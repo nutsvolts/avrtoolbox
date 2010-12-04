@@ -1,0 +1,24 @@
+C:\Users\owner\AppData\Local\Temporary Projects\xml_test\bin\Debug\xml_test.exe
+C:\Users\owner\AppData\Local\Temporary Projects\xml_test\bin\Debug\xml_test.pdb
+C:\Users\owner\AppData\Local\Temporary Projects\xml_test\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\owner\AppData\Local\Temporary Projects\xml_test\obj\Debug\xml_test.Form1.resources
+C:\Users\owner\AppData\Local\Temporary Projects\xml_test\obj\Debug\xml_test.Properties.Resources.resources
+C:\Users\owner\AppData\Local\Temporary Projects\xml_test\obj\Debug\xml_test.csproj.GenerateResource.Cache
+C:\Users\owner\AppData\Local\Temporary Projects\xml_test\obj\Debug\xml_test.exe
+C:\Users\owner\AppData\Local\Temporary Projects\xml_test\obj\Debug\xml_test.pdb
+C:\Temp\TimeTest\xml_test\xml_test\obj\Debug\xml_test.exe
+C:\Temp\TimeTest\xml_test\xml_test\obj\Debug\xml_test.pdb
+C:\Temp\TimeTest\xml_test\xml_test\bin\Debug\xml_test.exe
+C:\Temp\TimeTest\xml_test\xml_test\bin\Debug\xml_test.pdb
+C:\Temp\TimeTest\xml_test\xml_test\obj\Debug\ResolveAssemblyReference.cache
+C:\Temp\TimeTest\xml_test\xml_test\obj\Debug\xml_test.Form1.resources
+C:\Temp\TimeTest\xml_test\xml_test\obj\Debug\xml_test.Properties.Resources.resources
+C:\Temp\TimeTest\xml_test\xml_test\obj\Debug\xml_test.csproj.GenerateResource.Cache
+C:\Temp\xml_test\xml_test\obj\Debug\xml_test.exe
+C:\Temp\xml_test\xml_test\obj\Debug\xml_test.pdb
+C:\Temp\xml_test\xml_test\bin\Debug\xml_test.exe
+C:\Temp\xml_test\xml_test\bin\Debug\xml_test.pdb
+C:\Temp\xml_test\xml_test\obj\Debug\ResolveAssemblyReference.cache
+C:\Temp\xml_test\xml_test\obj\Debug\xml_test.Form1.resources
+C:\Temp\xml_test\xml_test\obj\Debug\xml_test.Properties.Resources.resources
+C:\Temp\xml_test\xml_test\obj\Debug\xml_test.csproj.GenerateResource.Cache
