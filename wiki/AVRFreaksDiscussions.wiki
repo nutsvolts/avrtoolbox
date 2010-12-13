@@ -1,7 +1,10 @@
 =Links to avrtoolbox discussions on AVRFreaks.=
 
-AVR Toolbox: http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&t=101072&highlight=
+*AVR Toolbox: *
+http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&t=101072&highlight=
 
-C Programming and documentation style: http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&t=101132&highlight=
+*C Programming and documentation style:* 
+http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&t=101132&highlight=
 
-Library module development - split early or late: http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&t=101126&highlight=
+*Library module development - split early or late:* 
+http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&t=101126&highlight=
