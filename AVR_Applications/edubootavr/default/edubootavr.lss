@@ -1,0 +1,981 @@
+
+edubootavr.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000004bc  00007800  00007800  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000082  00800100  00800100  00000530  2**0
+                  ALLOC
+  2 .debug_aranges 00000028  00000000  00000000  00000530  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_pubnames 00000066  00000000  00000000  00000558  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   000004c6  00000000  00000000  000005be  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 0000026b  00000000  00000000  00000a84  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000004fb  00000000  00000000  00000cef  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000070  00000000  00000000  000011ec  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    00000260  00000000  00000000  0000125c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    0000024b  00000000  00000000  000014bc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 000000e8  00000000  00000000  00001707  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00007800 <__ctors_end>:
+    7800:	11 e0       	ldi	r17, 0x01	; 1
+    7802:	a0 e0       	ldi	r26, 0x00	; 0
+    7804:	b1 e0       	ldi	r27, 0x01	; 1
+    7806:	01 c0       	rjmp	.+2      	; 0x780a <.do_clear_bss_start>
+
+00007808 <.do_clear_bss_loop>:
+    7808:	1d 92       	st	X+, r1
+
+0000780a <.do_clear_bss_start>:
+    780a:	a2 38       	cpi	r26, 0x82	; 130
+    780c:	b1 07       	cpc	r27, r17
+    780e:	e1 f7       	brne	.-8      	; 0x7808 <.do_clear_bss_loop>
+
+00007810 <__jumpMain>:
+// From Peter Fluery AVRFreaks Aug 10 2005 - to remove interrupt Vector table
+// put -nostartfiles in LDFlags, add the following function saves wasted space
+void __jumpMain (void) __attribute__ ((naked)) __attribute__ ((section (".init9")));
+
+void __jumpMain(void)
+{   
+    7810:	11 24       	eor	r1, r1
+    asm volatile ( ".set __stack, %0" :: "i" (RAMEND) );
+    asm volatile ( "clr __zero_reg__" );        // r1 set to 0
+    asm volatile ( "rjmp main");                   // jump to main()
+    7812:	c0 c0       	rjmp	.+384    	; 0x7994 <main>
+
+00007814 <sendByte>:
+   #error "No USART definition for MCU in USARTInit"
+#endif 
+}
+
+void sendByte( uint8_t data )
+{
+    7814:	98 2f       	mov	r25, r24
+	wdt_reset(); // reset the watchdog timer, if it is set
+    7816:	a8 95       	wdr
+	// Wait for empty transmit buffer 
+	while ( !( USART_CONTROL_STATUS_REG_A & (1<<USART_READY_TO_TRANSMIT)) );
+    7818:	e0 ec       	ldi	r30, 0xC0	; 192
+    781a:	f0 e0       	ldi	r31, 0x00	; 0
+    781c:	80 81       	ld	r24, Z
+    781e:	85 ff       	sbrs	r24, 5
+    7820:	fd cf       	rjmp	.-6      	; 0x781c <sendByte+0x8>
+	// Put data into buffer, sends the data
+	USART_DATA_REG = data;
+    7822:	90 93 c6 00 	sts	0x00C6, r25
+}
+    7826:	08 95       	ret
+
+00007828 <receiveByte>:
+
+uint8_t receiveByte( void )
+{
+    7828:	cf 92       	push	r12
+    782a:	df 92       	push	r13
+    782c:	ef 92       	push	r14
+    782e:	ff 92       	push	r15
+    7830:	0f 93       	push	r16
+    7832:	1f 93       	push	r17
+    7834:	cf 93       	push	r28
+    7836:	df 93       	push	r29
+	uint32_t count = 0;
+
+	wdt_reset(); // reset the watchdog timer, if it is set
+    7838:	a8 95       	wdr
+    783a:	ee 24       	eor	r14, r14
+    783c:	ff 24       	eor	r15, r15
+    783e:	87 01       	movw	r16, r14
+	// Wait for data to be received 
+	while ( !(USART_CONTROL_STATUS_REG_A & (1<<USART_RECEIVE_COMPLETE)) )
+    7840:	c0 ec       	ldi	r28, 0xC0	; 192
+    7842:	d0 e0       	ldi	r29, 0x00	; 0
+	{
+		if(count++ >= (F_CPU >> 4)) application_ptr();
+    7844:	cc 24       	eor	r12, r12
+    7846:	dd 24       	eor	r13, r13
+    7848:	10 c0       	rjmp	.+32     	; 0x786a <receiveByte+0x42>
+    784a:	80 e4       	ldi	r24, 0x40	; 64
+    784c:	e8 16       	cp	r14, r24
+    784e:	82 e4       	ldi	r24, 0x42	; 66
+    7850:	f8 06       	cpc	r15, r24
+    7852:	8f e0       	ldi	r24, 0x0F	; 15
+    7854:	08 07       	cpc	r16, r24
+    7856:	80 e0       	ldi	r24, 0x00	; 0
+    7858:	18 07       	cpc	r17, r24
+    785a:	10 f0       	brcs	.+4      	; 0x7860 <receiveByte+0x38>
+    785c:	f6 01       	movw	r30, r12
+    785e:	09 95       	icall
+    7860:	08 94       	sec
+    7862:	e1 1c       	adc	r14, r1
+    7864:	f1 1c       	adc	r15, r1
+    7866:	01 1d       	adc	r16, r1
+    7868:	11 1d       	adc	r17, r1
+{
+	uint32_t count = 0;
+
+	wdt_reset(); // reset the watchdog timer, if it is set
+	// Wait for data to be received 
+	while ( !(USART_CONTROL_STATUS_REG_A & (1<<USART_RECEIVE_COMPLETE)) )
+    786a:	88 81       	ld	r24, Y
+    786c:	88 23       	and	r24, r24
+    786e:	6c f7       	brge	.-38     	; 0x784a <receiveByte+0x22>
+	}
+	
+	count = 0;	
+		
+	// Get and return received data from buffer 
+	return USART_DATA_REG;
+    7870:	80 91 c6 00 	lds	r24, 0x00C6
+}
+    7874:	df 91       	pop	r29
+    7876:	cf 91       	pop	r28
+    7878:	1f 91       	pop	r17
+    787a:	0f 91       	pop	r16
+    787c:	ff 90       	pop	r15
+    787e:	ef 90       	pop	r14
+    7880:	df 90       	pop	r13
+    7882:	cf 90       	pop	r12
+    7884:	08 95       	ret
+
+00007886 <Delay>:
+{
+    unsigned char i; // mt int i;
+    
+    while (millisec--)
+        for (i=0; i<125; i++);
+}
+    7886:	08 95       	ret
+
+00007888 <OSCCAL_calibration>:
+*   Purpose :       Calibrate the internal OSCCAL byte, using the external 
+*                   32,768 kHz crystal as reference
+*
+*****************************************************************************/
+void OSCCAL_calibration(void)
+{
+    7888:	af 92       	push	r10
+    788a:	bf 92       	push	r11
+    788c:	cf 92       	push	r12
+    788e:	df 92       	push	r13
+    7890:	ef 92       	push	r14
+    7892:	ff 92       	push	r15
+    7894:	0f 93       	push	r16
+    7896:	1f 93       	push	r17
+    7898:	cf 93       	push	r28
+    789a:	df 93       	push	r29
+    unsigned char calibrate = 0;//FALSE;
+    int temp;
+    unsigned char tempL;
+
+    CLKPR = (1<<CLKPCE);        // set Clock Prescaler Change Enable
+    789c:	e1 e6       	ldi	r30, 0x61	; 97
+    789e:	f0 e0       	ldi	r31, 0x00	; 0
+    78a0:	80 e8       	ldi	r24, 0x80	; 128
+    78a2:	80 83       	st	Z, r24
+    // set prescaler = 8, Inter RC 8Mhz / 8 = 1Mhz
+    CLKPR = (1<<CLKPS1) | (1<<CLKPS0);
+    78a4:	83 e0       	ldi	r24, 0x03	; 3
+    78a6:	80 83       	st	Z, r24
+    
+    TIMSK2 = 0;             //disable OCIE2A and TOIE2
+    78a8:	10 92 70 00 	sts	0x0070, r1
+
+    ASSR = (1<<AS2);        //select asynchronous operation of timer2 (32,768kHz)
+    78ac:	88 e0       	ldi	r24, 0x08	; 8
+    78ae:	80 93 b6 00 	sts	0x00B6, r24
+    
+    OCR2A = 200;            // set timer2 compare value 
+    78b2:	88 ec       	ldi	r24, 0xC8	; 200
+    78b4:	80 93 b3 00 	sts	0x00B3, r24
+
+    TIMSK0 = 0;             // delete any interrupt sources
+    78b8:	10 92 6e 00 	sts	0x006E, r1
+        
+    TCCR1B = (1<<CS10);     // start timer1 with no prescaling
+    78bc:	81 e0       	ldi	r24, 0x01	; 1
+    78be:	80 93 81 00 	sts	0x0081, r24
+    TCCR2A = (1<<CS20);     // start timer2 with no prescaling
+    78c2:	80 93 b0 00 	sts	0x00B0, r24
+
+    while((ASSR & 0x01) | (ASSR & 0x04));       //wait for TCN2UB and TCR2UB to be cleared
+    78c6:	e6 eb       	ldi	r30, 0xB6	; 182
+    78c8:	f0 e0       	ldi	r31, 0x00	; 0
+    78ca:	20 81       	ld	r18, Z
+    78cc:	80 81       	ld	r24, Z
+    78ce:	90 e0       	ldi	r25, 0x00	; 0
+    78d0:	84 70       	andi	r24, 0x04	; 4
+    78d2:	90 70       	andi	r25, 0x00	; 0
+    78d4:	30 e0       	ldi	r19, 0x00	; 0
+    78d6:	21 70       	andi	r18, 0x01	; 1
+    78d8:	30 70       	andi	r19, 0x00	; 0
+    78da:	82 2b       	or	r24, r18
+    78dc:	93 2b       	or	r25, r19
+    78de:	89 2b       	or	r24, r25
+    78e0:	a1 f7       	brne	.-24     	; 0x78ca <OSCCAL_calibration+0x42>
+
+    Delay(1000);    // wait for external crystal to stabilise
+    78e2:	88 ee       	ldi	r24, 0xE8	; 232
+    78e4:	93 e0       	ldi	r25, 0x03	; 3
+    78e6:	0e 94 43 3c 	call	0x7886	; 0x7886 <Delay>
+    
+    while(!calibrate)
+    {
+        cli(); // mt __disable_interrupt();  // disable global interrupt
+        
+        TIFR1 = 0xFF;   // delete TIFR1 flags
+    78ea:	c6 e3       	ldi	r28, 0x36	; 54
+    78ec:	d0 e0       	ldi	r29, 0x00	; 0
+    78ee:	dd 24       	eor	r13, r13
+    78f0:	da 94       	dec	r13
+        TIFR2 = 0xFF;   // delete TIFR2 flags
+    78f2:	e7 e3       	ldi	r30, 0x37	; 55
+    78f4:	f0 e0       	ldi	r31, 0x00	; 0
+        
+        TCNT1H = 0;     // clear timer1 counter
+    78f6:	05 e8       	ldi	r16, 0x85	; 133
+    78f8:	10 e0       	ldi	r17, 0x00	; 0
+        TCNT1L = 0;
+    78fa:	64 e8       	ldi	r22, 0x84	; 132
+    78fc:	70 e0       	ldi	r23, 0x00	; 0
+        TCNT2 = 0;      // clear timer2 counter
+    78fe:	0f 2e       	mov	r0, r31
+    7900:	f2 eb       	ldi	r31, 0xB2	; 178
+    7902:	ef 2e       	mov	r14, r31
+    7904:	ff 24       	eor	r15, r15
+    7906:	f0 2d       	mov	r31, r0
+           
+	while ( !(TIFR2 & (1<<OCF2A)) ); // while ( !(TIFR2 && (1<<OCF2A)) );   // wait for timer2 compareflag
+    
+        TCCR1B = 0; // stop timer1
+    7908:	41 e8       	ldi	r20, 0x81	; 129
+    790a:	50 e0       	ldi	r21, 0x00	; 0
+        {
+            OSCCAL--;   // the internRC oscillator runs to fast, decrease the OSCCAL
+        }
+        else if (temp < 6120)
+        {
+            OSCCAL++;   // the internRC oscillator runs to slow, increase the OSCCAL
+    790c:	0f 2e       	mov	r0, r31
+    790e:	f6 e6       	ldi	r31, 0x66	; 102
+    7910:	af 2e       	mov	r10, r31
+    7912:	bb 24       	eor	r11, r11
+    7914:	f0 2d       	mov	r31, r0
+        }
+        else
+            calibrate = 1;//TRUE;   // the interRC is correct
+    
+        TCCR1B = (1<<CS10); // start timer1
+    7916:	cc 24       	eor	r12, r12
+    7918:	c3 94       	inc	r12
+
+    Delay(1000);    // wait for external crystal to stabilise
+    
+    while(!calibrate)
+    {
+        cli(); // mt __disable_interrupt();  // disable global interrupt
+    791a:	f8 94       	cli
+        
+        TIFR1 = 0xFF;   // delete TIFR1 flags
+    791c:	d8 82       	st	Y, r13
+        TIFR2 = 0xFF;   // delete TIFR2 flags
+    791e:	d0 82       	st	Z, r13
+        
+        TCNT1H = 0;     // clear timer1 counter
+    7920:	d8 01       	movw	r26, r16
+    7922:	1c 92       	st	X, r1
+        TCNT1L = 0;
+    7924:	db 01       	movw	r26, r22
+    7926:	1c 92       	st	X, r1
+        TCNT2 = 0;      // clear timer2 counter
+    7928:	d7 01       	movw	r26, r14
+    792a:	1c 92       	st	X, r1
+           
+	while ( !(TIFR2 & (1<<OCF2A)) ); // while ( !(TIFR2 && (1<<OCF2A)) );   // wait for timer2 compareflag
+    792c:	80 81       	ld	r24, Z
+    792e:	81 ff       	sbrs	r24, 1
+    7930:	fd cf       	rjmp	.-6      	; 0x792c <OSCCAL_calibration+0xa4>
+    
+        TCCR1B = 0; // stop timer1
+    7932:	da 01       	movw	r26, r20
+    7934:	1c 92       	st	X, r1
+
+        sei(); // __enable_interrupt();  // enable global interrupt
+    7936:	78 94       	sei
+    
+        if ( (TIFR1 & (1<<TOV1)) ) // if ( (TIFR1 && (1<<TOV1)) )
+    7938:	88 81       	ld	r24, Y
+    793a:	80 fd       	sbrc	r24, 0
+    793c:	16 c0       	rjmp	.+44     	; 0x796a <OSCCAL_calibration+0xe2>
+        {
+            temp = 0xFFFF;      // if timer1 overflows, set the temp to 0xFFFF
+        }
+        else
+        {   // read out the timer1 counter value
+            tempL = TCNT1L;
+    793e:	db 01       	movw	r26, r22
+    7940:	9c 91       	ld	r25, X
+            temp = TCNT1H;
+    7942:	d8 01       	movw	r26, r16
+    7944:	8c 91       	ld	r24, X
+            temp = (temp << 8);
+    7946:	38 2f       	mov	r19, r24
+    7948:	20 e0       	ldi	r18, 0x00	; 0
+            temp += tempL;
+    794a:	d9 01       	movw	r26, r18
+    794c:	a9 0f       	add	r26, r25
+    794e:	b1 1d       	adc	r27, r1
+    7950:	cd 01       	movw	r24, r26
+        }
+    
+        if (temp > 6250)
+    7952:	b8 e1       	ldi	r27, 0x18	; 24
+    7954:	8b 36       	cpi	r24, 0x6B	; 107
+    7956:	9b 07       	cpc	r25, r27
+    7958:	2c f0       	brlt	.+10     	; 0x7964 <OSCCAL_calibration+0xdc>
+        {
+            OSCCAL--;   // the internRC oscillator runs to fast, decrease the OSCCAL
+    795a:	d5 01       	movw	r26, r10
+    795c:	8c 91       	ld	r24, X
+    795e:	81 50       	subi	r24, 0x01	; 1
+    7960:	8c 93       	st	X, r24
+    7962:	07 c0       	rjmp	.+14     	; 0x7972 <OSCCAL_calibration+0xea>
+        }
+        else if (temp < 6120)
+    7964:	88 5e       	subi	r24, 0xE8	; 232
+    7966:	97 41       	sbci	r25, 0x17	; 23
+    7968:	3c f4       	brge	.+14     	; 0x7978 <OSCCAL_calibration+0xf0>
+        {
+            OSCCAL++;   // the internRC oscillator runs to slow, increase the OSCCAL
+    796a:	d5 01       	movw	r26, r10
+    796c:	8c 91       	ld	r24, X
+    796e:	8f 5f       	subi	r24, 0xFF	; 255
+    7970:	8c 93       	st	X, r24
+        }
+        else
+            calibrate = 1;//TRUE;   // the interRC is correct
+    
+        TCCR1B = (1<<CS10); // start timer1
+    7972:	da 01       	movw	r26, r20
+    7974:	cc 92       	st	X, r12
+    7976:	d1 cf       	rjmp	.-94     	; 0x791a <OSCCAL_calibration+0x92>
+    7978:	81 e0       	ldi	r24, 0x01	; 1
+    797a:	80 93 81 00 	sts	0x0081, r24
+    }
+}
+    797e:	df 91       	pop	r29
+    7980:	cf 91       	pop	r28
+    7982:	1f 91       	pop	r17
+    7984:	0f 91       	pop	r16
+    7986:	ff 90       	pop	r15
+    7988:	ef 90       	pop	r14
+    798a:	df 90       	pop	r13
+    798c:	cf 90       	pop	r12
+    798e:	bf 90       	pop	r11
+    7990:	af 90       	pop	r10
+    7992:	08 95       	ret
+
+00007994 <main>:
+    asm volatile ( "rjmp main");                   // jump to main()
+} 
+
+
+int main(void) 
+{ 
+    7994:	2f 92       	push	r2
+    7996:	3f 92       	push	r3
+    7998:	4f 92       	push	r4
+    799a:	5f 92       	push	r5
+    799c:	6f 92       	push	r6
+    799e:	7f 92       	push	r7
+    79a0:	8f 92       	push	r8
+    79a2:	9f 92       	push	r9
+    79a4:	af 92       	push	r10
+    79a6:	bf 92       	push	r11
+    79a8:	cf 92       	push	r12
+    79aa:	df 92       	push	r13
+    79ac:	ef 92       	push	r14
+    79ae:	ff 92       	push	r15
+    79b0:	0f 93       	push	r16
+    79b2:	1f 93       	push	r17
+    79b4:	df 93       	push	r29
+    79b6:	cf 93       	push	r28
+    79b8:	00 d0       	rcall	.+0      	; 0x79ba <main+0x26>
+    79ba:	00 d0       	rcall	.+0      	; 0x79bc <main+0x28>
+    79bc:	00 d0       	rcall	.+0      	; 0x79be <main+0x2a>
+    79be:	cd b7       	in	r28, 0x3d	; 61
+    79c0:	de b7       	in	r29, 0x3e	; 62
+void USARTInit()
+{
+	// Set baud rate hard coded to 19200 for 12MHz
+	//USART_BAUD_RATE_LOW = 38;
+
+	USART_BAUD_RATE_LOW =(uint8_t)(F_CPU/(BAUD*16L)-1);
+    79c2:	04 ec       	ldi	r16, 0xC4	; 196
+    79c4:	10 e0       	ldi	r17, 0x00	; 0
+    79c6:	80 e1       	ldi	r24, 0x10	; 16
+    79c8:	d8 01       	movw	r26, r16
+    79ca:	8c 93       	st	X, r24
+	// Enable receiver and transmitter
+	USART_CONTROL_STATUS_REG_B = (1 << USART_ENABLE_RECEIVER) | (1 << USART_ENABLE_TRANSMITTER);
+    79cc:	0f 2e       	mov	r0, r31
+    79ce:	f1 ec       	ldi	r31, 0xC1	; 193
+    79d0:	ef 2e       	mov	r14, r31
+    79d2:	ff 24       	eor	r15, r15
+    79d4:	f0 2d       	mov	r31, r0
+    79d6:	0f 2e       	mov	r0, r31
+    79d8:	f8 e1       	ldi	r31, 0x18	; 24
+    79da:	df 2e       	mov	r13, r31
+    79dc:	f0 2d       	mov	r31, r0
+    79de:	f7 01       	movw	r30, r14
+    79e0:	d0 82       	st	Z, r13
+	USARTInit();
+
+#if defined(Butterfly)
+
+
+    OSCCAL_calibration();   // Calibrate the OSCCAL byte
+    79e2:	0e 94 44 3c 	call	0x7888	; 0x7888 <OSCCAL_calibration>
+
+    ACSR = (1<<ACD);
+    79e6:	90 e8       	ldi	r25, 0x80	; 128
+    79e8:	90 bf       	out	0x30, r25	; 48
+
+    // Disable Digital input on PF0-2 (power save)
+    DIDR1 = (7<<ADC0D);
+    79ea:	87 e0       	ldi	r24, 0x07	; 7
+    79ec:	80 93 7f 00 	sts	0x007F, r24
+
+    PORTB = 0xFF;       // Enable pullups on Ports B and E
+    79f0:	8f ef       	ldi	r24, 0xFF	; 255
+    79f2:	85 b9       	out	0x05, r24	; 5
+    PORTE = 0xFF;
+    79f4:	8e b9       	out	0x0e, r24	; 14
+    
+    // boost IntRC to 2Mhz to achieve 19200 baudrate
+    CLKPR = (1<<CLKPCE);        // set Clock Prescaler Change Enable
+    79f6:	e1 e6       	ldi	r30, 0x61	; 97
+    79f8:	f0 e0       	ldi	r31, 0x00	; 0
+    79fa:	90 83       	st	Z, r25
+    // set prescaler = 4, Inter RC 8Mhz / 4 = 2Mhz
+    CLKPR = (1<<CLKPS1);    
+    79fc:	92 e0       	ldi	r25, 0x02	; 2
+    79fe:	90 83       	st	Z, r25
+
+    UBRRH = 0;//(unsigned char)(baudrate>>8);
+    7a00:	10 92 c5 00 	sts	0x00C5, r1
+    UBRRL = 12;//(unsigned char)baudrate;
+    7a04:	8c e0       	ldi	r24, 0x0C	; 12
+    7a06:	d8 01       	movw	r26, r16
+    7a08:	8c 93       	st	X, r24
+
+    // Enable 2x speed
+    UCSRA = (1<<U2X);
+    7a0a:	90 93 c0 00 	sts	0x00C0, r25
+
+    // Enable receiver and transmitter
+    UCSRB = (1<<RXEN)|(1<<TXEN)|(0<<RXCIE)|(0<<UDRIE);
+    7a0e:	f7 01       	movw	r30, r14
+    7a10:	d0 82       	st	Z, r13
+
+    // Async. mode, 8N1
+    UCSRC = (0<<UMSEL)|(0<<UPM0)|(0<<USBS)|(3<<UCSZ0)|(0<<UCPOL);
+    7a12:	86 e0       	ldi	r24, 0x06	; 6
+    7a14:	80 93 c2 00 	sts	0x00C2, r24
+        
+    MCUCR = (1<<IVCE);       
+    7a18:	e5 e5       	ldi	r30, 0x55	; 85
+    7a1a:	f0 e0       	ldi	r31, 0x00	; 0
+    7a1c:	81 e0       	ldi	r24, 0x01	; 1
+    7a1e:	80 83       	st	Z, r24
+    MCUCR = (1<<IVSEL);             //move interruptvectors to the Boot sector    
+    7a20:	90 83       	st	Z, r25
+
+    sei(); // mt __enable_interrupt();
+    7a22:	78 94       	sei
+    
+    // mt PCMSK1 = (1<<PORTB6) | (1<<PORTB4);
+	PCMSK1 = (1<<PINB6) | (1<<PINB4);       // set pin-change interrupt mask
+    7a24:	80 e5       	ldi	r24, 0x50	; 80
+    7a26:	80 93 6c 00 	sts	0x006C, r24
+  	EIFR   = (1<<PCIF1);                    // clear external intterupt flag 1
+    7a2a:	80 e8       	ldi	r24, 0x80	; 128
+    7a2c:	8c bb       	out	0x1c, r24	; 28
+	EIMSK  = (1<<PCIE1);   
+    7a2e:	8d bb       	out	0x1d, r24	; 29
+	else blockFlashRead( tempSize  );
+}
+
+void blockFlashLoad(uint16_t size)
+{ 
+	uint16_t tempAddress = address;
+    7a30:	82 e0       	ldi	r24, 0x02	; 2
+    7a32:	91 e0       	ldi	r25, 0x01	; 1
+    7a34:	8b 83       	std	Y+3, r24	; 0x03
+    7a36:	9c 83       	std	Y+4, r25	; 0x04
+	uint16_t i,tempWord;
+
+	// store values to be programmed in temporary buffer
+	for (i=0; i<USART_RX_BUFFER_SIZE; i++) {
+		if (i<size) pageBuffer[i]=receiveByte();
+		else pageBuffer[i]=0xFF;
+    7a38:	66 24       	eor	r6, r6
+    7a3a:	6a 94       	dec	r6
+	}
+	i=0;
+ 
+    boot_page_erase(address);//_safe(address);	// Perform page erase
+    7a3c:	0f 2e       	mov	r0, r31
+    7a3e:	f3 e0       	ldi	r31, 0x03	; 3
+    7a40:	7f 2e       	mov	r7, r31
+    7a42:	f0 2d       	mov	r31, r0
+    boot_spm_busy_wait();		// Wait until the memory is erased.
+    7a44:	0f 2e       	mov	r0, r31
+    7a46:	f7 e5       	ldi	r31, 0x57	; 87
+    7a48:	cf 2e       	mov	r12, r31
+    7a4a:	dd 24       	eor	r13, r13
+    7a4c:	f0 2d       	mov	r31, r0
+{
+	uint8_t cmd;
+
+	while(1)// Loop forever
+	{
+		cmd = receiveByte();
+    7a4e:	0e 94 14 3c 	call	0x7828	; 0x7828 <receiveByte>
+    7a52:	08 2f       	mov	r16, r24
+
+		switch (cmd)
+    7a54:	84 35       	cpi	r24, 0x54	; 84
+    7a56:	09 f4       	brne	.+2      	; 0x7a5a <main+0xc6>
+    7a58:	61 c0       	rjmp	.+194    	; 0x7b1c <main+0x188>
+    7a5a:	85 35       	cpi	r24, 0x55	; 85
+    7a5c:	a0 f4       	brcc	.+40     	; 0x7a86 <main+0xf2>
+    7a5e:	85 34       	cpi	r24, 0x45	; 69
+    7a60:	09 f4       	brne	.+2      	; 0x7a64 <main+0xd0>
+    7a62:	21 c1       	rjmp	.+578    	; 0x7ca6 <main+0x312>
+    7a64:	86 34       	cpi	r24, 0x46	; 70
+    7a66:	30 f4       	brcc	.+12     	; 0x7a74 <main+0xe0>
+    7a68:	81 34       	cpi	r24, 0x41	; 65
+    7a6a:	69 f1       	breq	.+90     	; 0x7ac6 <main+0x132>
+    7a6c:	82 34       	cpi	r24, 0x42	; 66
+    7a6e:	09 f0       	breq	.+2      	; 0x7a72 <main+0xde>
+    7a70:	1e c1       	rjmp	.+572    	; 0x7cae <main+0x31a>
+    7a72:	8f c0       	rjmp	.+286    	; 0x7b92 <main+0x1fe>
+    7a74:	80 35       	cpi	r24, 0x50	; 80
+    7a76:	f9 f0       	breq	.+62     	; 0x7ab6 <main+0x122>
+    7a78:	83 35       	cpi	r24, 0x53	; 83
+    7a7a:	09 f4       	brne	.+2      	; 0x7a7e <main+0xea>
+    7a7c:	66 c0       	rjmp	.+204    	; 0x7b4a <main+0x1b6>
+    7a7e:	8c 34       	cpi	r24, 0x4C	; 76
+    7a80:	09 f0       	breq	.+2      	; 0x7a84 <main+0xf0>
+    7a82:	15 c1       	rjmp	.+554    	; 0x7cae <main+0x31a>
+    7a84:	18 c0       	rjmp	.+48     	; 0x7ab6 <main+0x122>
+    7a86:	87 36       	cpi	r24, 0x67	; 103
+    7a88:	09 f4       	brne	.+2      	; 0x7a8c <main+0xf8>
+    7a8a:	83 c0       	rjmp	.+262    	; 0x7b92 <main+0x1fe>
+    7a8c:	88 36       	cpi	r24, 0x68	; 104
+    7a8e:	48 f4       	brcc	.+18     	; 0x7aa2 <main+0x10e>
+    7a90:	82 36       	cpi	r24, 0x62	; 98
+    7a92:	09 f4       	brne	.+2      	; 0x7a96 <main+0x102>
+    7a94:	74 c0       	rjmp	.+232    	; 0x7b7e <main+0x1ea>
+    7a96:	85 36       	cpi	r24, 0x65	; 101
+    7a98:	71 f1       	breq	.+92     	; 0x7af6 <main+0x162>
+    7a9a:	81 36       	cpi	r24, 0x61	; 97
+    7a9c:	09 f0       	breq	.+2      	; 0x7aa0 <main+0x10c>
+    7a9e:	07 c1       	rjmp	.+526    	; 0x7cae <main+0x31a>
+    7aa0:	0e c0       	rjmp	.+28     	; 0x7abe <main+0x12a>
+    7aa2:	83 37       	cpi	r24, 0x73	; 115
+    7aa4:	09 f4       	brne	.+2      	; 0x7aa8 <main+0x114>
+    7aa6:	40 c0       	rjmp	.+128    	; 0x7b28 <main+0x194>
+    7aa8:	84 37       	cpi	r24, 0x74	; 116
+    7aaa:	09 f4       	brne	.+2      	; 0x7aae <main+0x11a>
+    7aac:	47 c0       	rjmp	.+142    	; 0x7b3c <main+0x1a8>
+    7aae:	80 37       	cpi	r24, 0x70	; 112
+    7ab0:	09 f0       	breq	.+2      	; 0x7ab4 <main+0x120>
+    7ab2:	fd c0       	rjmp	.+506    	; 0x7cae <main+0x31a>
+    7ab4:	60 c0       	rjmp	.+192    	; 0x7b76 <main+0x1e2>
+		{
+			case 'P':// Enter program mode
+			case 'L':// Leave program mode
+				sendByte('\r');
+    7ab6:	8d e0       	ldi	r24, 0x0D	; 13
+    7ab8:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    7abc:	c8 cf       	rjmp	.-112    	; 0x7a4e <main+0xba>
+******************************************************/
+
+void autoIncrementAddress(void) // 'a'
+{ 
+	// Yes, this code autoincrements
+	sendByte('Y');
+    7abe:	89 e5       	ldi	r24, 0x59	; 89
+    7ac0:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    7ac4:	c4 cf       	rjmp	.-120    	; 0x7a4e <main+0xba>
+}
+
+void setAddress(void) // 'A'
+{ 
+	// Note that flash addresses are in words, not bytes               
+    address = receiveByte();   
+    7ac6:	0e 94 14 3c 	call	0x7828	; 0x7828 <receiveByte>
+    7aca:	18 2f       	mov	r17, r24
+    7acc:	80 93 00 01 	sts	0x0100, r24
+    7ad0:	10 92 01 01 	sts	0x0101, r1
+	address = (address << 8) | receiveByte();
+    7ad4:	0e 94 14 3c 	call	0x7828	; 0x7828 <receiveByte>
+	address = address << 1; // convert word address to byte address
+    7ad8:	31 2e       	mov	r3, r17
+    7ada:	22 24       	eor	r2, r2
+    7adc:	90 e0       	ldi	r25, 0x00	; 0
+    7ade:	82 29       	or	r24, r2
+    7ae0:	93 29       	or	r25, r3
+    7ae2:	88 0f       	add	r24, r24
+    7ae4:	99 1f       	adc	r25, r25
+    7ae6:	90 93 01 01 	sts	0x0101, r25
+    7aea:	80 93 00 01 	sts	0x0100, r24
+
+ 	sendByte('\r');  // respond okay
+    7aee:	8d e0       	ldi	r24, 0x0D	; 13
+    7af0:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    7af4:	ac cf       	rjmp	.-168    	; 0x7a4e <main+0xba>
+    7af6:	e0 e0       	ldi	r30, 0x00	; 0
+    7af8:	f0 e0       	ldi	r31, 0x00	; 0
+void chipErase(void) // 'e'
+{ 
+ 	int i;
+ 	for(i = 0 ; i < (FLASHEND - (BOOTSIZE * 2)); i += SPM_PAGESIZE)
+	{
+    	boot_page_erase(i);//_safe(i);	// Erase the page
+    7afa:	70 92 57 00 	sts	0x0057, r7
+    7afe:	e8 95       	spm
+    	boot_spm_busy_wait();		// Wait until finished.
+    7b00:	d6 01       	movw	r26, r12
+    7b02:	8c 91       	ld	r24, X
+    7b04:	80 fd       	sbrc	r24, 0
+    7b06:	fc cf       	rjmp	.-8      	; 0x7b00 <main+0x16c>
+}
+
+void chipErase(void) // 'e'
+{ 
+ 	int i;
+ 	for(i = 0 ; i < (FLASHEND - (BOOTSIZE * 2)); i += SPM_PAGESIZE)
+    7b08:	e0 58       	subi	r30, 0x80	; 128
+    7b0a:	ff 4f       	sbci	r31, 0xFF	; 255
+    7b0c:	bc e3       	ldi	r27, 0x3C	; 60
+    7b0e:	e0 30       	cpi	r30, 0x00	; 0
+    7b10:	fb 07       	cpc	r31, r27
+    7b12:	99 f7       	brne	.-26     	; 0x7afa <main+0x166>
+	{
+    	boot_page_erase(i);//_safe(i);	// Erase the page
+    	boot_spm_busy_wait();		// Wait until finished.
+	}
+   
+	sendByte('\r');  // respond okay
+    7b14:	8d e0       	ldi	r24, 0x0D	; 13
+    7b16:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    7b1a:	99 cf       	rjmp	.-206    	; 0x7a4e <main+0xba>
+
+void selectDeviceType() // 'T'
+{
+	//dummy read since we only have one device type
+	uint8_t dummy;
+	dummy = receiveByte();
+    7b1c:	0e 94 14 3c 	call	0x7828	; 0x7828 <receiveByte>
+	sendByte('\r');
+    7b20:	8d e0       	ldi	r24, 0x0D	; 13
+    7b22:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    7b26:	93 cf       	rjmp	.-218    	; 0x7a4e <main+0xba>
+}
+
+void readSignatureBytes(void) // 'S'
+{ 
+    sendByte( SIGNATURE_BYTE_3 );
+    7b28:	85 e0       	ldi	r24, 0x05	; 5
+    7b2a:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    sendByte( SIGNATURE_BYTE_2 );
+    7b2e:	84 e9       	ldi	r24, 0x94	; 148
+    7b30:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    sendByte( SIGNATURE_BYTE_1 );
+    7b34:	8e e1       	ldi	r24, 0x1E	; 30
+    7b36:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    7b3a:	89 cf       	rjmp	.-238    	; 0x7a4e <main+0xba>
+}
+
+void returnSupportedDeviceCodes(void) // 't'
+{
+	//sendByte((char)0); // list terminator
+	sendByte(SUPPORTED_DEVICE_CODE); // Support only this device
+    7b3c:	89 e7       	ldi	r24, 0x79	; 121
+    7b3e:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+	sendByte((char)0); // list terminator
+    7b42:	80 e0       	ldi	r24, 0x00	; 0
+    7b44:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    7b48:	82 cf       	rjmp	.-252    	; 0x7a4e <main+0xba>
+}
+
+void returnSoftwareIdentifier(void) // 'S'
+{ 
+    // Software identifier is 'AVRBOOT'
+	sendByte('A');
+    7b4a:	81 e4       	ldi	r24, 0x41	; 65
+    7b4c:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    sendByte('V'); 
+    7b50:	86 e5       	ldi	r24, 0x56	; 86
+    7b52:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    sendByte('R');
+    7b56:	82 e5       	ldi	r24, 0x52	; 82
+    7b58:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    sendByte('B');
+    7b5c:	82 e4       	ldi	r24, 0x42	; 66
+    7b5e:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    sendByte('O');
+    7b62:	8f e4       	ldi	r24, 0x4F	; 79
+    7b64:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    sendByte('O');
+    7b68:	8f e4       	ldi	r24, 0x4F	; 79
+    7b6a:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    sendByte('T');
+    7b6e:	84 e5       	ldi	r24, 0x54	; 84
+    7b70:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    7b74:	6c cf       	rjmp	.-296    	; 0x7a4e <main+0xba>
+}
+
+void returnProgrammerType(void) // 'p'
+{      
+	// Get programmer type - serial.
+    sendByte('S');
+    7b76:	83 e5       	ldi	r24, 0x53	; 83
+    7b78:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    7b7c:	68 cf       	rjmp	.-304    	; 0x7a4e <main+0xba>
+}
+
+void checkBlockSupport(void) // 'b'
+{ 
+    sendByte('Y'); // yes, block load is supported.
+    7b7e:	89 e5       	ldi	r24, 0x59	; 89
+    7b80:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    sendByte((SPM_PAGESIZE>>8) & 0xFF); // send MSB first.
+    7b84:	80 e0       	ldi	r24, 0x00	; 0
+    7b86:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    sendByte(SPM_PAGESIZE & 0xFF); // send LSB second.
+    7b8a:	80 e8       	ldi	r24, 0x80	; 128
+    7b8c:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    7b90:	5e cf       	rjmp	.-324    	; 0x7a4e <main+0xba>
+void startBlockAction(uint8_t cmd)
+{
+	uint8_t tempRec;
+	uint16_t tempSize;
+
+	tempSize = (receiveByte() << 8) | receiveByte();
+    7b92:	0e 94 14 3c 	call	0x7828	; 0x7828 <receiveByte>
+    7b96:	18 2f       	mov	r17, r24
+    7b98:	0e 94 14 3c 	call	0x7828	; 0x7828 <receiveByte>
+    7b9c:	1a 83       	std	Y+2, r17	; 0x02
+    7b9e:	19 82       	std	Y+1, r1	; 0x01
+    7ba0:	90 e0       	ldi	r25, 0x00	; 0
+    7ba2:	a9 80       	ldd	r10, Y+1	; 0x01
+    7ba4:	ba 80       	ldd	r11, Y+2	; 0x02
+    7ba6:	a8 2a       	or	r10, r24
+    7ba8:	b9 2a       	or	r11, r25
+	// dummy read for type - we only do flash NOT EEPROM
+	tempRec = receiveByte(); 
+    7baa:	0e 94 14 3c 	call	0x7828	; 0x7828 <receiveByte>
+	if(cmd == 'B') blockFlashLoad( tempSize );
+    7bae:	02 34       	cpi	r16, 0x42	; 66
+    7bb0:	09 f0       	breq	.+2      	; 0x7bb4 <main+0x220>
+    7bb2:	64 c0       	rjmp	.+200    	; 0x7c7c <main+0x2e8>
+	else blockFlashRead( tempSize  );
+}
+
+void blockFlashLoad(uint16_t size)
+{ 
+	uint16_t tempAddress = address;
+    7bb4:	40 90 00 01 	lds	r4, 0x0100
+    7bb8:	50 90 01 01 	lds	r5, 0x0101
+    7bbc:	0f 2e       	mov	r0, r31
+    7bbe:	f2 e0       	ldi	r31, 0x02	; 2
+    7bc0:	ef 2e       	mov	r14, r31
+    7bc2:	f1 e0       	ldi	r31, 0x01	; 1
+    7bc4:	ff 2e       	mov	r15, r31
+    7bc6:	f0 2d       	mov	r31, r0
+    7bc8:	8b 81       	ldd	r24, Y+3	; 0x03
+    7bca:	9c 81       	ldd	r25, Y+4	; 0x04
+    7bcc:	9e 83       	std	Y+6, r25	; 0x06
+    7bce:	8d 83       	std	Y+5, r24	; 0x05
+    7bd0:	00 e0       	ldi	r16, 0x00	; 0
+    7bd2:	10 e0       	ldi	r17, 0x00	; 0
+
+	uint16_t i,tempWord;
+
+	// store values to be programmed in temporary buffer
+	for (i=0; i<USART_RX_BUFFER_SIZE; i++) {
+		if (i<size) pageBuffer[i]=receiveByte();
+    7bd4:	0a 15       	cp	r16, r10
+    7bd6:	1b 05       	cpc	r17, r11
+    7bd8:	30 f4       	brcc	.+12     	; 0x7be6 <main+0x252>
+    7bda:	0e 94 14 3c 	call	0x7828	; 0x7828 <receiveByte>
+    7bde:	ed 81       	ldd	r30, Y+5	; 0x05
+    7be0:	fe 81       	ldd	r31, Y+6	; 0x06
+    7be2:	80 83       	st	Z, r24
+    7be4:	03 c0       	rjmp	.+6      	; 0x7bec <main+0x258>
+		else pageBuffer[i]=0xFF;
+    7be6:	ad 81       	ldd	r26, Y+5	; 0x05
+    7be8:	be 81       	ldd	r27, Y+6	; 0x06
+    7bea:	6c 92       	st	X, r6
+	uint16_t tempAddress = address;
+
+	uint16_t i,tempWord;
+
+	// store values to be programmed in temporary buffer
+	for (i=0; i<USART_RX_BUFFER_SIZE; i++) {
+    7bec:	0f 5f       	subi	r16, 0xFF	; 255
+    7bee:	1f 4f       	sbci	r17, 0xFF	; 255
+    7bf0:	ed 81       	ldd	r30, Y+5	; 0x05
+    7bf2:	fe 81       	ldd	r31, Y+6	; 0x06
+    7bf4:	31 96       	adiw	r30, 0x01	; 1
+    7bf6:	fe 83       	std	Y+6, r31	; 0x06
+    7bf8:	ed 83       	std	Y+5, r30	; 0x05
+    7bfa:	00 38       	cpi	r16, 0x80	; 128
+    7bfc:	11 05       	cpc	r17, r1
+    7bfe:	51 f7       	brne	.-44     	; 0x7bd4 <main+0x240>
+		if (i<size) pageBuffer[i]=receiveByte();
+		else pageBuffer[i]=0xFF;
+	}
+	i=0;
+ 
+    boot_page_erase(address);//_safe(address);	// Perform page erase
+    7c00:	e0 91 00 01 	lds	r30, 0x0100
+    7c04:	f0 91 01 01 	lds	r31, 0x0101
+    7c08:	70 92 57 00 	sts	0x0057, r7
+    7c0c:	e8 95       	spm
+    boot_spm_busy_wait();		// Wait until the memory is erased.
+    7c0e:	d6 01       	movw	r26, r12
+    7c10:	8c 91       	ld	r24, X
+    7c12:	80 fd       	sbrc	r24, 0
+    7c14:	fc cf       	rjmp	.-8      	; 0x7c0e <main+0x27a>
+
+    for(i = 0; i < size; i+=2)
+    7c16:	a1 14       	cp	r10, r1
+    7c18:	b1 04       	cpc	r11, r1
+    7c1a:	f9 f0       	breq	.+62     	; 0x7c5a <main+0x2c6>
+    7c1c:	20 e0       	ldi	r18, 0x00	; 0
+    7c1e:	30 e0       	ldi	r19, 0x00	; 0
+	{
+		tempWord = pageBuffer[i]; // load the little end then increment i
+    7c20:	d7 01       	movw	r26, r14
+    7c22:	8c 91       	ld	r24, X
+		tempWord += (pageBuffer[i+1] << 8); // load the big end
+        boot_page_fill(address,tempWord);;//_safe(address,tempWord);
+    7c24:	11 96       	adiw	r26, 0x01	; 1
+    7c26:	9c 90       	ld	r9, X
+    7c28:	88 24       	eor	r8, r8
+    7c2a:	a4 01       	movw	r20, r8
+    7c2c:	48 0f       	add	r20, r24
+    7c2e:	51 1d       	adc	r21, r1
+    7c30:	ca 01       	movw	r24, r20
+    7c32:	51 e0       	ldi	r21, 0x01	; 1
+    7c34:	0c 01       	movw	r0, r24
+    7c36:	50 93 57 00 	sts	0x0057, r21
+    7c3a:	e8 95       	spm
+    7c3c:	11 24       	eor	r1, r1
+    7c3e:	32 96       	adiw	r30, 0x02	; 2
+	i=0;
+ 
+    boot_page_erase(address);//_safe(address);	// Perform page erase
+    boot_spm_busy_wait();		// Wait until the memory is erased.
+
+    for(i = 0; i < size; i+=2)
+    7c40:	2e 5f       	subi	r18, 0xFE	; 254
+    7c42:	3f 4f       	sbci	r19, 0xFF	; 255
+    7c44:	82 e0       	ldi	r24, 0x02	; 2
+    7c46:	90 e0       	ldi	r25, 0x00	; 0
+    7c48:	e8 0e       	add	r14, r24
+    7c4a:	f9 1e       	adc	r15, r25
+    7c4c:	2a 15       	cp	r18, r10
+    7c4e:	3b 05       	cpc	r19, r11
+    7c50:	38 f3       	brcs	.-50     	; 0x7c20 <main+0x28c>
+    7c52:	f0 93 01 01 	sts	0x0101, r31
+    7c56:	e0 93 00 01 	sts	0x0100, r30
+        boot_page_fill(address,tempWord);;//_safe(address,tempWord);
+    							
+        address = address + 2;  	// word increment
+    } 
+    
+    boot_page_write(tempAddress);//_safe(tempAddress);
+    7c5a:	45 e0       	ldi	r20, 0x05	; 5
+    7c5c:	f2 01       	movw	r30, r4
+    7c5e:	40 93 57 00 	sts	0x0057, r20
+    7c62:	e8 95       	spm
+    boot_spm_busy_wait();	
+    7c64:	d6 01       	movw	r26, r12
+    7c66:	8c 91       	ld	r24, X
+    7c68:	80 fd       	sbrc	r24, 0
+    7c6a:	fc cf       	rjmp	.-8      	; 0x7c64 <main+0x2d0>
+    boot_rww_enable();				// Re-enable the RWW section   
+    7c6c:	b1 e1       	ldi	r27, 0x11	; 17
+    7c6e:	b0 93 57 00 	sts	0x0057, r27
+    7c72:	e8 95       	spm
+
+	sendByte('\r');
+    7c74:	8d e0       	ldi	r24, 0x0D	; 13
+    7c76:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    7c7a:	e9 ce       	rjmp	.-558    	; 0x7a4e <main+0xba>
+void blockFlashRead(uint16_t size)
+{ 
+	uint8_t data;
+	do {
+		// read_program_memory(address,0x00);
+		data = pgm_read_byte_near(address++);
+    7c7c:	e0 91 00 01 	lds	r30, 0x0100
+    7c80:	f0 91 01 01 	lds	r31, 0x0101
+    7c84:	cf 01       	movw	r24, r30
+    7c86:	01 96       	adiw	r24, 0x01	; 1
+    7c88:	90 93 01 01 	sts	0x0101, r25
+    7c8c:	80 93 00 01 	sts	0x0100, r24
+    7c90:	e4 91       	lpm	r30, Z+
+		// send byte
+		sendByte(data);
+    7c92:	8e 2f       	mov	r24, r30
+    7c94:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+		// reduce number of bytes to read by one
+		size--;	
+    7c98:	08 94       	sec
+    7c9a:	a1 08       	sbc	r10, r1
+    7c9c:	b1 08       	sbc	r11, r1
+								
+	} while (size);	// loop through size
+    7c9e:	a1 14       	cp	r10, r1
+    7ca0:	b1 04       	cpc	r11, r1
+    7ca2:	61 f7       	brne	.-40     	; 0x7c7c <main+0x2e8>
+    7ca4:	d4 ce       	rjmp	.-600    	; 0x7a4e <main+0xba>
+}
+
+
+void exitBootloader()
+{
+	sendByte('\r');
+    7ca6:	8d e0       	ldi	r24, 0x0D	; 13
+    7ca8:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    7cac:	d0 ce       	rjmp	.-608    	; 0x7a4e <main+0xba>
+				break;
+			case 'E':
+				exitBootloader();
+				break;									
+			default:
+				if(cmd != 0x1B) sendByte('?');
+    7cae:	0b 31       	cpi	r16, 0x1B	; 27
+    7cb0:	09 f4       	brne	.+2      	; 0x7cb4 <main+0x320>
+    7cb2:	cd ce       	rjmp	.-614    	; 0x7a4e <main+0xba>
+    7cb4:	8f e3       	ldi	r24, 0x3F	; 63
+    7cb6:	0e 94 0a 3c 	call	0x7814	; 0x7814 <sendByte>
+    7cba:	c9 ce       	rjmp	.-622    	; 0x7a4e <main+0xba>
