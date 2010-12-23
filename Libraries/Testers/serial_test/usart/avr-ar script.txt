@@ -1,2 +1,0 @@
-avr-ar rcs  C:\serial_test\usart\libusart.a C:\serial_test\usart\default\usart_init.o C:\serial_test\usart\default\usart_put_char.o C:\serial_test\usart\default\usart_send_byte.o C:\serial_test\usart\default\usart_error.o C:\serial_test\usart\default\usart_receive_byte.o C:\serial_test\usart\default\usart_send_pmstring.o
-
