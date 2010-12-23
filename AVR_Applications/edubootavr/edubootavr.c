@@ -1,12 +1,11 @@
 /*****************************************************
 	edubootavr Joe Pardue 7/24/10
-******************************************************/
 
-// I HATE LICENSES LIKE THIS >>BUT<< I've been told that without
-// the license then the work is automatically copyrighted in my name
-// since my purpose is to educate, I want the code to be used by whoever
-// wants to use it to learn something. If you like it, then visit
-// my website www.smileymicros.com and buy something.
+
+	12/19/10 modified to test boot-enable pin and LED flasher
+	THIS DOES NOT CONFORM TO THE AVRTOOLBOX CODING STYLE
+
+******************************************************/
 
 /*
  *  BSD License
@@ -41,9 +40,6 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-// And to further cover my ass, let me add that if you use this software
-// it will destroy whatever machine you use it on and kill anyone in a one 
-// kilometer radius. So don't even consider using it for any reason whatsoever!
 
 #include "edubootavr.h"  
 
@@ -61,8 +57,32 @@ void __jumpMain(void)
 } 
 
 
+// TODO PUT IN HEADER
+#define BOOT_PIN
+#if defined (BOOT_PIN)
+#define BOOT_STATE_PIN PIND
+#define BOOT_STATE_PIN_NUMBER PIND6
+#define BOOT_STATE_PIN_DDR DDRD
+#endif
+
 int main(void) 
 { 
+
+	#if defined(BOOT_PIN)
+	// Set pin for input
+	BOOT_STATE_PIN_DDR |= (1<<BOOT_STATE_PIN_NUMBER);
+	// Set pin with pullup
+	BOOT_STATE_PIN |= (1<<BOOT_STATE_PIN_NUMBER);
+
+	// Check boot enable pin state
+	// If BOOT_STATE_PIN_NUMBER is low, use bootloader.
+	if((BOOT_STATE_PIN & (1<<BOOT_STATE_PIN_NUMBER)) )
+	{
+		// Jump to the application section
+		application_ptr();
+	}
+	#endif
+
 	// Set up the USART
 	Initialization();
 	
@@ -84,6 +104,10 @@ int main(void)
 void AVR109CommandParser()
 {
 	uint8_t cmd;
+
+	//flash_led(2);
+
+
 
 	while(1)// Loop forever
 	{
@@ -326,7 +350,10 @@ uint8_t receiveByte( void )
 	// Wait for data to be received 
 	while ( !(USART_CONTROL_STATUS_REG_A & (1<<USART_RECEIVE_COMPLETE)) )
 	{
-		if(count++ >= (F_CPU >> 4)) application_ptr();
+		// JWP 12/20/10 extend wait
+		//if(count++ >= (F_CPU >> 4)) application_ptr();
+		if(count++ >= (F_CPU)) application_ptr();
+
 	}
 	
 	count = 0;	
@@ -338,9 +365,9 @@ uint8_t receiveByte( void )
 /*****************************************************
 	Initialization
 ******************************************************/
-
 void Initialization()
 {
+
 	USARTInit();
 
 #if defined(Butterfly)
@@ -386,7 +413,26 @@ void Initialization()
 #endif
 }
 
+// 12/19/19 JWP test
+#if defined (LED)
+#define LED_PORT PORTD
+#define LED_PIN 7
+#include <util\delay.h>
+void flash_led(uint8_t num)
+{
 
+	for( int i = 0; i < num ; i++)
+	{
+		LED_PORT &= ~(1 << LED_PIN);
+		_delay_ms(500);
+		LED_PORT |= (1 << LED_PIN);
+		_delay_ms(500);
+
+	}
+	
+}
+
+#endif
 // Only compile if Butterfly is defined in SmileyBootloader.h
 #if defined(Butterfly)
 /*****************************************************

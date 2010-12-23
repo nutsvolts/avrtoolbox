@@ -4,7 +4,7 @@
 
 ## General Flags
 PROJECT = edubootavr
-MCU = atmega169
+MCU = atmega644p
 TARGET = edubootavr.elf
 CC = avr-gcc
 
@@ -26,7 +26,7 @@ ASMFLAGS += -x assembler-with-cpp -Wa,-gdwarf2
 ## Linker flags
 LDFLAGS = $(COMMON)
 LDFLAGS += -nostartfiles -Wl,-Map=edubootavr.map
-LDFLAGS += -Wl,-section-start=.text=0x7800
+LDFLAGS += -Wl,-section-start=.text=0xfc00
 
 
 ## Intel Hex file production flags
