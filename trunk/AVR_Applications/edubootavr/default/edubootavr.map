@@ -7,7 +7,7 @@ Allocating common symbols
 Common symbol       size              file
 
 address             0x2               edubootavr.o
-pageBuffer          0x80              edubootavr.o
+pageBuffer          0x100             edubootavr.o
 
 Memory Configuration
 
@@ -23,7 +23,7 @@ signature        0x00840000         0x00000400         rw !x
 Linker script and memory map
 
 Address of section .data set to 0x800100
-Address of section .text set to 0x7800
+Address of section .text set to 0xfc00
 LOAD edubootavr.o
 LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
 LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5\libc.a
@@ -119,27 +119,27 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00007800      0x4bc
+.text           0x0000fc00      0x3d0
  *(.vectors)
  *(.vectors)
  *(.progmem.gcc*)
  *(.progmem*)
-                0x00007800                . = ALIGN (0x2)
-                0x00007800                __trampolines_start = .
+                0x0000fc00                . = ALIGN (0x2)
+                0x0000fc00                __trampolines_start = .
  *(.trampolines)
- .trampolines   0x00007800        0x0 linker stubs
+ .trampolines   0x0000fc00        0x0 linker stubs
  *(.trampolines*)
-                0x00007800                __trampolines_end = .
+                0x0000fc00                __trampolines_end = .
  *(.jumptables)
  *(.jumptables*)
  *(.lowtext)
  *(.lowtext*)
-                0x00007800                __ctors_start = .
+                0x0000fc00                __ctors_start = .
  *(.ctors)
-                0x00007800                __ctors_end = .
-                0x00007800                __dtors_start = .
+                0x0000fc00                __ctors_end = .
+                0x0000fc00                __dtors_start = .
  *(.dtors)
-                0x00007800                __dtors_end = .
+                0x0000fc00                __dtors_end = .
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
@@ -151,8 +151,8 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x00007800       0x10 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
-                0x00007800                __do_clear_bss
+ .init4         0x0000fc00       0x10 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
+                0x0000fc00                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -163,19 +163,18 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x00007810        0x4 edubootavr.o
-                0x00007810                __jumpMain
+ .init9         0x0000fc10        0x4 edubootavr.o
+                0x0000fc10                __jumpMain
  *(.init9)
  *(.text)
- .text          0x00007814      0x4a8 edubootavr.o
-                0x00007888                OSCCAL_calibration
-                0x00007994                main
-                0x00007886                Delay
- .text          0x00007cbc        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
-                0x00007cbc                . = ALIGN (0x2)
+ .text          0x0000fc14      0x3bc edubootavr.o
+                0x0000ff7a                flash_led
+                0x0000fc86                main
+ .text          0x0000ffd0        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
+                0x0000ffd0                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00007cbc        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
-                0x00007cbc                . = ALIGN (0x2)
+ .text.libgcc   0x0000ffd0        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
+                0x0000ffd0                . = ALIGN (0x2)
  *(.fini9)
  *(.fini9)
  *(.fini8)
@@ -196,9 +195,9 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
  *(.fini1)
  *(.fini0)
  *(.fini0)
-                0x00007cbc                _etext = .
+                0x0000ffd0                _etext = .
 
-.data           0x00800100        0x0 load address 0x00007cbc
+.data           0x00800100        0x0 load address 0x0000ffd0
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x0 edubootavr.o
@@ -211,26 +210,26 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
                 0x00800100                _edata = .
                 0x00800100                PROVIDE (__data_end, .)
 
-.bss            0x00800100       0x82
+.bss            0x00800100      0x102
                 0x00800100                PROVIDE (__bss_start, .)
  *(.bss)
  .bss           0x00800100        0x0 edubootavr.o
  .bss           0x00800100        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
  *(.bss*)
  *(COMMON)
- COMMON         0x00800100       0x82 edubootavr.o
+ COMMON         0x00800100      0x102 edubootavr.o
                 0x00800100                address
                 0x00800102                pageBuffer
-                0x00800182                PROVIDE (__bss_end, .)
-                0x00007cbc                __data_load_start = LOADADDR (.data)
-                0x00007cbc                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800202                PROVIDE (__bss_end, .)
+                0x0000ffd0                __data_load_start = LOADADDR (.data)
+                0x0000ffd0                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800182        0x0
-                0x00800182                PROVIDE (__noinit_start, .)
+.noinit         0x00800202        0x0
+                0x00800202                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800182                PROVIDE (__noinit_end, .)
-                0x00800182                _end = .
-                0x00800182                PROVIDE (__heap_start, .)
+                0x00800202                PROVIDE (__noinit_end, .)
+                0x00800202                _end = .
+                0x00800202                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -287,41 +286,41 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
                 0x00000000       0x28 edubootavr.o
 
 .debug_pubnames
-                0x00000000       0x66
+                0x00000000       0x53
  *(.debug_pubnames)
  .debug_pubnames
-                0x00000000       0x66 edubootavr.o
+                0x00000000       0x53 edubootavr.o
 
-.debug_info     0x00000000      0x4c6
+.debug_info     0x00000000      0x56d
  *(.debug_info)
- .debug_info    0x00000000      0x4c6 edubootavr.o
+ .debug_info    0x00000000      0x56d edubootavr.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000      0x26b
+.debug_abbrev   0x00000000      0x2a4
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x26b edubootavr.o
+ .debug_abbrev  0x00000000      0x2a4 edubootavr.o
 
-.debug_line     0x00000000      0x4fb
+.debug_line     0x00000000      0x467
  *(.debug_line)
- .debug_line    0x00000000      0x4fb edubootavr.o
+ .debug_line    0x00000000      0x467 edubootavr.o
 
-.debug_frame    0x00000000       0x70
+.debug_frame    0x00000000       0x60
  *(.debug_frame)
- .debug_frame   0x00000000       0x70 edubootavr.o
+ .debug_frame   0x00000000       0x60 edubootavr.o
 
-.debug_str      0x00000000      0x260
+.debug_str      0x00000000      0x283
  *(.debug_str)
- .debug_str     0x00000000      0x260 edubootavr.o
-                                0x294 (size before relaxing)
+ .debug_str     0x00000000      0x283 edubootavr.o
+                                0x2bd (size before relaxing)
 
-.debug_loc      0x00000000      0x24b
+.debug_loc      0x00000000      0x2a9
  *(.debug_loc)
- .debug_loc     0x00000000      0x24b edubootavr.o
+ .debug_loc     0x00000000      0x2a9 edubootavr.o
 
 .debug_macinfo
  *(.debug_macinfo)
 OUTPUT(edubootavr.elf elf32-avr)
 LOAD linker stubs
 
-.debug_ranges   0x00000000       0xe8
- .debug_ranges  0x00000000       0xe8 edubootavr.o
+.debug_ranges   0x00000000      0x128
+ .debug_ranges  0x00000000      0x128 edubootavr.o

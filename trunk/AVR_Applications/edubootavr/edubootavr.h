@@ -12,9 +12,9 @@
 	Remove '//' from device you are using
 	Add '//' to devices you are not using
 ******************************************************/
-//#define ATmega644
+#define ATmega644
 //#define ATmega32
-#define Butterfly
+//#define Butterfly
 //#define Arduino
 
 #if defined(Butterfly)
@@ -114,6 +114,8 @@ static void exitBootloader(void);
 // Function pointer to jump to the applicaion memory section
 static void (*application_ptr)( void ) = 0x0000; 
 
+// 12/19/10 JWP test 
+#define LED
 #if defined (LED)
 void flash_led(uint8_t);
 #endif
