@@ -40,7 +40,7 @@ Location: avrtoolbox\Libraries\Peripheral\spi
 	\author Joe Pardue 
 	\license New BSD
 	\date December 1, 2010
-	\version $ID$
+	\version <!--- $ID$ --->
 */
 /* ********************************************************** */
 
