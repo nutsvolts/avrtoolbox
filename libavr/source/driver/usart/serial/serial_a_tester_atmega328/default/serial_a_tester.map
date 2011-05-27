@@ -1,0 +1,770 @@
+Archive member included because of file (symbol)
+
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_available.o)
+                              serial_a_tester.o (serial_available)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_begin.o)
+                              serial_a_tester.o (serial_begin)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_in.o)
+                              serial_a_tester.o (serial_in)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_out.o)
+                              serial_a_tester.o (serial_out)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o)
+                              C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_begin.o) (usart0_init)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_insert.o)
+                              C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o) (usart0_buffer_insert)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_inuse_count.o)
+                              serial_a_tester.o (usart0_receive_buffer_inuse_count)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_remove.o)
+                              C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_in.o) (usart0_receive_buffer_remove)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_insert.o)
+                              serial_a_tester.o (usart0_transmit_buffer_insert)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_inuse_count.o)
+                              C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_out.o) (usart0_transmit_buffer_inuse_count)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(delay.o)
+                              serial_a_tester.o (delay)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_write.o)
+                              serial_a_tester.o (serial_write)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_add.o)
+                              C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o) (ring_add)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_init.o)
+                              C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o) (ring_init)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_remove.o)
+                              C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o) (ring_remove)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_inuse_count.o)
+                              C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_inuse_count.o) (usart0_buffer_inuse_count)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_remove.o)
+                              C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_remove.o) (usart0_buffer_remove)
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_clear.o)
+                              C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_init.o) (ring_clear)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+                              C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o) (__udivmodsi4)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o (exit)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+                              serial_a_tester.o (__do_copy_data)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                              serial_a_tester.o (__do_clear_bss)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(iob.o)
+                              C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o) (__iob)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vprintf.o)
+                              C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_out.o) (vprintf)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vprintf.o) (vfprintf)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o) (strnlen_P)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o) (strnlen)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o) (fputc)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o) (__ultoa_invert)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o) (__prologue_saves__)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o) (__epilogue_restores__)
+
+Allocating common symbols
+Common symbol       size              file
+
+flow                0x3               serial_a_tester.o
+usart0_transmit_buffer
+                    0x80              serial_a_tester.o
+usart0_transmit_ring
+                    0x8               serial_a_tester.o
+usart0_receive_ring
+                    0x8               serial_a_tester.o
+usart0_receive_buffer
+                    0x40              serial_a_tester.o
+__iob               0x6               c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(iob.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00020000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+fuse             0x00820000         0x00000400         rw !x
+lock             0x00830000         0x00000400         rw !x
+signature        0x00840000         0x00000400         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+Address of section .data set to 0x800100
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+LOAD serial_a_tester.o
+LOAD C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000      0xd4c
+ *(.vectors)
+ .vectors       0x00000000       0x68 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+                0x00000000                __vectors
+                0x00000000                __vector_default
+ *(.vectors)
+ *(.progmem.gcc*)
+ *(.progmem*)
+                0x00000068                . = ALIGN (0x2)
+                0x00000068                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x00000068        0x0 linker stubs
+ *(.trampolines*)
+                0x00000068                __trampolines_end = .
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x00000068                __ctors_start = .
+ *(.ctors)
+                0x00000068                __ctors_end = .
+                0x00000068                __dtors_start = .
+ *(.dtors)
+                0x00000068                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x00000068        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+                0x00000068                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x00000068        0xc c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x00000074       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+                0x00000074                __do_copy_data
+ .init4         0x0000008a       0x10 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x0000008a                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x0000009a        0x8 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+ *(.init9)
+ *(.text)
+ .text          0x000000a2        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+                0x000000a2                __vector_22
+                0x000000a2                __vector_1
+                0x000000a2                __vector_24
+                0x000000a2                __vector_12
+                0x000000a2                __bad_interrupt
+                0x000000a2                __vector_6
+                0x000000a2                __vector_3
+                0x000000a2                __vector_23
+                0x000000a2                __vector_25
+                0x000000a2                __vector_11
+                0x000000a2                __vector_13
+                0x000000a2                __vector_17
+                0x000000a2                __vector_7
+                0x000000a2                __vector_5
+                0x000000a2                __vector_4
+                0x000000a2                __vector_9
+                0x000000a2                __vector_2
+                0x000000a2                __vector_21
+                0x000000a2                __vector_15
+                0x000000a2                __vector_8
+                0x000000a2                __vector_14
+                0x000000a2                __vector_10
+                0x000000a2                __vector_16
+                0x000000a2                __vector_20
+ .text          0x000000a6      0x164 serial_a_tester.o
+                0x000000a6                main
+ .text          0x0000020a        0x6 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_available.o)
+                0x0000020a                serial_available
+ .text          0x00000210       0x34 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_begin.o)
+                0x00000210                serial_begin
+ .text          0x00000244        0x6 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_in.o)
+                0x00000244                serial_in
+ .text          0x0000024a       0x44 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_out.o)
+                0x0000024a                serial_out
+ .text          0x0000028e      0x334 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o)
+                0x00000322                usart0_transmit_check
+                0x0000028e                adelay
+                0x000003ac                __vector_19
+                0x0000058a                usart0_transmit_buffer_fill
+                0x00000426                usart0_init
+                0x000002aa                usart0_baud_set
+                0x000002e6                usart0_parity_set
+                0x00000596                usart_put_char
+                0x0000034c                __vector_18
+ .text          0x000005c2       0x10 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_insert.o)
+                0x000005c2                usart0_buffer_insert
+ .text          0x000005d2        0xa C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_inuse_count.o)
+                0x000005d2                usart0_receive_buffer_inuse_count
+ .text          0x000005dc        0xa C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_remove.o)
+                0x000005dc                usart0_receive_buffer_remove
+ .text          0x000005e6       0x1c C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_insert.o)
+                0x000005e6                usart0_transmit_buffer_insert
+ .text          0x00000602        0xa C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_inuse_count.o)
+                0x00000602                usart0_transmit_buffer_inuse_count
+ .text          0x0000060c       0x1c C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(delay.o)
+                0x0000060c                delay
+ .text          0x00000628       0x3a C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_write.o)
+                0x00000628                serial_write
+ .text          0x00000662       0x5c C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_add.o)
+                0x00000662                ring_add
+ .text          0x000006be       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_init.o)
+                0x000006be                ring_init
+ .text          0x000006de       0x5a C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_remove.o)
+                0x000006de                ring_remove
+ .text          0x00000738        0xc C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_inuse_count.o)
+                0x00000738                usart0_buffer_inuse_count
+ .text          0x00000744       0x10 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_remove.o)
+                0x00000744                usart0_buffer_remove
+ .text          0x00000754       0x34 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_clear.o)
+                0x00000754                ring_clear
+ .text          0x00000788        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+ .text          0x00000788        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text          0x00000788        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text          0x00000788        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text          0x00000788        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(iob.o)
+ .text          0x00000788        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vprintf.o)
+ .text          0x00000788        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+ .text          0x00000788        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+ .text          0x00000788        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
+ .text          0x00000788        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
+ .text          0x00000788        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+ .text          0x00000788        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+ .text          0x00000788        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+                0x00000788                . = ALIGN (0x2)
+ *(.text.*)
+ .text.libgcc   0x00000788       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+                0x00000788                __udivmodsi4
+ .text.libgcc   0x000007cc        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x000007cc        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x000007cc        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text.avr-libc
+                0x000007cc       0x14 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vprintf.o)
+                0x000007cc                vprintf
+ .text.avr-libc
+                0x000007e0      0x3ba c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x000007e0                vfprintf
+ .text.avr-libc
+                0x00000b9a       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x00000b9a                strnlen_P
+ .text.avr-libc
+                0x00000bb0       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x00000bb0                strnlen
+ .text.avr-libc
+                0x00000bc6       0x58 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x00000bc6                fputc
+ .text.avr-libc
+                0x00000c1e       0xbc c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00000c1e                __ultoa_invert
+ .text.libgcc   0x00000cda       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+                0x00000cda                __prologue_saves__
+ .text.libgcc   0x00000d12       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+                0x00000d12                __epilogue_restores__
+                0x00000d48                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x00000d48        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x00000d48                exit
+                0x00000d48                _exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x00000d48        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ *(.fini0)
+                0x00000d4c                _etext = .
+
+.data           0x00800100      0x20c load address 0x00000d4c
+                0x00800100                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800100        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+ .data          0x00800100      0x1fd serial_a_tester.o
+ .data          0x008002fd        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_available.o)
+ .data          0x008002fd        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_begin.o)
+ .data          0x008002fd        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_in.o)
+ .data          0x008002fd        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_out.o)
+ .data          0x008002fd        0xe C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o)
+                0x008002fd                mystdout
+ .data          0x0080030b        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_insert.o)
+ .data          0x0080030b        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_inuse_count.o)
+ .data          0x0080030b        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_remove.o)
+ .data          0x0080030b        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_insert.o)
+ .data          0x0080030b        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_inuse_count.o)
+ .data          0x0080030b        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(delay.o)
+ .data          0x0080030b        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_write.o)
+ .data          0x0080030b        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_add.o)
+ .data          0x0080030b        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_init.o)
+ .data          0x0080030b        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_remove.o)
+ .data          0x0080030b        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_inuse_count.o)
+ .data          0x0080030b        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_remove.o)
+ .data          0x0080030b        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_clear.o)
+ .data          0x0080030b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+ .data          0x0080030b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .data          0x0080030b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .data          0x0080030b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .data          0x0080030b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(iob.o)
+ .data          0x0080030b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vprintf.o)
+ .data          0x0080030b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+ .data          0x0080030b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+ .data          0x0080030b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
+ .data          0x0080030b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
+ .data          0x0080030b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+ .data          0x0080030b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+ .data          0x0080030b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+ *(.data*)
+ *(.rodata)
+ *(.rodata*)
+ *(.gnu.linkonce.d*)
+                0x0080030c                . = ALIGN (0x2)
+ *fill*         0x0080030b        0x1 00
+                0x0080030c                _edata = .
+                0x0080030c                PROVIDE (__data_end, .)
+
+.bss            0x0080030c       0xd9
+                0x0080030c                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x0080030c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+ .bss           0x0080030c        0x0 serial_a_tester.o
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_available.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_begin.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_in.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_out.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_insert.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_inuse_count.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_remove.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_insert.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_inuse_count.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(delay.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_write.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_add.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_init.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_remove.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_inuse_count.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_remove.o)
+ .bss           0x0080030c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_clear.o)
+ .bss           0x0080030c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+ .bss           0x0080030c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .bss           0x0080030c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .bss           0x0080030c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .bss           0x0080030c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(iob.o)
+ .bss           0x0080030c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vprintf.o)
+ .bss           0x0080030c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+ .bss           0x0080030c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+ .bss           0x0080030c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
+ .bss           0x0080030c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
+ .bss           0x0080030c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+ .bss           0x0080030c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+ .bss           0x0080030c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+ *(.bss*)
+ *(COMMON)
+ COMMON         0x0080030c       0xd3 serial_a_tester.o
+                0x0080030c                flow
+                0x0080030f                usart0_transmit_buffer
+                0x0080038f                usart0_transmit_ring
+                0x00800397                usart0_receive_ring
+                0x0080039f                usart0_receive_buffer
+ COMMON         0x008003df        0x6 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(iob.o)
+                0x008003df                __iob
+                0x008003e5                PROVIDE (__bss_end, .)
+                0x00000d4c                __data_load_start = LOADADDR (.data)
+                0x00000f58                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x008003e5        0x0
+                0x008003e5                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x008003e5                PROVIDE (__noinit_end, .)
+                0x008003e5                _end = .
+                0x008003e5                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000      0x260
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x20 serial_a_tester.o
+ .debug_aranges
+                0x00000020       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_available.o)
+ .debug_aranges
+                0x00000040       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_begin.o)
+ .debug_aranges
+                0x00000060       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_in.o)
+ .debug_aranges
+                0x00000080       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_out.o)
+ .debug_aranges
+                0x000000a0       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o)
+ .debug_aranges
+                0x000000c0       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_insert.o)
+ .debug_aranges
+                0x000000e0       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_inuse_count.o)
+ .debug_aranges
+                0x00000100       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_remove.o)
+ .debug_aranges
+                0x00000120       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_insert.o)
+ .debug_aranges
+                0x00000140       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_inuse_count.o)
+ .debug_aranges
+                0x00000160       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(delay.o)
+ .debug_aranges
+                0x00000180       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_write.o)
+ .debug_aranges
+                0x000001a0       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_add.o)
+ .debug_aranges
+                0x000001c0       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_init.o)
+ .debug_aranges
+                0x000001e0       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_remove.o)
+ .debug_aranges
+                0x00000200       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_inuse_count.o)
+ .debug_aranges
+                0x00000220       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_remove.o)
+ .debug_aranges
+                0x00000240       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_clear.o)
+
+.debug_pubnames
+                0x00000000      0x9a8
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x00000000       0x8a serial_a_tester.o
+ .debug_pubnames
+                0x0000008a       0x96 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_available.o)
+ .debug_pubnames
+                0x00000120       0x92 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_begin.o)
+ .debug_pubnames
+                0x000001b2       0x8f C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_in.o)
+ .debug_pubnames
+                0x00000241       0x90 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_out.o)
+ .debug_pubnames
+                0x000002d1      0x140 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o)
+ .debug_pubnames
+                0x00000411       0x9a C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_insert.o)
+ .debug_pubnames
+                0x000004ab       0xa7 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_inuse_count.o)
+ .debug_pubnames
+                0x00000552       0xa2 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_remove.o)
+ .debug_pubnames
+                0x000005f4       0xa3 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_insert.o)
+ .debug_pubnames
+                0x00000697       0xa8 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_inuse_count.o)
+ .debug_pubnames
+                0x0000073f       0x1c C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(delay.o)
+ .debug_pubnames
+                0x0000075b       0x92 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_write.o)
+ .debug_pubnames
+                0x000007ed       0x1f C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_add.o)
+ .debug_pubnames
+                0x0000080c       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_init.o)
+ .debug_pubnames
+                0x0000082c       0x22 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_remove.o)
+ .debug_pubnames
+                0x0000084e       0x9f C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_inuse_count.o)
+ .debug_pubnames
+                0x000008ed       0x9a C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_remove.o)
+ .debug_pubnames
+                0x00000987       0x21 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_clear.o)
+
+.debug_info     0x00000000     0x2938
+ *(.debug_info)
+ .debug_info    0x00000000      0x253 serial_a_tester.o
+ .debug_info    0x00000253      0x203 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_available.o)
+ .debug_info    0x00000456      0x29b C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_begin.o)
+ .debug_info    0x000006f1      0x203 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_in.o)
+ .debug_info    0x000008f4      0x24a C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_out.o)
+ .debug_info    0x00000b3e      0x634 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o)
+ .debug_info    0x00001172      0x24b C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_insert.o)
+ .debug_info    0x000013bd      0x203 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_inuse_count.o)
+ .debug_info    0x000015c0      0x213 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_remove.o)
+ .debug_info    0x000017d3      0x22b C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_insert.o)
+ .debug_info    0x000019fe      0x203 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_inuse_count.o)
+ .debug_info    0x00001c01      0x130 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(delay.o)
+ .debug_info    0x00001d31      0x239 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_write.o)
+ .debug_info    0x00001f6a      0x153 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_add.o)
+ .debug_info    0x000020bd      0x16f C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_init.o)
+ .debug_info    0x0000222c      0x158 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_remove.o)
+ .debug_info    0x00002384      0x237 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_inuse_count.o)
+ .debug_info    0x000025bb      0x237 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_remove.o)
+ .debug_info    0x000027f2      0x146 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_clear.o)
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev   0x00000000      0xfe3
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000       0xeb serial_a_tester.o
+ .debug_abbrev  0x000000eb       0xb5 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_available.o)
+ .debug_abbrev  0x000001a0       0xd1 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_begin.o)
+ .debug_abbrev  0x00000271       0xb5 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_in.o)
+ .debug_abbrev  0x00000326       0xe8 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_out.o)
+ .debug_abbrev  0x0000040e      0x206 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o)
+ .debug_abbrev  0x00000614       0xf1 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_insert.o)
+ .debug_abbrev  0x00000705       0xb5 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_inuse_count.o)
+ .debug_abbrev  0x000007ba       0xc4 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_remove.o)
+ .debug_abbrev  0x0000087e       0xd5 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_insert.o)
+ .debug_abbrev  0x00000953       0xb5 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_inuse_count.o)
+ .debug_abbrev  0x00000a08       0xbb C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(delay.o)
+ .debug_abbrev  0x00000ac3       0xdc C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_write.o)
+ .debug_abbrev  0x00000b9f       0xa2 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_add.o)
+ .debug_abbrev  0x00000c41       0xaf C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_init.o)
+ .debug_abbrev  0x00000cf0       0x9c C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_remove.o)
+ .debug_abbrev  0x00000d8c       0xe2 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_inuse_count.o)
+ .debug_abbrev  0x00000e6e       0xe2 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_remove.o)
+ .debug_abbrev  0x00000f50       0x93 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_clear.o)
+
+.debug_line     0x00000000     0x19f5
+ *(.debug_line)
+ .debug_line    0x00000000      0x1dd serial_a_tester.o
+ .debug_line    0x000001dd      0x168 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_available.o)
+ .debug_line    0x00000345      0x174 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_begin.o)
+ .debug_line    0x000004b9      0x161 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_in.o)
+ .debug_line    0x0000061a      0x1b2 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_out.o)
+ .debug_line    0x000007cc      0x3a2 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o)
+ .debug_line    0x00000b6e      0x12b C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_insert.o)
+ .debug_line    0x00000c99      0x120 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_inuse_count.o)
+ .debug_line    0x00000db9      0x11b C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_remove.o)
+ .debug_line    0x00000ed4      0x124 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_insert.o)
+ .debug_line    0x00000ff8      0x121 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_inuse_count.o)
+ .debug_line    0x00001119      0x15b C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(delay.o)
+ .debug_line    0x00001274      0x17c C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_write.o)
+ .debug_line    0x000013f0       0xf7 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_add.o)
+ .debug_line    0x000014e7       0xe0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_init.o)
+ .debug_line    0x000015c7       0xf2 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_remove.o)
+ .debug_line    0x000016b9      0x128 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_inuse_count.o)
+ .debug_line    0x000017e1      0x12b C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_remove.o)
+ .debug_line    0x0000190c       0xe9 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_clear.o)
+
+.debug_frame    0x00000000      0x2e0
+ *(.debug_frame)
+ .debug_frame   0x00000000       0x20 serial_a_tester.o
+ .debug_frame   0x00000020       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_available.o)
+ .debug_frame   0x00000040       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_begin.o)
+ .debug_frame   0x00000060       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_in.o)
+ .debug_frame   0x00000080       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_out.o)
+ .debug_frame   0x000000a0       0xa0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o)
+ .debug_frame   0x00000140       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_insert.o)
+ .debug_frame   0x00000160       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_inuse_count.o)
+ .debug_frame   0x00000180       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_remove.o)
+ .debug_frame   0x000001a0       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_insert.o)
+ .debug_frame   0x000001c0       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_inuse_count.o)
+ .debug_frame   0x000001e0       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(delay.o)
+ .debug_frame   0x00000200       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_write.o)
+ .debug_frame   0x00000220       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_add.o)
+ .debug_frame   0x00000240       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_init.o)
+ .debug_frame   0x00000260       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_remove.o)
+ .debug_frame   0x00000280       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_inuse_count.o)
+ .debug_frame   0x000002a0       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_remove.o)
+ .debug_frame   0x000002c0       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_clear.o)
+
+.debug_str      0x00000000      0x94c
+ *(.debug_str)
+ .debug_str     0x00000000      0x1bb serial_a_tester.o
+                                0x201 (size before relaxing)
+ .debug_str     0x000001bb       0x8f C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_available.o)
+                                0x230 (size before relaxing)
+ .debug_str     0x0000024a       0xdb C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_begin.o)
+                                0x2c2 (size before relaxing)
+ .debug_str     0x00000325       0x3b C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_in.o)
+                                0x222 (size before relaxing)
+ .debug_str     0x00000360       0x5e C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_out.o)
+                                0x24d (size before relaxing)
+ .debug_str     0x000003be      0x1b2 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o)
+                                0x438 (size before relaxing)
+ .debug_str     0x00000570       0x4c C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_insert.o)
+                                0x24a (size before relaxing)
+ .debug_str     0x000005bc       0x66 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_inuse_count.o)
+                                0x24d (size before relaxing)
+ .debug_str     0x00000622       0x5c C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_receive_buffer_remove.o)
+                                0x248 (size before relaxing)
+ .debug_str     0x0000067e       0x5e C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_insert.o)
+                                0x252 (size before relaxing)
+ .debug_str     0x000006dc       0x68 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_inuse_count.o)
+                                0x24f (size before relaxing)
+ .debug_str     0x00000744       0x28 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(delay.o)
+                                0x12a (size before relaxing)
+ .debug_str     0x0000076c       0x46 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_write.o)
+                                0x22d (size before relaxing)
+ .debug_str     0x000007b2       0x3e C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_add.o)
+                                0x176 (size before relaxing)
+ .debug_str     0x000007f0       0x3e C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_init.o)
+                                0x177 (size before relaxing)
+ .debug_str     0x0000082e       0x44 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_remove.o)
+                                0x176 (size before relaxing)
+ .debug_str     0x00000872       0x56 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_inuse_count.o)
+                                0x24e (size before relaxing)
+ .debug_str     0x000008c8       0x4c C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_remove.o)
+                                0x244 (size before relaxing)
+ .debug_str     0x00000914       0x38 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_clear.o)
+                                0x173 (size before relaxing)
+
+.debug_loc      0x00000000      0x5cb
+ *(.debug_loc)
+ .debug_loc     0x00000000       0x3f serial_a_tester.o
+ .debug_loc     0x0000003f       0x1e C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_begin.o)
+ .debug_loc     0x0000005d       0x48 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_out.o)
+ .debug_loc     0x000000a5      0x1ed C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0.o)
+ .debug_loc     0x00000292       0x3e C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_insert.o)
+ .debug_loc     0x000002d0       0x47 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_transmit_buffer_insert.o)
+ .debug_loc     0x00000317       0x89 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(serial_write.o)
+ .debug_loc     0x000003a0       0x50 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_add.o)
+ .debug_loc     0x000003f0       0xa1 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_init.o)
+ .debug_loc     0x00000491       0x6e C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_remove.o)
+ .debug_loc     0x000004ff       0x3b C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_inuse_count.o)
+ .debug_loc     0x0000053a       0x2b C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(usart0_buffer_remove.o)
+ .debug_loc     0x00000565       0x66 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_001.a(ring_clear.o)
+
+.debug_macinfo
+ *(.debug_macinfo)
+OUTPUT(serial_a_tester.elf elf32-avr)
+LOAD linker stubs
