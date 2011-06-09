@@ -1,2 +1,0 @@
-This is a test of avrtoolbox.
-This line added to generate a changed file.
