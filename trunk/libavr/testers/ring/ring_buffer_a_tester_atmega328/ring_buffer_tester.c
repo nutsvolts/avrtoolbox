@@ -34,6 +34,9 @@
 /**
     @file
    \brief Test the ring buffer library in libavr_atmega328_001.a
+   Details are in the July Nuts&Volts Smiley'Workshop avrtoolbox ring article
+   that may also be seen on www.smileymicros.com\blog
+
    May 7, 2011 - Joe Pardue
 
 */
@@ -48,19 +51,12 @@ static uint8_t array3[BUFFER_SIZE];
 
 int main(void)
 {
-	//smFifoStruct fifoStruct1;
-	//smFifoStruct fifoStruct2;	
-	//smFifoStruct fifoStruct3;
+	// Declare ring buffers
 	ring_t ring1;
 	ring_t ring2;
 	ring_t ring3;
-
 		
-	// Create fifos
-	//fifoInit(&fifoStruct1, array1, BUFFER_SIZE);
-	//fifoInit(&fifoStruct2, array2, BUFFER_SIZE);
-	//fifoInit(&fifoStruct3, array3, BUFFER_SIZE);
-
+	// Initialize ring buffers
 	ring_init(&ring1, array1, BUFFER_SIZE);
 	ring_init(&ring2, array2, BUFFER_SIZE);
 	ring_init(&ring3, array3, BUFFER_SIZE);
