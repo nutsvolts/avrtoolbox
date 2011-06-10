@@ -141,22 +141,25 @@ typedef struct
 // These functions have doxygen comments for inclusion in the avrtoolbox API
 //
 
+/*!
+	\defgroup usart USART Drivers
+*/
 /**
 	\ingroup usart
 
 	\brief intializes the uart parameters
 
 	\param mode 
-	/code
+	\code
 	typedef enum
 	{
 	    usart_mode_asynchronous = 0,
 	    usart_mode_synchronous = 1
 	} usart_mode_t;
-	/endcode
+	\endcode
 
 	\param baud
-	/code
+	\code
 	typedef enum
 	{
 	    baud_1200 = 1200,
@@ -167,10 +170,12 @@ typedef struct
 	    baud_38400 = 38400,
 		baud_57600 = 57600 // 3/17/11 JWP
 	} usart_baud_t;
-	/enccode
-
+	\endcode
+	
+	\param freq_cpu uint32_t value used to calculate the baud rate parameters
+	
 	\param databits uint8_t Number of data bits
-	/code
+	\code
 	typedef enum
 	{
 	    5-bit = 5,
@@ -179,38 +184,37 @@ typedef struct
 		8-bit = 8,
 		9-bit = 9
 	} usart_databits_t;
-	/endcode
+	\endcode
 	
 
 	\param stopbits uint8_t Number of stop bits
-	/todo - use enum typedef to be consistent
-	/code
+	\code
 	typedef enum
 	{
 	    1-stopbit = 1,
 	    2-stopbit = 6,
 	} usart_stopbits_t;	
-	/endcode
+	\endcode
 
 	\param parity
-	/code
+	\code
 	typedef enum
 	{
 	    parity_none = 0,
 		uparity_even = 1,
 	    uparity_odd = 2
 	} usart_parity_t;
-	/endcode
+	\endcode
 
 	\param flow_control
-	/code
+	\code
 	typedef enum
 	{
 	    flow_none = 0,
 	    flow_sw = 1,
 	    flow_hw = 2
 	} usart_flow_control_t;
-	/encode
+	\endcode
 */
 void usart0_init(uint32_t baud, uint32_t freq_cpu, usart_mode_t mode, usart_databits_t databits, usart_stopbits_t stopbits, usart_parity_t parity, usart_flow_control_t flow_control);
 
@@ -222,7 +226,7 @@ void usart0_init(uint32_t baud, uint32_t freq_cpu, usart_mode_t mode, usart_data
 
 
 	\param baud
-	/code
+	\code
 	typedef enum
 	{
 	    baud_1200 = 1200,
@@ -233,7 +237,7 @@ void usart0_init(uint32_t baud, uint32_t freq_cpu, usart_mode_t mode, usart_data
 	    baud_38400 = 38400,
 		baud_57600 = 57600 // 3/17/11 JWP
 	} usart_baud_t;
-	/enccode
+	\endcode
 
 
 */
@@ -250,38 +254,23 @@ void usart0_init_baud(uint32_t baud);
 bool usart0_available(void);
 
 
-
-
 /** \ingroup usart
 
     \brief Puts a character into the usart transmit buffer.
 	 
     \param c the char to be sent.
+	\param stream a pointer to the C output stream. 
+
+	The C output stream is attached with the following:
+	\code
+	FILE mystdout = FDEV_SETUP_STREAM(usart0_put_char, NULL, _FDEV_SETUP_WRITE);
+	\endcode
+	See the avrlibc manual for details
 
 	\return 0
 
 */
 int usart0_put_char(char c, FILE *stream);
-
-//void usart0_put_char(char c);
-
-
-
-/** \ingroup usart
-
-    \brief Puts a character into the usart transmit buffer.
-	Translates '\n' to '\r'
-	Provides a hardwired time delay if the transmit buffer it too full.
-	 
-    \param c the char to be sent.
-
-	\return 0
-
-	\todo is this an API function? I think not...
-*/
-//int usart0_put_char(char c, FILE *stream); 
-
-
 
 /*
 

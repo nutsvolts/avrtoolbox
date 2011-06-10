@@ -55,15 +55,20 @@ typedef struct
     ring_count_t count;
 } ring_t;
 
+/*!
+	\defgroup ring Ring Buffer
+*/
+
+
 /** 
-	\ingroup libring
+	\ingroup ring
 
 	\brief Sets up the ring buffer with ring_t parameters.
 	The clear command is also called to set 0 values within
     the ring buffer functions. 
 
-	\param *r pointer to the ring_t structure
-	\param a pointer to buffer you want to use for the ring buffer.
+	\param r pointer to the ring_t structure
+	\param buff pointer to buffer you want to use for the ring buffer.
 	\param size size in bytes of the buffer and must be equal to or greater than 2. he actual amount of storage available in the ring buffer is size - 1.
     
     \return boolean true if the ring buffer was initialized, false otherwise.
@@ -82,10 +87,10 @@ typedef struct
 	\endcode
 }	
 */
-bool ring_init(ring_t *r, ring_buffer_t buffer, ring_size_t size);
+bool ring_init(ring_t *r, ring_buffer_t buff, ring_size_t size);
 
 /** 
-	\ingroup libring
+	\ingroup ring
 
 	\brief This clear function will reset the head_index and tail_index to 0.
     The count value is also set to 0. A memset command is used to reset
@@ -105,7 +110,7 @@ bool ring_init(ring_t *r, ring_buffer_t buffer, ring_size_t size);
 bool ring_clear(ring_t *r);
 
 /** 
-	\ingroup libring
+	\ingroup ring
 
 	\brief This boolean will reference the ring_t structure and add data
     to the ring buffer as it increments the index. If data
@@ -134,7 +139,7 @@ bool ring_add(ring_t *r, uint8_t data);
 
 
 /** 
-	\ingroup libring
+	\ingroup ring
 
     \brief  Removes a byte of data from the ring buffer.
 	 
@@ -153,7 +158,7 @@ bool ring_add(ring_t *r, uint8_t data);
 uint8_t ring_remove(ring_t *r);
 
 /** 
-	\ingroup libring
+	\ingroup ring
 
     \brief Reads uint8_t count bytes from the ring buffer into a new buffer provided 
 	as a parameter. It does not remove any of the values read from the ring buffer.
@@ -177,11 +182,11 @@ uint8_t ring_remove(ring_t *r);
 uint8_t ring_peek(ring_t *r, uint8_t *buf, uint8_t count);
 
 /** 
-	\ingroup libring
+	\ingroup ring
 
     \brief Determines if the count is above the highmark used for flow-control.
 	 
-    \param ring_t *r : a pointer to a ring_t structure.
+    \param r a pointer to a ring_t structure.
 	
     \return true if the count is >= 3/4 of the buffer size.
 	
@@ -204,11 +209,11 @@ uint8_t ring_peek(ring_t *r, uint8_t *buf, uint8_t count);
 bool ring_above_highmark(ring_t *r);
 
 /** 
-	\ingroup libring
+	\ingroup ring
 
     \brief Determines if the count is belowthe lowmark used for flow-control.
 	 
-    \param ring_t *r : a pointer to a ring_t structure.
+    \param r a pointer to a ring_t structure.
 	
     \return true if the count is <= 1/4 of the buffer size.
 	

@@ -13,6 +13,7 @@
     <ul class="tablist">
       <li><a href="main.html"><span>Main&nbsp;Page</span></a></li>
       <li><a href="pages.html"><span>Related&nbsp;Pages</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Data&nbsp;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
@@ -33,43 +34,13 @@
 <div class="contents">
 <code>#include &quot;c:\avrtoolbox\libavr\source\general\ring\ring.h&quot;</code><br/>
 <code>#include &quot;<a class="el" href="usart_8h_source.html">usart.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="usart0_8h_source.html">usart0.h</a>&quot;</code><br/>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart0__receive__buffer__insert_8c.html#a1025ad53e510be6979182fed59b0c1ec">usart0_receive_buffer_insert</a> (uint8_t c)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga1025ad53e510be6979182fed59b0c1ec">usart0_receive_buffer_insert</a> (uint8_t c)</td></tr>
 </table>
-<hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a1025ad53e510be6979182fed59b0c1ec"></a><!-- doxytag: member="usart0_receive_buffer_insert.c::usart0_receive_buffer_insert" ref="a1025ad53e510be6979182fed59b0c1ec" args="(uint8_t c)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool usart0_receive_buffer_insert </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&nbsp;</td>
-          <td class="paramname"> <em>c</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
 </div>
-<div class="memdoc">
-
-<p>Adds the byte 'c' to the receive buffer and returns True if it was able to add the byte, False otherwise. </p>
-<dl class="note"><dt><b>Note:</b></dt><dd>Data added will be one value less than the size of the defined receive buffer. An example of this is a buffer size of [10] will only allow 9 values to be added into the buffer</dd></dl>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>c</em>&nbsp;</td><td>byte to add </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>boolean result of attempt to add byte </dd></dl>
-
-</div>
-</div>
-</div>
-<hr class="footer"/><address class="footer"><small>Generated on Sat May 7 2011 15:54:10 for libavr by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Jun 9 2011 16:13:56 for libavr by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>
