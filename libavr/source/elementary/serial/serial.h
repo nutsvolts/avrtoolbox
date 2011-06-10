@@ -4,14 +4,16 @@
 
 #define BUFFER_DELAY 20
 
+/*!
+	\defgroup serial Elementary Serial Communications Functions
+*/
+
 /*! 
 	\ingroup serial
 
 	\brief Gets the number of bytes that have arrived from the serial port and are available for reading from the 128 byte buffer.
 
-	\param none
-	
-	\return uint8_t bytes available in the serial receive buffer – up to 128.
+	\return uint8_t bytes available in the serial receive buffer up to 128.
 	
 	\code
 	Example:
@@ -33,8 +35,6 @@ uint8_t serial_available(void);
 	 Sets up the serial communication with the transmission data rate (baudrate).
 	
 	\param baudrate: 32-bit integer (uint32_t). Recommended that you only use one of the standard rates of: 300, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, or 115200.
-
-	\return nothing
 	
 	\code	
 	Example:
@@ -51,10 +51,6 @@ void serial_begin(uint32_t baudrate);
 	\ingroup serial
 
 	\brief Returns the serial communications elements to their default values.
-
-
-	\param None
-	\return Nothing
 	
 	\code	
 	Example:
@@ -71,10 +67,6 @@ void serial_end(void);
 	\ingroup serial
 
 	\brief Clear out any data in the serial buffer. Subsequent calls to serial_in() or serial_available() will only return data that has arrived since the call to serial_flush().
-
-	\param none
-	
-	\return nothing
 	
 	\code
 	Example:
@@ -91,8 +83,6 @@ void serial_flush(void);
 	\ingroup serial
 
 	\brief Inputs incoming serial data one byte at a time, returns –1 if no data is available.
-
-	\param none
 	
 	\return 8-bit signed integer (int8_t) - the first byte of incoming data or returns –1 if no data available.
 
@@ -101,8 +91,8 @@ void serial_flush(void);
 	// Define and receive a serial byte
 	int8_t myByte = serial_in();
 
-	// Is it ‘!’
-	if(myByte == ‘!’)
+	// Is it '!'
+	if(myByte == '!')
 	{
 		process_exclamation();
 	}	
@@ -112,14 +102,13 @@ void serial_flush(void);
 uint8_t serial_in(void);
 
 /*! 
-	\ingroup serial
+	\ingroup serial 
 
 	\brief Outputs formatted data based on conversion symbols and escape character sequences contained in a string of text. 
 	Syntax: serial_out(string_with_N_data_format_symbols, data1, data2, … dataN);
 
-	\param 
-	First parameter: string with data to format
-	Following parameters: the data to be formatted for printing in the first parameter string.
+	\param buff pointer to a string with format data.
+	\param size uint8_t number of characters in the buffer.
 
 	\return The number of characters printed or a negative number if an error occurred.
 	
@@ -165,10 +154,6 @@ uint8_t serial_in(void);
 
 	\note More advanced users may note that this is a macro wrapper for the standard library printf() function with the string stored in flash and the output directed to the USART, but the documentation here is kept simple for use by novices. If you want to use floating point conversions – DON’T. That facility is not included since it causes the code size to increase more than is warranted by the convenience. If you really need floating point consider using the special printf() functions as documented in avrlibc.
 */
-
-
-
-
 void serial_write(uint8_t *buff, uint8_t size);
 
 
