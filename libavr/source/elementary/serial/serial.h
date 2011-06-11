@@ -1,14 +1,7 @@
-$Id$
 $Date$
 $Revision$
 $HeadURL$
-
-$ svn propset svn:keywords "Date Author" license.txt
-property 'svn:keywords' set on 'license.txt'
-$
-
-
-
+$Author$
 
 //#include "..\devices\devices.h"
 #include "c:\avrtoolbox\libavr\source\driver\usart\usart.h"
