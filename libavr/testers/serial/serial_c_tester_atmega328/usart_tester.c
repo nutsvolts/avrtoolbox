@@ -36,24 +36,150 @@
  // If anyone has any reason to believe that any of this code violates other licenses
  // please contact me with details so that I may correct the situation. 
  
+
+
+/*
+
+
+TODO:
+1. In main, copy the doxy tests and use as comments for actual tests.
+2. Link functions in doxy with actual functions
+
+
+
+*/
+
+
+/**
+	\ingroup usart
+
+	\brief Test the usart module functions exposed by the API
+
+
+	<B>The USART Driver Library Functional Requirements Specification:</B>
+	1.	Initialization of all the parameters.
+	2.	Initialization using variable baudrate and common defaults for all other parameters.
+	3.	Termination of USART and restoration the default register values.
+	4.	Telling if received data is available.
+	5.	Input and output of char data type.
+	6.	Input and output of uint8_tstring data type.
+	7.	Input and output of string data type.
+	8.  Output via the C Standard Library printf function.
+	
+	<B>Functions that meet the requirements and are exposed in the API:</B><code>
+	1.	Initialization of all the parameters.
+	void usart0_init (uint32_t baud, uint32_t freq_cpu, usart_mode_t mode, usart_databits_t databits, usart_stopbits_t stopbits, usart_parity_t parity, usart_flow_control_t flow_control)
+	
+	2.	Initialization using variable baudrate and common defaults for all other parameters.
+	void usart0_init_baud (uint32_t baud)
+	
+	3.	Termination of USART and restoration the default register values.
+	void usart0_uninit (void)
+	
+	4.	Telling if received data is available.
+	bool usart0_available (void)
+	
+	5.	Input and output of char data type.
+	char usart0_get_char()
+	void usart0_put_char(char c)
+	
+	6.	Input and output of uint8_tstring data type.
+	uint8_t usart0_get_byte()
+	void usart0_put_byte(uint8_t b)
+	
+	7.	Input and output of string data type.
+	bool usart0_put_pgme string(char *str)
+	bool usart0_put_string(char *str)
+	
+	8.  Output via the C Standard Library printf function.
+	int usart0_put_char (char c, FILE *stream)
+	int usart0_put_char (char c, FILE *stream)
+	
+	<B>Test is passed if:</B>
+	1.	Initialization of all the parameters.
+	Pass if usart0_init() initialize a session allowing sending and receiving of characters to a PC terminal program.
+
+	2.	Initialization using variable baudrate and common defaults for all other parameters.
+	Pass if usart0_init_baud() initialize a session allowing sending and receiving of characters to a PC terminal program.
+
+	3.	Termination of USART and restoration the default register values.
+	Pass assumed if function uses techniques known to set register bits to set the usart bits to the default values.
+
+	4.	Telling if received data is available.
+	Pass if this function can be used in a while loop to monitor input characters and ping back those characters.
+
+	5.	Input and output of char data type.
+	Pass if demonstrated via a PC terminal.
+
+	6.	Input and output of string data type.
+	Pass if demonstrated via a PC terminal.
+
+	7.	Input and output of string data type.
+	Pass if demonstrated via a PC terminal.
+
+	8.  Output via the C Standard Library printf function.
+	Pass if the avrlibc simple implementation of printf works according to that manual.
+	
+
+	<B>Functions exposed in the API</B>
+	<code>
+	void usart0_init (uint32_t baud, uint32_t freq_cpu, usart_mode_t mode, usart_databits_t databits, usart_stopbits_t stopbits, usart_parity_t parity, usart_flow_control_t flow_control)
+	void usart0_init_baud (uint32_t baud)
+	void usart0_uninit (void)
+	bool usart0_available (void)
+	char usart0_get_char()
+	void usart0_put_char(char c)
+	uint8_t usart0_get_byte()
+	void usart0_put_byte(uint8_t b)
+	bool usart0 _put_string_P(char *str)
+	bool usart0 _put_string(char *str) 	
+	int usart0_put_char (char c, FILE *stream)
+	int usart0_put_char (char c, FILE *stream)
+	</endcode>
+
+
+	<B>Support Functions not in API</B>
+	These functions are built on the ring module and underlying code is tested there.
+	<code>
+	void 	usart0_transmit_buffer_clear (void)
+	bool 	usart0_transmit_buffer_insert (uint8_t c)
+	uint8_t usart0_transmit_buffer_remove (void)
+	uint8_t usart0_transmit_buffer_inuse_count (void)
+	uint8_t usart0_transmit_buffer_free_count (void)
+	uint8_t usart0_transmit_buffer_peek (uint8_t *buf, uint8_t count)
+	void 	usart0_receive_buffer_clear (void)
+	bool 	usart0_receive_buffer_insert (uint8_t c)
+	uint8_t usart0_receive_buffer_remove (void)
+	uint8_t usart0_receive_buffer_inuse_count (void)
+	uint8_t usart0_receive_buffer_free_count (void)
+	uint8_t usart0_receive_buffer_peek (uint8_t *buf, uint8_t count)
+	</code>
+
+*/
+
+
 #include "c:\avrtoolbox\libavr\source\driver\usart\usart.h" 
 
 
 //include to use delay function
 #include "c:\avrtoolbox\libavr\source\general\util\util.h"
 
+
+// This is a program memory string defined outside any function
+// Used for testing sending a program string in test 7 below
+const char pgm_str1[] PROGMEM =  "This is a program memory string defined outside any function.\r";
+
+
+
+
 int main(void)
 {
-	uint8_t count = 0;
-	uint8_t str[64];
 
-	#if defined(BUTTERFLY)
-	butterfly_init();
-	#endif
+/* Test 1.	Initialization of all the parameters.
+	Pass if usart0_init() initialize a session allowing sending and receiving of characters to a PC terminal program.
+*/
 
-	// Test usart initialization with all parameters
-/*	cli();
-
+/*	// PASSED
 	// Modem parameters used by common serial connections
 	usart_mode_t mode = usart_mode_asynchronous;
 	uint8_t databits = 8;
@@ -62,130 +188,130 @@ int main(void)
 	usart_flow_control_t flow_control = flow_none;
 
 	usart0_init(57600, F_CPU, mode,  databits, stopbits, parity, flow_control);
-
-	sei();
 */
-	// Test usart initialization with defaults
+
+/* Test 2.	Initialization using variable baudrate and common defaults for all other parameters.
+	Pass if usart0_init_baud() initialize a session allowing sending and receiving of characters to a PC terminal program.
+
+	// PASSED
+*/	// Leave in code since the function is used by remaining tests
+// NOTE: this is tested for the Butterfly which will set the baud to 19200 regardless of what you put here.
 	usart0_init_baud(57600);
 
 
-	str[0] = 'H';
-	str[1] = 'o';
-	str[2] = 'w';
-	str[3] = 'd';
-	str[4] = 'y';
-	str[5] = '1';
-	str[6] = '5';
-	str[7] = '\0';
+	// Debug test and track versions
+	uint8_t str[] = { 'H','o','w','d','y','7','4','\0'};
 
 	int i = 0;
-	// Send until encountering string terminator
+
 	while( (str[i] != '\0'))
 	{
 		usart0_transmit_buffer_insert(str[i++]);
-		delay(100); // prevents choking background activity
 	}
+	// Send a new line
+	usart0_transmit_buffer_insert('\r');
+	
+	//usart0_send_buffer();
+	usart0_send();
 
+
+/* Test 3.	Termination of USART and restoration the default register values.
+	Pass assumed if function uses techniques known to set register bits to set the usart bits to the default values.
+*/
+	// This test is deferred
+
+/* Test 4.	Telling if received data is available.
+	Pass if this function can be used in a while loop to monitor input characters and ping back those characters.
+*/
+/* Test 5. Input and output of char.
+	Pass if demonstrated via a PC terminal.
+*/
+
+/*	// Tests 4 and 5 - PASSED
+	char *c;
+
+	while(1)
+	{
+		if(usart0_available())
+		{
+			if(usart0_get_char(c)) usart0_put_char(*c);
+			usart0_send(); // Starts buffer tansmission
+		}
+	}
+*/
+
+/* Test	6.	Input and output of string data type.
+	Pass if demonstrated via a PC terminal.
+*/
+/*	// PASSED - Tested with Developer Terminal sending bytes in hex mode
+	uint8_t *b;
+
+	while(1)
+	{
+		if(usart0_available())
+		{
+			if(usart0_get_byte(b)) usart0_put_byte(*b);
+			usart0_send();  // Starts buffer tansmission
+		}
+	}
+*/
+
+/* Test	7.	Input and output of string data type.
+	Pass if demonstrated via a PC terminal.
+	NOTE: These function get and put to the buffers. Sending them requires a call to usart0_send();
+
+*/
+/*	PASSED
+	// Test with const char array intialized outside any function
+	// const char pgm_str1[] PROGMEM =  "This is a program memory string defined outside any function.\r";
+	usart0_put_pgm_string(pgm_str1);
+	usart0_send();
+
+	// Test with string intialized in a function
+	usart0_put_pgm_string(PSTR("This is a program memory string using PSTR within a function.\r"));
+	usart0_send();
+
+	usart0_put_string("Put a string from RAM.\r");
+	usart0_send();
+*/
+/* Test	8.  Output via the C Standard Library printf function.
+	Pass if the avrlibc simple implementation of printf works according to that manual.
+*/
+
+	printf("printf Hello, World! - from RAM\r");
+	printf_P(PSTR("printf Hello, World! - from program memory\r"));
+
+	// Test to see if you can choke it.
+	printf("Hello, World!\n");
+	printf("Now is the time for all good men to come to the aid of their country.\n");
+	printf("The quick brown fox jumjped over the lazy dog.\n");
+	printf("Hello, World!\n");
+	printf("Now is the time for all good men to come to the aid of their country.\n");
+	printf("The quick brown fox jumjped over the lazy dog.\n");
+	printf("Hello, World!\n");
+	printf("Now is the time for all good men to come to the aid of their country.\n");
+	printf("The quick brown fox jumjped over the lazy dog.\n");
+
+
+//	while(1);
+	uint8_t count = 0;
 
 	while(1)
 	{
 		// Ping back received values
-		if(usart0_receive_buffer_inuse_count())
+		if(usart0_available())//usart0_receive_buffer_inuse_count())
 		{
 			count = usart0_receive_buffer_inuse_count();
 
 			for(int i = 0 ; i < count; i++)
 			{
 				usart0_transmit_buffer_insert(usart0_receive_buffer_remove());
-				delay(100);
-			}
+			}	
+			usart0_send();
+			
 		}
 	}
 
-
-
-
-
-
-
-	// NOTE: If BUTTERFLY is defined then the serial_being() is bypassed
-	// and the usart is set to 19200 regardless of what this says
-//	serial_begin(57600);
-
-
-/*
-	buf[0] = 'H';
-	buf[1] = 'o';
-	buf[2] = 'w';
-	buf[3] = 'd';
-	buf[4] = 'y';
-	buf[5] = 0;
-
-//	serial_write(buf,6);
-	// Insert a delay to keep this from stepping on the next statement
-	delay(10);
-*/
-/*	serial_out("Hello71\n");//,0);
-/
-	// Send a bunch of stuff to see if it poops out
-	serial_out("serial_out The quick brown fox jumped over the lazy dog.");
-
-	serial_out("serial_printf The quick brown fox jumped over the lazy dog.\n");
-	serial_out("1serial_printf The quick brown fox jumped over the lazy dog.\n");
-	serial_out("2serial_printf The quick brown fox jumped over the lazy dog.\n");
-	serial_out("3serial_printf The quick brown fox jumped over the lazy dog.\n");
-	serial_out("4serial_printf The quick brown fox jumped over the lazy dog.\n");
-	serial_out("5serial_printf The quick brown fox jumped over the lazy dog.\n");
-*/
-	//char c = 'A';
-	//uint8_t x = 0x22;
-	//uint16_t X = 0x1122;
-
-	//serial_out("Test character: %c\n", c);
-
-	//serial_out("Test hexadecimal integer: %x\n", x);
-
-	//serial_out("Test 16-bit hexadecimal integer: %x\n", X);
-
-	//uint8_t  my_day = 21;
-	//uint8_t my_month[] = {"July"};
-	//uint16_t my_year = 1980;
-	
-	//serial_out("Your date of birth is:\nDay: %d \nMonth: %s \nYear: %d.", my_day, my_month, my_year); 
-	
-	/*while(1)
-	{
-		//delay(1000);
-		//usart0_transmit_buffer_insert('#');	
-
-		if(usart0_receive_buffer_inuse_count())//serial_available())
-		{
-			count = usart0_receive_buffer_inuse_count();
-
-			for(int i = 0 ; i < count; i++)
-			{
-				//str[i] = 1;//serial_in();
-				usart0_transmit_buffer_insert(usart0_receive_buffer_remove());
-			}
-			*/
-			//serial_write(buf,count);
-		
-			// Test serial_flush
-			/*
-			serial_write(buf,count);
-			serial_flush();
-			serial_write(buf,count);
-			*/
-
-			// Test usart0_uninit()
-			/*
-			_delay_ms(500);
-			serial_printf("Before serial_end()\n",0);
-			serial_end();
-			serial_printf("After serial_end()\n",0);
-				serial_begin(57600);
-			serial_printf("After serial_begin(57600)\n",0);
-			*/
-		//}
-	//}//
 }
+
+
