@@ -140,10 +140,10 @@
 <h3><a class="anchor" id="index_u"></a>- u -</h3><ul>
 <li>usart0_available()
 : <a class="el" href="group__usart.html#gae01b5873f5c2adafc9158f271d019368">usart.h</a>
+, <a class="el" href="group__usart.html#gae01b5873f5c2adafc9158f271d019368">usart0_available.c</a>
 </li>
 <li>usart0_baud_set()
-: <a class="el" href="usart_8h.html#a1747985c8a9d69f94106f5bd3fa4c238">usart.h</a>
-, <a class="el" href="usart0_8c.html#a1747985c8a9d69f94106f5bd3fa4c238">usart0.c</a>
+: <a class="el" href="usart0_8c.html#a1747985c8a9d69f94106f5bd3fa4c238">usart0.c</a>
 </li>
 <li>usart0_buffer_clear()
 : <a class="el" href="usart_8h.html#a3cd410f7d46719c7737b3a562cebf6e0">usart.h</a>
@@ -170,7 +170,15 @@
 , <a class="el" href="usart0__buffer__remove_8c.html#abe4bb81f73f0a13c51f637b676d7af1d">usart0_buffer_remove.c</a>
 </li>
 <li>usart0_flow_control_set()
-: <a class="el" href="usart_8h.html#a793b2551c2ec96001837a6b15966349d">usart.h</a>
+: <a class="el" href="usart0_8c.html#a793b2551c2ec96001837a6b15966349d">usart0.c</a>
+</li>
+<li>usart0_get_byte()
+: <a class="el" href="group__usart.html#gae8f858248942ef9c896650a983c5d5a5">usart.h</a>
+, <a class="el" href="group__usart.html#gae8f858248942ef9c896650a983c5d5a5">usart0_get_byte.c</a>
+</li>
+<li>usart0_get_char()
+: <a class="el" href="group__usart.html#ga4d68d44edcf280d291b76285cdeb525d">usart.h</a>
+, <a class="el" href="group__usart.html#ga4d68d44edcf280d291b76285cdeb525d">usart0_get_char.c</a>
 </li>
 <li>usart0_init()
 : <a class="el" href="group__usart.html#gaf7b51594efd5e2111d7d086de98bacb5">usart.h</a>
@@ -181,12 +189,27 @@
 , <a class="el" href="group__usart.html#gaa6c1c90bb4bf888cc85854587545c732">usart0_init_baud.c</a>
 </li>
 <li>usart0_parity_set()
-: <a class="el" href="usart_8h.html#a88dfa4e057eab5acd41c35210364280d">usart.h</a>
-, <a class="el" href="usart0_8c.html#a88dfa4e057eab5acd41c35210364280d">usart0.c</a>
+: <a class="el" href="usart0_8c.html#a88dfa4e057eab5acd41c35210364280d">usart0.c</a>
+</li>
+<li>usart0_put_byte()
+: <a class="el" href="group__usart.html#ga97f2723cc583a2eac27ddd1a41c98a32">usart.h</a>
+, <a class="el" href="group__usart.html#ga97f2723cc583a2eac27ddd1a41c98a32">usart0_put_byte.c</a>
 </li>
 <li>usart0_put_char()
-: <a class="el" href="group__usart.html#gadcf6678f62a270da7242e5ece026c10f">usart.h</a>
-, <a class="el" href="group__usart.html#gadcf6678f62a270da7242e5ece026c10f">usart0.c</a>
+: <a class="el" href="group__usart.html#ga78dcfaa2e2a85894750e69046d53ab9e">usart.h</a>
+, <a class="el" href="group__usart.html#ga78dcfaa2e2a85894750e69046d53ab9e">usart0_put_char.c</a>
+, <a class="el" href="group__usart.html#ga78dcfaa2e2a85894750e69046d53ab9e">usart0_put_stringP.c</a>
+</li>
+<li>usart0_put_char_stream()
+: <a class="el" href="usart0_8c.html#a52607cb8394a49da73ed42c5afb2a99a">usart0.c</a>
+</li>
+<li>usart0_put_pgm_string()
+: <a class="el" href="usart_8h.html#a7518656faf171173db98a2f3645cf8b4">usart.h</a>
+, <a class="el" href="usart0__put__pgm__string_8c.html#a90c0775136c509012bf368a1b4fdb296">usart0_put_pgm_string.c</a>
+</li>
+<li>usart0_put_string()
+: <a class="el" href="group__usart.html#ga10a7467a45897601763cfa03db090f9c">usart.h</a>
+, <a class="el" href="group__usart.html#ga10a7467a45897601763cfa03db090f9c">usart0_put_string.c</a>
 </li>
 <li>usart0_receive_buffer_clear()
 : <a class="el" href="group__usart.html#gac994fe99a6c84619bddce910d0e73089">usart.h</a>
@@ -196,33 +219,35 @@
 : <a class="el" href="group__usart.html#ga4053ab8c6d74b63f5f03e0e32c632c71">usart.h</a>
 , <a class="el" href="group__usart.html#ga4053ab8c6d74b63f5f03e0e32c632c71">usart0_receive_buffer_free_count.c</a>
 </li>
-<li>usart0_receive_buffer_insert()
-: <a class="el" href="group__usart.html#ga1025ad53e510be6979182fed59b0c1ec">usart.h</a>
-, <a class="el" href="group__usart.html#ga1025ad53e510be6979182fed59b0c1ec">usart0_receive_buffer_insert.c</a>
-</li>
 <li>usart0_receive_buffer_inuse_count()
-: <a class="el" href="group__usart.html#ga03e5c9aa4ded0b09f06a03a5f941c266">usart0_receive_buffer_inuse_count.c</a>
-, <a class="el" href="group__usart.html#ga03e5c9aa4ded0b09f06a03a5f941c266">usart.h</a>
+: <a class="el" href="group__usart.html#ga03e5c9aa4ded0b09f06a03a5f941c266">usart.h</a>
+, <a class="el" href="group__usart.html#ga03e5c9aa4ded0b09f06a03a5f941c266">usart0_receive_buffer_inuse_count.c</a>
 </li>
 <li>usart0_receive_buffer_peek()
 : <a class="el" href="group__usart.html#gafcb56b817d21622ccadfd22fa3525a1d">usart.h</a>
 , <a class="el" href="group__usart.html#gafcb56b817d21622ccadfd22fa3525a1d">usart0_receive_buffer_peek.c</a>
 </li>
 <li>usart0_receive_buffer_remove()
-: <a class="el" href="group__usart.html#ga0dd7517c599312240a7de51839cc8c57">usart0_receive_buffer_remove.c</a>
-, <a class="el" href="group__usart.html#ga0dd7517c599312240a7de51839cc8c57">usart.h</a>
+: <a class="el" href="group__usart.html#ga0dd7517c599312240a7de51839cc8c57">usart.h</a>
+, <a class="el" href="group__usart.html#ga0dd7517c599312240a7de51839cc8c57">usart0_receive_buffer_remove.c</a>
 </li>
-<li>usart0_receive_peek()
-: <a class="el" href="group__usart.html#gae7b2f7469292a50a99777684d8d866f3">usart.h</a>
-, <a class="el" href="group__usart.html#gae7b2f7469292a50a99777684d8d866f3">usart0_receive_peek.c</a>
+<li>usart0_send()
+: <a class="el" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac">usart.h</a>
+, <a class="el" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac">usart0.c</a>
+</li>
+<li>usart0_send_buffer()
+: <a class="el" href="usart0__send__buffer_8c.html#a0ff4a6471314a4661a3a904d2c519239">usart0_send_buffer.c</a>
+</li>
+<li>usart0_send_string()
+: <a class="el" href="usart0__send__string_8c.html#ad1b4a0ecd3f0260ef0f1c477210a43b8">usart0_send_string.c</a>
 </li>
 <li>usart0_transmit_buffer_clear()
 : <a class="el" href="group__usart.html#ga7552e3d0a6153c95cadc81aba4fd0413">usart.h</a>
 , <a class="el" href="group__usart.html#ga7552e3d0a6153c95cadc81aba4fd0413">usart0_transmit_buffer_clear.c</a>
 </li>
 <li>usart0_transmit_buffer_free_count()
-: <a class="el" href="group__usart.html#gad483142216f045d706f749076ac1549b">usart0_transmit_buffer_free_count.c</a>
-, <a class="el" href="group__usart.html#gad483142216f045d706f749076ac1549b">usart.h</a>
+: <a class="el" href="group__usart.html#gad483142216f045d706f749076ac1549b">usart.h</a>
+, <a class="el" href="group__usart.html#gad483142216f045d706f749076ac1549b">usart0_transmit_buffer_free_count.c</a>
 </li>
 <li>usart0_transmit_buffer_insert()
 : <a class="el" href="group__usart.html#ga8d3a6791aac28e357f812fe2c8d3021e">usart0_transmit_buffer_insert.c</a>
@@ -233,27 +258,24 @@
 , <a class="el" href="group__usart.html#ga87daee19364f78bb23707df70b61fdc5">usart.h</a>
 </li>
 <li>usart0_transmit_buffer_peek()
-: <a class="el" href="group__usart.html#ga869f5f7b2fd787e7f7ba6db1beeda3b2">usart0_transmit_buffer_peek.c</a>
-, <a class="el" href="group__usart.html#ga869f5f7b2fd787e7f7ba6db1beeda3b2">usart.h</a>
+: <a class="el" href="group__usart.html#ga869f5f7b2fd787e7f7ba6db1beeda3b2">usart.h</a>
+, <a class="el" href="group__usart.html#ga869f5f7b2fd787e7f7ba6db1beeda3b2">usart0_transmit_buffer_peek.c</a>
 </li>
 <li>usart0_transmit_buffer_remove()
-: <a class="el" href="group__usart.html#gae149e1fb5a06df6871ffbbe7c80dd625">usart.h</a>
-, <a class="el" href="group__usart.html#gae149e1fb5a06df6871ffbbe7c80dd625">usart0_transmit_buffer_remove.c</a>
-</li>
-<li>usart0_transmit_check()
-: <a class="el" href="usart_8h.html#a61df404408a13e0741fe328d29df8075">usart.h</a>
+: <a class="el" href="group__usart.html#gae149e1fb5a06df6871ffbbe7c80dd625">usart0_transmit_buffer_remove.c</a>
+, <a class="el" href="group__usart.html#gae149e1fb5a06df6871ffbbe7c80dd625">usart.h</a>
 </li>
 <li>usart0_transmit_peek()
-: <a class="el" href="group__usart.html#gafe18c11171fc9d48119fbd6fecec6bef">usart.h</a>
-, <a class="el" href="group__usart.html#gafe18c11171fc9d48119fbd6fecec6bef">usart0_transmit_peek.c</a>
+: <a class="el" href="group__usart.html#gafe18c11171fc9d48119fbd6fecec6bef">usart0_transmit_peek.c</a>
+, <a class="el" href="group__usart.html#gafe18c11171fc9d48119fbd6fecec6bef">usart.h</a>
 </li>
 <li>usart0_uninit()
-: <a class="el" href="group__usart.html#ga05305155cc1dde15421fedc26ee3c7e3">usart0_uninit.c</a>
+: <a class="el" href="group__usart.html#ga05305155cc1dde15421fedc26ee3c7e3">usart0.c</a>
 , <a class="el" href="group__usart.html#ga05305155cc1dde15421fedc26ee3c7e3">usart.h</a>
 </li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Jun 9 2011 16:13:57 for libavr by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 19 2011 13:20:53 for libavr by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

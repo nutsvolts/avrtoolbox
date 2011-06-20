@@ -56,40 +56,6 @@ Data Structures</h2></td></tr>
 Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a68930607179311e75e47b0dcbd26ba6a">USART0_RECEIVE_BUFFER_LEN</a>&nbsp;&nbsp;&nbsp;64</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#ae894a29a6a36c7afd001a0bed6f89ab3">USART0_TRANSMIT_BUFFER_LEN</a>&nbsp;&nbsp;&nbsp;128</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a71650498dcd48a55c2ebee71f3dca31c">usart_baudrate_to_setting</a>(f_cpu, baud)&nbsp;&nbsp;&nbsp;(uint16_t)(((uint32_t)(f_cpu) / ((uint32_t)(baud) * (uint32_t)16)) - 1)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a393c179a02ce4b80d03cbcc11582e9d5">usart0_mode</a>(x)&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_C = (UART_CONTROL_STATUS_REG_C &amp; (uint8_t)~((1&lt;&lt;UART_MODE_SELECT_0)|(1&lt;&lt;UART_MODE_SELECT_1))) | (uint8_t)((x) &lt;&lt; UART_MODE_SELECT_0))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a2e505b897f2b7a8e0458205a2d4edef1">usart0_clock_polarity</a>(x)&nbsp;&nbsp;&nbsp;bit_write(x, UART_CONTROL_STATUS_REG_C, BIT(UCPOL0))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a39c49d24001ec33323e17efb14231319">usart0_transmit_enable</a>()&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_ENABLE_TRANSMITTER))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#ad336c595dbe9f635065726bbb975e274">usart0_transmit_disable</a>()&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_ENABLE_TRANSMITTER))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#ac7ee289c628b7eb4c2cdaf8b3b9d77c2">usart0_receive_enable</a>()&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_ENABLE_RECEIVER))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#afbc8d91a3a6acb5b441598e13fae1e2f">usart0_receive_disable</a>()&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_ENABLE_RECEIVER))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a4d5e37068ca4578fcf026cf091dff0ef">usart0_transmit_speed_double_enable</a>()&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_A |= (uint8_t)(1 &lt;&lt; UART_DOUBLE_SPEED))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#ac7cb29b1b67ef3617c3a87ce2d48b0f6">usart0_transmit_speed_double_disable</a>()&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_A &amp;= (uint8_t)~(1 &lt;&lt; UART_DOUBLE_SPEED))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#accac10a4861d98a1b8d39475f76a1cac">usart0_receive_complete</a>()&nbsp;&nbsp;&nbsp;bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_RECEIVE_COMPLETE))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a2326fde275a4fc78414dddf8582198fe">usart0_transmit_complete</a>()&nbsp;&nbsp;&nbsp;bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_TRANSMIT_COMPLETE))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a7244e89840a666a862debbabc7636458">usart0_data_register_empty</a>()&nbsp;&nbsp;&nbsp;bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_READY_TO_TRANSMIT))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#aed834da99866af38214e033946f08819">usart0_frame_error</a>()&nbsp;&nbsp;&nbsp;bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_FRAME_ERROR))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#ad2eff621773785644eea953c2904afe3">usart0_data_overrun</a>()&nbsp;&nbsp;&nbsp;bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_DATA_OVER_RUN))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a23e075bc416c1257e6bfebdf94e142d6">usart0_parity_error</a>()&nbsp;&nbsp;&nbsp;bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_PARITY_ERROR))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#ac379053c5e647242a72aae8061efef34">usart0_multiprocessor_mode</a>(x)&nbsp;&nbsp;&nbsp;bit_write(x, UART_CONTROL_STATUS_REG_A, BIT(UART_MULTI-PROCESSOR_COMMUNICATION_MODE))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a38b8dfcf4d51e7dacc3e25170a7952eb">usart0_receive_complete_interrupt_enable</a>()&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_RX_COMPLETE_INTERRUPT_ENABLE))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a75bb30f97859bd32b348cd050d75486a">usart0_receive_complete_interrupt_disable</a>()&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_RX_COMPLETE_INTERRUPT_ENABLE))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a363900325bf97afa805b3783e7cec5c6">usart0_receive_complete_interrupt_get</a>()&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B &amp; (1 &lt;&lt; UART_RX_COMPLETE_INTERRUPT_ENABLE))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#ae1b295c3f4d15f385f7b499616dc3c59">usart0_transmit_complete_interrupt_enable</a>()&nbsp;&nbsp;&nbsp;UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_TX_COMPLETE_INTERRUPT_ENABLE)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#ad6785a0065a45cdf694042e89041dc3d">usart0_transmit_complete_interrupt_disable</a>()&nbsp;&nbsp;&nbsp;UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_TX_COMPLETE_INTERRUPT_ENABLE)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#aa16a8edf113b09bdba7738e5d6f2731d">usart0_transmit_complete_interrupt_get</a>()&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B &amp; (1 &lt;&lt; TXCIE0))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a63ccc8bea70516e85b452cf6bd3691e0">usart0_data_register_empty_interrupt_enable</a>()&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a62b99f3f2c4a0d1e7594a877161f0372">usart0_data_register_empty_interrupt_disable</a>()&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a32f28a1ac78ad48e84450b968d7027d2">usart0_data_register_empty_interrupt_get</a>()&nbsp;&nbsp;&nbsp;bit_read(UART_CONTROL_STATUS_REG_B, BIT(UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a60d815177751882f6d499200f100c8d6">usart0_receive_data_bit_8</a>(x)&nbsp;&nbsp;&nbsp;bit_write(x, UART_CONTROL_STATUS_REG_B, BIT(UART_RX_DATA_BIT_8))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a43ed47aaf821e9a29a05327672a8321d">usart0_transmit_data_bit_8</a>(x)&nbsp;&nbsp;&nbsp;bit_write(x, UART_CONTROL_STATUS_REG_B, BIT(UART_tX_DATA_BIT_8))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a08e876dd48218ae09dacb4740aa8edbe">usart0_stop_bits_set</a>(stop_bits)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a9acd0ced2196cc75ff6a9d5a87d6e16e">usart0_data_bits_set</a>(data_bits)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#aec95534a7595fc2d029aef9e9040627c">usart0_rts_enable</a>()&nbsp;&nbsp;&nbsp;bit_clear(USART0_RTS_PORT, USART0_RTS)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#af97c0b8925d829761f49e357c62dc202">usart0_rts_disable</a>()&nbsp;&nbsp;&nbsp;bit_set(USART0_RTS_PORT, USART0_RTS)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a3252d9faf441d225932b7a17df863bae">usart0_rts_init</a>()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a0e95b69c2410bde5084c49217f8417ec">usart0_cts_read</a>()&nbsp;&nbsp;&nbsp;bit_read(USART0_CTS_PORT, USART0_CTS)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#af645abfa6856fa3a76955bc2ae7e9565">usart0_cts_init</a>()</td></tr>
 <tr><td colspan="2"><h2><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a1209980dae4cfa2b7933ccb7c53746dc">usart_mode_t</a> { <a class="el" href="usart_8h.html#a1209980dae4cfa2b7933ccb7c53746dcacf885aa099d37aa50928ce18377c24b6">usart_mode_asynchronous</a> =  0, 
@@ -130,8 +96,15 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gaf7b51594efd5e2111d7d086de98bacb5">usart0_init</a> (uint32_t baud, uint32_t freq_cpu, <a class="el" href="usart_8h.html#a1209980dae4cfa2b7933ccb7c53746dc">usart_mode_t</a> mode, <a class="el" href="usart_8h.html#a506e33de86dc835ddfb4ae6d0e3da5e2">usart_databits_t</a> databits, <a class="el" href="usart_8h.html#ae8703749b006538834e892f29428fed9">usart_stopbits_t</a> stopbits, <a class="el" href="usart_8h.html#a0251d137a3f1586a0694a14efebf7f1e">usart_parity_t</a> parity, <a class="el" href="usart_8h.html#acd8a6297b68afb3863ff4c842dd0abfb">usart_flow_control_t</a> flow_control)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gaa6c1c90bb4bf888cc85854587545c732">usart0_init_baud</a> (uint32_t baud)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga05305155cc1dde15421fedc26ee3c7e3">usart0_uninit</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac">usart0_send</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gae01b5873f5c2adafc9158f271d019368">usart0_available</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gadcf6678f62a270da7242e5ece026c10f">usart0_put_char</a> (char c, FILE *stream)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga78dcfaa2e2a85894750e69046d53ab9e">usart0_put_char</a> (char c)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga4d68d44edcf280d291b76285cdeb525d">usart0_get_char</a> (char *c)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga97f2723cc583a2eac27ddd1a41c98a32">usart0_put_byte</a> (uint8_t b)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gae8f858248942ef9c896650a983c5d5a5">usart0_get_byte</a> (uint8_t *b)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga10a7467a45897601763cfa03db090f9c">usart0_put_string</a> (char *str)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a7518656faf171173db98a2f3645cf8b4">usart0_put_pgm_string</a> (const char *)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga7552e3d0a6153c95cadc81aba4fd0413">usart0_transmit_buffer_clear</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga8d3a6791aac28e357f812fe2c8d3021e">usart0_transmit_buffer_insert</a> (uint8_t c)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gae149e1fb5a06df6871ffbbe7c80dd625">usart0_transmit_buffer_remove</a> (void)</td></tr>
@@ -140,17 +113,10 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga869f5f7b2fd787e7f7ba6db1beeda3b2">usart0_transmit_buffer_peek</a> (uint8_t *buf, uint8_t count)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gafe18c11171fc9d48119fbd6fecec6bef">usart0_transmit_peek</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gac994fe99a6c84619bddce910d0e73089">usart0_receive_buffer_clear</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga1025ad53e510be6979182fed59b0c1ec">usart0_receive_buffer_insert</a> (uint8_t c)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga0dd7517c599312240a7de51839cc8c57">usart0_receive_buffer_remove</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga03e5c9aa4ded0b09f06a03a5f941c266">usart0_receive_buffer_inuse_count</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga4053ab8c6d74b63f5f03e0e32c632c71">usart0_receive_buffer_free_count</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gafcb56b817d21622ccadfd22fa3525a1d">usart0_receive_buffer_peek</a> (uint8_t *buf, uint8_t count)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gae7b2f7469292a50a99777684d8d866f3">usart0_receive_peek</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga05305155cc1dde15421fedc26ee3c7e3">usart0_uninit</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a1747985c8a9d69f94106f5bd3fa4c238">usart0_baud_set</a> (uint32_t baudrate, uint32_t freq_cpu)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a88dfa4e057eab5acd41c35210364280d">usart0_parity_set</a> (<a class="el" href="usart_8h.html#a0251d137a3f1586a0694a14efebf7f1e">usart_parity_t</a> parity)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a793b2551c2ec96001837a6b15966349d">usart0_flow_control_set</a> (<a class="el" href="usart_8h.html#acd8a6297b68afb3863ff4c842dd0abfb">usart_flow_control_t</a> flow_control)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a61df404408a13e0741fe328d29df8075">usart0_transmit_check</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a3cd410f7d46719c7737b3a562cebf6e0">usart0_buffer_clear</a> (<a class="el" href="structring__t.html">ring_t</a> *ring)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a732c55d3685e71f24d361827aed21053">usart0_buffer_insert</a> (<a class="el" href="structring__t.html">ring_t</a> *ring, uint8_t c)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#abe4bb81f73f0a13c51f637b676d7af1d">usart0_buffer_remove</a> (<a class="el" href="structring__t.html">ring_t</a> *ring)</td></tr>
@@ -163,250 +129,10 @@ Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a6b769dd4596ce2db76888ceffb20ce94">usart0_receive_buffer</a> [USART0_RECEIVE_BUFFER_LEN]</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structring__t.html">ring_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a01cd9645bef88311b3237af59e7bfab0">usart0_transmit_ring</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a651dd06fb517fc7af8f036bb42bb5916">usart0_transmit_buffer</a> [USART0_TRANSMIT_BUFFER_LEN]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">volatile uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#a2acfa7d4e8b8a6ff7d23d1c6ff981aef">usart_tx_ready_flag</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">volatile uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart_8h.html#acb2bc206f10caedf3dad08d8dc83a365">usart_buffered_tx_flag</a></td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
-<a class="anchor" id="a2e505b897f2b7a8e0458205a2d4edef1"></a><!-- doxytag: member="usart.h::usart0_clock_polarity" ref="a2e505b897f2b7a8e0458205a2d4edef1" args="(x)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_clock_polarity</td>
-          <td>(</td>
-          <td class="paramtype">&nbsp;</td>
-          <td class="paramname">x</td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;bit_write(x, UART_CONTROL_STATUS_REG_C, BIT(UCPOL0))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af645abfa6856fa3a76955bc2ae7e9565"></a><!-- doxytag: member="usart.h::usart0_cts_init" ref="af645abfa6856fa3a76955bc2ae7e9565" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_cts_init</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment"><span class="keywordflow">do</span>{     \
-    <a class="code" href="bit_8h.html#a72acd5e8f279fce5baecdcf6cd4e550d">bit_clear</a>(USART0_CTS_PORT_DIRECTION, USART0_CTS); \
-}<span class="keywordflow">while</span>(0)
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a0e95b69c2410bde5084c49217f8417ec"></a><!-- doxytag: member="usart.h::usart0_cts_read" ref="a0e95b69c2410bde5084c49217f8417ec" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_cts_read</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;bit_read(USART0_CTS_PORT, USART0_CTS)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9acd0ced2196cc75ff6a9d5a87d6e16e"></a><!-- doxytag: member="usart.h::usart0_data_bits_set" ref="a9acd0ced2196cc75ff6a9d5a87d6e16e" args="(data_bits)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_data_bits_set</td>
-          <td>(</td>
-          <td class="paramtype">&nbsp;</td>
-          <td class="paramname">data_bits</td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment"><span class="keywordflow">do</span>{         \
-    <span class="keywordflow">if</span>((data_bits) &gt;= 5 &amp;&amp; (data_bits) &lt;= 8)    \
-    {       \
-        <a class="code" href="bit_8h.html#ab936d757424e62e89cdd27196315ea7a">bit_write</a>(<a class="code" href="bit_8h.html#a962478e60bab6c37ffaabe21bfe237ee">bit_read</a>(((data_bits) - 5), <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(0)), UART_CONTROL_STATUS_REG_C, <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(UART_CHARACTER_SIZE_0)); \
-        <a class="code" href="bit_8h.html#ab936d757424e62e89cdd27196315ea7a">bit_write</a>(<a class="code" href="bit_8h.html#a962478e60bab6c37ffaabe21bfe237ee">bit_read</a>(((data_bits) - 5), <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(1)), UART_CONTROL_STATUS_REG_C, <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(UART_CHARACTER_SIZE_1)); \
-        <a class="code" href="bit_8h.html#a72acd5e8f279fce5baecdcf6cd4e550d">bit_clear</a>(UART_CONTROL_STATUS_REG_B, <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(UART_CHARACTER_SIZE_2));     \
-    }       \
-    <span class="keywordflow">if</span>((data_bits) == 9)    \
-    {       \
-        <a class="code" href="bit_8h.html#a539037d328707f28ed55900c7dd64230">bit_set</a>(UART_CONTROL_STATUS_REG_C, <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(UART_CHARACTER_SIZE_0));    \
-        <a class="code" href="bit_8h.html#a539037d328707f28ed55900c7dd64230">bit_set</a>(UART_CONTROL_STATUS_REG_C, <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(UART_CHARACTER_SIZE_1));    \
-        <a class="code" href="bit_8h.html#a539037d328707f28ed55900c7dd64230">bit_set</a>(UART_CONTROL_STATUS_REG_B, <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(UART_CHARACTER_SIZE_2));    \
-    }       \
-}<span class="keywordflow">while</span>(0)
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="ad2eff621773785644eea953c2904afe3"></a><!-- doxytag: member="usart.h::usart0_data_overrun" ref="ad2eff621773785644eea953c2904afe3" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_data_overrun</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_DATA_OVER_RUN))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7244e89840a666a862debbabc7636458"></a><!-- doxytag: member="usart.h::usart0_data_register_empty" ref="a7244e89840a666a862debbabc7636458" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_data_register_empty</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_READY_TO_TRANSMIT))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a62b99f3f2c4a0d1e7594a877161f0372"></a><!-- doxytag: member="usart.h::usart0_data_register_empty_interrupt_disable" ref="a62b99f3f2c4a0d1e7594a877161f0372" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_data_register_empty_interrupt_disable</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a63ccc8bea70516e85b452cf6bd3691e0"></a><!-- doxytag: member="usart.h::usart0_data_register_empty_interrupt_enable" ref="a63ccc8bea70516e85b452cf6bd3691e0" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_data_register_empty_interrupt_enable</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a32f28a1ac78ad48e84450b968d7027d2"></a><!-- doxytag: member="usart.h::usart0_data_register_empty_interrupt_get" ref="a32f28a1ac78ad48e84450b968d7027d2" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_data_register_empty_interrupt_get</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;bit_read(UART_CONTROL_STATUS_REG_B, BIT(UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aed834da99866af38214e033946f08819"></a><!-- doxytag: member="usart.h::usart0_frame_error" ref="aed834da99866af38214e033946f08819" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_frame_error</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_FRAME_ERROR))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a393c179a02ce4b80d03cbcc11582e9d5"></a><!-- doxytag: member="usart.h::usart0_mode" ref="a393c179a02ce4b80d03cbcc11582e9d5" args="(x)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_mode</td>
-          <td>(</td>
-          <td class="paramtype">&nbsp;</td>
-          <td class="paramname">x</td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_C = (UART_CONTROL_STATUS_REG_C &amp; (uint8_t)~((1&lt;&lt;UART_MODE_SELECT_0)|(1&lt;&lt;UART_MODE_SELECT_1))) | (uint8_t)((x) &lt;&lt; UART_MODE_SELECT_0))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac379053c5e647242a72aae8061efef34"></a><!-- doxytag: member="usart.h::usart0_multiprocessor_mode" ref="ac379053c5e647242a72aae8061efef34" args="(x)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_multiprocessor_mode</td>
-          <td>(</td>
-          <td class="paramtype">&nbsp;</td>
-          <td class="paramname">x</td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;bit_write(x, UART_CONTROL_STATUS_REG_A, BIT(UART_MULTI-PROCESSOR_COMMUNICATION_MODE))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a23e075bc416c1257e6bfebdf94e142d6"></a><!-- doxytag: member="usart.h::usart0_parity_error" ref="a23e075bc416c1257e6bfebdf94e142d6" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_parity_error</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_PARITY_ERROR))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a68930607179311e75e47b0dcbd26ba6a"></a><!-- doxytag: member="usart.h::USART0_RECEIVE_BUFFER_LEN" ref="a68930607179311e75e47b0dcbd26ba6a" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -418,205 +144,8 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="accac10a4861d98a1b8d39475f76a1cac"></a><!-- doxytag: member="usart.h::usart0_receive_complete" ref="accac10a4861d98a1b8d39475f76a1cac" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_receive_complete</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_RECEIVE_COMPLETE))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Definition at line <a class="el" href="usart_8h_source.html#l00062">62</a> of file <a class="el" href="usart_8h_source.html">usart.h</a>.</p>
 
-</div>
-</div>
-<a class="anchor" id="a75bb30f97859bd32b348cd050d75486a"></a><!-- doxytag: member="usart.h::usart0_receive_complete_interrupt_disable" ref="a75bb30f97859bd32b348cd050d75486a" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_receive_complete_interrupt_disable</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_RX_COMPLETE_INTERRUPT_ENABLE))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a38b8dfcf4d51e7dacc3e25170a7952eb"></a><!-- doxytag: member="usart.h::usart0_receive_complete_interrupt_enable" ref="a38b8dfcf4d51e7dacc3e25170a7952eb" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_receive_complete_interrupt_enable</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_RX_COMPLETE_INTERRUPT_ENABLE))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a363900325bf97afa805b3783e7cec5c6"></a><!-- doxytag: member="usart.h::usart0_receive_complete_interrupt_get" ref="a363900325bf97afa805b3783e7cec5c6" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_receive_complete_interrupt_get</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B &amp; (1 &lt;&lt; UART_RX_COMPLETE_INTERRUPT_ENABLE))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a60d815177751882f6d499200f100c8d6"></a><!-- doxytag: member="usart.h::usart0_receive_data_bit_8" ref="a60d815177751882f6d499200f100c8d6" args="(x)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_receive_data_bit_8</td>
-          <td>(</td>
-          <td class="paramtype">&nbsp;</td>
-          <td class="paramname">x</td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;bit_write(x, UART_CONTROL_STATUS_REG_B, BIT(UART_RX_DATA_BIT_8))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="afbc8d91a3a6acb5b441598e13fae1e2f"></a><!-- doxytag: member="usart.h::usart0_receive_disable" ref="afbc8d91a3a6acb5b441598e13fae1e2f" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_receive_disable</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_ENABLE_RECEIVER))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac7ee289c628b7eb4c2cdaf8b3b9d77c2"></a><!-- doxytag: member="usart.h::usart0_receive_enable" ref="ac7ee289c628b7eb4c2cdaf8b3b9d77c2" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_receive_enable</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_ENABLE_RECEIVER))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af97c0b8925d829761f49e357c62dc202"></a><!-- doxytag: member="usart.h::usart0_rts_disable" ref="af97c0b8925d829761f49e357c62dc202" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_rts_disable</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;bit_set(USART0_RTS_PORT, USART0_RTS)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aec95534a7595fc2d029aef9e9040627c"></a><!-- doxytag: member="usart.h::usart0_rts_enable" ref="aec95534a7595fc2d029aef9e9040627c" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_rts_enable</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;bit_clear(USART0_RTS_PORT, USART0_RTS)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3252d9faf441d225932b7a17df863bae"></a><!-- doxytag: member="usart.h::usart0_rts_init" ref="a3252d9faf441d225932b7a17df863bae" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_rts_init</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment"><span class="keywordflow">do</span>{     \
-    <a class="code" href="usart_8h.html#aec95534a7595fc2d029aef9e9040627c">usart0_rts_enable</a>();    \
-    <a class="code" href="bit_8h.html#a539037d328707f28ed55900c7dd64230">bit_set</a>(USART0_RTS_PORT_DIRECTION, USART0_RTS); \
-}<span class="keywordflow">while</span>(0)
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a08e876dd48218ae09dacb4740aa8edbe"></a><!-- doxytag: member="usart.h::usart0_stop_bits_set" ref="a08e876dd48218ae09dacb4740aa8edbe" args="(stop_bits)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_stop_bits_set</td>
-          <td>(</td>
-          <td class="paramtype">&nbsp;</td>
-          <td class="paramname">stop_bits</td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment"><span class="keywordflow">do</span>{                                     \
-    <span class="keywordflow">if</span>((stop_bits) &gt;= 1 &amp;&amp; (stop_bits) &lt;= 2)    \
-    {                                           \
-        <a class="code" href="bit_8h.html#ab936d757424e62e89cdd27196315ea7a">bit_write</a>((stop_bits) - 1, UART_CONTROL_STATUS_REG_C, <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(UART_STOP_BIT_SELECT)); \
-    }                                           \
-}<span class="keywordflow">while</span>(0)
-</pre></div>
 </div>
 </div>
 <a class="anchor" id="ae894a29a6a36c7afd001a0bed6f89ab3"></a><!-- doxytag: member="usart.h::USART0_TRANSMIT_BUFFER_LEN" ref="ae894a29a6a36c7afd001a0bed6f89ab3" args="" -->
@@ -630,186 +159,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="a2326fde275a4fc78414dddf8582198fe"></a><!-- doxytag: member="usart.h::usart0_transmit_complete" ref="a2326fde275a4fc78414dddf8582198fe" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_transmit_complete</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_TRANSMIT_COMPLETE))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad6785a0065a45cdf694042e89041dc3d"></a><!-- doxytag: member="usart.h::usart0_transmit_complete_interrupt_disable" ref="ad6785a0065a45cdf694042e89041dc3d" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_transmit_complete_interrupt_disable</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_TX_COMPLETE_INTERRUPT_ENABLE)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae1b295c3f4d15f385f7b499616dc3c59"></a><!-- doxytag: member="usart.h::usart0_transmit_complete_interrupt_enable" ref="ae1b295c3f4d15f385f7b499616dc3c59" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_transmit_complete_interrupt_enable</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_TX_COMPLETE_INTERRUPT_ENABLE)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa16a8edf113b09bdba7738e5d6f2731d"></a><!-- doxytag: member="usart.h::usart0_transmit_complete_interrupt_get" ref="aa16a8edf113b09bdba7738e5d6f2731d" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_transmit_complete_interrupt_get</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B &amp; (1 &lt;&lt; TXCIE0))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a43ed47aaf821e9a29a05327672a8321d"></a><!-- doxytag: member="usart.h::usart0_transmit_data_bit_8" ref="a43ed47aaf821e9a29a05327672a8321d" args="(x)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_transmit_data_bit_8</td>
-          <td>(</td>
-          <td class="paramtype">&nbsp;</td>
-          <td class="paramname">x</td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;bit_write(x, UART_CONTROL_STATUS_REG_B, BIT(UART_tX_DATA_BIT_8))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad336c595dbe9f635065726bbb975e274"></a><!-- doxytag: member="usart.h::usart0_transmit_disable" ref="ad336c595dbe9f635065726bbb975e274" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_transmit_disable</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_ENABLE_TRANSMITTER))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a39c49d24001ec33323e17efb14231319"></a><!-- doxytag: member="usart.h::usart0_transmit_enable" ref="a39c49d24001ec33323e17efb14231319" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_transmit_enable</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_ENABLE_TRANSMITTER))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac7cb29b1b67ef3617c3a87ce2d48b0f6"></a><!-- doxytag: member="usart.h::usart0_transmit_speed_double_disable" ref="ac7cb29b1b67ef3617c3a87ce2d48b0f6" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_transmit_speed_double_disable</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_A &amp;= (uint8_t)~(1 &lt;&lt; UART_DOUBLE_SPEED))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4d5e37068ca4578fcf026cf091dff0ef"></a><!-- doxytag: member="usart.h::usart0_transmit_speed_double_enable" ref="a4d5e37068ca4578fcf026cf091dff0ef" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart0_transmit_speed_double_enable</td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;(UART_CONTROL_STATUS_REG_A |= (uint8_t)(1 &lt;&lt; UART_DOUBLE_SPEED))</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a71650498dcd48a55c2ebee71f3dca31c"></a><!-- doxytag: member="usart.h::usart_baudrate_to_setting" ref="a71650498dcd48a55c2ebee71f3dca31c" args="(f_cpu, baud)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define usart_baudrate_to_setting</td>
-          <td>(</td>
-          <td class="paramtype">&nbsp;</td>
-          <td class="paramname">f_cpu, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&nbsp;</td>
-          <td class="paramname">baud</td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td>&nbsp;&nbsp;&nbsp;(uint16_t)(((uint32_t)(f_cpu) / ((uint32_t)(baud) * (uint32_t)16)) - 1)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Definition at line <a class="el" href="usart_8h_source.html#l00066">66</a> of file <a class="el" href="usart_8h_source.html">usart.h</a>.</p>
 
 </div>
 </div>
@@ -843,6 +193,8 @@ Variables</h2></td></tr>
 </dd>
 </dl>
 
+<p>Definition at line <a class="el" href="usart_8h_source.html#l00107">107</a> of file <a class="el" href="usart_8h_source.html">usart.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a506e33de86dc835ddfb4ae6d0e3da5e2"></a><!-- doxytag: member="usart.h::usart_databits_t" ref="a506e33de86dc835ddfb4ae6d0e3da5e2" args="" -->
@@ -870,6 +222,8 @@ Variables</h2></td></tr>
 </dd>
 </dl>
 
+<p>Definition at line <a class="el" href="usart_8h_source.html#l00119">119</a> of file <a class="el" href="usart_8h_source.html">usart.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="acd8a6297b68afb3863ff4c842dd0abfb"></a><!-- doxytag: member="usart.h::usart_flow_control_t" ref="acd8a6297b68afb3863ff4c842dd0abfb" args="" -->
@@ -893,6 +247,8 @@ Variables</h2></td></tr>
 </dd>
 </dl>
 
+<p>Definition at line <a class="el" href="usart_8h_source.html#l00134">134</a> of file <a class="el" href="usart_8h_source.html">usart.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a1209980dae4cfa2b7933ccb7c53746dc"></a><!-- doxytag: member="usart.h::usart_mode_t" ref="a1209980dae4cfa2b7933ccb7c53746dc" args="" -->
@@ -913,6 +269,8 @@ Variables</h2></td></tr>
 </table>
 </dd>
 </dl>
+
+<p>Definition at line <a class="el" href="usart_8h_source.html#l00093">93</a> of file <a class="el" href="usart_8h_source.html">usart.h</a>.</p>
 
 </div>
 </div>
@@ -937,6 +295,8 @@ Variables</h2></td></tr>
 </dd>
 </dl>
 
+<p>Definition at line <a class="el" href="usart_8h_source.html#l00100">100</a> of file <a class="el" href="usart_8h_source.html">usart.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ae8703749b006538834e892f29428fed9"></a><!-- doxytag: member="usart.h::usart_stopbits_t" ref="ae8703749b006538834e892f29428fed9" args="" -->
@@ -958,36 +318,11 @@ Variables</h2></td></tr>
 </dd>
 </dl>
 
-</div>
-</div>
-<hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a1747985c8a9d69f94106f5bd3fa4c238"></a><!-- doxytag: member="usart.h::usart0_baud_set" ref="a1747985c8a9d69f94106f5bd3fa4c238" args="(uint32_t baudrate, uint32_t freq_cpu)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void usart0_baud_set </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t&nbsp;</td>
-          <td class="paramname"> <em>baudrate</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&nbsp;</td>
-          <td class="paramname"> <em>freq_cpu</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Definition at line <a class="el" href="usart_8h_source.html#l00128">128</a> of file <a class="el" href="usart_8h_source.html">usart.h</a>.</p>
 
 </div>
 </div>
+<hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a3cd410f7d46719c7737b3a562cebf6e0"></a><!-- doxytag: member="usart.h::usart0_buffer_clear" ref="a3cd410f7d46719c7737b3a562cebf6e0" args="(ring_t *ring)" -->
 <div class="memitem">
 <div class="memproto">
@@ -1003,6 +338,8 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="usart0__buffer__clear_8c_source.html#l00041">41</a> of file <a class="el" href="usart0__buffer__clear_8c_source.html">usart0_buffer_clear.c</a>.</p>
 
 </div>
 </div>
@@ -1021,6 +358,8 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="usart0__buffer__free__count_8c_source.html#l00041">41</a> of file <a class="el" href="usart0__buffer__free__count_8c_source.html">usart0_buffer_free_count.c</a>.</p>
 
 </div>
 </div>
@@ -1049,6 +388,8 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="usart0__buffer__insert_8c_source.html#l00041">41</a> of file <a class="el" href="usart0__buffer__insert_8c_source.html">usart0_buffer_insert.c</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a4691642c094d9b3d12c06d88512c9fc9"></a><!-- doxytag: member="usart.h::usart0_buffer_inuse_count" ref="a4691642c094d9b3d12c06d88512c9fc9" args="(ring_t *ring)" -->
@@ -1066,6 +407,8 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="usart0__buffer__inuse__count_8c_source.html#l00041">41</a> of file <a class="el" href="usart0__buffer__inuse__count_8c_source.html">usart0_buffer_inuse_count.c</a>.</p>
 
 </div>
 </div>
@@ -1100,6 +443,8 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="usart0__buffer__peek_8c_source.html#l00041">41</a> of file <a class="el" href="usart0__buffer__peek_8c_source.html">usart0_buffer_peek.c</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="abe4bb81f73f0a13c51f637b676d7af1d"></a><!-- doxytag: member="usart.h::usart0_buffer_remove" ref="abe4bb81f73f0a13c51f637b676d7af1d" args="(ring_t *ring)" -->
@@ -1118,52 +463,18 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="a793b2551c2ec96001837a6b15966349d"></a><!-- doxytag: member="usart.h::usart0_flow_control_set" ref="a793b2551c2ec96001837a6b15966349d" args="(usart_flow_control_t flow_control)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void usart0_flow_control_set </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="usart_8h.html#acd8a6297b68afb3863ff4c842dd0abfb">usart_flow_control_t</a>&nbsp;</td>
-          <td class="paramname"> <em>flow_control</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Definition at line <a class="el" href="usart0__buffer__remove_8c_source.html#l00041">41</a> of file <a class="el" href="usart0__buffer__remove_8c_source.html">usart0_buffer_remove.c</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a88dfa4e057eab5acd41c35210364280d"></a><!-- doxytag: member="usart.h::usart0_parity_set" ref="a88dfa4e057eab5acd41c35210364280d" args="(usart_parity_t parity)" -->
+<a class="anchor" id="a7518656faf171173db98a2f3645cf8b4"></a><!-- doxytag: member="usart.h::usart0_put_pgm_string" ref="a7518656faf171173db98a2f3645cf8b4" args="(const char *)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void usart0_parity_set </td>
+          <td class="memname">void usart0_put_pgm_string </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="usart_8h.html#a0251d137a3f1586a0694a14efebf7f1e">usart_parity_t</a>&nbsp;</td>
-          <td class="paramname"> <em>parity</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a61df404408a13e0741fe328d29df8075"></a><!-- doxytag: member="usart.h::usart0_transmit_check" ref="a61df404408a13e0741fe328d29df8075" args="(void)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void usart0_transmit_check </td>
-          <td>(</td>
-          <td class="paramtype">void&nbsp;</td>
+          <td class="paramtype">const char *&nbsp;</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
@@ -1171,6 +482,31 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Loads a string from program memory into the transmit buffer. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>pointer</em>&nbsp;</td><td>to a constant character string</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment">        <span class="comment">// Define string outside any function</span>
+        <span class="keyword">const</span> <span class="keywordtype">char</span> pgm_str1[] PROGMEM =  <span class="stringliteral">&quot;This is a program memory string defined outside any function.\r&quot;</span>;
+        ...
+        <span class="comment">// Put the program memory string into the transmit buffer</span>
+        <a class="code" href="usart_8h.html#a7518656faf171173db98a2f3645cf8b4" title="Loads a string from program memory into the transmit buffer.">usart0_put_pgm_string</a>(pgm_str1);
+        <span class="comment">// Transmit it</span>
+        <a class="code" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac" title="Initiates the interrupt based transmission of the buffer NOTE: All of the put or insert function only...">usart0_send</a>();
+
+        <span class="comment">// Use with a string intialized in the function</span>
+        <a class="code" href="usart_8h.html#a7518656faf171173db98a2f3645cf8b4" title="Loads a string from program memory into the transmit buffer.">usart0_put_pgm_string</a>(PSTR(<span class="stringliteral">&quot;This is a program memory string using PSTR within a function.\r&quot;</span>));
+        <a class="code" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac" title="Initiates the interrupt based transmission of the buffer NOTE: All of the put or insert function only...">usart0_send</a>();
+</pre></div> 
+<p><p>The 'for' logic terminates if the byte is '' or if i = 60. '' is 'null' and terminates C strings The 80 prevents too much overrun if we get a bad pointer and it limits the string size </p>
+</p>
+
+<p>Definition at line <a class="el" href="usart0__put__pgm__string_8c_source.html#l00041">41</a> of file <a class="el" href="usart0__put__pgm__string_8c_source.html">usart0_put_pgm_string.c</a>.</p>
 
 </div>
 </div>
@@ -1186,6 +522,8 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="usart_8h_source.html#l00063">63</a> of file <a class="el" href="usart_8h_source.html">usart.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a7fed97e63d361555cef014709ee36712"></a><!-- doxytag: member="usart.h::usart0_receive_ring" ref="a7fed97e63d361555cef014709ee36712" args="" -->
@@ -1198,6 +536,8 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="usart_8h_source.html#l00061">61</a> of file <a class="el" href="usart_8h_source.html">usart.h</a>.</p>
 
 </div>
 </div>
@@ -1212,6 +552,8 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="usart_8h_source.html#l00067">67</a> of file <a class="el" href="usart_8h_source.html">usart.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a01cd9645bef88311b3237af59e7bfab0"></a><!-- doxytag: member="usart.h::usart0_transmit_ring" ref="a01cd9645bef88311b3237af59e7bfab0" args="" -->
@@ -1225,10 +567,42 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="usart_8h_source.html#l00065">65</a> of file <a class="el" href="usart_8h_source.html">usart.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acb2bc206f10caedf3dad08d8dc83a365"></a><!-- doxytag: member="usart.h::usart_buffered_tx_flag" ref="acb2bc206f10caedf3dad08d8dc83a365" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t <a class="el" href="usart_8h.html#acb2bc206f10caedf3dad08d8dc83a365">usart_buffered_tx_flag</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="usart_8h_source.html#l00072">72</a> of file <a class="el" href="usart_8h_source.html">usart.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2acfa7d4e8b8a6ff7d23d1c6ff981aef"></a><!-- doxytag: member="usart.h::usart_tx_ready_flag" ref="a2acfa7d4e8b8a6ff7d23d1c6ff981aef" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t <a class="el" href="usart_8h.html#a2acfa7d4e8b8a6ff7d23d1c6ff981aef">usart_tx_ready_flag</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="usart_8h_source.html#l00071">71</a> of file <a class="el" href="usart_8h_source.html">usart.h</a>.</p>
+
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Jun 9 2011 16:13:56 for libavr by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 19 2011 13:20:52 for libavr by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

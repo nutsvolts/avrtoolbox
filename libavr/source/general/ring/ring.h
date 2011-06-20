@@ -66,12 +66,6 @@ typedef struct
 	\brief Sets up the ring buffer with ring_t parameters.
 	The clear command is also called to set 0 values within
     the ring buffer functions. 
-
-	\param r pointer to the ring_t structure
-	\param buff pointer to buffer you want to use for the ring buffer.
-	\param size size in bytes of the buffer and must be equal to or greater than 2. he actual amount of storage available in the ring buffer is size - 1.
-    
-    \return boolean true if the ring buffer was initialized, false otherwise.
     
 	\code
 	Example:
@@ -85,6 +79,12 @@ typedef struct
 		
 	// Okay to use the buffer 
 	\endcode
+
+	\param r pointer to the ring_t structure
+	\param buff pointer to buffer you want to use for the ring buffer.
+	\param size size in bytes of the buffer and must be equal to or greater than 2. he actual amount of storage available in the ring buffer is size - 1.
+    
+    \return boolean true if the ring buffer was initialized, false otherwise.
 }	
 */
 bool ring_init(ring_t *r, ring_buffer_t buff, ring_size_t size);
@@ -95,9 +95,6 @@ bool ring_init(ring_t *r, ring_buffer_t buff, ring_size_t size);
 	\brief This clear function will reset the head_index and tail_index to 0.
     The count value is also set to 0. A memset command is used to reset
     a particular area in memory as well.
-
-	\param *r pointer to ring buffer
-	\return boolean result of attempt to add byte
 	
 	\code
 	Example:
@@ -106,6 +103,10 @@ bool ring_init(ring_t *r, ring_buffer_t buff, ring_size_t size);
 		ring_clear(&receive_ring);
 	}
 	\endcode
+
+	\param *r pointer to ring buffer
+	
+	\return boolean result of attempt to add byte
 */
 bool ring_clear(ring_t *r);
 
@@ -122,10 +123,6 @@ bool ring_clear(ring_t *r);
     of the defined ring buffer. An example of this is a buffer
     size of [10] will only allow 9 values to be added into the buffer
 	
-	\param *r pointer to ring buffer
-	\param data byte to add
-	\return boolean result of attempt to add byte
-	
 	\code
 	Example:
 	// receive_ring structure defined elsewhere
@@ -134,6 +131,11 @@ bool ring_clear(ring_t *r);
 		return(ring_add(&receive_ring, b));
 	}
 	\endcode
+	
+	\param *r pointer to ring buffer
+	\param data byte to add
+	
+	\return boolean result of attempt to add byte
 */
 bool ring_add(ring_t *r, uint8_t data);
 
@@ -142,10 +144,6 @@ bool ring_add(ring_t *r, uint8_t data);
 	\ingroup ring
 
     \brief  Removes a byte of data from the ring buffer.
-	 
-    \param *r a pointer to the ring_t structure.
-	
-    \return The byte of data removed.
 	
 	\code
 	// receive_ring structure defined elsewhere
@@ -154,6 +152,10 @@ bool ring_add(ring_t *r, uint8_t data);
 		return(ring_remove(&receive_ring));
 	}
 	\endcode
+	 
+    \param *r a pointer to the ring_t structure.
+	
+    \return The byte of data removed.
 */	
 uint8_t ring_remove(ring_t *r);
 
@@ -163,12 +165,6 @@ uint8_t ring_remove(ring_t *r);
     \brief Reads uint8_t count bytes from the ring buffer into a new buffer provided 
 	as a parameter. It does not remove any of the values read from the ring buffer.
 	Nor does it change the ring buffer indexes.	It returns the number of bytes read.
-	 
-    \param *r a pointer to the ring_t structure.
-    \param *buf a pointer to a buffer to hold the data.
-    \param count the number of bytes to load from the ring buffer to buf.
-	
-    \return the actual number of bytes read.
 	
 	\code
 	Example:
@@ -178,6 +174,12 @@ uint8_t ring_remove(ring_t *r);
 		return(ring_peek(&receive_ring, buf, count));
 	}
 	\endcode
+	 
+    \param *r a pointer to the ring_t structure.
+    \param *buf a pointer to a buffer to hold the data.
+    \param count the number of bytes to load from the ring buffer to buf.
+	
+    \return the actual number of bytes read.
 */
 uint8_t ring_peek(ring_t *r, uint8_t *buf, uint8_t count);
 
@@ -185,10 +187,6 @@ uint8_t ring_peek(ring_t *r, uint8_t *buf, uint8_t count);
 	\ingroup ring
 
     \brief Determines if the count is above the highmark used for flow-control.
-	 
-    \param r a pointer to a ring_t structure.
-	
-    \return true if the count is >= 3/4 of the buffer size.
 	
 	\code
 	Example:
@@ -205,6 +203,10 @@ uint8_t ring_peek(ring_t *r, uint8_t *buf, uint8_t count);
 		}
 	}
 	\endcode
+	 
+    \param r a pointer to a ring_t structure.
+	
+    \return true if the count is >= 3/4 of the buffer size.
 */
 bool ring_above_highmark(ring_t *r);
 
@@ -212,10 +214,6 @@ bool ring_above_highmark(ring_t *r);
 	\ingroup ring
 
     \brief Determines if the count is belowthe lowmark used for flow-control.
-	 
-    \param r a pointer to a ring_t structure.
-	
-    \return true if the count is <= 1/4 of the buffer size.
 	
 	\code
 	Example:
@@ -232,6 +230,10 @@ bool ring_above_highmark(ring_t *r);
 		}
 	}
 	\endcode
+	 
+    \param r a pointer to a ring_t structure.
+	
+    \return true if the count is <= 1/4 of the buffer size.
 */
 bool ring_below_lowmark(ring_t *r);
 

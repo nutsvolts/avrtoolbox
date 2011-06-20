@@ -36,15 +36,16 @@
  // If anyone has any reason to believe that any of this code violates other licenses
  // please contact me with details so that I may correct the situation. 
  
-
-#include "c:\avrtoolbox\libavr\source\general\ring\ring.h" 
 #include "usart.h"
 
 bool usart0_transmit_buffer_insert(uint8_t c)
 {
     register bool result;
     result = usart0_buffer_insert(&usart0_transmit_ring, c);
-    if(result == true) usart0_transmit_check();
+	
+	// JWP 6/14/11 don't automatically send. Use usart0_transmit_send when 
+	// 		you have finished loading what you want to send in the buffer
+	//if(result == true) usart0_transmit_check();
 
     return(result);
 }

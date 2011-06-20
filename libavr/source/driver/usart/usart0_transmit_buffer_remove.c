@@ -36,14 +36,13 @@
  // If anyone has any reason to believe that any of this code violates other licenses
  // please contact me with details so that I may correct the situation. 
  
-#include "c:\avrtoolbox\libavr\source\general\ring\ring.h" 
 #include "usart.h"
 
 uint8_t usart0_transmit_buffer_remove(void)
 {
     register uint8_t result;
     result = usart0_buffer_remove(&usart0_transmit_ring);
-    usart0_transmit_check();
+    //usart0_transmit_check();
     return(result);
 }
 
