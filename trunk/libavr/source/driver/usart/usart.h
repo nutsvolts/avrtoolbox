@@ -54,6 +54,11 @@
 
 #include "c:\avrtoolbox\libavr\source\general\ring\ring.h"
 
+//JWP 6/16/11 The Butterfly requires special code for clock and baud
+#if defined(__AVR_ATmega169__) // Assume Butterfly
+#include "c:\avrtoolbox\libavr\source\board\butterfly\butterfly.h" //"libserial\serial.h"
+#endif
+
 
 
 //
@@ -67,6 +72,25 @@ uint8_t usart0_receive_buffer[USART0_RECEIVE_BUFFER_LEN];
 ring_t usart0_transmit_ring;
 #define USART0_TRANSMIT_BUFFER_LEN  128
 uint8_t usart0_transmit_buffer[USART0_TRANSMIT_BUFFER_LEN];
+
+
+// JWP 6/16/11 flags for revised transmissio logic
+volatile uint8_t usart_tx_ready_flag;
+volatile uint8_t usart_buffered_tx_flag;
+
+// TODO MOVE AND PUT DOXYGEN COMMENTS
+// JWP 6/16/11 added to change transmission logic.
+// this function waits until a pending transmission is complete
+// then sends a byte. If the usart_buffered_TX_flag is set true
+// then the ISR continues to send until the buffer is empty, otherwise
+// the ISR just sends the byte. 
+//void usart0_send_byte(void);
+//void usart0_send_buffer(void);
+
+// AVRStudio crashed when I was converting from the above to the below
+// TODO FIND AND FIX
+
+
 
 
 //
@@ -243,11 +267,56 @@ void usart0_init(uint32_t baud, uint32_t freq_cpu, usart_mode_t mode, usart_data
 */
 void usart0_init_baud(uint32_t baud);
 
+/** 
+	\ingroup usart
+
+	\brief  Restores registers to datasheet default valuse
+
+	Example:
+	\code
+	// Stop the madness
+	usart0_uninit();
+	\endcode
+
+*/
+void usart0_uninit(void);
+
+
+
+
+
+/** \ingroup usart
+
+    \brief Initiates the interrupt based transmission of the buffer
+	 NOTE: All of the put or insert function only load a byte into the transmission buffer.
+	 This function must be called to start the transmission.
+
+	Example:
+	\code
+	// Put a string from program memory into the transmit buffer
+	usart0_put_pgm_string(pgm_str1);
+	// Initiate buffer transmission
+	usart0_send();
+	\endcode
+*/
+void usart0_send(void);
+
 
 /** \ingroup usart
 
     \brief Gets the receive buffer count
 	This can be used as a boolean since if the buffer is empty it returns 0.
+
+	Example:
+	\code
+	char *c;
+
+	if(usart0_available())
+	{
+		if(usart0_get_char(c)) usart0_put_char(*c);
+		usart0_send(); // Starts buffer tansmission
+	}
+	\endcode
 	 
     \return receive buffer count.
 */
@@ -257,37 +326,106 @@ bool usart0_available(void);
 /** \ingroup usart
 
     \brief Puts a character into the usart transmit buffer.
+
+	\code
+	char *c;
+	
+	if(usart0_get_char(c)) usart0_put_char(*c);
+	\endcode
 	 
     \param c the char to be sent.
-	\param stream a pointer to the C output stream. 
 
-	The C output stream is attached with the following:
+*/
+void usart0_put_char(char c);
+
+/** \ingroup usart
+
+    \brief Gets a character from the usart receive buffer.
+
 	\code
-	FILE mystdout = FDEV_SETUP_STREAM(usart0_put_char, NULL, _FDEV_SETUP_WRITE);
+	char *c;
+	
+	if(usart0_get_char(c)) usart0_put_char(*c);
 	\endcode
-	See the avrlibc manual for details
 
-	\return 0
+	 
+	\param *c pointer to a character to put the buffer value
+
+    \return character from the buffer
 
 */
-int usart0_put_char(char c, FILE *stream);
+bool usart0_get_char(char *c);
 
-/*
+/** \ingroup usart
 
+    \brief Puts a uint8_t byte into the usart transmit buffer.
 
-Read or write to the buffers one byte at a time.
-uint8_t usart0_get_byte_read()
-void usart0_put_byte_write(uint8_t b)
+	\code
+	uint8_t *b;
 
+	if(usart0_get_byte(b)) usart0_put_byte(*b);
+	\endcode
 
-Read or writeg to the buffers one char at a time.
-char usart0_get_char()
-Read or write simple strings.
-bool usart0_send_string(char *str) - TODO: USE PROGMEM
-???bool usart0_receive_string(char *str) - TODO: ? BUFFER?
+	 
+    \param b the  to be sent.
+
 */
+void usart0_put_byte(uint8_t b);
+
+/** \ingroup usart
+
+    \brief Gets a uint8_t byte from the usart receive buffer.
+	
+	\param *b pointer to a uint8_t byte to put the buffer value
+
+    \return uint8_t byte from the buffer
+
+	\code
+	uint8_t *b;
+
+	if(usart0_get_byte(b)) usart0_put_byte(*b);
+	\endcode
+	 
+
+*/
+bool usart0_get_byte(uint8_t *b);
 
 
+/** \ingroup usart
+
+    \brief Puts a '\0' terminated string into the transmit buffer.
+	To prevent buffer overrun, the string is automatically truncated 
+	with '\0'if it exceeds USART0_TRANSMIT_BUFFER_LEN - 1.
+	 
+	\param *str pointer to a char buffer 
+
+*/
+void usart0_put_string(char *str); 
+
+
+/*!	
+	\brief Loads a string from program memory into the transmit buffer.
+	
+	\param pointer to a constant character string
+
+	Example:
+	\code
+	// Define string outside any function
+	const char pgm_str1[] PROGMEM =  "This is a program memory string defined outside any function.\r";
+	...
+	// Put the program memory string into the transmit buffer
+	usart0_put_pgm_string(pgm_str1);
+	// Transmit it
+	usart0_send();
+
+	// Use with a string intialized in the function
+	usart0_put_pgm_string(PSTR("This is a program memory string using PSTR within a function.\r"));
+	usart0_send();
+
+	\endcode
+
+*/ 
+void usart0_put_pgm_string(const char *); 
 
 
 /** 
@@ -296,6 +434,14 @@ bool usart0_send_string(char *str) - TODO: USE PROGMEM
 	\brief This clear function will reset the transmit buffer head_index
 	and tail_index to 0. The count value is also set to 0. A memset command 
 	is used to reset a particular area in memory as well.
+
+	Example:
+	\code
+	void end_this()
+	{
+		usart0_transmit_buffer_clear();
+	}
+	\endcode
 
 */
 void usart0_transmit_buffer_clear(void);
@@ -310,16 +456,30 @@ void usart0_transmit_buffer_clear(void);
     of the defined receive buffer. An example of this is a buffer
     size of [10] will only allow 9 values to be added into the buffer
 	
+	Example:
+	\code
+	\\ Add a string termination character
+	usart0_transmit_buffer_insert('\0');
+	\endcode
+
 	\param c byte to add
 	\return boolean result of attempt to add byte
 	
 */
 bool usart0_transmit_buffer_insert(uint8_t c);
 
+
 /** \ingroup usart
 
     \brief Data is retreived from the transmit buffer. Upon
     retrieval, the buffer index is decremented.
+
+	Example:
+	\code
+	char c;
+
+	c = usart0_transmit_buffer_remove();
+	\endcode
 
     \return tail data byte
 */
@@ -329,6 +489,15 @@ uint8_t usart0_transmit_buffer_remove(void);
 
     \brief Gets the transmit buffer count
 	 
+	Example:
+	\code
+	if(usart0_transmit_buffer_inuse_count())// Is there data in the buffer?
+	{
+		// Send next byte in the buffer.
+ 	      UART_DATA_REG = ring_remove(&usart0_transmit_ring);
+	}
+	\endcode
+
     \return Transmit buffer count.
 */
 uint8_t usart0_transmit_buffer_inuse_count(void);
@@ -337,6 +506,13 @@ uint8_t usart0_transmit_buffer_inuse_count(void);
 	\ingroup usart
 
 	\brief Transmit buffer counter initialization
+
+	Example:
+	\code
+	uint8_t free;
+
+	free = usart0_transmit_buffer_free_count();	
+	\endcode
 
 	\return Transmit buffer size minus receive buffer count
 */
@@ -347,22 +523,30 @@ uint8_t usart0_transmit_buffer_free_count(void);
 
 	\brief Looks at a number of bytes of data in the transmit buffer
 
+	Example:
+	\code
+	uint8_t myBuf[10];
+	uint8_t toGet = 10;
+	uint8_t got = 0;
+
+	got = usart0_transmit_buffer_peek(myBuf, toGet);
+	if(got != get)
+	{
+		\\ didn't get requested bytes
+	}
+	else
+	}
+		\\got requested bytes 
+		...
+	}
+	\endcode
+
 	\param *buf pointer a buffer to hold the bytes requested
 	\param count The number of bytes to look at.
 
 	\return Total bytes read
 */
 uint8_t usart0_transmit_buffer_peek(uint8_t *buf, uint8_t count);
-
-/** 
-	\ingroup usart
-
-	\brief 	Looks at the tail byte of data in the Transmit buffer
-
-	\return Transmit buffer tail byte
-*/
-uint8_t usart0_transmit_peek(void);
-
 
 
 /** 
@@ -372,39 +556,57 @@ uint8_t usart0_transmit_peek(void);
 	and tail_index to 0. The count value is also set to 0. A memset command 
 	is used to reset a particular area in memory as well.
 
+	Example:
+	\code
+	void end_this()
+	{
+		usart0_receive__buffer_clear();
+	}
+	\endcode
+
 */
 void usart0_receive_buffer_clear(void);
 
-/** 
-	\ingroup usart
-
-	\brief Adds the byte 'c' to the receive buffer and returns
-	True if it was able to add the byte, False otherwise.
-  
-    \note Data added will be one value less than the size
-    of the defined receive buffer. An example of this is a buffer
-    size of [10] will only allow 9 values to be added into the buffer
-	
-	\param c byte to add
-	\return boolean result of attempt to add byte
-	
-*/
-bool usart0_receive_buffer_insert(uint8_t c);
 
 /** \ingroup usart
 
     \brief Data is retreived from the receive buffer. Upon
     retrieval, the buffer index is decremented.
 
+	Example:
+	\code
+	\\ Remove a byte from the receive buffer and put it in the transmit buffer
+	sart0_transmit_buffer_insert(usart0_receive_buffer_remove());
+	\endcode
+
     \return tail data byte
+
 */
 uint8_t usart0_receive_buffer_remove(void);
 
 /** \ingroup usart
 
     \brief Gets the receive buffer count
-	 
+
     \return receive buffer count.
+
+	Example:
+	\code
+	while(1)
+		// Ping back received values
+		if(usart0_available())
+		{
+			count = usart0_receive_buffer_inuse_count();
+
+			for(int i = 0 ; i < count; i++)
+			{
+				usart0_transmit_buffer_insert(usart0_receive_buffer_remove());
+			}	
+			usart0_send();		
+		}
+	}
+	\endcode
+	 
 */
 uint8_t usart0_receive_buffer_inuse_count(void);
 
@@ -412,6 +614,13 @@ uint8_t usart0_receive_buffer_inuse_count(void);
 	\ingroup usart
 
 	\brief Receive buffer counter initialization
+
+	Example:
+	\code
+	uint8_t free;
+
+	free = usart0_receive_buffer_free_count();	
+	\endcode
 
 	\return receive buffer size minus receive buffer count
 */
@@ -422,6 +631,13 @@ uint8_t usart0_receive_buffer_free_count(void);
 
 	\brief Looks at a number of bytes of data in the receive buffer
 
+	Example:
+	\code
+	uint8_t peekByte = 0;
+
+	peekByte = usart0_receive_peek();
+	\endcode
+
 	\param *buf pointer a buffer to hold the bytes requested
 	\param count The number of bytes to look at.
 
@@ -429,246 +645,16 @@ uint8_t usart0_receive_buffer_free_count(void);
 */
 uint8_t usart0_receive_buffer_peek(uint8_t *buf, uint8_t count);
 
-/** 
-	\ingroup usart
 
-	\brief 	Looks at the tail byte of data in the receive buffer
-
-	\return Receive buffer tail byte
-*/
-uint8_t usart0_receive_peek(void);
-
-
-/** 
-	\ingroup usart
-
-	\brief  Restores registers to datasheet default valuse
-
-*/
-void usart0_uninit(void);
-
-
-//
-// defines
-//
-
-
-#define usart_baudrate_to_setting(f_cpu, baud)		(uint16_t)(((uint32_t)(f_cpu) / ((uint32_t)(baud) * (uint32_t)16)) - 1)
-
-/*
-#if defined(BUTTERFLY)
-#include "..\butterfly\butterfly.h"
-#endif
-*/
-// Begin changes 3/17/11 JWP
-// Added Atmega328
-// TODO:
-// This code is tested in the most common uart mode: N,8,1 
-// Needs testing in other modes and with the hw and sw flow control
-// PLEASE - anyone who adapts this code for the untested modes show
-// us what you did so we can patch this.
-
-// 3/18/11 JWP added Atmega169
-#if defined(__AVR_ATmega169__)
-   // ATMega with one uart that doesn't use 0 after register/bit names
-   // like ATmega169
-   #define UART_BAUD_RATE_HIGH			UBRRH
-   #define UART_BAUD_RATE_LOW			UBRRL
-   #define UART_CONTROL_STATUS_REG_A	UCSRA
-   #define UART_CONTROL_STATUS_REG_B	UCSRB
-   #define UART_CONTROL_STATUS_REG_C	UCSRC
-
-   #define UART_ENABLE_TRANSMITTER		TXEN
-   #define UART_ENABLE_RECEIVER			RXEN
-   #define UART_READY_TO_TRANSMIT		UDRE
-   #define UART_TRANSMIT_COMPLETE		TXC
-   #define UART_RECEIVE_COMPLETE		RXC
-   #define UART_DATA_REG				UDR
-   #define UART_STOP_BIT_SELECT			USBS
-   #define UART_CHARACTER_SIZE_0		UCSZ0
-   #define UART_CHARACTER_SIZE_1		UCSZ1
-   #define UART_CHARACTER_SIZE_2		UCSZ2
-   #define UART_MODE_SELECT				UMSEL
-   #define UART_DOUBLE_SPEED			U2X
-   #define UART_FRAME_ERROR				FE
-   #define UART_DATA_OVER_RUN			DOR
-   #define UART_PARITY_ERROR			UPE
-   #define UART_PARITY_MODE_0			UPM0
-   #define UART_PARITY_MODE_1			UPM1
-   #define UART_MULTI_PROCESSOR_COMMUNICATION_MODE	MPCM
-   #define UART_TX_COMPLETE_INTERRUPT_ENABLE	TXCIE
-   #define UART_RX_COMPLETE_INTERRUPT_ENABLE 	RXCIE
-   #define UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE	UDRIE
-   #define UART_RX_DATA_BIT_8	RXB8
-   #define UART_TX_DATA_BIT_8	TXB8
-
-#elif defined(__AVR_ATmega128__) \
-|| defined(__AVR_ATmega1281__) \
-|| defined(__AVR_ATmega2561__) \
-|| defined(__AVR_ATmega328P__)
-
-   // ATMega with two uarts - uart 0
-   // or with one uart but using 0 in register/bit names (like ATmega328)
-   #define UART_BAUD_RATE_HIGH			UBRR0H
-   #define UART_BAUD_RATE_LOW			UBRR0L
-   #define UART_CONTROL_STATUS_REG_A	UCSR0A
-   #define UART_CONTROL_STATUS_REG_B	UCSR0B
-   #define UART_CONTROL_STATUS_REG_C	UCSR0C
-
-   #define UART_ENABLE_TRANSMITTER		TXEN0
-   #define UART_ENABLE_RECEIVER			RXEN0
-   #define UART_READY_TO_TRANSMIT		UDRE0
-   #define UART_TRANSMIT_COMPLETE		TXC0
-   #define UART_RECEIVE_COMPLETE		RXC0
-   #define UART_DATA_REG				UDR0
-   #define UART_STOP_BIT_SELECT			USBS0
-   #define UART_CHARACTER_SIZE_0		UCSZ00
-   #define UART_CHARACTER_SIZE_1		UCSZ01
-   #define UART_CHARACTER_SIZE_2		UCSZ02
-   #define UART_MODE_SELECT				UMSEL // ATmega128 
-   #define UART_MODE_SELECT_0			UMSEL00
-   #define UART_MODE_SELECT_1			UMSEL01
-   #define UART_DOUBLE_SPEED			U2X0
-   #define UART_FRAME_ERROR				FE0
-   #define UART_DATA_OVER_RUN			DOR0
-   #define UART_PARITY_ERROR			UPE0
-   #define UART_PARITY_MODE_0			UPM00
-   #define UART_PARITY_MODE_1			UPM01
-   #define UART_MULTI_PROCESSOR_COMMUNICATION_MODE	MPCM0
-   #define UART_TX_COMPLETE_INTERRUPT_ENABLE	TXCIE0
-   #define UART_RX_COMPLETE_INTERRUPT_ENABLE 	RXCIE0
-   #define UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE	UDRIE0
-   #define UART_RX_DATA_BIT_8	RXB80
-   #define UART_TX_DATA_BIT_8	TXB08
-#else
-   #error "no uart definition for MCU"
-#endif
-
-// GCC compiler specific.
-#if defined(__AVR_ATmega128__) \
-|| defined(__AVR_ATmega1281__) \
-|| defined(__AVR_ATmega2561__) \
-|| defined(__AVR_ATmega169__)
-	#define usart0_receive_interrupt_service_routine        ISR(USART0_RX_vect)
-	#define usart0_transmit_interrupt_service_routine       ISR(USART0_UDRE_vect)
-#elif defined(__AVR_ATmega328P__)
-	#define usart0_receive_interrupt_service_routine        ISR(USART_RX_vect)
-	#define usart0_transmit_interrupt_service_routine       ISR(USART_UDRE_vect)
-#else
-   #error "no interrupt definition for MCU"
-#endif
-
-
-#define usart0_mode(x)      (UART_CONTROL_STATUS_REG_C = (UART_CONTROL_STATUS_REG_C & (uint8_t)~((1<<UART_MODE_SELECT_0)|(1<<UART_MODE_SELECT_1))) | (uint8_t)((x) << UART_MODE_SELECT_0))
-
-#define usart0_clock_polarity(x)    bit_write(x, UART_CONTROL_STATUS_REG_C, BIT(UCPOL0))
-
-#define usart0_transmit_enable()    (UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 << UART_ENABLE_TRANSMITTER))
-#define usart0_transmit_disable()   (UART_CONTROL_STATUS_REG_B &= (uint8_t)~(1 << UART_ENABLE_TRANSMITTER))
-
-#define usart0_receive_enable()     (UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 << UART_ENABLE_RECEIVER))
-#define usart0_receive_disable()    (UART_CONTROL_STATUS_REG_B &= (uint8_t)~(1 << UART_ENABLE_RECEIVER))
-
-#define usart0_transmit_speed_double_enable()   (UART_CONTROL_STATUS_REG_A |= (uint8_t)(1 << UART_DOUBLE_SPEED))
-#define usart0_transmit_speed_double_disable()  (UART_CONTROL_STATUS_REG_A &= (uint8_t)~(1 << UART_DOUBLE_SPEED))
-
-#define usart0_receive_complete()           bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_RECEIVE_COMPLETE))
-
-#define usart0_transmit_complete()          bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_TRANSMIT_COMPLETE))
-
-#define usart0_data_register_empty()        bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_READY_TO_TRANSMIT))
-
-#define usart0_frame_error()                bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_FRAME_ERROR))
-
-#define usart0_data_overrun()               bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_DATA_OVER_RUN))
-
-#define usart0_parity_error()               bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_PARITY_ERROR))
-
-#define usart0_multiprocessor_mode(x)       bit_write(x, UART_CONTROL_STATUS_REG_A, BIT(UART_MULTI-PROCESSOR_COMMUNICATION_MODE))
-
-#define usart0_receive_complete_interrupt_enable()      (UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 << UART_RX_COMPLETE_INTERRUPT_ENABLE))
-#define usart0_receive_complete_interrupt_disable()     (UART_CONTROL_STATUS_REG_B &= (uint8_t)~(1 << UART_RX_COMPLETE_INTERRUPT_ENABLE))
-
-#define usart0_receive_complete_interrupt_get()         (UART_CONTROL_STATUS_REG_B & (1 << UART_RX_COMPLETE_INTERRUPT_ENABLE))
-
-#define usart0_transmit_complete_interrupt_enable()     UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 << UART_TX_COMPLETE_INTERRUPT_ENABLE)
-#define usart0_transmit_complete_interrupt_disable()    UART_CONTROL_STATUS_REG_B &= (uint8_t)~(1 << UART_TX_COMPLETE_INTERRUPT_ENABLE)
-
-#define usart0_transmit_complete_interrupt_get()        (UART_CONTROL_STATUS_REG_B & (1 << TXCIE0))
-
-#define usart0_data_register_empty_interrupt_enable()   (UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 << UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))
-#define usart0_data_register_empty_interrupt_disable()  (UART_CONTROL_STATUS_REG_B &= (uint8_t)~(1 << UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))
-
-#define usart0_data_register_empty_interrupt_get()      bit_read(UART_CONTROL_STATUS_REG_B, BIT(UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))
-
-#define usart0_receive_data_bit_8(x)                    bit_write(x, UART_CONTROL_STATUS_REG_B, BIT(UART_RX_DATA_BIT_8))
-
-#define usart0_transmit_data_bit_8(x)                   bit_write(x, UART_CONTROL_STATUS_REG_B, BIT(UART_tX_DATA_BIT_8))
-
-#define usart0_stop_bits_set(stop_bits) \
-do{                                     \
-    if((stop_bits) >= 1 && (stop_bits) <= 2)    \
-    {                                           \
-        bit_write((stop_bits) - 1, UART_CONTROL_STATUS_REG_C, BIT(UART_STOP_BIT_SELECT)); \
-    }                                           \
-}while(0)
-
-
-#define usart0_data_bits_set(data_bits) \
-do{         \
-    if((data_bits) >= 5 && (data_bits) <= 8)    \
-    {       \
-        bit_write(bit_read(((data_bits) - 5), BIT(0)), UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_0)); \
-        bit_write(bit_read(((data_bits) - 5), BIT(1)), UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_1)); \
-        bit_clear(UART_CONTROL_STATUS_REG_B, BIT(UART_CHARACTER_SIZE_2));     \
-    }       \
-    if((data_bits) == 9)    \
-    {       \
-        bit_set(UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_0));    \
-        bit_set(UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_1));    \
-        bit_set(UART_CONTROL_STATUS_REG_B, BIT(UART_CHARACTER_SIZE_2));    \
-    }       \
-}while(0)
-
-#define usart0_rts_enable()     bit_clear(USART0_RTS_PORT, USART0_RTS)
-
-#define usart0_rts_disable()    bit_set(USART0_RTS_PORT, USART0_RTS)
-
-#define usart0_rts_init()   \
-do{     \
-    usart0_rts_enable();    \
-    bit_set(USART0_RTS_PORT_DIRECTION, USART0_RTS); \
-}while(0)
-
-#define usart0_cts_read()       bit_read(USART0_CTS_PORT, USART0_CTS)
-
-#define usart0_cts_init()   \
-do{     \
-    bit_clear(USART0_CTS_PORT_DIRECTION, USART0_CTS); \
-}while(0)
-
-
-//
-// Non-API functions
-//
-
-//void usart0_init(usart_mode_t mode, uint32_t baud, uint8_t databits, uint8_t stopbits, usart_parity_t parity, flow_control_t flow_control);
-
-void usart0_baud_set(uint32_t baudrate, uint32_t freq_cpu);
-void usart0_parity_set(usart_parity_t parity);
-void usart0_flow_control_set(usart_flow_control_t flow_control);
-
-void usart0_transmit_check(void);
-
+// These functions are used by API functions but not exposed in the API
 void usart0_buffer_clear(ring_t *ring);
 bool usart0_buffer_insert(ring_t *ring, uint8_t c);
 uint8_t usart0_buffer_remove(ring_t *ring);
-
 uint8_t usart0_buffer_inuse_count(ring_t *ring);
 uint8_t usart0_buffer_peek(ring_t *ring, uint8_t *buf, uint8_t count);
 uint8_t usart0_buffer_free_count(ring_t *ring);
 
-//#endif
+
 #endif
 
 

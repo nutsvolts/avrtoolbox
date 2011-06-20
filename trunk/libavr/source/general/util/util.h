@@ -36,7 +36,12 @@
  // If this is the case it was due to oversight while debugging and I apologize.
  // If anyone has any reason to believe that any of this code violates other licenses
  // please contact me with details so that I may correct the situation. 
- 
+
+#ifndef UTIL_H
+#define UTIL_H
+
 #include <stdint.h>
 
 void delay(uint16_t ms);
+
+#endif

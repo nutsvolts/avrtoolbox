@@ -38,7 +38,6 @@
  
 #include "usart.h"
 
-
 void usart0_init_baud(uint32_t baud)
 {
 	// Test usart initialization with all parameters

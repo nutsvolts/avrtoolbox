@@ -36,13 +36,15 @@
  // If anyone has any reason to believe that any of this code violates other licenses
  // please contact me with details so that I may correct the situation. 
  
-#include "c:\avrtoolbox\libavr\source\general\ring\ring.h" 
 #include "usart.h"
 
 bool usart0_buffer_insert(ring_t *ring, uint8_t c)
 {
     register bool result;
     register uint8_t sreg;
+   
+   	// Do not load buffer while transmitting from buffer
+	while(usart_buffered_tx_flag);
     
     sreg = SREG;
     cli();

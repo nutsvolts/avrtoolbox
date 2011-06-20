@@ -36,8 +36,6 @@
  // If anyone has any reason to believe that any of this code violates other licenses
  // please contact me with details so that I may correct the situation. 
  
-#include "c:\avrtoolbox\libavr\source\general\ring\ring.h" 
-
 #include "usart.h"
 
 uint8_t usart0_buffer_free_count(ring_t *ring)

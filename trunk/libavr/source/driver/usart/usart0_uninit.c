@@ -40,11 +40,4 @@
 #include "usart.h"
 
 
-void usart0_uninit(void)
-{
-	// restore to datasheet defaults
-	UART_CONTROL_STATUS_REG_A = 0x20;
-	UART_CONTROL_STATUS_REG_B = 0;
-	UART_CONTROL_STATUS_REG_C = 0x06;
-}
 
