@@ -15,7 +15,7 @@ COMMON = -mmcu=$(MCU)
 
 ## Compile options common for all C compilation units.
 CFLAGS = $(COMMON)
-CFLAGS += -Wall -gdwarf-2 -std=gnu99     -DF_CPU=2000000UL -Os -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
+CFLAGS += -Wall -gdwarf-2 -std=gnu99                     -DF_CPU=2000000UL -Os -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 CFLAGS += -MD -MP -MT $(*F).o -MF dep/$(@F).d 
 
 ## Assembly specific flags
@@ -37,7 +37,7 @@ HEX_EEPROM_FLAGS += --change-section-lma .eeprom=0 --no-change-warnings
 
 
 ## Objects that must be built in order to link
-OBJECTS = serial_tester.o serial_available.o serial_begin.o serial_end.o serial_flush.o ring_above_highmark.o ring_add.o ring_below_lowmark.o ring_init.o ring_peek.o ring_remove.o usart0.o usart0_buffer_clear.o usart0_buffer_free_count.o usart0_buffer_insert.o usart0_buffer_inuse_count.o usart0_buffer_peek.o usart0_buffer_remove.o usart0_receive_buffer_clear.o usart0_receive_buffer_free_count.o usart0_receive_buffer_insert.o usart0_receive_buffer_inuse_count.o usart0_receive_buffer_peek.o usart0_receive_buffer_remove.o usart0_receive_peek.o usart0_transmit_buffer_clear.o usart0_transmit_buffer_free_count.o usart0_transmit_buffer_insert.o usart0_transmit_buffer_inuse_count.o usart0_transmit_buffer_peek.o usart0_transmit_buffer_remove.o usart0_uninit.o usart0_transmit_peek.o delay.o ring_clear.o serial_in.o serial_out.o serial_write.o 
+OBJECTS = serial_tester.o serial_available.o serial_begin.o serial_end.o serial_flush.o ring_above_highmark.o ring_add.o ring_below_lowmark.o ring_init.o ring_peek.o ring_remove.o usart0.o usart0_buffer_clear.o usart0_buffer_free_count.o usart0_buffer_insert.o usart0_buffer_inuse_count.o usart0_buffer_peek.o usart0_buffer_remove.o usart0_receive_buffer_clear.o usart0_receive_buffer_free_count.o usart0_receive_buffer_inuse_count.o usart0_receive_buffer_peek.o usart0_receive_buffer_remove.o usart0_transmit_buffer_clear.o usart0_transmit_buffer_free_count.o usart0_transmit_buffer_insert.o usart0_transmit_buffer_inuse_count.o usart0_transmit_buffer_peek.o usart0_transmit_buffer_remove.o usart0_uninit.o delay.o ring_clear.o serial_in.o serial_out.o serial_write.o butterfly.o 
 
 ## Objects explicitly added by the user
 LINKONLYOBJECTS = 
@@ -106,9 +106,6 @@ usart0_receive_buffer_clear.o: ../../../../source/driver/usart/usart0_receive_bu
 usart0_receive_buffer_free_count.o: ../../../../source/driver/usart/usart0_receive_buffer_free_count.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
-usart0_receive_buffer_insert.o: ../../../../source/driver/usart/usart0_receive_buffer_insert.c
-	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
-
 usart0_receive_buffer_inuse_count.o: ../../../../source/driver/usart/usart0_receive_buffer_inuse_count.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
@@ -116,9 +113,6 @@ usart0_receive_buffer_peek.o: ../../../../source/driver/usart/usart0_receive_buf
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 usart0_receive_buffer_remove.o: ../../../../source/driver/usart/usart0_receive_buffer_remove.c
-	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
-
-usart0_receive_peek.o: ../../../../source/driver/usart/usart0_receive_peek.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 usart0_transmit_buffer_clear.o: ../../../../source/driver/usart/usart0_transmit_buffer_clear.c
@@ -142,9 +136,6 @@ usart0_transmit_buffer_remove.o: ../../../../source/driver/usart/usart0_transmit
 usart0_uninit.o: ../../../../source/driver/usart/usart0_uninit.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
-usart0_transmit_peek.o: ../../../../source/driver/usart/usart0_transmit_peek.c
-	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
-
 delay.o: ../../../../source/general/util/delay.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
@@ -158,6 +149,9 @@ serial_out.o: ../../../../source/elementary/serial/serial_out.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 serial_write.o: ../../../../source/elementary/serial/serial_write.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
+
+butterfly.o: ../../../../source/board/butterfly/butterfly.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 ##Link

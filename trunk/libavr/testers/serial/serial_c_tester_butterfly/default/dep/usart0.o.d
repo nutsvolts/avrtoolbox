@@ -18,16 +18,12 @@ usart0.o: ../../../../source/driver/usart/usart0.c \
   ../../../../source/driver/usart/ascii.h \
   ../../../../source/driver/usart/slice.h \
   ../../../../source/driver/usart/usart.h \
-  ../../../../source/driver/usart/usart0.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/stdio.h \
   c:\winavr-20100110\bin\../lib/gcc/avr/4.3.3/include/stdarg.h \
   ../../../../source/driver/usart/bit.h \
   c:\avrtoolbox\libavr\source\general\ring\ring.h \
-  c:/winavr-20100110/lib/gcc/../../avr/include/util\delay.h \
-  c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h \
-  c:\avrtoolbox\libavr\source\general\util\util.h \
-  c:\avrtoolbox\libavr\source\elementary\serial\serial.h \
-  c:\avrtoolbox\libavr\source\driver\usart\usart0.h
+  c:\avrtoolbox\libavr\source\board\butterfly\butterfly.h \
+  c:\avrtoolbox\libavr\source\general\util\util.h
 
 c:/winavr-20100110/lib/gcc/../../avr/include/avr/interrupt.h:
 
@@ -67,8 +63,6 @@ c:/winavr-20100110/lib/gcc/../../avr/include/stdlib.h:
 
 ../../../../source/driver/usart/usart.h:
 
-../../../../source/driver/usart/usart0.h:
-
 c:/winavr-20100110/lib/gcc/../../avr/include/stdio.h:
 
 c:\winavr-20100110\bin\../lib/gcc/avr/4.3.3/include/stdarg.h:
@@ -77,12 +71,6 @@ c:\winavr-20100110\bin\../lib/gcc/avr/4.3.3/include/stdarg.h:
 
 c:\avrtoolbox\libavr\source\general\ring\ring.h:
 
-c:/winavr-20100110/lib/gcc/../../avr/include/util\delay.h:
-
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h:
+c:\avrtoolbox\libavr\source\board\butterfly\butterfly.h:
 
 c:\avrtoolbox\libavr\source\general\util\util.h:
-
-c:\avrtoolbox\libavr\source\elementary\serial\serial.h:
-
-c:\avrtoolbox\libavr\source\driver\usart\usart0.h:
