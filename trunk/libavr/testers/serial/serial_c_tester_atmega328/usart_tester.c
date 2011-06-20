@@ -199,8 +199,13 @@ int main(void)
 	usart0_init_baud(57600);
 
 
+<<<<<<< .mine
+	// Debug test and track versions
+	uint8_t str[] = { 'H','o','w','d','y','7','3','\0'};
+=======
 	// Debug test and track versions
 	uint8_t str[] = { 'H','o','w','d','y','7','4','\0'};
+>>>>>>> .r97
 
 	int i = 0;
 
