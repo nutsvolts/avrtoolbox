@@ -191,48 +191,20 @@ int main(void)
 	usart0_init(57600, F_CPU, mode,  databits, stopbits, parity, flow_control);
 */
 
-<<<<<<< .mine
-/* Test 2.	Initialization using variable baudrate and common defaults for all other parameters.
-	Pass if usart0_init_baud() initialize a session allowing sending and receiving of characters to a PC terminal program.
 
-	// PASSED
-*/	// Leave in code since the function is used by remaining tests
-=======
-<<<<<<< .mine
-/* Test 2.	Initialization using variable baudrate and common defaults for all other parameters.
-	Pass if usart0_init_baud() initialize a session allowing sending and receiving of characters to a PC terminal program.
-
-	// PASSED
-*/	// Leave in code since the function is used by remaining tests
-=======
 /* Test 2.	Initialization using variable baudrate and common defaults for all other parameters.
 	Pass if usart0_init_baud() initialize a session allowing sending and receiving of characters to a PC terminal program.
 
 	// PASSED
 */	// Leave in code since the function is used by remaining tests
 // NOTE: this is tested for the Butterfly which will set the baud to 19200 regardless of what you put here.
->>>>>>> .r100
->>>>>>> .r101
+
 	usart0_init_baud(57600);
 
 
-<<<<<<< .mine
 	// Debug test and track versions
-	uint8_t str[] = { 'H','o','w','d','y','7','2','\0'};
-=======
-<<<<<<< .mine
-	// Debug test and track versions
-	uint8_t str[] = { 'H','o','w','d','y','7','2','\0'};
-=======
-<<<<<<< .mine
-	// Debug test and track versions
-	uint8_t str[] = { 'H','o','w','d','y','7','3','\0'};
-=======
-	// Debug test and track versions
+
 	uint8_t str[] = { 'H','o','w','d','y','7','4','\0'};
->>>>>>> .r97
->>>>>>> .r100
->>>>>>> .r101
 
 	int i = 0;
 
