@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ 
+  <COMPort>COM1</COMPort>
+  <Baud>9600</Baud>
+  <Databits>8</Databits>
+  <Parity>None</Parity> 
+  <Stopbits>1</Stopbits>
+  <Handshake>None</Handshake>
+
+  <TerminalCharacters>0x0D,0x0A,</TerminalCharacters>
+
+  <MacroText1>First test, correct macro</MacroText1>
+  <MacroData1>COMMAND3 123,COMMAND4 321,COMMAND6 65535,HELP 123,!</MacroData1>
+  <MacroType1>ASCII</MacroType1>
+
+  <MacroText2>Second test, bad command</MacroText2>
+  <MacroData2>C@OMMAND3 123,COMMAND4 321,COMMAND6 65535,HELP 123,!</MacroData2>
+  <MacroType2>ASCII</MacroType2>
+
+  <MacroText3>Third test, bad data</MacroText3>
+  <MacroData3>COMMAND3 1A23,COMMAND4 321,COMMAND6 65535,HELP 123,!</MacroData3>
+  <MacroType3>ASCII</MacroType3>
+
+  <MacroText4>Fourth test, no space</MacroText4>
+  <MacroData4>COMMAND3 123,COMMAND4321,COMMAND6 65535,HELP 123,!</MacroData4>
+  <MacroType4>ASCII</MacroType4> 
+
+  <MacroText5>Fifth test, no comma</MacroText5>
+  <MacroData5>COMMAND3 123COMMAND4 321,COMMAND6 65535,HELP 123,!</MacroData5>
+  <MacroType5>ASCII</MacroType5> 
+
+  <MacroText6>Sixth test, no terminator</MacroText6>
+  <MacroData6>COMMAND3 123,COMMAND4 321,COMMAND6 65535,HELP 123,</MacroData6>
+  <MacroType6>ASCII</MacroType6> 
+
+</XMLData>
