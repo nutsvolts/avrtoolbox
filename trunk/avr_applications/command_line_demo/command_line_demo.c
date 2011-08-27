@@ -65,7 +65,6 @@ void parse_command(void);
 bool call_command(const char* command, const char* data);
 
 // Create an array of command names in program memory
-
 typedef struct PROGMEM
 {
 	PGM_P PTEXT; // pointer to text in program memory
@@ -148,7 +147,7 @@ COMMAND4 - uint16_t data - Brief description of the command\n
 COMMAND5 - uint16_t data - Brief description of the command\n
 HELP - no data - Display the help list\n"
 */
-const char HELP[] PROGMEM = "\nCOMMAND - DATATYPE - SUMMARY\nCOMMAND1 - uint16_t data - Brief description of the command\nCOMMAND2 - uint16_t data - Brief description of the command\nCOMMAND3 - uint16_t data - Brief description of the command\nCOMMAND4 - uint16_t data - Brief description of the command\nCOMMAND5 - uint16_t - data - Brief description of the command\nHELP - no data - Display the help list\n";
+const char HELP[] PROGMEM = "\nCOMMAND - DATATYPE - SUMMARY\nCOMMAND1 - uint16_t data - Brief description of the command\nCOMMAND2 - uint16_t data - Brief description of the command\nCOMMAND3 - uint16_t data - Brief description of the command\nCOMMAND4 - uint16_t data - Brief description of the command\nCOMMAND5 - uint16_t data - Brief description of the command\nHELP - no data - Display the help list\n";
 
 void help(uint16_t data)
 {
