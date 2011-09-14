@@ -39,13 +39,13 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga97f2723cc583a2eac27ddd1a41c98a32">usart0_put_byte</a> (uint8_t b)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gae8f858248942ef9c896650a983c5d5a5">usart0_get_byte</a> (uint8_t *b)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga10a7467a45897601763cfa03db090f9c">usart0_put_string</a> (char *str)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga7518656faf171173db98a2f3645cf8b4">usart0_put_pgm_string</a> (const char *)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga7552e3d0a6153c95cadc81aba4fd0413">usart0_transmit_buffer_clear</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga8d3a6791aac28e357f812fe2c8d3021e">usart0_transmit_buffer_insert</a> (uint8_t c)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gae149e1fb5a06df6871ffbbe7c80dd625">usart0_transmit_buffer_remove</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga87daee19364f78bb23707df70b61fdc5">usart0_transmit_buffer_inuse_count</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gad483142216f045d706f749076ac1549b">usart0_transmit_buffer_free_count</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga869f5f7b2fd787e7f7ba6db1beeda3b2">usart0_transmit_buffer_peek</a> (uint8_t *buf, uint8_t count)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gafe18c11171fc9d48119fbd6fecec6bef">usart0_transmit_peek</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#gac994fe99a6c84619bddce910d0e73089">usart0_receive_buffer_clear</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga0dd7517c599312240a7de51839cc8c57">usart0_receive_buffer_remove</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga03e5c9aa4ded0b09f06a03a5f941c266">usart0_receive_buffer_inuse_count</a> (void)</td></tr>
@@ -259,7 +259,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="usart0_8c_source.html#l00332">332</a> of file <a class="el" href="usart0_8c_source.html">usart0.c</a>.</p>
+<p>Definition at line <a class="el" href="usart0_8c_source.html#l00333">333</a> of file <a class="el" href="usart0_8c_source.html">usart0.c</a>.</p>
 
 </div>
 </div>
@@ -360,6 +360,49 @@ Functions</h2></td></tr>
 </dl>
 
 <p>Definition at line <a class="el" href="usart0__put__char_8c_source.html#l00041">41</a> of file <a class="el" href="usart0__put__char_8c_source.html">usart0_put_char.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga7518656faf171173db98a2f3645cf8b4"></a><!-- doxytag: member="usart.h::usart0_put_pgm_string" ref="ga7518656faf171173db98a2f3645cf8b4" args="(const char *)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void usart0_put_pgm_string </td>
+          <td>(</td>
+          <td class="paramtype">const char *&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Loads a string from program memory into the transmit buffer. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>pointer</em>&nbsp;</td><td>to a constant character string</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment">        <span class="comment">// Define string outside any function</span>
+        <span class="keyword">const</span> <span class="keywordtype">char</span> pgm_str1[] PROGMEM =  <span class="stringliteral">&quot;This is a program memory string defined outside any function.\r&quot;</span>;
+        ...
+        <span class="comment">// Put the program memory string into the transmit buffer</span>
+        <a class="code" href="group__usart.html#ga7518656faf171173db98a2f3645cf8b4" title="Loads a string from program memory into the transmit buffer.">usart0_put_pgm_string</a>(pgm_str1);
+        <span class="comment">// Transmit it</span>
+        <a class="code" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac" title="Initiates the interrupt based transmission of the buffer NOTE: All of the put or insert function only...">usart0_send</a>();
+
+        <span class="comment">// Use with a string intialized in the function</span>
+        <a class="code" href="group__usart.html#ga7518656faf171173db98a2f3645cf8b4" title="Loads a string from program memory into the transmit buffer.">usart0_put_pgm_string</a>(PSTR(<span class="stringliteral">&quot;This is a program memory string using PSTR within a function.\r&quot;</span>));
+        <a class="code" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac" title="Initiates the interrupt based transmission of the buffer NOTE: All of the put or insert function only...">usart0_send</a>();
+</pre></div> 
+<p><p>The 'for' logic terminates if the byte is '' or if i = 60. '' is 'null' and terminates C strings The 80 prevents too much overrun if we get a bad pointer and it limits the string size </p>
+</p>
+
+<p>Definition at line <a class="el" href="usart0__put__pgm__string_8c_source.html#l00041">41</a> of file <a class="el" href="usart0__put__pgm__string_8c_source.html">usart0_put_pgm_string.c</a>.</p>
 
 </div>
 </div>
@@ -511,7 +554,7 @@ Functions</h2></td></tr>
 <p>Example: </p>
 <div class="fragment"><pre class="fragment">        uint8_t peekByte = 0;
 
-        peekByte = usart0_receive_peek();
+        peekByte = <a class="code" href="usart0__receive__peek_8c.html#ae7b2f7469292a50a99777684d8d866f3">usart0_receive_peek</a>();
 </pre></div><dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>*buf</em>&nbsp;</td><td>pointer a buffer to hold the bytes requested </td></tr>
@@ -542,11 +585,11 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Data is retreived from the receive buffer. Upon retrieval, the buffer index is decremented. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>tail data byte</dd></dl>
 <p>Example: </p>
 <div class="fragment"><pre class="fragment">        \\ Remove a byte from the receive buffer and put it in the transmit buffer
         sart0_transmit_buffer_insert(<a class="code" href="group__usart.html#ga0dd7517c599312240a7de51839cc8c57" title="Data is retreived from the receive buffer. Upon retrieval, the buffer index is decremented.">usart0_receive_buffer_remove</a>());
-</pre></div> 
+</pre></div><dl class="return"><dt><b>Returns:</b></dt><dd>tail data byte </dd></dl>
+
 <p>Definition at line <a class="el" href="usart0__receive__buffer__remove_8c_source.html#l00041">41</a> of file <a class="el" href="usart0__receive__buffer__remove_8c_source.html">usart0_receive_buffer_remove.c</a>.</p>
 
 </div>
@@ -570,11 +613,11 @@ Functions</h2></td></tr>
 <p>Initiates the interrupt based transmission of the buffer NOTE: All of the put or insert function only load a byte into the transmission buffer. This function must be called to start the transmission. </p>
 <p>Example: </p>
 <div class="fragment"><pre class="fragment">        <span class="comment">// Put a string from program memory into the transmit buffer</span>
-        <a class="code" href="usart_8h.html#a7518656faf171173db98a2f3645cf8b4" title="Loads a string from program memory into the transmit buffer.">usart0_put_pgm_string</a>(pgm_str1);
+        <a class="code" href="group__usart.html#ga7518656faf171173db98a2f3645cf8b4" title="Loads a string from program memory into the transmit buffer.">usart0_put_pgm_string</a>(pgm_str1);
         <span class="comment">// Initiate buffer transmission</span>
         <a class="code" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac" title="Initiates the interrupt based transmission of the buffer NOTE: All of the put or insert function only...">usart0_send</a>();
 </pre></div> 
-<p>Definition at line <a class="el" href="usart0_8c_source.html#l00432">432</a> of file <a class="el" href="usart0_8c_source.html">usart0.c</a>.</p>
+<p>Definition at line <a class="el" href="usart0_8c_source.html#l00407">407</a> of file <a class="el" href="usart0_8c_source.html">usart0.c</a>.</p>
 
 </div>
 </div>
@@ -775,33 +818,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gafe18c11171fc9d48119fbd6fecec6bef"></a><!-- doxytag: member="usart.h::usart0_transmit_peek" ref="gafe18c11171fc9d48119fbd6fecec6bef" args="(void)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t usart0_transmit_peek </td>
-          <td>(</td>
-          <td class="paramtype">void&nbsp;</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Looks at the tail byte of data in the Transmit buffer. </p>
-<p>Example: </p>
-<div class="fragment"><pre class="fragment">        uint8_t peekByte = 0;
-
-        peekByte = <a class="code" href="group__usart.html#gafe18c11171fc9d48119fbd6fecec6bef" title="Looks at the tail byte of data in the Transmit buffer.">usart0_transmit_peek</a>();
-</pre></div><dl class="return"><dt><b>Returns:</b></dt><dd>Transmit buffer tail byte </dd></dl>
-
-<p>Definition at line <a class="el" href="usart0__transmit__peek_8c_source.html#l00041">41</a> of file <a class="el" href="usart0__transmit__peek_8c_source.html">usart0_transmit_peek.c</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ga05305155cc1dde15421fedc26ee3c7e3"></a><!-- doxytag: member="usart.h::usart0_uninit" ref="ga05305155cc1dde15421fedc26ee3c7e3" args="(void)" -->
 <div class="memitem">
 <div class="memproto">
@@ -823,12 +839,12 @@ Functions</h2></td></tr>
 <div class="fragment"><pre class="fragment">        <span class="comment">// Stop the madness</span>
         <a class="code" href="group__usart.html#ga05305155cc1dde15421fedc26ee3c7e3" title="Restores registers to datasheet default valuse.">usart0_uninit</a>();
 </pre></div> 
-<p>Definition at line <a class="el" href="usart0_8c_source.html#l00418">418</a> of file <a class="el" href="usart0_8c_source.html">usart0.c</a>.</p>
+<p>Definition at line <a class="el" href="usart0_8c_source.html#l00393">393</a> of file <a class="el" href="usart0_8c_source.html">usart0.c</a>.</p>
 
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 19 2011 13:20:53 for libavr by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 14 2011 16:28:31 for libavr by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

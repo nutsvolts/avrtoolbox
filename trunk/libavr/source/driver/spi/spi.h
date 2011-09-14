@@ -201,14 +201,14 @@ void spi0_init_master(void);
 //#include "..\device\device.h" // defines device	
 
 /************************************************************/
-/*!	
+	
 	\def DOXYGEN
 	Doxygen has a problem with the #if statements when the
 	required define is in another file, so we will add a 
 	special section just for Doxygen. Remove the comment '//'
 	to define DOXYGEN before running Doxygen. Make sure the
 	'//' is back in place before compiling the code.
-*/
+
 /************************************************************/
 //#define DOXYGEN	
 	
@@ -219,7 +219,7 @@ void spi0_init_master(void);
 ******************************************************/
 
 /* ********************************************************** */
-/*!	
+	
 	\mainpage SPI (Serial Peripheral Interface)
 	
 	\brief This code was designed to allow the user to create
@@ -252,7 +252,7 @@ void spi0_init_master(void);
 	\author Joe Pardue 
 	\date 9/22/10
 	\version 1.00
-*/
+
 /* ********************************************************** */
 
 

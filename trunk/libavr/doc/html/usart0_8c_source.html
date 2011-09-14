@@ -105,466 +105,441 @@
 <a name="l00074"></a>00074 
 <a name="l00075"></a>00075 <span class="preprocessor">#include &quot;c:\avrtoolbox\libavr\source\general\util\util.h&quot;</span>
 <a name="l00076"></a>00076 
-<a name="l00077"></a>00077 <span class="preprocessor">#if defined(BUTTERFLY)</span>
-<a name="l00078"></a>00078 <span class="preprocessor"></span><span class="preprocessor">#include &quot;..\butterfly\butterfly.h&quot;</span>
-<a name="l00079"></a>00079 <span class="preprocessor">#endif</span>
-<a name="l00080"></a>00080 <span class="preprocessor"></span>
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078 <span class="comment">//</span>
+<a name="l00079"></a>00079 <span class="comment">// defines</span>
+<a name="l00080"></a>00080 <span class="comment">//</span>
 <a name="l00081"></a>00081 
 <a name="l00082"></a>00082 
-<a name="l00083"></a>00083 
-<a name="l00084"></a>00084 <span class="comment">//</span>
-<a name="l00085"></a>00085 <span class="comment">// defines</span>
-<a name="l00086"></a>00086 <span class="comment">//</span>
-<a name="l00087"></a>00087 
-<a name="l00088"></a>00088 
-<a name="l00089"></a><a class="code" href="usart0_8c.html#a71650498dcd48a55c2ebee71f3dca31c">00089</a> <span class="preprocessor">#define usart_baudrate_to_setting(f_cpu, baud)          (uint16_t)(((uint32_t)(f_cpu) / ((uint32_t)(baud) * (uint32_t)16)) - 1)</span>
-<a name="l00090"></a>00090 <span class="preprocessor"></span>
-<a name="l00091"></a>00091 <span class="comment">/*</span>
-<a name="l00092"></a>00092 <span class="comment">#if defined(BUTTERFLY)</span>
-<a name="l00093"></a>00093 <span class="comment">#include &quot;..\butterfly\butterfly.h&quot;</span>
-<a name="l00094"></a>00094 <span class="comment">#endif</span>
-<a name="l00095"></a>00095 <span class="comment">*/</span>
-<a name="l00096"></a>00096 <span class="comment">// Begin changes 3/17/11 JWP</span>
-<a name="l00097"></a>00097 <span class="comment">// Added Atmega328</span>
-<a name="l00098"></a>00098 <span class="comment">// TODO:</span>
-<a name="l00099"></a>00099 <span class="comment">// This code is tested in the most common uart mode: N,8,1 </span>
-<a name="l00100"></a>00100 <span class="comment">// Needs testing in other modes and with the hw and sw flow control</span>
-<a name="l00101"></a>00101 <span class="comment">// PLEASE - anyone who adapts this code for the untested modes show</span>
-<a name="l00102"></a>00102 <span class="comment">// us what you did so we can patch this.</span>
-<a name="l00103"></a>00103 
-<a name="l00104"></a>00104 <span class="comment">// 3/18/11 JWP added Atmega169</span>
-<a name="l00105"></a>00105 <span class="preprocessor">#if defined(__AVR_ATmega169__)</span>
-<a name="l00106"></a>00106 <span class="preprocessor"></span>   <span class="comment">// ATMega with one uart that doesn&#39;t use 0 after register/bit names</span>
-<a name="l00107"></a>00107    <span class="comment">// like ATmega169</span>
-<a name="l00108"></a>00108 <span class="preprocessor">   #define UART_BAUD_RATE_HIGH                  UBRRH</span>
-<a name="l00109"></a>00109 <span class="preprocessor"></span><span class="preprocessor">   #define UART_BAUD_RATE_LOW                   UBRRL</span>
-<a name="l00110"></a>00110 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CONTROL_STATUS_REG_A    UCSRA</span>
-<a name="l00111"></a>00111 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CONTROL_STATUS_REG_B    UCSRB</span>
-<a name="l00112"></a>00112 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CONTROL_STATUS_REG_C    UCSRC</span>
-<a name="l00113"></a>00113 <span class="preprocessor"></span>
-<a name="l00114"></a>00114 <span class="preprocessor">   #define UART_ENABLE_TRANSMITTER              TXEN</span>
-<a name="l00115"></a>00115 <span class="preprocessor"></span><span class="preprocessor">   #define UART_ENABLE_RECEIVER                 RXEN</span>
-<a name="l00116"></a>00116 <span class="preprocessor"></span><span class="preprocessor">   #define UART_READY_TO_TRANSMIT               UDRE</span>
-<a name="l00117"></a>00117 <span class="preprocessor"></span><span class="preprocessor">   #define UART_TRANSMIT_COMPLETE               TXC</span>
-<a name="l00118"></a>00118 <span class="preprocessor"></span><span class="preprocessor">   #define UART_RECEIVE_COMPLETE                RXC</span>
-<a name="l00119"></a>00119 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DATA_REG                                UDR</span>
-<a name="l00120"></a>00120 <span class="preprocessor"></span><span class="preprocessor">   #define UART_STOP_BIT_SELECT                 USBS</span>
-<a name="l00121"></a>00121 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CHARACTER_SIZE_0                UCSZ0</span>
-<a name="l00122"></a>00122 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CHARACTER_SIZE_1                UCSZ1</span>
-<a name="l00123"></a>00123 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CHARACTER_SIZE_2                UCSZ2</span>
-<a name="l00124"></a>00124 <span class="preprocessor"></span><span class="preprocessor">   #define UART_MODE_SELECT                             UMSEL</span>
-<a name="l00125"></a>00125 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DOUBLE_SPEED                    U2X</span>
-<a name="l00126"></a>00126 <span class="preprocessor"></span><span class="preprocessor">   #define UART_FRAME_ERROR                             FE</span>
-<a name="l00127"></a>00127 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DATA_OVER_RUN                   DOR</span>
-<a name="l00128"></a>00128 <span class="preprocessor"></span><span class="preprocessor">   #define UART_PARITY_ERROR                    UPE</span>
-<a name="l00129"></a>00129 <span class="preprocessor"></span><span class="preprocessor">   #define UART_PARITY_MODE_0                   UPM0</span>
-<a name="l00130"></a>00130 <span class="preprocessor"></span><span class="preprocessor">   #define UART_PARITY_MODE_1                   UPM1</span>
-<a name="l00131"></a>00131 <span class="preprocessor"></span><span class="preprocessor">   #define UART_MULTI_PROCESSOR_COMMUNICATION_MODE      MPCM</span>
-<a name="l00132"></a>00132 <span class="preprocessor"></span><span class="preprocessor">   #define UART_TX_COMPLETE_INTERRUPT_ENABLE    TXCIE</span>
-<a name="l00133"></a>00133 <span class="preprocessor"></span><span class="preprocessor">   #define UART_RX_COMPLETE_INTERRUPT_ENABLE    RXCIE</span>
-<a name="l00134"></a>00134 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE    UDRIE</span>
-<a name="l00135"></a>00135 <span class="preprocessor"></span><span class="preprocessor">   #define UART_RX_DATA_BIT_8   RXB8</span>
-<a name="l00136"></a>00136 <span class="preprocessor"></span><span class="preprocessor">   #define UART_TX_DATA_BIT_8   TXB8</span>
-<a name="l00137"></a>00137 <span class="preprocessor"></span>
-<a name="l00138"></a>00138 <span class="preprocessor">#elif defined(__AVR_ATmega128__) \</span>
-<a name="l00139"></a>00139 <span class="preprocessor">|| defined(__AVR_ATmega1281__) \</span>
-<a name="l00140"></a>00140 <span class="preprocessor">|| defined(__AVR_ATmega2561__) \</span>
-<a name="l00141"></a>00141 <span class="preprocessor">|| defined(__AVR_ATmega328P__)</span>
-<a name="l00142"></a>00142 <span class="preprocessor"></span>
-<a name="l00143"></a>00143    <span class="comment">// ATMega with two uarts - uart 0</span>
-<a name="l00144"></a>00144    <span class="comment">// or with one uart but using 0 in register/bit names (like ATmega328)</span>
-<a name="l00145"></a>00145 <span class="preprocessor">   #define UART_BAUD_RATE_HIGH                  UBRR0H</span>
-<a name="l00146"></a>00146 <span class="preprocessor"></span><span class="preprocessor">   #define UART_BAUD_RATE_LOW                   UBRR0L</span>
-<a name="l00147"></a>00147 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CONTROL_STATUS_REG_A    UCSR0A</span>
-<a name="l00148"></a>00148 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CONTROL_STATUS_REG_B    UCSR0B</span>
-<a name="l00149"></a>00149 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CONTROL_STATUS_REG_C    UCSR0C</span>
-<a name="l00150"></a>00150 <span class="preprocessor"></span>
-<a name="l00151"></a>00151 <span class="preprocessor">   #define UART_ENABLE_TRANSMITTER              TXEN0</span>
-<a name="l00152"></a>00152 <span class="preprocessor"></span><span class="preprocessor">   #define UART_ENABLE_RECEIVER                 RXEN0</span>
-<a name="l00153"></a>00153 <span class="preprocessor"></span><span class="preprocessor">   #define UART_READY_TO_TRANSMIT               UDRE0</span>
-<a name="l00154"></a>00154 <span class="preprocessor"></span><span class="preprocessor">   #define UART_TRANSMIT_COMPLETE               TXC0</span>
-<a name="l00155"></a>00155 <span class="preprocessor"></span><span class="preprocessor">   #define UART_RECEIVE_COMPLETE                RXC0</span>
-<a name="l00156"></a>00156 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DATA_REG                                UDR0</span>
-<a name="l00157"></a>00157 <span class="preprocessor"></span><span class="preprocessor">   #define UART_STOP_BIT_SELECT                 USBS0</span>
-<a name="l00158"></a>00158 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CHARACTER_SIZE_0                UCSZ00</span>
-<a name="l00159"></a>00159 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CHARACTER_SIZE_1                UCSZ01</span>
-<a name="l00160"></a>00160 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CHARACTER_SIZE_2                UCSZ02</span>
-<a name="l00161"></a>00161 <span class="preprocessor"></span><span class="preprocessor">   #define UART_MODE_SELECT                             UMSEL // ATmega128 </span>
-<a name="l00162"></a>00162 <span class="preprocessor"></span><span class="preprocessor">   #define UART_MODE_SELECT_0                   UMSEL00</span>
-<a name="l00163"></a>00163 <span class="preprocessor"></span><span class="preprocessor">   #define UART_MODE_SELECT_1                   UMSEL01</span>
-<a name="l00164"></a>00164 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DOUBLE_SPEED                    U2X0</span>
-<a name="l00165"></a>00165 <span class="preprocessor"></span><span class="preprocessor">   #define UART_FRAME_ERROR                             FE0</span>
-<a name="l00166"></a>00166 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DATA_OVER_RUN                   DOR0</span>
-<a name="l00167"></a>00167 <span class="preprocessor"></span><span class="preprocessor">   #define UART_PARITY_ERROR                    UPE0</span>
-<a name="l00168"></a>00168 <span class="preprocessor"></span><span class="preprocessor">   #define UART_PARITY_MODE_0                   UPM00</span>
-<a name="l00169"></a>00169 <span class="preprocessor"></span><span class="preprocessor">   #define UART_PARITY_MODE_1                   UPM01</span>
-<a name="l00170"></a>00170 <span class="preprocessor"></span><span class="preprocessor">   #define UART_MULTI_PROCESSOR_COMMUNICATION_MODE      MPCM0</span>
-<a name="l00171"></a>00171 <span class="preprocessor"></span><span class="preprocessor">   #define UART_TX_COMPLETE_INTERRUPT_ENABLE    TXCIE0</span>
-<a name="l00172"></a>00172 <span class="preprocessor"></span><span class="preprocessor">   #define UART_RX_COMPLETE_INTERRUPT_ENABLE    RXCIE0</span>
-<a name="l00173"></a>00173 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE    UDRIE0</span>
-<a name="l00174"></a>00174 <span class="preprocessor"></span><span class="preprocessor">   #define UART_RX_DATA_BIT_8   RXB80</span>
-<a name="l00175"></a>00175 <span class="preprocessor"></span><span class="preprocessor">   #define UART_TX_DATA_BIT_8   TXB08</span>
-<a name="l00176"></a>00176 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00177"></a>00177 <span class="preprocessor"></span><span class="preprocessor">   #error &quot;no uart definition for MCU&quot;</span>
-<a name="l00178"></a>00178 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00179"></a>00179 <span class="preprocessor"></span>
-<a name="l00180"></a>00180 <span class="comment">// GCC compiler specific.</span>
-<a name="l00181"></a>00181 <span class="preprocessor">#if defined(__AVR_ATmega128__) \</span>
-<a name="l00182"></a>00182 <span class="preprocessor">|| defined(__AVR_ATmega1281__) \</span>
-<a name="l00183"></a>00183 <span class="preprocessor">|| defined(__AVR_ATmega2561__) \</span>
-<a name="l00184"></a>00184 <span class="preprocessor">|| defined(__AVR_ATmega169__)</span>
-<a name="l00185"></a>00185 <span class="preprocessor"></span><span class="preprocessor">        #define usart0_receive_interrupt_service_routine        ISR(USART0_RX_vect)</span>
-<a name="l00186"></a>00186 <span class="preprocessor"></span>        <span class="comment">//#define usart0_transmit_interrupt_service_routine       ISR(USART0_UDRE_vect)</span>
-<a name="l00187"></a>00187         <span class="comment">// JWP 6/16/11 changed interrupt vector</span>
-<a name="l00188"></a>00188 <span class="preprocessor">        #define usart0_transmit_interrupt_service_routine       ISR(USART0_TX_vect)</span>
-<a name="l00189"></a>00189 <span class="preprocessor"></span><span class="preprocessor">#elif defined(__AVR_ATmega328P__)</span>
-<a name="l00190"></a>00190 <span class="preprocessor"></span><span class="preprocessor">        #define usart0_receive_interrupt_service_routine        ISR(USART_RX_vect)</span>
-<a name="l00191"></a>00191 <span class="preprocessor"></span>        <span class="comment">//#define usart0_transmit_interrupt_service_routine       ISR(USART_UDRE_vect)</span>
-<a name="l00192"></a>00192         <span class="comment">// JWP 6/16/11 changed interrupt vector</span>
-<a name="l00193"></a>00193 <span class="preprocessor">        #define usart0_transmit_interrupt_service_routine       ISR(USART_TX_vect)</span>
-<a name="l00194"></a>00194 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00195"></a>00195 <span class="preprocessor"></span><span class="preprocessor">   #error &quot;no interrupt definition for MCU&quot;</span>
-<a name="l00196"></a>00196 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00197"></a>00197 <span class="preprocessor"></span>
-<a name="l00198"></a>00198 
-<a name="l00199"></a><a class="code" href="usart0_8c.html#a393c179a02ce4b80d03cbcc11582e9d5">00199</a> <span class="preprocessor">#define usart0_mode(x)      (UART_CONTROL_STATUS_REG_C = (UART_CONTROL_STATUS_REG_C &amp; (uint8_t)~((1&lt;&lt;UART_MODE_SELECT_0)|(1&lt;&lt;UART_MODE_SELECT_1))) | (uint8_t)((x) &lt;&lt; UART_MODE_SELECT_0))</span>
-<a name="l00200"></a>00200 <span class="preprocessor"></span>
-<a name="l00201"></a><a class="code" href="usart0_8c.html#a2e505b897f2b7a8e0458205a2d4edef1">00201</a> <span class="preprocessor">#define usart0_clock_polarity(x)    bit_write(x, UART_CONTROL_STATUS_REG_C, BIT(UCPOL0))</span>
+<a name="l00083"></a><a class="code" href="usart0_8c.html#a71650498dcd48a55c2ebee71f3dca31c">00083</a> <span class="preprocessor">#define usart_baudrate_to_setting(f_cpu, baud)          (uint16_t)(((uint32_t)(f_cpu) / ((uint32_t)(baud) * (uint32_t)16)) - 1)</span>
+<a name="l00084"></a>00084 <span class="preprocessor"></span>
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086 <span class="comment">// Begin changes 3/17/11 JWP</span>
+<a name="l00087"></a>00087 <span class="comment">// Added Atmega328</span>
+<a name="l00088"></a>00088 <span class="comment">// TODO:</span>
+<a name="l00089"></a>00089 <span class="comment">// This code is tested in the most common uart mode: N,8,1 </span>
+<a name="l00090"></a>00090 <span class="comment">// Needs testing in other modes and with the hw and sw flow control</span>
+<a name="l00091"></a>00091 <span class="comment">// PLEASE - anyone who adapts this code for the untested modes show</span>
+<a name="l00092"></a>00092 <span class="comment">// us what you did so we can patch this.</span>
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094 <span class="comment">// 3/18/11 JWP added Atmega169</span>
+<a name="l00095"></a>00095 <span class="preprocessor">#if defined(__AVR_ATmega169__)</span>
+<a name="l00096"></a>00096 <span class="preprocessor"></span>   <span class="comment">// ATMega with one uart that doesn&#39;t use 0 after register/bit names</span>
+<a name="l00097"></a>00097    <span class="comment">// like ATmega169</span>
+<a name="l00098"></a>00098 <span class="preprocessor">   #define UART_BAUD_RATE_HIGH                  UBRRH</span>
+<a name="l00099"></a>00099 <span class="preprocessor"></span><span class="preprocessor">   #define UART_BAUD_RATE_LOW                   UBRRL</span>
+<a name="l00100"></a>00100 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CONTROL_STATUS_REG_A    UCSRA</span>
+<a name="l00101"></a>00101 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CONTROL_STATUS_REG_B    UCSRB</span>
+<a name="l00102"></a>00102 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CONTROL_STATUS_REG_C    UCSRC</span>
+<a name="l00103"></a>00103 <span class="preprocessor"></span>
+<a name="l00104"></a>00104 <span class="preprocessor">   #define UART_ENABLE_TRANSMITTER              TXEN</span>
+<a name="l00105"></a>00105 <span class="preprocessor"></span><span class="preprocessor">   #define UART_ENABLE_RECEIVER                 RXEN</span>
+<a name="l00106"></a>00106 <span class="preprocessor"></span><span class="preprocessor">   #define UART_READY_TO_TRANSMIT               UDRE</span>
+<a name="l00107"></a>00107 <span class="preprocessor"></span><span class="preprocessor">   #define UART_TRANSMIT_COMPLETE               TXC</span>
+<a name="l00108"></a>00108 <span class="preprocessor"></span><span class="preprocessor">   #define UART_RECEIVE_COMPLETE                RXC</span>
+<a name="l00109"></a>00109 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DATA_REG                                UDR</span>
+<a name="l00110"></a>00110 <span class="preprocessor"></span><span class="preprocessor">   #define UART_STOP_BIT_SELECT                 USBS</span>
+<a name="l00111"></a>00111 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CHARACTER_SIZE_0                UCSZ0</span>
+<a name="l00112"></a>00112 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CHARACTER_SIZE_1                UCSZ1</span>
+<a name="l00113"></a>00113 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CHARACTER_SIZE_2                UCSZ2</span>
+<a name="l00114"></a>00114 <span class="preprocessor"></span><span class="preprocessor">   #define UART_MODE_SELECT                             UMSEL</span>
+<a name="l00115"></a>00115 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DOUBLE_SPEED                    U2X</span>
+<a name="l00116"></a>00116 <span class="preprocessor"></span><span class="preprocessor">   #define UART_FRAME_ERROR                             FE</span>
+<a name="l00117"></a>00117 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DATA_OVER_RUN                   DOR</span>
+<a name="l00118"></a>00118 <span class="preprocessor"></span><span class="preprocessor">   #define UART_PARITY_ERROR                    UPE</span>
+<a name="l00119"></a>00119 <span class="preprocessor"></span><span class="preprocessor">   #define UART_PARITY_MODE_0                   UPM0</span>
+<a name="l00120"></a>00120 <span class="preprocessor"></span><span class="preprocessor">   #define UART_PARITY_MODE_1                   UPM1</span>
+<a name="l00121"></a>00121 <span class="preprocessor"></span><span class="preprocessor">   #define UART_MULTI_PROCESSOR_COMMUNICATION_MODE      MPCM</span>
+<a name="l00122"></a>00122 <span class="preprocessor"></span><span class="preprocessor">   #define UART_TX_COMPLETE_INTERRUPT_ENABLE    TXCIE</span>
+<a name="l00123"></a>00123 <span class="preprocessor"></span><span class="preprocessor">   #define UART_RX_COMPLETE_INTERRUPT_ENABLE    RXCIE</span>
+<a name="l00124"></a>00124 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE    UDRIE</span>
+<a name="l00125"></a>00125 <span class="preprocessor"></span><span class="preprocessor">   #define UART_RX_DATA_BIT_8   RXB8</span>
+<a name="l00126"></a>00126 <span class="preprocessor"></span><span class="preprocessor">   #define UART_TX_DATA_BIT_8   TXB8</span>
+<a name="l00127"></a>00127 <span class="preprocessor"></span>
+<a name="l00128"></a>00128 <span class="comment">// JWP 6/19/11</span>
+<a name="l00129"></a>00129 <span class="comment">//#define usart0_mode(x) (UART_CONTROL_STATUS_REG_C = (UART_CONTROL_STATUS_REG_C &amp; (uint8_t)~(1&lt;&lt;UART_MODE_SELECT)) | (uint8_t)((x) &lt;&lt; UART_MODE_SELECT))</span>
+<a name="l00130"></a>00130 
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132 <span class="preprocessor">#elif defined(__AVR_ATmega128__) \</span>
+<a name="l00133"></a>00133 <span class="preprocessor">|| defined(__AVR_ATmega1281__) \</span>
+<a name="l00134"></a>00134 <span class="preprocessor">|| defined(__AVR_ATmega2561__) \</span>
+<a name="l00135"></a>00135 <span class="preprocessor">|| defined(__AVR_ATmega328P__)</span>
+<a name="l00136"></a>00136 <span class="preprocessor"></span>
+<a name="l00137"></a>00137    <span class="comment">// ATMega with two uarts - uart 0</span>
+<a name="l00138"></a>00138    <span class="comment">// or with one uart but using 0 in register/bit names (like ATmega328)</span>
+<a name="l00139"></a>00139 <span class="preprocessor">   #define UART_BAUD_RATE_HIGH                  UBRR0H</span>
+<a name="l00140"></a>00140 <span class="preprocessor"></span><span class="preprocessor">   #define UART_BAUD_RATE_LOW                   UBRR0L</span>
+<a name="l00141"></a>00141 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CONTROL_STATUS_REG_A    UCSR0A</span>
+<a name="l00142"></a>00142 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CONTROL_STATUS_REG_B    UCSR0B</span>
+<a name="l00143"></a>00143 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CONTROL_STATUS_REG_C    UCSR0C</span>
+<a name="l00144"></a>00144 <span class="preprocessor"></span>
+<a name="l00145"></a>00145 <span class="preprocessor">   #define UART_ENABLE_TRANSMITTER              TXEN0</span>
+<a name="l00146"></a>00146 <span class="preprocessor"></span><span class="preprocessor">   #define UART_ENABLE_RECEIVER                 RXEN0</span>
+<a name="l00147"></a>00147 <span class="preprocessor"></span><span class="preprocessor">   #define UART_READY_TO_TRANSMIT               UDRE0</span>
+<a name="l00148"></a>00148 <span class="preprocessor"></span><span class="preprocessor">   #define UART_TRANSMIT_COMPLETE               TXC0</span>
+<a name="l00149"></a>00149 <span class="preprocessor"></span><span class="preprocessor">   #define UART_RECEIVE_COMPLETE                RXC0</span>
+<a name="l00150"></a>00150 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DATA_REG                                UDR0</span>
+<a name="l00151"></a>00151 <span class="preprocessor"></span><span class="preprocessor">   #define UART_STOP_BIT_SELECT                 USBS0</span>
+<a name="l00152"></a>00152 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CHARACTER_SIZE_0                UCSZ00</span>
+<a name="l00153"></a>00153 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CHARACTER_SIZE_1                UCSZ01</span>
+<a name="l00154"></a>00154 <span class="preprocessor"></span><span class="preprocessor">   #define UART_CHARACTER_SIZE_2                UCSZ02</span>
+<a name="l00155"></a>00155 <span class="preprocessor"></span><span class="preprocessor">   #define UART_MODE_SELECT                             UMSEL // ATmega128 </span>
+<a name="l00156"></a>00156 <span class="preprocessor"></span><span class="preprocessor">   #define UART_MODE_SELECT_0                   UMSEL00</span>
+<a name="l00157"></a>00157 <span class="preprocessor"></span><span class="preprocessor">   #define UART_MODE_SELECT_1                   UMSEL01</span>
+<a name="l00158"></a>00158 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DOUBLE_SPEED                    U2X0</span>
+<a name="l00159"></a>00159 <span class="preprocessor"></span><span class="preprocessor">   #define UART_FRAME_ERROR                             FE0</span>
+<a name="l00160"></a>00160 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DATA_OVER_RUN                   DOR0</span>
+<a name="l00161"></a>00161 <span class="preprocessor"></span><span class="preprocessor">   #define UART_PARITY_ERROR                    UPE0</span>
+<a name="l00162"></a>00162 <span class="preprocessor"></span><span class="preprocessor">   #define UART_PARITY_MODE_0                   UPM00</span>
+<a name="l00163"></a>00163 <span class="preprocessor"></span><span class="preprocessor">   #define UART_PARITY_MODE_1                   UPM01</span>
+<a name="l00164"></a>00164 <span class="preprocessor"></span><span class="preprocessor">   #define UART_MULTI_PROCESSOR_COMMUNICATION_MODE      MPCM0</span>
+<a name="l00165"></a>00165 <span class="preprocessor"></span><span class="preprocessor">   #define UART_TX_COMPLETE_INTERRUPT_ENABLE    TXCIE0</span>
+<a name="l00166"></a>00166 <span class="preprocessor"></span><span class="preprocessor">   #define UART_RX_COMPLETE_INTERRUPT_ENABLE    RXCIE0</span>
+<a name="l00167"></a>00167 <span class="preprocessor"></span><span class="preprocessor">   #define UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE    UDRIE0</span>
+<a name="l00168"></a>00168 <span class="preprocessor"></span><span class="preprocessor">   #define UART_RX_DATA_BIT_8   RXB80</span>
+<a name="l00169"></a>00169 <span class="preprocessor"></span><span class="preprocessor">   #define UART_TX_DATA_BIT_8   TXB08</span>
+<a name="l00170"></a>00170 <span class="preprocessor"></span>
+<a name="l00171"></a>00171         <span class="comment">// JWP 6/19/11  TODO TEST FOR ATMEGA128</span>
+<a name="l00172"></a>00172 <span class="comment">/*      #if defined(__AVR_ATmega128__)</span>
+<a name="l00173"></a>00173 <span class="comment">        #define usart0_mode(x) (UART_CONTROL_STATUS_REG_C = (UART_CONTROL_STATUS_REG_C &amp; (uint8_t)~(1&lt;&lt;UART_MODE_SELECT)) | (uint8_t)((x) &lt;&lt; UART_MODE_SELECT))</span>
+<a name="l00174"></a>00174 <span class="comment">        #else</span>
+<a name="l00175"></a>00175 <span class="comment">        #define usart0_mode(x) (UART_CONTROL_STATUS_REG_C = (UART_CONTROL_STATUS_REG_C &amp; (uint8_t)~((1&lt;&lt;UART_MODE_SELECT_0)|(1&lt;&lt;UART_MODE_SELECT_1))) | (uint8_t)((x) &lt;&lt; UART_MODE_SELECT_0))</span>
+<a name="l00176"></a>00176 <span class="comment">        #endif</span>
+<a name="l00177"></a>00177 <span class="comment">*/</span>
+<a name="l00178"></a>00178 <span class="preprocessor">#else</span>
+<a name="l00179"></a>00179 <span class="preprocessor"></span><span class="preprocessor">   #error &quot;no uart definition for MCU&quot;</span>
+<a name="l00180"></a>00180 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00181"></a>00181 <span class="preprocessor"></span>
+<a name="l00182"></a>00182 <span class="comment">// GCC compiler specific.</span>
+<a name="l00183"></a>00183 <span class="preprocessor">#if defined(__AVR_ATmega128__) \</span>
+<a name="l00184"></a>00184 <span class="preprocessor">|| defined(__AVR_ATmega1281__) \</span>
+<a name="l00185"></a>00185 <span class="preprocessor">|| defined(__AVR_ATmega2561__) \</span>
+<a name="l00186"></a>00186 <span class="preprocessor">|| defined(__AVR_ATmega169__)</span>
+<a name="l00187"></a>00187 <span class="preprocessor"></span><span class="preprocessor">        #define usart0_receive_interrupt_service_routine        ISR(USART0_RX_vect)</span>
+<a name="l00188"></a>00188 <span class="preprocessor"></span>        <span class="comment">//#define usart0_transmit_interrupt_service_routine       ISR(USART0_UDRE_vect)</span>
+<a name="l00189"></a>00189         <span class="comment">// JWP 6/16/11 changed interrupt vector</span>
+<a name="l00190"></a>00190 <span class="preprocessor">        #define usart0_transmit_interrupt_service_routine       ISR(USART0_TX_vect)</span>
+<a name="l00191"></a>00191 <span class="preprocessor"></span><span class="preprocessor">#elif defined(__AVR_ATmega328P__)</span>
+<a name="l00192"></a>00192 <span class="preprocessor"></span><span class="preprocessor">        #define usart0_receive_interrupt_service_routine        ISR(USART_RX_vect)</span>
+<a name="l00193"></a>00193 <span class="preprocessor"></span>        <span class="comment">//#define usart0_transmit_interrupt_service_routine       ISR(USART_UDRE_vect)</span>
+<a name="l00194"></a>00194         <span class="comment">// JWP 6/16/11 changed interrupt vector</span>
+<a name="l00195"></a>00195 <span class="preprocessor">        #define usart0_transmit_interrupt_service_routine       ISR(USART_TX_vect)</span>
+<a name="l00196"></a>00196 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00197"></a>00197 <span class="preprocessor"></span><span class="preprocessor">   #error &quot;no interrupt definition for MCU&quot;</span>
+<a name="l00198"></a>00198 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00199"></a>00199 <span class="preprocessor"></span>
+<a name="l00200"></a>00200 
+<a name="l00201"></a><a class="code" href="usart0_8c.html#a393c179a02ce4b80d03cbcc11582e9d5">00201</a> <span class="preprocessor">#define usart0_mode(x) (UART_CONTROL_STATUS_REG_C = (UART_CONTROL_STATUS_REG_C &amp; (uint8_t)~((1&lt;&lt;UART_MODE_SELECT_0)|(1&lt;&lt;UART_MODE_SELECT_1))) | (uint8_t)((x) &lt;&lt; UART_MODE_SELECT_0))</span>
 <a name="l00202"></a>00202 <span class="preprocessor"></span>
-<a name="l00203"></a><a class="code" href="usart0_8c.html#a39c49d24001ec33323e17efb14231319">00203</a> <span class="preprocessor">#define usart0_transmit_enable()    (UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_ENABLE_TRANSMITTER))</span>
-<a name="l00204"></a><a class="code" href="usart0_8c.html#ad336c595dbe9f635065726bbb975e274">00204</a> <span class="preprocessor"></span><span class="preprocessor">#define usart0_transmit_disable()   (UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_ENABLE_TRANSMITTER))</span>
+<a name="l00203"></a>00203 
+<a name="l00204"></a><a class="code" href="usart0_8c.html#a2e505b897f2b7a8e0458205a2d4edef1">00204</a> <span class="preprocessor">#define usart0_clock_polarity(x)    bit_write(x, UART_CONTROL_STATUS_REG_C, BIT(UCPOL0))</span>
 <a name="l00205"></a>00205 <span class="preprocessor"></span>
-<a name="l00206"></a><a class="code" href="usart0_8c.html#ac7ee289c628b7eb4c2cdaf8b3b9d77c2">00206</a> <span class="preprocessor">#define usart0_receive_enable()     (UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_ENABLE_RECEIVER))</span>
-<a name="l00207"></a><a class="code" href="usart0_8c.html#afbc8d91a3a6acb5b441598e13fae1e2f">00207</a> <span class="preprocessor"></span><span class="preprocessor">#define usart0_receive_disable()    (UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_ENABLE_RECEIVER))</span>
+<a name="l00206"></a><a class="code" href="usart0_8c.html#a39c49d24001ec33323e17efb14231319">00206</a> <span class="preprocessor">#define usart0_transmit_enable()    (UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_ENABLE_TRANSMITTER))</span>
+<a name="l00207"></a><a class="code" href="usart0_8c.html#ad336c595dbe9f635065726bbb975e274">00207</a> <span class="preprocessor"></span><span class="preprocessor">#define usart0_transmit_disable()   (UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_ENABLE_TRANSMITTER))</span>
 <a name="l00208"></a>00208 <span class="preprocessor"></span>
-<a name="l00209"></a><a class="code" href="usart0_8c.html#a4d5e37068ca4578fcf026cf091dff0ef">00209</a> <span class="preprocessor">#define usart0_transmit_speed_double_enable()   (UART_CONTROL_STATUS_REG_A |= (uint8_t)(1 &lt;&lt; UART_DOUBLE_SPEED))</span>
-<a name="l00210"></a><a class="code" href="usart0_8c.html#ac7cb29b1b67ef3617c3a87ce2d48b0f6">00210</a> <span class="preprocessor"></span><span class="preprocessor">#define usart0_transmit_speed_double_disable()  (UART_CONTROL_STATUS_REG_A &amp;= (uint8_t)~(1 &lt;&lt; UART_DOUBLE_SPEED))</span>
+<a name="l00209"></a><a class="code" href="usart0_8c.html#ac7ee289c628b7eb4c2cdaf8b3b9d77c2">00209</a> <span class="preprocessor">#define usart0_receive_enable()     (UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_ENABLE_RECEIVER))</span>
+<a name="l00210"></a><a class="code" href="usart0_8c.html#afbc8d91a3a6acb5b441598e13fae1e2f">00210</a> <span class="preprocessor"></span><span class="preprocessor">#define usart0_receive_disable()    (UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_ENABLE_RECEIVER))</span>
 <a name="l00211"></a>00211 <span class="preprocessor"></span>
-<a name="l00212"></a><a class="code" href="usart0_8c.html#accac10a4861d98a1b8d39475f76a1cac">00212</a> <span class="preprocessor">#define usart0_receive_complete()           bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_RECEIVE_COMPLETE))</span>
-<a name="l00213"></a>00213 <span class="preprocessor"></span>
-<a name="l00214"></a><a class="code" href="usart0_8c.html#a2326fde275a4fc78414dddf8582198fe">00214</a> <span class="preprocessor">#define usart0_transmit_complete()          bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_TRANSMIT_COMPLETE))</span>
-<a name="l00215"></a>00215 <span class="preprocessor"></span>
-<a name="l00216"></a><a class="code" href="usart0_8c.html#a7244e89840a666a862debbabc7636458">00216</a> <span class="preprocessor">#define usart0_data_register_empty()        bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_READY_TO_TRANSMIT))</span>
-<a name="l00217"></a>00217 <span class="preprocessor"></span>
-<a name="l00218"></a><a class="code" href="usart0_8c.html#aed834da99866af38214e033946f08819">00218</a> <span class="preprocessor">#define usart0_frame_error()                bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_FRAME_ERROR))</span>
-<a name="l00219"></a>00219 <span class="preprocessor"></span>
-<a name="l00220"></a><a class="code" href="usart0_8c.html#ad2eff621773785644eea953c2904afe3">00220</a> <span class="preprocessor">#define usart0_data_overrun()               bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_DATA_OVER_RUN))</span>
-<a name="l00221"></a>00221 <span class="preprocessor"></span>
-<a name="l00222"></a><a class="code" href="usart0_8c.html#a23e075bc416c1257e6bfebdf94e142d6">00222</a> <span class="preprocessor">#define usart0_parity_error()               bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_PARITY_ERROR))</span>
-<a name="l00223"></a>00223 <span class="preprocessor"></span>
-<a name="l00224"></a><a class="code" href="usart0_8c.html#ac379053c5e647242a72aae8061efef34">00224</a> <span class="preprocessor">#define usart0_multiprocessor_mode(x)       bit_write(x, UART_CONTROL_STATUS_REG_A, BIT(UART_MULTI-PROCESSOR_COMMUNICATION_MODE))</span>
-<a name="l00225"></a>00225 <span class="preprocessor"></span>
-<a name="l00226"></a><a class="code" href="usart0_8c.html#a38b8dfcf4d51e7dacc3e25170a7952eb">00226</a> <span class="preprocessor">#define usart0_receive_complete_interrupt_enable()      (UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_RX_COMPLETE_INTERRUPT_ENABLE))</span>
-<a name="l00227"></a><a class="code" href="usart0_8c.html#a75bb30f97859bd32b348cd050d75486a">00227</a> <span class="preprocessor"></span><span class="preprocessor">#define usart0_receive_complete_interrupt_disable()     (UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_RX_COMPLETE_INTERRUPT_ENABLE))</span>
+<a name="l00212"></a><a class="code" href="usart0_8c.html#a4d5e37068ca4578fcf026cf091dff0ef">00212</a> <span class="preprocessor">#define usart0_transmit_speed_double_enable()   (UART_CONTROL_STATUS_REG_A |= (uint8_t)(1 &lt;&lt; UART_DOUBLE_SPEED))</span>
+<a name="l00213"></a><a class="code" href="usart0_8c.html#ac7cb29b1b67ef3617c3a87ce2d48b0f6">00213</a> <span class="preprocessor"></span><span class="preprocessor">#define usart0_transmit_speed_double_disable()  (UART_CONTROL_STATUS_REG_A &amp;= (uint8_t)~(1 &lt;&lt; UART_DOUBLE_SPEED))</span>
+<a name="l00214"></a>00214 <span class="preprocessor"></span>
+<a name="l00215"></a><a class="code" href="usart0_8c.html#accac10a4861d98a1b8d39475f76a1cac">00215</a> <span class="preprocessor">#define usart0_receive_complete()           bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_RECEIVE_COMPLETE))</span>
+<a name="l00216"></a>00216 <span class="preprocessor"></span>
+<a name="l00217"></a><a class="code" href="usart0_8c.html#a2326fde275a4fc78414dddf8582198fe">00217</a> <span class="preprocessor">#define usart0_transmit_complete()          bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_TRANSMIT_COMPLETE))</span>
+<a name="l00218"></a>00218 <span class="preprocessor"></span>
+<a name="l00219"></a><a class="code" href="usart0_8c.html#a7244e89840a666a862debbabc7636458">00219</a> <span class="preprocessor">#define usart0_data_register_empty()        bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_READY_TO_TRANSMIT))</span>
+<a name="l00220"></a>00220 <span class="preprocessor"></span>
+<a name="l00221"></a><a class="code" href="usart0_8c.html#aed834da99866af38214e033946f08819">00221</a> <span class="preprocessor">#define usart0_frame_error()                bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_FRAME_ERROR))</span>
+<a name="l00222"></a>00222 <span class="preprocessor"></span>
+<a name="l00223"></a><a class="code" href="usart0_8c.html#ad2eff621773785644eea953c2904afe3">00223</a> <span class="preprocessor">#define usart0_data_overrun()               bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_DATA_OVER_RUN))</span>
+<a name="l00224"></a>00224 <span class="preprocessor"></span>
+<a name="l00225"></a><a class="code" href="usart0_8c.html#a23e075bc416c1257e6bfebdf94e142d6">00225</a> <span class="preprocessor">#define usart0_parity_error()               bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_PARITY_ERROR))</span>
+<a name="l00226"></a>00226 <span class="preprocessor"></span>
+<a name="l00227"></a><a class="code" href="usart0_8c.html#ac379053c5e647242a72aae8061efef34">00227</a> <span class="preprocessor">#define usart0_multiprocessor_mode(x)       bit_write(x, UART_CONTROL_STATUS_REG_A, BIT(UART_MULTI-PROCESSOR_COMMUNICATION_MODE))</span>
 <a name="l00228"></a>00228 <span class="preprocessor"></span>
-<a name="l00229"></a><a class="code" href="usart0_8c.html#a363900325bf97afa805b3783e7cec5c6">00229</a> <span class="preprocessor">#define usart0_receive_complete_interrupt_get()         (UART_CONTROL_STATUS_REG_B &amp; (1 &lt;&lt; UART_RX_COMPLETE_INTERRUPT_ENABLE))</span>
-<a name="l00230"></a>00230 <span class="preprocessor"></span>
-<a name="l00231"></a><a class="code" href="usart0_8c.html#ae1b295c3f4d15f385f7b499616dc3c59">00231</a> <span class="preprocessor">#define usart0_transmit_complete_interrupt_enable()     UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_TX_COMPLETE_INTERRUPT_ENABLE)</span>
-<a name="l00232"></a><a class="code" href="usart0_8c.html#ad6785a0065a45cdf694042e89041dc3d">00232</a> <span class="preprocessor"></span><span class="preprocessor">#define usart0_transmit_complete_interrupt_disable()    UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_TX_COMPLETE_INTERRUPT_ENABLE)</span>
+<a name="l00229"></a><a class="code" href="usart0_8c.html#a38b8dfcf4d51e7dacc3e25170a7952eb">00229</a> <span class="preprocessor">#define usart0_receive_complete_interrupt_enable()      (UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_RX_COMPLETE_INTERRUPT_ENABLE))</span>
+<a name="l00230"></a><a class="code" href="usart0_8c.html#a75bb30f97859bd32b348cd050d75486a">00230</a> <span class="preprocessor"></span><span class="preprocessor">#define usart0_receive_complete_interrupt_disable()     (UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_RX_COMPLETE_INTERRUPT_ENABLE))</span>
+<a name="l00231"></a>00231 <span class="preprocessor"></span>
+<a name="l00232"></a><a class="code" href="usart0_8c.html#a363900325bf97afa805b3783e7cec5c6">00232</a> <span class="preprocessor">#define usart0_receive_complete_interrupt_get()         (UART_CONTROL_STATUS_REG_B &amp; (1 &lt;&lt; UART_RX_COMPLETE_INTERRUPT_ENABLE))</span>
 <a name="l00233"></a>00233 <span class="preprocessor"></span>
-<a name="l00234"></a><a class="code" href="usart0_8c.html#aa16a8edf113b09bdba7738e5d6f2731d">00234</a> <span class="preprocessor">#define usart0_transmit_complete_interrupt_get()        (UART_CONTROL_STATUS_REG_B &amp; (1 &lt;&lt; TXCIE0))</span>
-<a name="l00235"></a>00235 <span class="preprocessor"></span>
-<a name="l00236"></a><a class="code" href="usart0_8c.html#a63ccc8bea70516e85b452cf6bd3691e0">00236</a> <span class="preprocessor">#define usart0_data_register_empty_interrupt_enable()   (UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))</span>
-<a name="l00237"></a><a class="code" href="usart0_8c.html#a62b99f3f2c4a0d1e7594a877161f0372">00237</a> <span class="preprocessor"></span><span class="preprocessor">#define usart0_data_register_empty_interrupt_disable()  (UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))</span>
+<a name="l00234"></a><a class="code" href="usart0_8c.html#ae1b295c3f4d15f385f7b499616dc3c59">00234</a> <span class="preprocessor">#define usart0_transmit_complete_interrupt_enable()     UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_TX_COMPLETE_INTERRUPT_ENABLE)</span>
+<a name="l00235"></a><a class="code" href="usart0_8c.html#ad6785a0065a45cdf694042e89041dc3d">00235</a> <span class="preprocessor"></span><span class="preprocessor">#define usart0_transmit_complete_interrupt_disable()    UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_TX_COMPLETE_INTERRUPT_ENABLE)</span>
+<a name="l00236"></a>00236 <span class="preprocessor"></span>
+<a name="l00237"></a><a class="code" href="usart0_8c.html#aa16a8edf113b09bdba7738e5d6f2731d">00237</a> <span class="preprocessor">#define usart0_transmit_complete_interrupt_get()        (UART_CONTROL_STATUS_REG_B &amp; (1 &lt;&lt; TXCIE0))</span>
 <a name="l00238"></a>00238 <span class="preprocessor"></span>
-<a name="l00239"></a><a class="code" href="usart0_8c.html#a32f28a1ac78ad48e84450b968d7027d2">00239</a> <span class="preprocessor">#define usart0_data_register_empty_interrupt_get()      bit_read(UART_CONTROL_STATUS_REG_B, BIT(UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))</span>
-<a name="l00240"></a>00240 <span class="preprocessor"></span>
-<a name="l00241"></a><a class="code" href="usart0_8c.html#a60d815177751882f6d499200f100c8d6">00241</a> <span class="preprocessor">#define usart0_receive_data_bit_8(x)                    bit_write(x, UART_CONTROL_STATUS_REG_B, BIT(UART_RX_DATA_BIT_8))</span>
-<a name="l00242"></a>00242 <span class="preprocessor"></span>
-<a name="l00243"></a><a class="code" href="usart0_8c.html#a43ed47aaf821e9a29a05327672a8321d">00243</a> <span class="preprocessor">#define usart0_transmit_data_bit_8(x)                   bit_write(x, UART_CONTROL_STATUS_REG_B, BIT(UART_tX_DATA_BIT_8))</span>
-<a name="l00244"></a>00244 <span class="preprocessor"></span>
-<a name="l00245"></a><a class="code" href="usart0_8c.html#a08e876dd48218ae09dacb4740aa8edbe">00245</a> <span class="preprocessor">#define usart0_stop_bits_set(stop_bits) \</span>
-<a name="l00246"></a>00246 <span class="preprocessor">do{                                     \</span>
-<a name="l00247"></a>00247 <span class="preprocessor">    if((stop_bits) &gt;= 1 &amp;&amp; (stop_bits) &lt;= 2)    \</span>
-<a name="l00248"></a>00248 <span class="preprocessor">    {                                           \</span>
-<a name="l00249"></a>00249 <span class="preprocessor">        bit_write((stop_bits) - 1, UART_CONTROL_STATUS_REG_C, BIT(UART_STOP_BIT_SELECT)); \</span>
-<a name="l00250"></a>00250 <span class="preprocessor">    }                                           \</span>
-<a name="l00251"></a>00251 <span class="preprocessor">}while(0)</span>
-<a name="l00252"></a>00252 <span class="preprocessor"></span>
-<a name="l00253"></a>00253 
-<a name="l00254"></a><a class="code" href="usart0_8c.html#a9acd0ced2196cc75ff6a9d5a87d6e16e">00254</a> <span class="preprocessor">#define usart0_data_bits_set(data_bits) \</span>
-<a name="l00255"></a>00255 <span class="preprocessor">do{         \</span>
-<a name="l00256"></a>00256 <span class="preprocessor">    if((data_bits) &gt;= 5 &amp;&amp; (data_bits) &lt;= 8)    \</span>
-<a name="l00257"></a>00257 <span class="preprocessor">    {       \</span>
-<a name="l00258"></a>00258 <span class="preprocessor">        bit_write(bit_read(((data_bits) - 5), BIT(0)), UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_0)); \</span>
-<a name="l00259"></a>00259 <span class="preprocessor">        bit_write(bit_read(((data_bits) - 5), BIT(1)), UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_1)); \</span>
-<a name="l00260"></a>00260 <span class="preprocessor">        bit_clear(UART_CONTROL_STATUS_REG_B, BIT(UART_CHARACTER_SIZE_2));     \</span>
-<a name="l00261"></a>00261 <span class="preprocessor">    }       \</span>
-<a name="l00262"></a>00262 <span class="preprocessor">    if((data_bits) == 9)    \</span>
-<a name="l00263"></a>00263 <span class="preprocessor">    {       \</span>
-<a name="l00264"></a>00264 <span class="preprocessor">        bit_set(UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_0));    \</span>
-<a name="l00265"></a>00265 <span class="preprocessor">        bit_set(UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_1));    \</span>
-<a name="l00266"></a>00266 <span class="preprocessor">        bit_set(UART_CONTROL_STATUS_REG_B, BIT(UART_CHARACTER_SIZE_2));    \</span>
-<a name="l00267"></a>00267 <span class="preprocessor">    }       \</span>
-<a name="l00268"></a>00268 <span class="preprocessor">}while(0)</span>
-<a name="l00269"></a>00269 <span class="preprocessor"></span>
-<a name="l00270"></a><a class="code" href="usart0_8c.html#aec95534a7595fc2d029aef9e9040627c">00270</a> <span class="preprocessor">#define usart0_rts_enable()     bit_clear(USART0_RTS_PORT, USART0_RTS)</span>
-<a name="l00271"></a>00271 <span class="preprocessor"></span>
-<a name="l00272"></a><a class="code" href="usart0_8c.html#af97c0b8925d829761f49e357c62dc202">00272</a> <span class="preprocessor">#define usart0_rts_disable()    bit_set(USART0_RTS_PORT, USART0_RTS)</span>
-<a name="l00273"></a>00273 <span class="preprocessor"></span>
-<a name="l00274"></a><a class="code" href="usart0_8c.html#a3252d9faf441d225932b7a17df863bae">00274</a> <span class="preprocessor">#define usart0_rts_init()   \</span>
-<a name="l00275"></a>00275 <span class="preprocessor">do{     \</span>
-<a name="l00276"></a>00276 <span class="preprocessor">    usart0_rts_enable();    \</span>
-<a name="l00277"></a>00277 <span class="preprocessor">    bit_set(USART0_RTS_PORT_DIRECTION, USART0_RTS); \</span>
-<a name="l00278"></a>00278 <span class="preprocessor">}while(0)</span>
-<a name="l00279"></a>00279 <span class="preprocessor"></span>
-<a name="l00280"></a><a class="code" href="usart0_8c.html#a0e95b69c2410bde5084c49217f8417ec">00280</a> <span class="preprocessor">#define usart0_cts_read()       bit_read(USART0_CTS_PORT, USART0_CTS)</span>
-<a name="l00281"></a>00281 <span class="preprocessor"></span>
-<a name="l00282"></a><a class="code" href="usart0_8c.html#af645abfa6856fa3a76955bc2ae7e9565">00282</a> <span class="preprocessor">#define usart0_cts_init()   \</span>
-<a name="l00283"></a>00283 <span class="preprocessor">do{     \</span>
-<a name="l00284"></a>00284 <span class="preprocessor">    bit_clear(USART0_CTS_PORT_DIRECTION, USART0_CTS); \</span>
-<a name="l00285"></a>00285 <span class="preprocessor">}while(0)</span>
-<a name="l00286"></a>00286 <span class="preprocessor"></span>
-<a name="l00287"></a>00287 
-<a name="l00288"></a>00288 <span class="comment">//</span>
-<a name="l00289"></a>00289 <span class="comment">// Non-API functions</span>
-<a name="l00290"></a>00290 <span class="comment">//</span>
-<a name="l00291"></a>00291 
-<a name="l00292"></a>00292 <span class="comment">//void usart0_init(usart_mode_t mode, uint32_t baud, uint8_t databits, uint8_t stopbits, usart_parity_t parity, flow_control_t flow_control);</span>
-<a name="l00293"></a>00293 
-<a name="l00294"></a>00294 <span class="keywordtype">void</span> <a class="code" href="usart0_8c.html#a1747985c8a9d69f94106f5bd3fa4c238">usart0_baud_set</a>(uint32_t baudrate, uint32_t freq_cpu);
-<a name="l00295"></a>00295 <span class="keywordtype">void</span> <a class="code" href="usart0_8c.html#a88dfa4e057eab5acd41c35210364280d">usart0_parity_set</a>(<a class="code" href="usart_8h.html#a0251d137a3f1586a0694a14efebf7f1e">usart_parity_t</a> parity);
-<a name="l00296"></a>00296 <span class="keywordtype">void</span> <a class="code" href="usart0_8c.html#a793b2551c2ec96001837a6b15966349d">usart0_flow_control_set</a>(<a class="code" href="usart_8h.html#acd8a6297b68afb3863ff4c842dd0abfb">usart_flow_control_t</a> flow_control);
-<a name="l00297"></a>00297 
+<a name="l00239"></a><a class="code" href="usart0_8c.html#a63ccc8bea70516e85b452cf6bd3691e0">00239</a> <span class="preprocessor">#define usart0_data_register_empty_interrupt_enable()   (UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 &lt;&lt; UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))</span>
+<a name="l00240"></a><a class="code" href="usart0_8c.html#a62b99f3f2c4a0d1e7594a877161f0372">00240</a> <span class="preprocessor"></span><span class="preprocessor">#define usart0_data_register_empty_interrupt_disable()  (UART_CONTROL_STATUS_REG_B &amp;= (uint8_t)~(1 &lt;&lt; UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))</span>
+<a name="l00241"></a>00241 <span class="preprocessor"></span>
+<a name="l00242"></a><a class="code" href="usart0_8c.html#a32f28a1ac78ad48e84450b968d7027d2">00242</a> <span class="preprocessor">#define usart0_data_register_empty_interrupt_get()      bit_read(UART_CONTROL_STATUS_REG_B, BIT(UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))</span>
+<a name="l00243"></a>00243 <span class="preprocessor"></span>
+<a name="l00244"></a><a class="code" href="usart0_8c.html#a60d815177751882f6d499200f100c8d6">00244</a> <span class="preprocessor">#define usart0_receive_data_bit_8(x)                    bit_write(x, UART_CONTROL_STATUS_REG_B, BIT(UART_RX_DATA_BIT_8))</span>
+<a name="l00245"></a>00245 <span class="preprocessor"></span>
+<a name="l00246"></a><a class="code" href="usart0_8c.html#a43ed47aaf821e9a29a05327672a8321d">00246</a> <span class="preprocessor">#define usart0_transmit_data_bit_8(x)                   bit_write(x, UART_CONTROL_STATUS_REG_B, BIT(UART_tX_DATA_BIT_8))</span>
+<a name="l00247"></a>00247 <span class="preprocessor"></span>
+<a name="l00248"></a><a class="code" href="usart0_8c.html#a08e876dd48218ae09dacb4740aa8edbe">00248</a> <span class="preprocessor">#define usart0_stop_bits_set(stop_bits) \</span>
+<a name="l00249"></a>00249 <span class="preprocessor">do{                                     \</span>
+<a name="l00250"></a>00250 <span class="preprocessor">    if((stop_bits) &gt;= 1 &amp;&amp; (stop_bits) &lt;= 2)    \</span>
+<a name="l00251"></a>00251 <span class="preprocessor">    {                                           \</span>
+<a name="l00252"></a>00252 <span class="preprocessor">        bit_write((stop_bits) - 1, UART_CONTROL_STATUS_REG_C, BIT(UART_STOP_BIT_SELECT)); \</span>
+<a name="l00253"></a>00253 <span class="preprocessor">    }                                           \</span>
+<a name="l00254"></a>00254 <span class="preprocessor">}while(0)</span>
+<a name="l00255"></a>00255 <span class="preprocessor"></span>
+<a name="l00256"></a>00256 
+<a name="l00257"></a><a class="code" href="usart0_8c.html#a9acd0ced2196cc75ff6a9d5a87d6e16e">00257</a> <span class="preprocessor">#define usart0_data_bits_set(data_bits) \</span>
+<a name="l00258"></a>00258 <span class="preprocessor">do{         \</span>
+<a name="l00259"></a>00259 <span class="preprocessor">    if((data_bits) &gt;= 5 &amp;&amp; (data_bits) &lt;= 8)    \</span>
+<a name="l00260"></a>00260 <span class="preprocessor">    {       \</span>
+<a name="l00261"></a>00261 <span class="preprocessor">        bit_write(bit_read(((data_bits) - 5), BIT(0)), UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_0)); \</span>
+<a name="l00262"></a>00262 <span class="preprocessor">        bit_write(bit_read(((data_bits) - 5), BIT(1)), UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_1)); \</span>
+<a name="l00263"></a>00263 <span class="preprocessor">        bit_clear(UART_CONTROL_STATUS_REG_B, BIT(UART_CHARACTER_SIZE_2));     \</span>
+<a name="l00264"></a>00264 <span class="preprocessor">    }       \</span>
+<a name="l00265"></a>00265 <span class="preprocessor">    if((data_bits) == 9)    \</span>
+<a name="l00266"></a>00266 <span class="preprocessor">    {       \</span>
+<a name="l00267"></a>00267 <span class="preprocessor">        bit_set(UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_0));    \</span>
+<a name="l00268"></a>00268 <span class="preprocessor">        bit_set(UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_1));    \</span>
+<a name="l00269"></a>00269 <span class="preprocessor">        bit_set(UART_CONTROL_STATUS_REG_B, BIT(UART_CHARACTER_SIZE_2));    \</span>
+<a name="l00270"></a>00270 <span class="preprocessor">    }       \</span>
+<a name="l00271"></a>00271 <span class="preprocessor">}while(0)</span>
+<a name="l00272"></a>00272 <span class="preprocessor"></span>
+<a name="l00273"></a><a class="code" href="usart0_8c.html#aec95534a7595fc2d029aef9e9040627c">00273</a> <span class="preprocessor">#define usart0_rts_enable()     bit_clear(USART0_RTS_PORT, USART0_RTS)</span>
+<a name="l00274"></a>00274 <span class="preprocessor"></span>
+<a name="l00275"></a><a class="code" href="usart0_8c.html#af97c0b8925d829761f49e357c62dc202">00275</a> <span class="preprocessor">#define usart0_rts_disable()    bit_set(USART0_RTS_PORT, USART0_RTS)</span>
+<a name="l00276"></a>00276 <span class="preprocessor"></span>
+<a name="l00277"></a><a class="code" href="usart0_8c.html#a3252d9faf441d225932b7a17df863bae">00277</a> <span class="preprocessor">#define usart0_rts_init()   \</span>
+<a name="l00278"></a>00278 <span class="preprocessor">do{     \</span>
+<a name="l00279"></a>00279 <span class="preprocessor">    usart0_rts_enable();    \</span>
+<a name="l00280"></a>00280 <span class="preprocessor">    bit_set(USART0_RTS_PORT_DIRECTION, USART0_RTS); \</span>
+<a name="l00281"></a>00281 <span class="preprocessor">}while(0)</span>
+<a name="l00282"></a>00282 <span class="preprocessor"></span>
+<a name="l00283"></a><a class="code" href="usart0_8c.html#a0e95b69c2410bde5084c49217f8417ec">00283</a> <span class="preprocessor">#define usart0_cts_read()       bit_read(USART0_CTS_PORT, USART0_CTS)</span>
+<a name="l00284"></a>00284 <span class="preprocessor"></span>
+<a name="l00285"></a><a class="code" href="usart0_8c.html#af645abfa6856fa3a76955bc2ae7e9565">00285</a> <span class="preprocessor">#define usart0_cts_init()   \</span>
+<a name="l00286"></a>00286 <span class="preprocessor">do{     \</span>
+<a name="l00287"></a>00287 <span class="preprocessor">    bit_clear(USART0_CTS_PORT_DIRECTION, USART0_CTS); \</span>
+<a name="l00288"></a>00288 <span class="preprocessor">}while(0)</span>
+<a name="l00289"></a>00289 <span class="preprocessor"></span>
+<a name="l00290"></a>00290 
+<a name="l00291"></a>00291 <span class="comment">//</span>
+<a name="l00292"></a>00292 <span class="comment">// Non-API functions</span>
+<a name="l00293"></a>00293 <span class="comment">//</span>
+<a name="l00294"></a>00294 
+<a name="l00295"></a>00295 <span class="keywordtype">void</span> <a class="code" href="usart0_8c.html#a1747985c8a9d69f94106f5bd3fa4c238">usart0_baud_set</a>(uint32_t baudrate, uint32_t freq_cpu);
+<a name="l00296"></a>00296 <span class="keywordtype">void</span> <a class="code" href="usart0_8c.html#a88dfa4e057eab5acd41c35210364280d">usart0_parity_set</a>(<a class="code" href="usart_8h.html#a0251d137a3f1586a0694a14efebf7f1e">usart_parity_t</a> parity);
+<a name="l00297"></a>00297 <span class="keywordtype">void</span> <a class="code" href="usart0_8c.html#a793b2551c2ec96001837a6b15966349d">usart0_flow_control_set</a>(<a class="code" href="usart_8h.html#acd8a6297b68afb3863ff4c842dd0abfb">usart_flow_control_t</a> flow_control);
 <a name="l00298"></a>00298 
-<a name="l00299"></a>00299 <span class="comment">// Removed from usart.h since it isn&#39;t available in the API</span>
-<a name="l00300"></a>00300 <span class="comment">/*</span>
-<a name="l00301"></a>00301 <span class="comment"> \ingroup usart</span>
-<a name="l00302"></a>00302 <span class="comment"></span>
-<a name="l00303"></a>00303 <span class="comment">    \brief Puts a character into the usart transmit buffer.</span>
-<a name="l00304"></a>00304 <span class="comment">         </span>
-<a name="l00305"></a>00305 <span class="comment">    \param c the char to be sent.</span>
-<a name="l00306"></a>00306 <span class="comment">        \param stream a pointer to the C output stream. </span>
-<a name="l00307"></a>00307 <span class="comment"></span>
-<a name="l00308"></a>00308 <span class="comment">        The C output stream is attached with the following:</span>
-<a name="l00309"></a>00309 <span class="comment">        \code</span>
-<a name="l00310"></a>00310 <span class="comment">        FILE mystdout = FDEV_SETUP_STREAM(usart0_put_char, NULL, _FDEV_SETUP_WRITE);</span>
-<a name="l00311"></a>00311 <span class="comment">        \endcode</span>
-<a name="l00312"></a>00312 <span class="comment">        See the avrlibc manual for details</span>
-<a name="l00313"></a>00313 <span class="comment"></span>
-<a name="l00314"></a>00314 <span class="comment">        \return 0</span>
-<a name="l00315"></a>00315 <span class="comment"></span>
-<a name="l00316"></a>00316 <span class="comment">*/</span>
-<a name="l00317"></a>00317 <span class="keywordtype">int</span> <a class="code" href="usart0_8c.html#a52607cb8394a49da73ed42c5afb2a99a">usart0_put_char_stream</a>(<span class="keywordtype">char</span> c, FILE *stream);
-<a name="l00318"></a>00318 
-<a name="l00319"></a>00319 <span class="comment">// Keep this in the same file as the usart0_put_char function</span>
-<a name="l00320"></a><a class="code" href="usart0_8c.html#aaa1fc0ff1aeb77f1feff261fa5ea792b">00320</a> FILE <a class="code" href="usart0_8c.html#aaa1fc0ff1aeb77f1feff261fa5ea792b">mystdout</a> = FDEV_SETUP_STREAM(<a class="code" href="usart0_8c.html#a52607cb8394a49da73ed42c5afb2a99a">usart0_put_char_stream</a>, NULL, _FDEV_SETUP_WRITE);
-<a name="l00321"></a><a class="code" href="usart0_8c.html#a52607cb8394a49da73ed42c5afb2a99a">00321</a> <span class="keywordtype">int</span> <a class="code" href="usart0_8c.html#a52607cb8394a49da73ed42c5afb2a99a">usart0_put_char_stream</a>(<span class="keywordtype">char</span> c, FILE *stream) 
-<a name="l00322"></a>00322 { 
-<a name="l00323"></a>00323         <span class="keywordflow">if</span> (c == <span class="charliteral">&#39;\n&#39;</span>) <a class="code" href="usart0_8c.html#a52607cb8394a49da73ed42c5afb2a99a">usart0_put_char_stream</a>(<span class="charliteral">&#39;\r&#39;</span>, stream);
-<a name="l00324"></a>00324 
-<a name="l00325"></a>00325         <a class="code" href="group__usart.html#ga8d3a6791aac28e357f812fe2c8d3021e" title="Adds the byte &amp;#39;c&amp;#39; to the transmit buffer and returns True if it was able to add the byte...">usart0_transmit_buffer_insert</a>((uint8_t)c);
-<a name="l00326"></a>00326         
-<a name="l00327"></a>00327         <a class="code" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac" title="Initiates the interrupt based transmission of the buffer NOTE: All of the put or insert function only...">usart0_send</a>();
-<a name="l00328"></a>00328 
-<a name="l00329"></a>00329         <span class="keywordflow">return</span> 0; 
-<a name="l00330"></a>00330 } 
-<a name="l00331"></a>00331 
-<a name="l00332"></a><a class="code" href="group__usart.html#gaf7b51594efd5e2111d7d086de98bacb5">00332</a> <span class="keywordtype">void</span> <a class="code" href="group__usart.html#gaf7b51594efd5e2111d7d086de98bacb5" title="intializes the uart parameters">usart0_init</a>(uint32_t baud, uint32_t freq_cpu, <a class="code" href="usart_8h.html#a1209980dae4cfa2b7933ccb7c53746dc">usart_mode_t</a> mode, <a class="code" href="usart_8h.html#a506e33de86dc835ddfb4ae6d0e3da5e2">usart_databits_t</a> databits, <a class="code" href="usart_8h.html#ae8703749b006538834e892f29428fed9">usart_stopbits_t</a> stopbits, <a class="code" href="usart_8h.html#a0251d137a3f1586a0694a14efebf7f1e">usart_parity_t</a> parity, <a class="code" href="usart_8h.html#acd8a6297b68afb3863ff4c842dd0abfb">usart_flow_control_t</a> flow_control)
-<a name="l00333"></a>00333 {
-<a name="l00334"></a>00334 
-<a name="l00335"></a>00335         cli();
-<a name="l00336"></a>00336 
-<a name="l00337"></a>00337         stdout = &amp;<a class="code" href="usart0_8c.html#aaa1fc0ff1aeb77f1feff261fa5ea792b">mystdout</a>;    <span class="comment">//set the output stream </span>
-<a name="l00338"></a>00338 
-<a name="l00339"></a>00339     <span class="comment">//flow.flow_control = flow_control;</span>
-<a name="l00340"></a>00340     <span class="comment">//flow.flow_out = true;</span>
-<a name="l00341"></a>00341     <span class="comment">//flow.flow_in = true;</span>
-<a name="l00342"></a>00342 
-<a name="l00343"></a>00343         <span class="comment">// JWP 3/27/11 the following was already commented out in xxx code</span>
-<a name="l00344"></a>00344     <span class="comment">// Initialize hw flow control task.</span>
-<a name="l00345"></a>00345     <span class="comment">// flow_out_tcb.handler = usart0_flow_out_hw_task;</span>
-<a name="l00346"></a>00346     <span class="comment">// flow_out_tcb.absolute_timing = false;</span>
-<a name="l00347"></a>00347     <span class="comment">// flow_out_tcb.run_interval = 0;</span>
-<a name="l00348"></a>00348     <span class="comment">// flow_out_tcb.enabled = false;</span>
-<a name="l00349"></a>00349     <span class="comment">// task_add(&amp;flow_out_tcb);</span>
-<a name="l00350"></a>00350 
-<a name="l00351"></a>00351  
-<a name="l00352"></a>00352         <a class="code" href="usart0_8c.html#ad336c595dbe9f635065726bbb975e274">usart0_transmit_disable</a>();
-<a name="l00353"></a>00353     <a class="code" href="usart0_8c.html#afbc8d91a3a6acb5b441598e13fae1e2f">usart0_receive_disable</a>();
-<a name="l00354"></a>00354         <a class="code" href="usart0_8c.html#ad6785a0065a45cdf694042e89041dc3d">usart0_transmit_complete_interrupt_disable</a>();
-<a name="l00355"></a>00355     <a class="code" href="usart0_8c.html#a75bb30f97859bd32b348cd050d75486a">usart0_receive_complete_interrupt_disable</a>();
-<a name="l00356"></a>00356 
-<a name="l00357"></a>00357     
-<a name="l00358"></a>00358         <a class="code" href="usart0_8c.html#a393c179a02ce4b80d03cbcc11582e9d5">usart0_mode</a>(mode);
-<a name="l00359"></a>00359         <a class="code" href="usart0_8c.html#a1747985c8a9d69f94106f5bd3fa4c238">usart0_baud_set</a>(baud, freq_cpu);
-<a name="l00360"></a>00360     <a class="code" href="usart0_8c.html#a9acd0ced2196cc75ff6a9d5a87d6e16e">usart0_data_bits_set</a>(databits);
-<a name="l00361"></a>00361     <a class="code" href="usart0_8c.html#a08e876dd48218ae09dacb4740aa8edbe">usart0_stop_bits_set</a>(stopbits);
-<a name="l00362"></a>00362     <a class="code" href="usart0_8c.html#a88dfa4e057eab5acd41c35210364280d">usart0_parity_set</a>(parity);
-<a name="l00363"></a>00363  
-<a name="l00364"></a>00364         <a class="code" href="usart0_8c.html#a1747985c8a9d69f94106f5bd3fa4c238">usart0_baud_set</a>(baud, freq_cpu);
-<a name="l00365"></a>00365 
-<a name="l00366"></a>00366 <span class="comment">/* JWP 6/16/11 The Butterfly requires special code for clock and baud</span>
-<a name="l00367"></a>00367 <span class="comment">//#if defined(BUTTERFLY)</span>
-<a name="l00368"></a>00368 <span class="comment">        //butterfly_uart_init();</span>
-<a name="l00369"></a>00369 <span class="comment">        // Butterfly specific </span>
-<a name="l00370"></a>00370 <span class="comment"></span><span class="comment"></span>
-<a name="l00371"></a>00371 <span class="comment">        /// boost IntRC to 2Mhz to achieve 19200 baudrate</span>
-<a name="l00372"></a>00372 <span class="comment"></span>    CLKPR = (1&lt;&lt;CLKPCE);        /// set Clock Prescaler Change Enable<span class="comment"></span>
-<a name="l00373"></a>00373 <span class="comment">    /// set prescaler = 4, Inter RC 8Mhz / 4 = 2Mhz</span>
-<a name="l00374"></a>00374 <span class="comment"></span>    CLKPR = (1&lt;&lt;CLKPS1);  
-<a name="l00375"></a>00375 <span class="comment"></span>
-<a name="l00376"></a>00376 <span class="comment">    /// Enable 2x speed</span>
-<a name="l00377"></a>00377 <span class="comment"></span>    UART_CONTROL_STATUS_REG_A = (1&lt;&lt;UART_DOUBLE_SPEED);
-<a name="l00378"></a>00378 <span class="comment"></span>
-<a name="l00379"></a>00379 <span class="comment">        /// At this point you have doubled the F_CPU and doubled the </span>
-<a name="l00380"></a>00380 <span class="comment">        /// uart speed so the Butterfly F_CPU 1000000 is for baudrate</span>
-<a name="l00381"></a>00381 <span class="comment">        /// purposes 4000000 thus the *4</span>
-<a name="l00382"></a>00382 <span class="comment"></span>        UART_BAUD_RATE_HIGH = 0;//((F_CPU*4)/(baudrate*16L)-1) &gt;&gt; 8;
-<a name="l00383"></a>00383         UART_BAUD_RATE_LOW = 12;//(uint8_t)((F_CPU*4)/(baudrate*16L)-1);
-<a name="l00384"></a>00384 <span class="comment"></span>
-<a name="l00385"></a>00385 <span class="comment">    /// Enable receiver and transmitter</span>
-<a name="l00386"></a>00386 <span class="comment"></span>        // JWP added | 10/22/10
-<a name="l00387"></a>00387         UART_CONTROL_STATUS_REG_B |= (1 &lt;&lt; UART_ENABLE_RECEIVER) | (1 &lt;&lt; UART_ENABLE_TRANSMITTER);
-<a name="l00388"></a>00388 <span class="comment"></span>
-<a name="l00389"></a>00389 <span class="comment">    /// Async. mode, 8N1</span>
-<a name="l00390"></a>00390 <span class="comment"></span>        UART_CONTROL_STATUS_REG_C |= (1 &lt;&lt; UART_CHARACTER_SIZE_0) | (1 &lt;&lt; UART_CHARACTER_SIZE_1);
-<a name="l00391"></a>00391 //#endif
-<a name="l00392"></a>00392 */
-<a name="l00393"></a>00393 
-<a name="l00394"></a>00394         <a class="code" href="group__ring.html#gab4695c238ca484ff40b736029ebd6b47" title="Sets up the ring buffer with ring_t parameters. The clear command is also called to set 0 values with...">ring_init</a>(&amp;<a class="code" href="usart_8h.html#a7fed97e63d361555cef014709ee36712">usart0_receive_ring</a>, <a class="code" href="usart_8h.html#a6b769dd4596ce2db76888ceffb20ce94">usart0_receive_buffer</a>, <a class="code" href="usart_8h.html#a68930607179311e75e47b0dcbd26ba6a">USART0_RECEIVE_BUFFER_LEN</a>);
-<a name="l00395"></a>00395     <a class="code" href="group__ring.html#gab4695c238ca484ff40b736029ebd6b47" title="Sets up the ring buffer with ring_t parameters. The clear command is also called to set 0 values with...">ring_init</a>(&amp;<a class="code" href="usart_8h.html#a01cd9645bef88311b3237af59e7bfab0">usart0_transmit_ring</a>, <a class="code" href="usart_8h.html#a651dd06fb517fc7af8f036bb42bb5916">usart0_transmit_buffer</a>, <a class="code" href="usart_8h.html#ae894a29a6a36c7afd001a0bed6f89ab3">USART0_TRANSMIT_BUFFER_LEN</a>);
-<a name="l00396"></a>00396 
-<a name="l00397"></a>00397 
-<a name="l00398"></a>00398         <span class="comment">//UCSR0B |= ((1&lt;&lt;RXCIE0)|(1&lt;&lt;TXCIE0)|(1&lt;&lt;RXEN0)|(1&lt;&lt;TXEN0));</span>
-<a name="l00399"></a>00399 
-<a name="l00400"></a>00400         <span class="comment">// JWP 6/16/11 </span>
-<a name="l00401"></a>00401         <a class="code" href="usart0_8c.html#a39c49d24001ec33323e17efb14231319">usart0_transmit_enable</a>();
-<a name="l00402"></a>00402     <a class="code" href="usart0_8c.html#ac7ee289c628b7eb4c2cdaf8b3b9d77c2">usart0_receive_enable</a>();
-<a name="l00403"></a>00403         <a class="code" href="usart0_8c.html#ae1b295c3f4d15f385f7b499616dc3c59">usart0_transmit_complete_interrupt_enable</a>();
-<a name="l00404"></a>00404     <a class="code" href="usart0_8c.html#a38b8dfcf4d51e7dacc3e25170a7952eb">usart0_receive_complete_interrupt_enable</a>();
-<a name="l00405"></a>00405 
-<a name="l00406"></a>00406 
-<a name="l00407"></a>00407 
-<a name="l00408"></a>00408         <span class="comment">// JWP 6/16/11 - set flags for revised transmission logic</span>
-<a name="l00409"></a>00409         <a class="code" href="usart_8h.html#acb2bc206f10caedf3dad08d8dc83a365">usart_buffered_tx_flag</a> = <span class="keyword">false</span>;
-<a name="l00410"></a>00410         <a class="code" href="usart_8h.html#a2acfa7d4e8b8a6ff7d23d1c6ff981aef">usart_tx_ready_flag</a> = <span class="keyword">true</span>;
-<a name="l00411"></a>00411 
-<a name="l00412"></a>00412         sei();
-<a name="l00413"></a>00413 
-<a name="l00414"></a>00414         <span class="keywordflow">return</span>;
-<a name="l00415"></a>00415 }
-<a name="l00416"></a>00416 
-<a name="l00417"></a>00417 
-<a name="l00418"></a><a class="code" href="group__usart.html#ga05305155cc1dde15421fedc26ee3c7e3">00418</a> <span class="keywordtype">void</span> <a class="code" href="group__usart.html#ga05305155cc1dde15421fedc26ee3c7e3" title="Restores registers to datasheet default valuse.">usart0_uninit</a>(<span class="keywordtype">void</span>)
-<a name="l00419"></a>00419 {
-<a name="l00420"></a>00420         <span class="comment">// restore to datasheet defaults</span>
-<a name="l00421"></a>00421         UART_CONTROL_STATUS_REG_A = 0x20;
-<a name="l00422"></a>00422         UART_CONTROL_STATUS_REG_B = 0;
-<a name="l00423"></a>00423         UART_CONTROL_STATUS_REG_C = 0x06;
-<a name="l00424"></a>00424 }
-<a name="l00425"></a>00425 
-<a name="l00426"></a>00426 
-<a name="l00427"></a>00427 <span class="comment">// JWP 6/16/11 added to change transmission logic.</span>
-<a name="l00428"></a>00428 <span class="comment">// this function waits until a pending transmission is complete</span>
-<a name="l00429"></a>00429 <span class="comment">// then sends a byte. If the usart_buffered_TX_flag is set true</span>
-<a name="l00430"></a>00430 <span class="comment">// then the ISR continues to send until the buffer is empty, otherwise</span>
-<a name="l00431"></a>00431 <span class="comment">// the ISR just sends the byte. </span>
-<a name="l00432"></a><a class="code" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac">00432</a> <span class="keywordtype">void</span> <a class="code" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac" title="Initiates the interrupt based transmission of the buffer NOTE: All of the put or insert function only...">usart0_send</a>(<span class="keywordtype">void</span>)
-<a name="l00433"></a>00433 {
-<a name="l00434"></a>00434 
-<a name="l00435"></a>00435         <span class="comment">// Wait until the transmitter is ready</span>
-<a name="l00436"></a>00436         <span class="keywordflow">while</span>(!<a class="code" href="usart_8h.html#a2acfa7d4e8b8a6ff7d23d1c6ff981aef">usart_tx_ready_flag</a>);
+<a name="l00299"></a>00299 
+<a name="l00300"></a>00300 <span class="comment">// Removed from usart.h since it isn&#39;t available in the API</span>
+<a name="l00301"></a>00301 <span class="comment">/*</span>
+<a name="l00302"></a>00302 <span class="comment"> \ingroup usart</span>
+<a name="l00303"></a>00303 <span class="comment"></span>
+<a name="l00304"></a>00304 <span class="comment">    \brief Puts a character into the usart transmit buffer.</span>
+<a name="l00305"></a>00305 <span class="comment">         </span>
+<a name="l00306"></a>00306 <span class="comment">    \param c the char to be sent.</span>
+<a name="l00307"></a>00307 <span class="comment">        \param stream a pointer to the C output stream. </span>
+<a name="l00308"></a>00308 <span class="comment"></span>
+<a name="l00309"></a>00309 <span class="comment">        The C output stream is attached with the following:</span>
+<a name="l00310"></a>00310 <span class="comment">        \code</span>
+<a name="l00311"></a>00311 <span class="comment">        FILE mystdout = FDEV_SETUP_STREAM(usart0_put_char, NULL, _FDEV_SETUP_WRITE);</span>
+<a name="l00312"></a>00312 <span class="comment">        \endcode</span>
+<a name="l00313"></a>00313 <span class="comment">        See the avrlibc manual for details</span>
+<a name="l00314"></a>00314 <span class="comment"></span>
+<a name="l00315"></a>00315 <span class="comment">        \return 0</span>
+<a name="l00316"></a>00316 <span class="comment"></span>
+<a name="l00317"></a>00317 <span class="comment">*/</span>
+<a name="l00318"></a>00318 <span class="keywordtype">int</span> <a class="code" href="usart0_8c.html#a52607cb8394a49da73ed42c5afb2a99a">usart0_put_char_stream</a>(<span class="keywordtype">char</span> c, FILE *stream);
+<a name="l00319"></a>00319 
+<a name="l00320"></a>00320 <span class="comment">// Keep this in the same file as the usart0_put_char function</span>
+<a name="l00321"></a><a class="code" href="usart0_8c.html#aaa1fc0ff1aeb77f1feff261fa5ea792b">00321</a> FILE <a class="code" href="usart0_8c.html#aaa1fc0ff1aeb77f1feff261fa5ea792b">mystdout</a> = FDEV_SETUP_STREAM(<a class="code" href="usart0_8c.html#a52607cb8394a49da73ed42c5afb2a99a">usart0_put_char_stream</a>, NULL, _FDEV_SETUP_WRITE);
+<a name="l00322"></a><a class="code" href="usart0_8c.html#a52607cb8394a49da73ed42c5afb2a99a">00322</a> <span class="keywordtype">int</span> <a class="code" href="usart0_8c.html#a52607cb8394a49da73ed42c5afb2a99a">usart0_put_char_stream</a>(<span class="keywordtype">char</span> c, FILE *stream) 
+<a name="l00323"></a>00323 { 
+<a name="l00324"></a>00324         <span class="keywordflow">if</span> (c == <span class="charliteral">&#39;\n&#39;</span>) <a class="code" href="usart0_8c.html#a52607cb8394a49da73ed42c5afb2a99a">usart0_put_char_stream</a>(<span class="charliteral">&#39;\r&#39;</span>, stream);
+<a name="l00325"></a>00325 
+<a name="l00326"></a>00326         <a class="code" href="group__usart.html#ga8d3a6791aac28e357f812fe2c8d3021e" title="Adds the byte &amp;#39;c&amp;#39; to the transmit buffer and returns True if it was able to add the byte...">usart0_transmit_buffer_insert</a>((uint8_t)c);
+<a name="l00327"></a>00327         
+<a name="l00328"></a>00328         <a class="code" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac" title="Initiates the interrupt based transmission of the buffer NOTE: All of the put or insert function only...">usart0_send</a>();
+<a name="l00329"></a>00329 
+<a name="l00330"></a>00330         <span class="keywordflow">return</span> 0; 
+<a name="l00331"></a>00331 } 
+<a name="l00332"></a>00332 
+<a name="l00333"></a><a class="code" href="group__usart.html#gaf7b51594efd5e2111d7d086de98bacb5">00333</a> <span class="keywordtype">void</span> <a class="code" href="group__usart.html#gaf7b51594efd5e2111d7d086de98bacb5" title="intializes the uart parameters">usart0_init</a>(uint32_t baud, uint32_t freq_cpu, <a class="code" href="usart_8h.html#a1209980dae4cfa2b7933ccb7c53746dc">usart_mode_t</a> mode, <a class="code" href="usart_8h.html#a506e33de86dc835ddfb4ae6d0e3da5e2">usart_databits_t</a> databits, <a class="code" href="usart_8h.html#ae8703749b006538834e892f29428fed9">usart_stopbits_t</a> stopbits, <a class="code" href="usart_8h.html#a0251d137a3f1586a0694a14efebf7f1e">usart_parity_t</a> parity, <a class="code" href="usart_8h.html#acd8a6297b68afb3863ff4c842dd0abfb">usart_flow_control_t</a> flow_control)
+<a name="l00334"></a>00334 {
+<a name="l00335"></a>00335 
+<a name="l00336"></a>00336         cli();
+<a name="l00337"></a>00337 
+<a name="l00338"></a>00338         stdout = &amp;<a class="code" href="usart0_8c.html#aaa1fc0ff1aeb77f1feff261fa5ea792b">mystdout</a>;    <span class="comment">//set the output stream </span>
+<a name="l00339"></a>00339 
+<a name="l00340"></a>00340     <span class="comment">//flow.flow_control = flow_control;</span>
+<a name="l00341"></a>00341     <span class="comment">//flow.flow_out = true;</span>
+<a name="l00342"></a>00342     <span class="comment">//flow.flow_in = true;</span>
+<a name="l00343"></a>00343 
+<a name="l00344"></a>00344         <span class="comment">// JWP 3/27/11 the following was already commented out in xxx code</span>
+<a name="l00345"></a>00345     <span class="comment">// Initialize hw flow control task.</span>
+<a name="l00346"></a>00346     <span class="comment">// flow_out_tcb.handler = usart0_flow_out_hw_task;</span>
+<a name="l00347"></a>00347     <span class="comment">// flow_out_tcb.absolute_timing = false;</span>
+<a name="l00348"></a>00348     <span class="comment">// flow_out_tcb.run_interval = 0;</span>
+<a name="l00349"></a>00349     <span class="comment">// flow_out_tcb.enabled = false;</span>
+<a name="l00350"></a>00350     <span class="comment">// task_add(&amp;flow_out_tcb);</span>
+<a name="l00351"></a>00351 
+<a name="l00352"></a>00352  
+<a name="l00353"></a>00353         <a class="code" href="usart0_8c.html#ad336c595dbe9f635065726bbb975e274">usart0_transmit_disable</a>();
+<a name="l00354"></a>00354     <a class="code" href="usart0_8c.html#afbc8d91a3a6acb5b441598e13fae1e2f">usart0_receive_disable</a>();
+<a name="l00355"></a>00355         <a class="code" href="usart0_8c.html#ad6785a0065a45cdf694042e89041dc3d">usart0_transmit_complete_interrupt_disable</a>();
+<a name="l00356"></a>00356     <a class="code" href="usart0_8c.html#a75bb30f97859bd32b348cd050d75486a">usart0_receive_complete_interrupt_disable</a>();
+<a name="l00357"></a>00357 
+<a name="l00358"></a>00358 <span class="comment">//  JWP 6/19/11 Just use default while testing</span>
+<a name="l00359"></a>00359 <span class="comment">// TODO: figure this out someday   </span>
+<a name="l00360"></a>00360 <span class="comment">//      usart0_mode(mode);</span>
+<a name="l00361"></a>00361         <a class="code" href="usart0_8c.html#a1747985c8a9d69f94106f5bd3fa4c238">usart0_baud_set</a>(baud, freq_cpu);
+<a name="l00362"></a>00362     <a class="code" href="usart0_8c.html#a9acd0ced2196cc75ff6a9d5a87d6e16e">usart0_data_bits_set</a>(databits);
+<a name="l00363"></a>00363     <a class="code" href="usart0_8c.html#a08e876dd48218ae09dacb4740aa8edbe">usart0_stop_bits_set</a>(stopbits);
+<a name="l00364"></a>00364     <a class="code" href="usart0_8c.html#a88dfa4e057eab5acd41c35210364280d">usart0_parity_set</a>(parity);
+<a name="l00365"></a>00365  
+<a name="l00366"></a>00366         <a class="code" href="usart0_8c.html#a1747985c8a9d69f94106f5bd3fa4c238">usart0_baud_set</a>(baud, freq_cpu);
+<a name="l00367"></a>00367 
+<a name="l00368"></a>00368 <span class="comment">//JWP 6/16/11 The Butterfly requires special code for clock and baud</span>
+<a name="l00369"></a>00369 <span class="preprocessor">#if defined(__AVR_ATmega169__) // Assume Butterfly</span>
+<a name="l00370"></a>00370 <span class="preprocessor"></span>        <a class="code" href="butterfly_8h.html#a68eba58863de4a48fd7ad4e02d0f10ba">butterfly_init</a>();
+<a name="l00371"></a>00371 <span class="preprocessor">#endif</span>
+<a name="l00372"></a>00372 <span class="preprocessor"></span>
+<a name="l00373"></a>00373 
+<a name="l00374"></a>00374         <a class="code" href="group__ring.html#gab4695c238ca484ff40b736029ebd6b47" title="Sets up the ring buffer with ring_t parameters. The clear command is also called to set 0 values with...">ring_init</a>(&amp;<a class="code" href="usart_8h.html#a7fed97e63d361555cef014709ee36712">usart0_receive_ring</a>, <a class="code" href="usart_8h.html#a6b769dd4596ce2db76888ceffb20ce94">usart0_receive_buffer</a>, <a class="code" href="usart_8h.html#a68930607179311e75e47b0dcbd26ba6a">USART0_RECEIVE_BUFFER_LEN</a>);
+<a name="l00375"></a>00375     <a class="code" href="group__ring.html#gab4695c238ca484ff40b736029ebd6b47" title="Sets up the ring buffer with ring_t parameters. The clear command is also called to set 0 values with...">ring_init</a>(&amp;<a class="code" href="usart_8h.html#a01cd9645bef88311b3237af59e7bfab0">usart0_transmit_ring</a>, <a class="code" href="usart_8h.html#a651dd06fb517fc7af8f036bb42bb5916">usart0_transmit_buffer</a>, <a class="code" href="usart_8h.html#ae894a29a6a36c7afd001a0bed6f89ab3">USART0_TRANSMIT_BUFFER_LEN</a>);
+<a name="l00376"></a>00376 
+<a name="l00377"></a>00377         <span class="comment">// JWP 6/16/11 </span>
+<a name="l00378"></a>00378         <a class="code" href="usart0_8c.html#a39c49d24001ec33323e17efb14231319">usart0_transmit_enable</a>();
+<a name="l00379"></a>00379     <a class="code" href="usart0_8c.html#ac7ee289c628b7eb4c2cdaf8b3b9d77c2">usart0_receive_enable</a>();
+<a name="l00380"></a>00380         <a class="code" href="usart0_8c.html#ae1b295c3f4d15f385f7b499616dc3c59">usart0_transmit_complete_interrupt_enable</a>();
+<a name="l00381"></a>00381     <a class="code" href="usart0_8c.html#a38b8dfcf4d51e7dacc3e25170a7952eb">usart0_receive_complete_interrupt_enable</a>();
+<a name="l00382"></a>00382 
+<a name="l00383"></a>00383         <span class="comment">// JWP 6/16/11 - set flags for revised transmission logic</span>
+<a name="l00384"></a>00384         <a class="code" href="usart_8h.html#acb2bc206f10caedf3dad08d8dc83a365">usart_buffered_tx_flag</a> = <span class="keyword">false</span>;
+<a name="l00385"></a>00385         <a class="code" href="usart_8h.html#a2acfa7d4e8b8a6ff7d23d1c6ff981aef">usart_tx_ready_flag</a> = <span class="keyword">true</span>;
+<a name="l00386"></a>00386 
+<a name="l00387"></a>00387         sei();
+<a name="l00388"></a>00388 
+<a name="l00389"></a>00389         <span class="keywordflow">return</span>;
+<a name="l00390"></a>00390 }
+<a name="l00391"></a>00391 
+<a name="l00392"></a>00392 
+<a name="l00393"></a><a class="code" href="group__usart.html#ga05305155cc1dde15421fedc26ee3c7e3">00393</a> <span class="keywordtype">void</span> <a class="code" href="group__usart.html#ga05305155cc1dde15421fedc26ee3c7e3" title="Restores registers to datasheet default valuse.">usart0_uninit</a>(<span class="keywordtype">void</span>)
+<a name="l00394"></a>00394 {
+<a name="l00395"></a>00395         <span class="comment">// restore to datasheet defaults</span>
+<a name="l00396"></a>00396         UART_CONTROL_STATUS_REG_A = 0x20;
+<a name="l00397"></a>00397         UART_CONTROL_STATUS_REG_B = 0;
+<a name="l00398"></a>00398         UART_CONTROL_STATUS_REG_C = 0x06;
+<a name="l00399"></a>00399 }
+<a name="l00400"></a>00400 
+<a name="l00401"></a>00401 
+<a name="l00402"></a>00402 <span class="comment">// JWP 6/16/11 added to change transmission logic.</span>
+<a name="l00403"></a>00403 <span class="comment">// this function waits until a pending transmission is complete</span>
+<a name="l00404"></a>00404 <span class="comment">// then sends a byte. If the usart_buffered_TX_flag is set true</span>
+<a name="l00405"></a>00405 <span class="comment">// then the ISR continues to send until the buffer is empty, otherwise</span>
+<a name="l00406"></a>00406 <span class="comment">// the ISR just sends the byte. </span>
+<a name="l00407"></a><a class="code" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac">00407</a> <span class="keywordtype">void</span> <a class="code" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac" title="Initiates the interrupt based transmission of the buffer NOTE: All of the put or insert function only...">usart0_send</a>(<span class="keywordtype">void</span>)
+<a name="l00408"></a>00408 {
+<a name="l00409"></a>00409 
+<a name="l00410"></a>00410         <span class="comment">// Wait until the transmitter is ready</span>
+<a name="l00411"></a>00411         <span class="keywordflow">while</span>(!<a class="code" href="usart_8h.html#a2acfa7d4e8b8a6ff7d23d1c6ff981aef">usart_tx_ready_flag</a>);
+<a name="l00412"></a>00412 
+<a name="l00413"></a>00413         <span class="comment">// Set flag for ISR</span>
+<a name="l00414"></a>00414         <a class="code" href="usart_8h.html#acb2bc206f10caedf3dad08d8dc83a365">usart_buffered_tx_flag</a> = <span class="keyword">true</span>;
+<a name="l00415"></a>00415         
+<a name="l00416"></a>00416         <span class="comment">// Send the byte</span>
+<a name="l00417"></a>00417         UART_DATA_REG = <a class="code" href="group__ring.html#gad13ce446eabdaefcfbabee5a818df7c1" title="Removes a byte of data from the ring buffer.">ring_remove</a>(&amp;<a class="code" href="usart_8h.html#a01cd9645bef88311b3237af59e7bfab0">usart0_transmit_ring</a>);
+<a name="l00418"></a>00418 
+<a name="l00419"></a>00419         <span class="comment">// Set the ready flag to false</span>
+<a name="l00420"></a>00420         <a class="code" href="usart_8h.html#a2acfa7d4e8b8a6ff7d23d1c6ff981aef">usart_tx_ready_flag</a> = <span class="keyword">false</span>;
+<a name="l00421"></a>00421 }
+<a name="l00422"></a>00422 
+<a name="l00423"></a>00423 
+<a name="l00424"></a>00424 <span class="comment">// 3/18/11 JWP removed magic number for clock and added freq_cpu</span>
+<a name="l00425"></a><a class="code" href="usart0_8c.html#a1747985c8a9d69f94106f5bd3fa4c238">00425</a> <span class="keywordtype">void</span> <a class="code" href="usart0_8c.html#a1747985c8a9d69f94106f5bd3fa4c238">usart0_baud_set</a>(uint32_t baudrate, uint32_t freq_cpu)
+<a name="l00426"></a>00426 {
+<a name="l00427"></a>00427         uint16_t setting;
+<a name="l00428"></a>00428         
+<a name="l00429"></a>00429         setting = <a class="code" href="usart0_8c.html#a71650498dcd48a55c2ebee71f3dca31c">usart_baudrate_to_setting</a>(freq_cpu,baudrate);
+<a name="l00430"></a>00430         
+<a name="l00431"></a>00431         <span class="comment">// Write hi byte first as writing lo byte will trigger immediate update of baud prescaler.</span>
+<a name="l00432"></a>00432         UART_BAUD_RATE_HIGH = <a class="code" href="slice_8h.html#ab32e8bd475aea64e1e2f94a4369ac4fb">hi_byte</a>(setting);
+<a name="l00433"></a>00433         UART_BAUD_RATE_LOW= <a class="code" href="slice_8h.html#a05ebbe6602dd02d12421de9cd571ec72">lo_byte</a>(setting);
+<a name="l00434"></a>00434         
+<a name="l00435"></a>00435         <span class="keywordflow">return</span>;
+<a name="l00436"></a>00436 }
 <a name="l00437"></a>00437 
-<a name="l00438"></a>00438         <span class="comment">// Set flag for ISR</span>
-<a name="l00439"></a>00439         <a class="code" href="usart_8h.html#acb2bc206f10caedf3dad08d8dc83a365">usart_buffered_tx_flag</a> = <span class="keyword">true</span>;
-<a name="l00440"></a>00440         
-<a name="l00441"></a>00441         <span class="comment">// Send the byte</span>
-<a name="l00442"></a>00442         UART_DATA_REG = <a class="code" href="group__ring.html#gad13ce446eabdaefcfbabee5a818df7c1" title="Removes a byte of data from the ring buffer.">ring_remove</a>(&amp;<a class="code" href="usart_8h.html#a01cd9645bef88311b3237af59e7bfab0">usart0_transmit_ring</a>);
-<a name="l00443"></a>00443 
-<a name="l00444"></a>00444         <span class="comment">// Set the ready flag to false</span>
-<a name="l00445"></a>00445         <a class="code" href="usart_8h.html#a2acfa7d4e8b8a6ff7d23d1c6ff981aef">usart_tx_ready_flag</a> = <span class="keyword">false</span>;
-<a name="l00446"></a>00446 }
-<a name="l00447"></a>00447 
+<a name="l00438"></a><a class="code" href="usart0_8c.html#a88dfa4e057eab5acd41c35210364280d">00438</a> <span class="keywordtype">void</span> <a class="code" href="usart0_8c.html#a88dfa4e057eab5acd41c35210364280d">usart0_parity_set</a>(<a class="code" href="usart_8h.html#a0251d137a3f1586a0694a14efebf7f1e">usart_parity_t</a> parity)
+<a name="l00439"></a>00439 {
+<a name="l00440"></a>00440     <span class="keywordflow">if</span>(parity &gt; 0)
+<a name="l00441"></a>00441     {
+<a name="l00442"></a>00442         parity++;
+<a name="l00443"></a>00443     }
+<a name="l00444"></a>00444     <a class="code" href="bit_8h.html#ab936d757424e62e89cdd27196315ea7a">bit_write</a>(<a class="code" href="bit_8h.html#a962478e60bab6c37ffaabe21bfe237ee">bit_read</a>(parity, <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(0)), UART_CONTROL_STATUS_REG_C, <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(UART_PARITY_MODE_0));
+<a name="l00445"></a>00445     <a class="code" href="bit_8h.html#ab936d757424e62e89cdd27196315ea7a">bit_write</a>(<a class="code" href="bit_8h.html#a962478e60bab6c37ffaabe21bfe237ee">bit_read</a>(parity, <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(1)), UART_CONTROL_STATUS_REG_C, <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(UART_PARITY_MODE_1));
+<a name="l00446"></a>00446     <span class="keywordflow">return</span>;
+<a name="l00447"></a>00447 }
 <a name="l00448"></a>00448 
-<a name="l00449"></a>00449 <span class="comment">// 3/18/11 JWP removed magic number for clock and added freq_cpu</span>
-<a name="l00450"></a><a class="code" href="usart0_8c.html#a1747985c8a9d69f94106f5bd3fa4c238">00450</a> <span class="keywordtype">void</span> <a class="code" href="usart0_8c.html#a1747985c8a9d69f94106f5bd3fa4c238">usart0_baud_set</a>(uint32_t baudrate, uint32_t freq_cpu)
-<a name="l00451"></a>00451 {
-<a name="l00452"></a>00452         uint16_t setting;
-<a name="l00453"></a>00453         
-<a name="l00454"></a>00454         setting = <a class="code" href="usart0_8c.html#a71650498dcd48a55c2ebee71f3dca31c">usart_baudrate_to_setting</a>(freq_cpu,baudrate);
-<a name="l00455"></a>00455         
-<a name="l00456"></a>00456         <span class="comment">// Write hi byte first as writing lo byte will trigger immediate update of baud prescaler.</span>
-<a name="l00457"></a>00457         UART_BAUD_RATE_HIGH = <a class="code" href="slice_8h.html#ab32e8bd475aea64e1e2f94a4369ac4fb">hi_byte</a>(setting);
-<a name="l00458"></a>00458         UART_BAUD_RATE_LOW= <a class="code" href="slice_8h.html#a05ebbe6602dd02d12421de9cd571ec72">lo_byte</a>(setting);
-<a name="l00459"></a>00459         
-<a name="l00460"></a>00460         <span class="keywordflow">return</span>;
-<a name="l00461"></a>00461 }
-<a name="l00462"></a>00462 
-<a name="l00463"></a><a class="code" href="usart0_8c.html#a88dfa4e057eab5acd41c35210364280d">00463</a> <span class="keywordtype">void</span> <a class="code" href="usart0_8c.html#a88dfa4e057eab5acd41c35210364280d">usart0_parity_set</a>(<a class="code" href="usart_8h.html#a0251d137a3f1586a0694a14efebf7f1e">usart_parity_t</a> parity)
-<a name="l00464"></a>00464 {
-<a name="l00465"></a>00465     <span class="keywordflow">if</span>(parity &gt; 0)
-<a name="l00466"></a>00466     {
-<a name="l00467"></a>00467         parity++;
-<a name="l00468"></a>00468     }
-<a name="l00469"></a>00469     <a class="code" href="bit_8h.html#ab936d757424e62e89cdd27196315ea7a">bit_write</a>(<a class="code" href="bit_8h.html#a962478e60bab6c37ffaabe21bfe237ee">bit_read</a>(parity, <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(0)), UART_CONTROL_STATUS_REG_C, <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(UART_PARITY_MODE_0));
-<a name="l00470"></a>00470     <a class="code" href="bit_8h.html#ab936d757424e62e89cdd27196315ea7a">bit_write</a>(<a class="code" href="bit_8h.html#a962478e60bab6c37ffaabe21bfe237ee">bit_read</a>(parity, <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(1)), UART_CONTROL_STATUS_REG_C, <a class="code" href="bit_8h.html#ad27cc17b25bb93134368d5eb21126eae">BIT</a>(UART_PARITY_MODE_1));
-<a name="l00471"></a>00471     <span class="keywordflow">return</span>;
-<a name="l00472"></a>00472 }
-<a name="l00473"></a>00473 
-<a name="l00474"></a>00474 <span class="comment">// JWP 6/16/11 rewrote transmit interrupt to use TX complete vector</span>
-<a name="l00475"></a>00475 <span class="comment">// rather than the Data Register Empty vector</span>
-<a name="l00476"></a>00476 <span class="comment">// The interrupt service routines are included in the initialization .c file </span>
-<a name="l00477"></a>00477 <span class="comment">// since they must be associated with a .c file for the compiler</span>
-<a name="l00478"></a>00478 usart0_transmit_interrupt_service_routine
-<a name="l00479"></a>00479 {
-<a name="l00480"></a>00480 
-<a name="l00481"></a>00481         <span class="comment">// Is buffered transmission enabled?</span>
-<a name="l00482"></a>00482         <span class="keywordflow">if</span>(<a class="code" href="usart_8h.html#acb2bc206f10caedf3dad08d8dc83a365">usart_buffered_tx_flag</a>)
-<a name="l00483"></a>00483         {               
-<a name="l00484"></a>00484                 <span class="comment">//if(usart0_transmit_ring.count)// Alternate technique</span>
-<a name="l00485"></a>00485                 <span class="keywordflow">if</span>(<a class="code" href="group__usart.html#ga87daee19364f78bb23707df70b61fdc5" title="Gets the transmit buffer count.">usart0_transmit_buffer_inuse_count</a>())<span class="comment">// Is there data in the buffer?</span>
-<a name="l00486"></a>00486                 {
-<a name="l00487"></a>00487                         <span class="comment">// Send next byte in the buffer.</span>
-<a name="l00488"></a>00488                UART_DATA_REG = <a class="code" href="group__ring.html#gad13ce446eabdaefcfbabee5a818df7c1" title="Removes a byte of data from the ring buffer.">ring_remove</a>(&amp;<a class="code" href="usart_8h.html#a01cd9645bef88311b3237af59e7bfab0">usart0_transmit_ring</a>);
-<a name="l00489"></a>00489                 }
-<a name="l00490"></a>00490                 <span class="keywordflow">else</span>
-<a name="l00491"></a>00491                 {
-<a name="l00492"></a>00492                         <span class="comment">// The buffer is empty</span>
-<a name="l00493"></a>00493                         <a class="code" href="usart_8h.html#acb2bc206f10caedf3dad08d8dc83a365">usart_buffered_tx_flag</a> = <span class="keyword">false</span>;
-<a name="l00494"></a>00494                         <span class="comment">// Set the ready flag</span>
-<a name="l00495"></a>00495                         <a class="code" href="usart_8h.html#a2acfa7d4e8b8a6ff7d23d1c6ff981aef">usart_tx_ready_flag</a> = <span class="keyword">true</span>;
-<a name="l00496"></a>00496                 }
-<a name="l00497"></a>00497         }
-<a name="l00498"></a>00498         <span class="keywordflow">else</span> <span class="comment">// Not buffered so transmited single byte</span>
-<a name="l00499"></a>00499         {
-<a name="l00500"></a>00500                 <span class="comment">// Set transmit ready flag</span>
-<a name="l00501"></a>00501                 <a class="code" href="usart_8h.html#a2acfa7d4e8b8a6ff7d23d1c6ff981aef">usart_tx_ready_flag</a> = <span class="keyword">true</span>;
-<a name="l00502"></a>00502         }
-<a name="l00503"></a>00503         
-<a name="l00504"></a>00504     <span class="keywordflow">return</span>;
-<a name="l00505"></a>00505 }
+<a name="l00449"></a>00449 <span class="comment">// JWP 6/16/11 rewrote transmit interrupt to use TX complete vector</span>
+<a name="l00450"></a>00450 <span class="comment">// rather than the Data Register Empty vector</span>
+<a name="l00451"></a>00451 <span class="comment">// The interrupt service routines are included in the initialization .c file </span>
+<a name="l00452"></a>00452 <span class="comment">// since they must be associated with a .c file for the compiler</span>
+<a name="l00453"></a>00453 usart0_transmit_interrupt_service_routine
+<a name="l00454"></a>00454 {
+<a name="l00455"></a>00455 
+<a name="l00456"></a>00456         <span class="comment">// Is buffered transmission enabled?</span>
+<a name="l00457"></a>00457         <span class="keywordflow">if</span>(<a class="code" href="usart_8h.html#acb2bc206f10caedf3dad08d8dc83a365">usart_buffered_tx_flag</a>)
+<a name="l00458"></a>00458         {               
+<a name="l00459"></a>00459                 <span class="comment">//if(usart0_transmit_ring.count)// Alternate technique</span>
+<a name="l00460"></a>00460                 <span class="keywordflow">if</span>(<a class="code" href="group__usart.html#ga87daee19364f78bb23707df70b61fdc5" title="Gets the transmit buffer count.">usart0_transmit_buffer_inuse_count</a>())<span class="comment">// Is there data in the buffer?</span>
+<a name="l00461"></a>00461                 {
+<a name="l00462"></a>00462                         <span class="comment">// Send next byte in the buffer.</span>
+<a name="l00463"></a>00463                UART_DATA_REG = <a class="code" href="group__ring.html#gad13ce446eabdaefcfbabee5a818df7c1" title="Removes a byte of data from the ring buffer.">ring_remove</a>(&amp;<a class="code" href="usart_8h.html#a01cd9645bef88311b3237af59e7bfab0">usart0_transmit_ring</a>);
+<a name="l00464"></a>00464                 }
+<a name="l00465"></a>00465                 <span class="keywordflow">else</span>
+<a name="l00466"></a>00466                 {
+<a name="l00467"></a>00467                         <span class="comment">// The buffer is empty</span>
+<a name="l00468"></a>00468                         <a class="code" href="usart_8h.html#acb2bc206f10caedf3dad08d8dc83a365">usart_buffered_tx_flag</a> = <span class="keyword">false</span>;
+<a name="l00469"></a>00469                         <span class="comment">// Set the ready flag</span>
+<a name="l00470"></a>00470                         <a class="code" href="usart_8h.html#a2acfa7d4e8b8a6ff7d23d1c6ff981aef">usart_tx_ready_flag</a> = <span class="keyword">true</span>;
+<a name="l00471"></a>00471                 }
+<a name="l00472"></a>00472         }
+<a name="l00473"></a>00473         <span class="keywordflow">else</span> <span class="comment">// Not buffered so transmited single byte</span>
+<a name="l00474"></a>00474         {
+<a name="l00475"></a>00475                 <span class="comment">// Set transmit ready flag</span>
+<a name="l00476"></a>00476                 <a class="code" href="usart_8h.html#a2acfa7d4e8b8a6ff7d23d1c6ff981aef">usart_tx_ready_flag</a> = <span class="keyword">true</span>;
+<a name="l00477"></a>00477         }
+<a name="l00478"></a>00478         
+<a name="l00479"></a>00479     <span class="keywordflow">return</span>;
+<a name="l00480"></a>00480 }
+<a name="l00481"></a>00481 
+<a name="l00482"></a>00482 
+<a name="l00483"></a>00483 <span class="comment">// The interrupt service routines are included in the initialization .c file </span>
+<a name="l00484"></a>00484 <span class="comment">// since they must be associated with a .c file for the compiler</span>
+<a name="l00485"></a>00485 usart0_receive_interrupt_service_routine
+<a name="l00486"></a>00486 {
+<a name="l00487"></a>00487         <span class="keyword">register</span> uint8_t data;
+<a name="l00488"></a>00488         <span class="keyword">register</span> uint8_t parity_error = <span class="keyword">false</span>;
+<a name="l00489"></a>00489         <span class="keyword">register</span> uint8_t frame_error = <span class="keyword">false</span>;
+<a name="l00490"></a>00490 
+<a name="l00491"></a>00491         <span class="comment">// Get error conditions before getting the data.</span>
+<a name="l00492"></a>00492         frame_error = <a class="code" href="usart0_8c.html#aed834da99866af38214e033946f08819">usart0_frame_error</a>();
+<a name="l00493"></a>00493         parity_error = <a class="code" href="usart0_8c.html#a23e075bc416c1257e6bfebdf94e142d6">usart0_parity_error</a>();
+<a name="l00494"></a>00494         
+<a name="l00495"></a>00495         data = UART_DATA_REG;
+<a name="l00496"></a>00496     
+<a name="l00497"></a>00497         <span class="keywordflow">if</span>(!frame_error &amp;&amp; !parity_error)
+<a name="l00498"></a>00498         {
+<a name="l00499"></a>00499                 <span class="comment">// Store data in ring buffer.</span>
+<a name="l00500"></a>00500         <a class="code" href="group__ring.html#gac9a8b59e0ca9491d6b500771d5706c1d" title="This boolean will reference the ring_t structure and add data to the ring buffer as it increments the...">ring_add</a>(&amp;<a class="code" href="usart_8h.html#a7fed97e63d361555cef014709ee36712">usart0_receive_ring</a>, data);
+<a name="l00501"></a>00501         }
+<a name="l00502"></a>00502 
+<a name="l00503"></a>00503         <span class="keywordflow">return</span>;
+<a name="l00504"></a>00504 }
+<a name="l00505"></a>00505 
 <a name="l00506"></a>00506 
 <a name="l00507"></a>00507 
-<a name="l00508"></a>00508 <span class="comment">// The interrupt service routines are included in the initialization .c file </span>
-<a name="l00509"></a>00509 <span class="comment">// since they must be associated with a .c file for the compiler</span>
-<a name="l00510"></a>00510 usart0_receive_interrupt_service_routine
-<a name="l00511"></a>00511 {
-<a name="l00512"></a>00512         <span class="keyword">register</span> uint8_t data;
-<a name="l00513"></a>00513         <span class="keyword">register</span> uint8_t parity_error = <span class="keyword">false</span>;
-<a name="l00514"></a>00514         <span class="keyword">register</span> uint8_t frame_error = <span class="keyword">false</span>;
-<a name="l00515"></a>00515 
-<a name="l00516"></a>00516         <span class="comment">// Get error conditions before getting the data.</span>
-<a name="l00517"></a>00517         frame_error = <a class="code" href="usart0_8c.html#aed834da99866af38214e033946f08819">usart0_frame_error</a>();
-<a name="l00518"></a>00518         parity_error = <a class="code" href="usart0_8c.html#a23e075bc416c1257e6bfebdf94e142d6">usart0_parity_error</a>();
-<a name="l00519"></a>00519         
-<a name="l00520"></a>00520         data = UART_DATA_REG;
-<a name="l00521"></a>00521     
-<a name="l00522"></a>00522         <span class="keywordflow">if</span>(!frame_error &amp;&amp; !parity_error)
-<a name="l00523"></a>00523         {
-<a name="l00524"></a>00524                 <span class="comment">// Store data in ring buffer.</span>
-<a name="l00525"></a>00525         <a class="code" href="group__ring.html#gac9a8b59e0ca9491d6b500771d5706c1d" title="This boolean will reference the ring_t structure and add data to the ring buffer as it increments the...">ring_add</a>(&amp;<a class="code" href="usart_8h.html#a7fed97e63d361555cef014709ee36712">usart0_receive_ring</a>, data);
-<a name="l00526"></a>00526         }
-<a name="l00527"></a>00527 
-<a name="l00528"></a>00528         <span class="keywordflow">return</span>;
-<a name="l00529"></a>00529 }
-<a name="l00530"></a>00530 
-<a name="l00531"></a>00531 
-<a name="l00532"></a>00532 
-<a name="l00533"></a>00533 
+<a name="l00508"></a>00508 
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 19 2011 13:20:51 for libavr by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 14 2011 16:28:30 for libavr by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>
