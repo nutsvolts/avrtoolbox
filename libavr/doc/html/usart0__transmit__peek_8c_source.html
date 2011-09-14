@@ -67,22 +67,24 @@
 <a name="l00036"></a>00036  <span class="comment">// If anyone has any reason to believe that any of this code violates other licenses</span>
 <a name="l00037"></a>00037  <span class="comment">// please contact me with details so that I may correct the situation. </span>
 <a name="l00038"></a>00038  
-<a name="l00039"></a>00039 <span class="preprocessor">#include &quot;<a class="code" href="usart_8h.html">usart.h</a>&quot;</span>
-<a name="l00040"></a>00040 
-<a name="l00041"></a><a class="code" href="group__usart.html#gafe18c11171fc9d48119fbd6fecec6bef">00041</a> uint8_t <a class="code" href="group__usart.html#gafe18c11171fc9d48119fbd6fecec6bef" title="Looks at the tail byte of data in the Transmit buffer.">usart0_transmit_peek</a>(<span class="keywordtype">void</span>)
-<a name="l00042"></a>00042 {
-<a name="l00043"></a>00043         uint8_t data;
-<a name="l00044"></a>00044         <a class="code" href="group__usart.html#ga869f5f7b2fd787e7f7ba6db1beeda3b2" title="Looks at a number of bytes of data in the transmit buffer.">usart0_transmit_buffer_peek</a>(&amp;data, 1);
-<a name="l00045"></a>00045         <span class="keywordflow">return</span>(data);
-<a name="l00046"></a>00046 }
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048 
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040 <span class="preprocessor">#include &quot;c:\avrtoolbox\libavr\source\general\ring\ring.h&quot;</span> 
+<a name="l00041"></a>00041 <span class="preprocessor">#include &quot;<a class="code" href="usart_8h.html">usart.h</a>&quot;</span>
+<a name="l00042"></a>00042 
+<a name="l00043"></a><a class="code" href="usart0__transmit__peek_8c.html#afe18c11171fc9d48119fbd6fecec6bef">00043</a> uint8_t <a class="code" href="usart0__transmit__peek_8c.html#afe18c11171fc9d48119fbd6fecec6bef">usart0_transmit_peek</a>(<span class="keywordtype">void</span>)
+<a name="l00044"></a>00044 {
+<a name="l00045"></a>00045         uint8_t data;
+<a name="l00046"></a>00046         <a class="code" href="group__usart.html#ga869f5f7b2fd787e7f7ba6db1beeda3b2" title="Looks at a number of bytes of data in the transmit buffer.">usart0_transmit_buffer_peek</a>(&amp;data, 1);
+<a name="l00047"></a>00047         <span class="keywordflow">return</span>(data);
+<a name="l00048"></a>00048 }
 <a name="l00049"></a>00049 
 <a name="l00050"></a>00050 
 <a name="l00051"></a>00051 
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053 
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 19 2011 13:20:52 for libavr by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 14 2011 16:28:30 for libavr by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

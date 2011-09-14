@@ -38,54 +38,10 @@
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart0__put__pgm__string_8c.html#a90c0775136c509012bf368a1b4fdb296">usart0_put_pgm_string</a> (const char *FlashString)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__usart.html#ga7518656faf171173db98a2f3645cf8b4">usart0_put_pgm_string</a> (const char *FlashString)</td></tr>
 </table>
-<hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a90c0775136c509012bf368a1b4fdb296"></a><!-- doxytag: member="usart0_put_pgm_string.c::usart0_put_pgm_string" ref="a90c0775136c509012bf368a1b4fdb296" args="(const char *FlashString)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void usart0_put_pgm_string </td>
-          <td>(</td>
-          <td class="paramtype">const char *&nbsp;</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
 </div>
-<div class="memdoc">
-
-<p>Loads a string from program memory into the transmit buffer. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>pointer</em>&nbsp;</td><td>to a constant character string</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Example: </p>
-<div class="fragment"><pre class="fragment">        <span class="comment">// Define string outside any function</span>
-        <span class="keyword">const</span> <span class="keywordtype">char</span> pgm_str1[] PROGMEM =  <span class="stringliteral">&quot;This is a program memory string defined outside any function.\r&quot;</span>;
-        ...
-        <span class="comment">// Put the program memory string into the transmit buffer</span>
-        <a class="code" href="usart_8h.html#a7518656faf171173db98a2f3645cf8b4" title="Loads a string from program memory into the transmit buffer.">usart0_put_pgm_string</a>(pgm_str1);
-        <span class="comment">// Transmit it</span>
-        <a class="code" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac" title="Initiates the interrupt based transmission of the buffer NOTE: All of the put or insert function only...">usart0_send</a>();
-
-        <span class="comment">// Use with a string intialized in the function</span>
-        <a class="code" href="usart_8h.html#a7518656faf171173db98a2f3645cf8b4" title="Loads a string from program memory into the transmit buffer.">usart0_put_pgm_string</a>(PSTR(<span class="stringliteral">&quot;This is a program memory string using PSTR within a function.\r&quot;</span>));
-        <a class="code" href="group__usart.html#gae81c5cb5c8c871913e7c2395b42b52ac" title="Initiates the interrupt based transmission of the buffer NOTE: All of the put or insert function only...">usart0_send</a>();
-</pre></div> 
-<p><p>The 'for' logic terminates if the byte is '' or if i = 60. '' is 'null' and terminates C strings The 80 prevents too much overrun if we get a bad pointer and it limits the string size </p>
-</p>
-
-<p>Definition at line <a class="el" href="usart0__put__pgm__string_8c_source.html#l00041">41</a> of file <a class="el" href="usart0__put__pgm__string_8c_source.html">usart0_put_pgm_string.c</a>.</p>
-
-</div>
-</div>
-</div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 19 2011 13:20:53 for libavr by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 14 2011 16:28:30 for libavr by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

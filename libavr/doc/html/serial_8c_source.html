@@ -68,135 +68,138 @@
 <a name="l00037"></a>00037  <span class="comment">// please contact me with details so that I may correct the situation. </span>
 <a name="l00038"></a>00038 
 <a name="l00039"></a>00039 
-<a name="l00040"></a>00040 <span class="comment">// We use a delay in serial_printf if the string to be printed comes withing 2/3</span>
-<a name="l00041"></a>00041 <span class="comment">// of the maximum buffer length. The 2/3 and the delays were determined empirically</span>
-<a name="l00042"></a>00042 <span class="comment">// to prevent the test code from stepping on the usart buffer. If you are certian that</span>
-<a name="l00043"></a>00043 <span class="comment">// you won&#39;t send serial_printf strings greater than the buffer size and that you won&#39;t</span>
-<a name="l00044"></a>00044 <span class="comment">// use the serial_printf to send long strings more frequently than about 20ms then you </span>
-<a name="l00045"></a>00045 <span class="comment">// can remove the if() condition. We have this as the default condition for the serial</span>
-<a name="l00046"></a>00046 <span class="comment">// library since we assume the users are novices and might miss a note to avoid long or</span>
-<a name="l00047"></a>00047 <span class="comment">// frequent use of the serial_printf function.</span>
-<a name="l00048"></a>00048 <span class="preprocessor">#if defined(BUTTERFLY)</span>
-<a name="l00049"></a>00049 <span class="preprocessor"></span><span class="preprocessor">#include &quot;.\butterfly\butterfly.h&quot;</span>
-<a name="l00050"></a>00050 <span class="preprocessor">#define serial_printf(val1, val2) {printf_P(PSTR(val1),val2); if(usart0_transmit_buffer_inuse_count() &gt; ((2*USART0_TRANSMIT_BUFFER_LEN)/3)) delay(20);}</span>
-<a name="l00051"></a>00051 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00052"></a><a class="code" href="serial_8c.html#a99096248a506221d8799095601b91bc2">00052</a> <span class="preprocessor"></span><span class="preprocessor">#define serial_printf(val1, val2) {printf_P(PSTR(val1),val2); if(usart0_transmit_buffer_inuse_count() &gt; ((2*USART0_TRANSMIT_BUFFER_LEN)/3)) delay(10);}</span>
-<a name="l00053"></a>00053 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00054"></a>00054 <span class="preprocessor"></span>
-<a name="l00055"></a>00055 <span class="preprocessor">#include &quot;c:\avrtoolbox\libavr\source\driver\usart\usart0.h&quot;</span>
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057 <span class="preprocessor">#include &lt;util\delay.h&gt;</span>
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059 <span class="keywordtype">void</span> <a class="code" href="group__serial.html#ga2559ff325a5d03218c7020e0f0e6dcda">serial_begin</a>(uint32_t baudrate);
-<a name="l00060"></a>00060 <span class="keywordtype">void</span> <a class="code" href="group__serial.html#ga1c3bc0d4ec8ae917b559e0788a1e2536" title="Returns the serial communications elements to their default values.">serial_end</a>(<span class="keywordtype">void</span>);
-<a name="l00061"></a>00061 <span class="keywordtype">void</span> <a class="code" href="serial_8c.html#aae486386df02d9299c8739693f7fb38a">serial_print</a>(<span class="keywordtype">char</span> *s);
-<a name="l00062"></a>00062 <span class="keywordtype">void</span> <a class="code" href="serial_8c.html#a14aa9663300209681dcf18bd32a9855c">serial_println</a>(<span class="keywordtype">char</span> *s);
-<a name="l00063"></a>00063 uint8_t <a class="code" href="group__serial.html#ga7a8efe7f4cd2338deff8bd2c52a6f56b" title="Gets the number of bytes that have arrived from the serial port and are available for reading from th...">serial_available</a>(<span class="keywordtype">void</span>);
-<a name="l00064"></a>00064 uint8_t <a class="code" href="serial_8c.html#a1ddec0fce87f4da8ec113cec57744a61">serial_read</a>(<span class="keywordtype">void</span>);
-<a name="l00065"></a>00065 <span class="keywordtype">void</span> <a class="code" href="group__serial.html#gaf5d688600f05137b44dd915a9bb0686c" title="Outputs formatted data based on conversion symbols and escape character sequences contained in a stri...">serial_write</a>(uint8_t *buff, uint8_t size);
-<a name="l00066"></a>00066 <span class="keywordtype">void</span> <a class="code" href="group__serial.html#ga04858117b8541474fe79c45a044b59cc" title="Clear out any data in the serial buffer. Subsequent calls to serial_in() or serial_available() will o...">serial_flush</a>(<span class="keywordtype">void</span>);
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068 
-<a name="l00069"></a>00069 <span class="keywordtype">void</span> <a class="code" href="serial_8c.html#adb7db4d9ef946dcfb58bcfc667ee674a">delay</a>(uint16_t ms);
+<a name="l00040"></a>00040 <span class="comment">// TODO - THE DELAY MAY NO LONGER BE NECESSARY DUE TO A FIX IN THE USART CODE</span>
+<a name="l00041"></a>00041 <span class="comment">// TODO - RETEST THIS WITHOUT THE DELAY</span>
+<a name="l00042"></a>00042 <span class="comment">// We use a delay in serial_printf if the string to be printed comes withing 2/3</span>
+<a name="l00043"></a>00043 <span class="comment">// of the maximum buffer length. The 2/3 and the delays were determined empirically</span>
+<a name="l00044"></a>00044 <span class="comment">// to prevent the test code from stepping on the usart buffer. If you are certian that</span>
+<a name="l00045"></a>00045 <span class="comment">// you won&#39;t send serial_printf strings greater than the buffer size and that you won&#39;t</span>
+<a name="l00046"></a>00046 <span class="comment">// use the serial_printf to send long strings more frequently than about 20ms then you </span>
+<a name="l00047"></a>00047 <span class="comment">// can remove the if() condition. We have this as the default condition for the serial</span>
+<a name="l00048"></a>00048 <span class="comment">// library since we assume the users are novices and might miss a note to avoid long or</span>
+<a name="l00049"></a>00049 <span class="comment">// frequent use of the serial_printf function.</span>
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051 <span class="preprocessor">#if defined(BUTTERFLY)</span>
+<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="butterfly_8h.html">.\butterfly\butterfly.h</a>&quot;</span>
+<a name="l00053"></a>00053 <span class="preprocessor">#define serial_printf(val1, val2) {printf_P(PSTR(val1),val2); if(usart0_transmit_buffer_inuse_count() &gt; ((2*USART0_TRANSMIT_BUFFER_LEN)/3)) delay(20);}</span>
+<a name="l00054"></a>00054 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00055"></a><a class="code" href="serial_8c.html#a99096248a506221d8799095601b91bc2">00055</a> <span class="preprocessor"></span><span class="preprocessor">#define serial_printf(val1, val2) {printf_P(PSTR(val1),val2); if(usart0_transmit_buffer_inuse_count() &gt; ((2*USART0_TRANSMIT_BUFFER_LEN)/3)) delay(10);}</span>
+<a name="l00056"></a>00056 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00057"></a>00057 <span class="preprocessor"></span>
+<a name="l00058"></a>00058 <span class="preprocessor">#include &quot;c:\avrtoolbox\libavr\source\driver\usart\usart0.h&quot;</span>
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060 <span class="preprocessor">#include &lt;util\delay.h&gt;</span>
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062 <span class="keywordtype">void</span> <a class="code" href="group__serial.html#ga2559ff325a5d03218c7020e0f0e6dcda">serial_begin</a>(uint32_t baudrate);
+<a name="l00063"></a>00063 <span class="keywordtype">void</span> <a class="code" href="group__serial.html#ga1c3bc0d4ec8ae917b559e0788a1e2536" title="Returns the serial communications elements to their default values.">serial_end</a>(<span class="keywordtype">void</span>);
+<a name="l00064"></a>00064 <span class="keywordtype">void</span> <a class="code" href="serial_8c.html#aae486386df02d9299c8739693f7fb38a">serial_print</a>(<span class="keywordtype">char</span> *s);
+<a name="l00065"></a>00065 <span class="keywordtype">void</span> <a class="code" href="serial_8c.html#a14aa9663300209681dcf18bd32a9855c">serial_println</a>(<span class="keywordtype">char</span> *s);
+<a name="l00066"></a>00066 uint8_t <a class="code" href="group__serial.html#ga7a8efe7f4cd2338deff8bd2c52a6f56b" title="Gets the number of bytes that have arrived from the serial port and are available for reading from th...">serial_available</a>(<span class="keywordtype">void</span>);
+<a name="l00067"></a>00067 uint8_t <a class="code" href="serial_8c.html#a1ddec0fce87f4da8ec113cec57744a61">serial_read</a>(<span class="keywordtype">void</span>);
+<a name="l00068"></a>00068 <span class="keywordtype">void</span> <a class="code" href="group__serial.html#gaf5d688600f05137b44dd915a9bb0686c" title="Outputs the indicated number of bytes.">serial_write</a>(uint8_t *buff, uint8_t size);
+<a name="l00069"></a>00069 <span class="keywordtype">void</span> <a class="code" href="group__serial.html#ga04858117b8541474fe79c45a044b59cc" title="Clear out any data in the serial buffer. Subsequent calls to serial_in() or serial_available() will o...">serial_flush</a>(<span class="keywordtype">void</span>);
 <a name="l00070"></a>00070 
 <a name="l00071"></a>00071 
-<a name="l00072"></a><a class="code" href="util_8h.html#adb7db4d9ef946dcfb58bcfc667ee674a">00072</a> <span class="keywordtype">void</span> <a class="code" href="serial_8c.html#adb7db4d9ef946dcfb58bcfc667ee674a">delay</a>(uint16_t ms)
-<a name="l00073"></a>00073 {
-<a name="l00074"></a>00074         <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0 ; i &lt; ms ; i++)
-<a name="l00075"></a>00075         {
-<a name="l00076"></a>00076                 _delay_ms(1);
-<a name="l00077"></a>00077         }
-<a name="l00078"></a>00078 }
-<a name="l00079"></a>00079 
-<a name="l00080"></a>00080 
-<a name="l00081"></a>00081 
+<a name="l00072"></a>00072 <span class="keywordtype">void</span> <a class="code" href="serial_8c.html#adb7db4d9ef946dcfb58bcfc667ee674a">delay</a>(uint16_t ms);
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074 
+<a name="l00075"></a><a class="code" href="util_8h.html#adb7db4d9ef946dcfb58bcfc667ee674a">00075</a> <span class="keywordtype">void</span> <a class="code" href="serial_8c.html#adb7db4d9ef946dcfb58bcfc667ee674a">delay</a>(uint16_t ms)
+<a name="l00076"></a>00076 {
+<a name="l00077"></a>00077         <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0 ; i &lt; ms ; i++)
+<a name="l00078"></a>00078         {
+<a name="l00079"></a>00079                 _delay_ms(1);
+<a name="l00080"></a>00080         }
+<a name="l00081"></a>00081 }
 <a name="l00082"></a>00082 
-<a name="l00083"></a><a class="code" href="group__serial.html#ga2559ff325a5d03218c7020e0f0e6dcda">00083</a> <span class="keywordtype">void</span> <a class="code" href="group__serial.html#ga2559ff325a5d03218c7020e0f0e6dcda">serial_begin</a>(uint32_t baud)
-<a name="l00084"></a>00084 {
-<a name="l00085"></a>00085         cli();
-<a name="l00086"></a>00086 
-<a name="l00087"></a>00087         <span class="comment">// Modem parameters used by common serial connections</span>
-<a name="l00088"></a>00088         <a class="code" href="usart_8h.html#a1209980dae4cfa2b7933ccb7c53746dc">usart_mode_t</a> mode = usart_mode_asynchronous;
-<a name="l00089"></a>00089         uint8_t databits = 8;
-<a name="l00090"></a>00090         uint8_t stopbits = 1;
-<a name="l00091"></a>00091         <a class="code" href="usart_8h.html#a0251d137a3f1586a0694a14efebf7f1e">usart_parity_t</a> parity = parity_none;
-<a name="l00092"></a>00092         <a class="code" href="usart_8h.html#acd8a6297b68afb3863ff4c842dd0abfb">usart_flow_control_t</a> flow_control = flow_none;
-<a name="l00093"></a>00093 
-<a name="l00094"></a>00094         <a class="code" href="group__usart.html#gaf7b51594efd5e2111d7d086de98bacb5" title="intializes the uart parameters">usart0_init</a>(baud, F_CPU, mode,  databits, stopbits, parity, flow_control);
-<a name="l00095"></a>00095 
-<a name="l00096"></a>00096         sei();
-<a name="l00097"></a>00097 
-<a name="l00098"></a>00098 }
-<a name="l00099"></a>00099 
-<a name="l00100"></a><a class="code" href="serial_8c.html#ab5187269936538ffb8ccbbe7115ffdbc">00100</a> <span class="preprocessor">#define MAX_STRING 255 // stop if not a string</span>
-<a name="l00101"></a><a class="code" href="serial_8c.html#aae486386df02d9299c8739693f7fb38a">00101</a> <span class="preprocessor"></span><span class="keywordtype">void</span> <a class="code" href="serial_8c.html#aae486386df02d9299c8739693f7fb38a">serial_print</a>(<span class="keywordtype">char</span> *str)
-<a name="l00102"></a>00102 {
-<a name="l00103"></a>00103 
-<a name="l00104"></a>00104         <span class="keywordtype">int</span> i = 0;
-<a name="l00105"></a>00105         <span class="comment">// Send until encountering string terminator</span>
-<a name="l00106"></a>00106         <span class="comment">// or exceeding MAX_STRING size in case str is not a string</span>
-<a name="l00107"></a>00107         <span class="keywordflow">while</span>( (str[i] != <span class="charliteral">&#39;\0&#39;</span>) &amp;&amp; ( i &lt; <a class="code" href="serial_8c.html#ab5187269936538ffb8ccbbe7115ffdbc">MAX_STRING</a>) )
-<a name="l00108"></a>00108         {
-<a name="l00109"></a>00109                 <span class="comment">//loop_until_bit_is_set(UCSRA, UDRE); // wait for UDR to be clear </span>
-<a name="l00110"></a>00110                 <span class="comment">//UDR = str[i++];    //send the character </span>
-<a name="l00111"></a>00111                 loop_until_bit_is_set(UART_CONTROL_STATUS_REG_A, UART_READY_TO_TRANSMIT); <span class="comment">// wait for UDR to be clear </span>
-<a name="l00112"></a>00112                 UART_DATA_REG = str[i++];    <span class="comment">//send the character </span>
-<a name="l00113"></a>00113 
-<a name="l00114"></a>00114 
-<a name="l00115"></a>00115                 <span class="comment">//usart0_transmit_buffer_insert(str[i++]);</span>
-<a name="l00116"></a>00116         }       
-<a name="l00117"></a>00117 }
-<a name="l00118"></a>00118 
-<a name="l00119"></a><a class="code" href="serial_8c.html#a14aa9663300209681dcf18bd32a9855c">00119</a> <span class="keywordtype">void</span> <a class="code" href="serial_8c.html#a14aa9663300209681dcf18bd32a9855c">serial_println</a>(<span class="keywordtype">char</span> *str)
-<a name="l00120"></a>00120 {
-<a name="l00121"></a>00121         <a class="code" href="serial_8c.html#aae486386df02d9299c8739693f7fb38a">serial_print</a>(str);
-<a name="l00122"></a>00122         <span class="comment">//finish by sending a newline character</span>
-<a name="l00123"></a>00123         <span class="comment">//usart0_transmit_buffer_insert(0x0D);</span>
-<a name="l00124"></a>00124         <span class="comment">//loop_until_bit_is_set(UCSRA, UDRE); // wait for UDR to be clear </span>
-<a name="l00125"></a>00125         <span class="comment">//UDR = 0x0D;    //send the character </span>
-<a name="l00126"></a>00126         loop_until_bit_is_set(UART_CONTROL_STATUS_REG_A, UART_READY_TO_TRANSMIT); <span class="comment">// wait for UDR to be clear </span>
-<a name="l00127"></a>00127         UART_DATA_REG = 0x0D;    <span class="comment">//send the character </span>
-<a name="l00128"></a>00128 
-<a name="l00129"></a>00129 
-<a name="l00130"></a>00130 }
+<a name="l00083"></a>00083 
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085 
+<a name="l00086"></a><a class="code" href="group__serial.html#ga2559ff325a5d03218c7020e0f0e6dcda">00086</a> <span class="keywordtype">void</span> <a class="code" href="group__serial.html#ga2559ff325a5d03218c7020e0f0e6dcda">serial_begin</a>(uint32_t baud)
+<a name="l00087"></a>00087 {
+<a name="l00088"></a>00088         cli();
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090         <span class="comment">// Modem parameters used by common serial connections</span>
+<a name="l00091"></a>00091         <a class="code" href="usart_8h.html#a1209980dae4cfa2b7933ccb7c53746dc">usart_mode_t</a> mode = usart_mode_asynchronous;
+<a name="l00092"></a>00092         uint8_t databits = 8;
+<a name="l00093"></a>00093         uint8_t stopbits = 1;
+<a name="l00094"></a>00094         <a class="code" href="usart_8h.html#a0251d137a3f1586a0694a14efebf7f1e">usart_parity_t</a> parity = parity_none;
+<a name="l00095"></a>00095         <a class="code" href="usart_8h.html#acd8a6297b68afb3863ff4c842dd0abfb">usart_flow_control_t</a> flow_control = flow_none;
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097         <a class="code" href="group__usart.html#gaf7b51594efd5e2111d7d086de98bacb5" title="intializes the uart parameters">usart0_init</a>(baud, F_CPU, mode,  databits, stopbits, parity, flow_control);
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099         sei();
+<a name="l00100"></a>00100 
+<a name="l00101"></a>00101 }
+<a name="l00102"></a>00102 
+<a name="l00103"></a><a class="code" href="serial_8c.html#ab5187269936538ffb8ccbbe7115ffdbc">00103</a> <span class="preprocessor">#define MAX_STRING 255 // stop if not a string</span>
+<a name="l00104"></a><a class="code" href="serial_8c.html#aae486386df02d9299c8739693f7fb38a">00104</a> <span class="preprocessor"></span><span class="keywordtype">void</span> <a class="code" href="serial_8c.html#aae486386df02d9299c8739693f7fb38a">serial_print</a>(<span class="keywordtype">char</span> *str)
+<a name="l00105"></a>00105 {
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107         <span class="keywordtype">int</span> i = 0;
+<a name="l00108"></a>00108         <span class="comment">// Send until encountering string terminator</span>
+<a name="l00109"></a>00109         <span class="comment">// or exceeding MAX_STRING size in case str is not a string</span>
+<a name="l00110"></a>00110         <span class="keywordflow">while</span>( (str[i] != <span class="charliteral">&#39;\0&#39;</span>) &amp;&amp; ( i &lt; <a class="code" href="serial_8c.html#ab5187269936538ffb8ccbbe7115ffdbc">MAX_STRING</a>) )
+<a name="l00111"></a>00111         {
+<a name="l00112"></a>00112                 <span class="comment">//loop_until_bit_is_set(UCSRA, UDRE); // wait for UDR to be clear </span>
+<a name="l00113"></a>00113                 <span class="comment">//UDR = str[i++];    //send the character </span>
+<a name="l00114"></a>00114                 loop_until_bit_is_set(UART_CONTROL_STATUS_REG_A, UART_READY_TO_TRANSMIT); <span class="comment">// wait for UDR to be clear </span>
+<a name="l00115"></a>00115                 UART_DATA_REG = str[i++];    <span class="comment">//send the character </span>
+<a name="l00116"></a>00116 
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118                 <span class="comment">//usart0_transmit_buffer_insert(str[i++]);</span>
+<a name="l00119"></a>00119         }       
+<a name="l00120"></a>00120 }
+<a name="l00121"></a>00121 
+<a name="l00122"></a><a class="code" href="serial_8c.html#a14aa9663300209681dcf18bd32a9855c">00122</a> <span class="keywordtype">void</span> <a class="code" href="serial_8c.html#a14aa9663300209681dcf18bd32a9855c">serial_println</a>(<span class="keywordtype">char</span> *str)
+<a name="l00123"></a>00123 {
+<a name="l00124"></a>00124         <a class="code" href="serial_8c.html#aae486386df02d9299c8739693f7fb38a">serial_print</a>(str);
+<a name="l00125"></a>00125         <span class="comment">//finish by sending a newline character</span>
+<a name="l00126"></a>00126         <span class="comment">//usart0_transmit_buffer_insert(0x0D);</span>
+<a name="l00127"></a>00127         <span class="comment">//loop_until_bit_is_set(UCSRA, UDRE); // wait for UDR to be clear </span>
+<a name="l00128"></a>00128         <span class="comment">//UDR = 0x0D;    //send the character </span>
+<a name="l00129"></a>00129         loop_until_bit_is_set(UART_CONTROL_STATUS_REG_A, UART_READY_TO_TRANSMIT); <span class="comment">// wait for UDR to be clear </span>
+<a name="l00130"></a>00130         UART_DATA_REG = 0x0D;    <span class="comment">//send the character </span>
 <a name="l00131"></a>00131 
-<a name="l00132"></a><a class="code" href="group__serial.html#ga7a8efe7f4cd2338deff8bd2c52a6f56b">00132</a> uint8_t <a class="code" href="group__serial.html#ga7a8efe7f4cd2338deff8bd2c52a6f56b" title="Gets the number of bytes that have arrived from the serial port and are available for reading from th...">serial_available</a>(<span class="keywordtype">void</span>)
-<a name="l00133"></a>00133 {
-<a name="l00134"></a>00134         <span class="keywordflow">return</span> <a class="code" href="group__usart.html#ga03e5c9aa4ded0b09f06a03a5f941c266" title="Gets the receive buffer count.">usart0_receive_buffer_inuse_count</a>();     
-<a name="l00135"></a>00135 }
-<a name="l00136"></a>00136 
-<a name="l00137"></a><a class="code" href="serial_8c.html#a1ddec0fce87f4da8ec113cec57744a61">00137</a> uint8_t <a class="code" href="serial_8c.html#a1ddec0fce87f4da8ec113cec57744a61">serial_read</a>(<span class="keywordtype">void</span>)
-<a name="l00138"></a>00138 {
-<a name="l00139"></a>00139         <span class="keywordflow">return</span> <a class="code" href="group__usart.html#ga0dd7517c599312240a7de51839cc8c57" title="Data is retreived from the receive buffer. Upon retrieval, the buffer index is decremented.">usart0_receive_buffer_remove</a>();
-<a name="l00140"></a>00140 }
-<a name="l00141"></a>00141 
-<a name="l00142"></a><a class="code" href="group__serial.html#gaf5d688600f05137b44dd915a9bb0686c">00142</a> <span class="keywordtype">void</span> <a class="code" href="group__serial.html#gaf5d688600f05137b44dd915a9bb0686c" title="Outputs formatted data based on conversion symbols and escape character sequences contained in a stri...">serial_write</a>(uint8_t *buff, uint8_t size)
-<a name="l00143"></a>00143 {
-<a name="l00144"></a>00144         <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; size; i++)
-<a name="l00145"></a>00145         {
-<a name="l00146"></a>00146                 <a class="code" href="group__usart.html#ga8d3a6791aac28e357f812fe2c8d3021e" title="Adds the byte &amp;#39;c&amp;#39; to the transmit buffer and returns True if it was able to add the byte...">usart0_transmit_buffer_insert</a>(buff[i]);
-<a name="l00147"></a>00147         }
-<a name="l00148"></a>00148 }
-<a name="l00149"></a>00149 
-<a name="l00150"></a><a class="code" href="group__serial.html#ga04858117b8541474fe79c45a044b59cc">00150</a> <span class="keywordtype">void</span> <a class="code" href="group__serial.html#ga04858117b8541474fe79c45a044b59cc" title="Clear out any data in the serial buffer. Subsequent calls to serial_in() or serial_available() will o...">serial_flush</a>(<span class="keywordtype">void</span>)
-<a name="l00151"></a>00151 {
-<a name="l00152"></a>00152         cli();
-<a name="l00153"></a>00153         <a class="code" href="group__usart.html#gac994fe99a6c84619bddce910d0e73089" title="This clear function will reset the receive buffer head_index and tail_index to 0. The count value is ...">usart0_receive_buffer_clear</a>();
-<a name="l00154"></a>00154         <a class="code" href="group__usart.html#ga7552e3d0a6153c95cadc81aba4fd0413" title="This clear function will reset the transmit buffer head_index and tail_index to 0. The count value is also set to 0. A memset command is used to reset a particular area in memory as well.">usart0_transmit_buffer_clear</a>();
-<a name="l00155"></a>00155         sei();
-<a name="l00156"></a>00156 
-<a name="l00157"></a>00157 }
-<a name="l00158"></a>00158 
-<a name="l00159"></a><a class="code" href="group__serial.html#ga1c3bc0d4ec8ae917b559e0788a1e2536">00159</a> <span class="keywordtype">void</span> <a class="code" href="group__serial.html#ga1c3bc0d4ec8ae917b559e0788a1e2536" title="Returns the serial communications elements to their default values.">serial_end</a>(<span class="keywordtype">void</span>)
-<a name="l00160"></a>00160 {
-<a name="l00161"></a>00161         <a class="code" href="group__usart.html#ga05305155cc1dde15421fedc26ee3c7e3" title="Restores registers to datasheet default valuse.">usart0_uninit</a>();
-<a name="l00162"></a>00162 }
-<a name="l00163"></a>00163 
-<a name="l00164"></a>00164 
-<a name="l00165"></a>00165 
+<a name="l00132"></a>00132 
+<a name="l00133"></a>00133 }
+<a name="l00134"></a>00134 
+<a name="l00135"></a><a class="code" href="group__serial.html#ga7a8efe7f4cd2338deff8bd2c52a6f56b">00135</a> uint8_t <a class="code" href="group__serial.html#ga7a8efe7f4cd2338deff8bd2c52a6f56b" title="Gets the number of bytes that have arrived from the serial port and are available for reading from th...">serial_available</a>(<span class="keywordtype">void</span>)
+<a name="l00136"></a>00136 {
+<a name="l00137"></a>00137         <span class="keywordflow">return</span> <a class="code" href="group__usart.html#ga03e5c9aa4ded0b09f06a03a5f941c266" title="Gets the receive buffer count.">usart0_receive_buffer_inuse_count</a>();     
+<a name="l00138"></a>00138 }
+<a name="l00139"></a>00139 
+<a name="l00140"></a><a class="code" href="serial_8c.html#a1ddec0fce87f4da8ec113cec57744a61">00140</a> uint8_t <a class="code" href="serial_8c.html#a1ddec0fce87f4da8ec113cec57744a61">serial_read</a>(<span class="keywordtype">void</span>)
+<a name="l00141"></a>00141 {
+<a name="l00142"></a>00142         <span class="keywordflow">return</span> <a class="code" href="group__usart.html#ga0dd7517c599312240a7de51839cc8c57" title="Data is retreived from the receive buffer. Upon retrieval, the buffer index is decremented.">usart0_receive_buffer_remove</a>();
+<a name="l00143"></a>00143 }
+<a name="l00144"></a>00144 
+<a name="l00145"></a><a class="code" href="group__serial.html#gaf5d688600f05137b44dd915a9bb0686c">00145</a> <span class="keywordtype">void</span> <a class="code" href="group__serial.html#gaf5d688600f05137b44dd915a9bb0686c" title="Outputs the indicated number of bytes.">serial_write</a>(uint8_t *buff, uint8_t size)
+<a name="l00146"></a>00146 {
+<a name="l00147"></a>00147         <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; size; i++)
+<a name="l00148"></a>00148         {
+<a name="l00149"></a>00149                 <a class="code" href="group__usart.html#ga8d3a6791aac28e357f812fe2c8d3021e" title="Adds the byte &amp;#39;c&amp;#39; to the transmit buffer and returns True if it was able to add the byte...">usart0_transmit_buffer_insert</a>(buff[i]);
+<a name="l00150"></a>00150         }
+<a name="l00151"></a>00151 }
+<a name="l00152"></a>00152 
+<a name="l00153"></a><a class="code" href="group__serial.html#ga04858117b8541474fe79c45a044b59cc">00153</a> <span class="keywordtype">void</span> <a class="code" href="group__serial.html#ga04858117b8541474fe79c45a044b59cc" title="Clear out any data in the serial buffer. Subsequent calls to serial_in() or serial_available() will o...">serial_flush</a>(<span class="keywordtype">void</span>)
+<a name="l00154"></a>00154 {
+<a name="l00155"></a>00155         cli();
+<a name="l00156"></a>00156         <a class="code" href="group__usart.html#gac994fe99a6c84619bddce910d0e73089" title="This clear function will reset the receive buffer head_index and tail_index to 0. The count value is ...">usart0_receive_buffer_clear</a>();
+<a name="l00157"></a>00157         <a class="code" href="group__usart.html#ga7552e3d0a6153c95cadc81aba4fd0413" title="This clear function will reset the transmit buffer head_index and tail_index to 0. The count value is also set to 0. A memset command is used to reset a particular area in memory as well.">usart0_transmit_buffer_clear</a>();
+<a name="l00158"></a>00158         sei();
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160 }
+<a name="l00161"></a>00161 
+<a name="l00162"></a><a class="code" href="group__serial.html#ga1c3bc0d4ec8ae917b559e0788a1e2536">00162</a> <span class="keywordtype">void</span> <a class="code" href="group__serial.html#ga1c3bc0d4ec8ae917b559e0788a1e2536" title="Returns the serial communications elements to their default values.">serial_end</a>(<span class="keywordtype">void</span>)
+<a name="l00163"></a>00163 {
+<a name="l00164"></a>00164         <a class="code" href="group__usart.html#ga05305155cc1dde15421fedc26ee3c7e3" title="Restores registers to datasheet default valuse.">usart0_uninit</a>();
+<a name="l00165"></a>00165 }
+<a name="l00166"></a>00166 
+<a name="l00167"></a>00167 
+<a name="l00168"></a>00168 
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 19 2011 13:20:51 for libavr by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 14 2011 16:28:29 for libavr by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>
