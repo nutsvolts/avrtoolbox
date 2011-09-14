@@ -402,7 +402,8 @@ bool usart0_get_byte(uint8_t *b);
 void usart0_put_string(char *str); 
 
 
-/*!	
+/** \ingroup usart	
+
 	\brief Loads a string from program memory into the transmit buffer.
 	
 	\param pointer to a constant character string
