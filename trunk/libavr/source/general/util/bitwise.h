@@ -47,116 +47,157 @@
 /*! 
 	\ingroup bitwise  
 
-	\def bit8(x)
+	\def bit(x)
 	Creates a mask with the bit x set to 1
 
 	Example:
 	\code
-	bit8_get(p,m) ((p) & bit8(m)) 
+	bit_get(p,m) ((p) & bit(m)) 
 	\endcode
 */
-#define bit8(x)	(1 << (x))
+#define bit(x)	(1 << (x))
 
 /*! 
 	\ingroup bitwise  
 
-	\def bit8_get(p,m)
-	Gets bit m in uint8_t p
+	\def bit_get(p,m)
+	Gets bit m in p
 
 	Example:
 	\code
-	if(bit8_get(PORTB,pin)) printf("The pin is HIGH.\n");
+	if(bit_get(PORTB,pin)) printf("The pin is HIGH.\n");
 	else printf("The pin is LOW\n");
 	\endcode
 */
-#define bit8_get(p,m) ((p) & bit8(m)) 
+#define bit_get(p,m) ((p) & bit(m)) 
 
 /*! 
 	\ingroup bitwise  
 
-	\def bit8_set(p,m) 
-	Sets bit m in uint8_t p
+	\def bit_set(p,m) 
+	Sets bit m in p
 
 	Example:
 	\code
 	// If the button is pressed turn on the LED
-	if(bit8_get(PORTC,BUTTON1)) bit8_set(PORTB,LED1);
+	if(bit_get(PORTC,BUTTON1)) bit_set(PORTB,LED1);
 	\endcode
 */
-#define bit8_set(p,m) ((p) |= bit8(m)) 
+#define bit_set(p,m) ((p) |= bit(m)) 
 
 /*! 
 	\ingroup bitwise  
 
-	\def bit8_clear(p,m)
-	Clears bit m in uint8_t p
+	\def bit_clear(p,m)
+	Clears bit m in p
 
 	Example:
 	\code
 	// If the button is not pressed turn off the LED
-	if(!bit8_get(PORTC,BUTTON1)) bit8_clear(PORTB,LED1);
+	if(!bit_get(PORTC,BUTTON1)) bit_clear(PORTB,LED1);
 	\endcode
 */
-#define bit8_clear(p,m) ((p) &= ~bit8(m)) 
+#define bit_clear(p,m) ((p) &= ~bit(m)) 
 
 /*! 
 	\ingroup bitwise  
 
-	\def bit8_flip(p,m) 
-	Flips (inverts) bit m in uint8_t p
+	\def bit_flip(p,m) 
+	Flips (inverts) bit m in p
 	
 	Example:
 	\code
 	// Flip the even pins on a port
 	for(i = 0; i < 8; i += 2)
 	{
-		bit8_flip(PORTb,i);
+		bit_flip(PORTB,i);
 	}
 	\endcode
 */
-#define bit8_flip(p,m) ((p) ^= bit8(m)) 
+#define bit_flip(p,m) ((p) ^= bit(m)) 
 
 /*! 
 	\ingroup bitwise  
 
-	\def bit8_write(c,p,m) 
+	\def bit_write(c,p,m) 
 	Writes c (HIGH or LOW) to pin m of uint8_t p
 
 	Example:
 	\code
 	// Set PORTB pin# to HIGH
-	bit8_write(HIGH,PORTB,pin);
+	bit_write(HIGH,PORTB,pin);
 	\endcode
 */
-#define bit8_write(c,p,m) (c ? bit8_set(p,m) : bit8_clear(p,m)) 
+#define bit_write(c,p,m) (c ? bit_set(p,m) : bit_clear(p,m)) 
 
 /*! 
 	\ingroup bitwise  
 
-	\def bit8_is_set(p, bit) bit8_read(p, bit)
-	Returns 1 if the bit # in uint8_t p is set, 0 otherwise
+	\def bit_is_set(p, bit) bit_read(p, bit)
+	Returns 1 if the bit # in p is set, 0 otherwise
 
 	Example:
 	\code
 	// If PORTB pin# is HIGH, set corresponding bit on PORTC
-	if(bit8_is_set(PORTB,pin) bit8_set(PORTC,pin);
+	if(bit_is_set(PORTB,pin) bit_set(PORTC,pin);
 	\endcode
 */
-#define bit8_is_set(p, bit) bit8_get(p, bit)
+#define bit_is_set(p, bit) bit_get(p, bit)
 
 /*! 
 	\ingroup bitwise  
 
-	\def bit8_is_clear(p, bit)
-	Returns 1 if the bit # in uint8_t p is clear, 1 otherwise
+	\def bit_is_clear(p, bit)
+	Returns 1 if the bit # in p is clear, 1 otherwise
 
 	Example:
 	\code
 	// If PORTB pin# is LOW, clear corresponding bit on PORTC
-	if(bit8_is_clear(PORTB,pin) bit8_clear(PORTC,pin);
+	if(bit_is_clear(PORTB,pin) bit_clear(PORTC,pin);
 
 	\endcode
 */
-#define bit8_is_clear(p, bit) (!bit8_get(p, bit))
+#define bit_is_clear(p, bit) (!bit_get(p, bit))
+
+
+/*! 
+	\ingroup bitwise 
+	
+	\def bit_rotate_right(a)
+	Rotates each bit 'a' one bit to the right. If the LSB is 1 then the MSB becomes 1
+	
+	Example:
+	\code
+	// Show a lit LED moving to the right
+	uint16_t x = 0x8000;
+	for(int i = 0; i < 16; i++)
+	{
+		led_out(myLED,x);
+		bit_rotate_right(x);
+	}
+	\endcode
+*/
+#define bit_rotate_right(a) a = ((a & 0x01)? ((a >> 1)| (1ULL << ((sizeof(a) * 8) - 1))) : (a >> 1)) 
+
+/*! 
+	\ingroup bitwise 
+	
+	\def bit_rotate_left(a)
+	Rotates each bit 'a' one bit to the left. If the MSB is 1 then the LSB becomes 1
+	
+	Example:
+	\code
+	// Show a lit LED moving to the right
+	uint16_t x = 0x0001;
+	for(int i = 0; i < 16; i++)
+	{
+		led_out(myLED,x);
+		bit_rotate_left(x);
+	}
+	\endcode
+	
+*/
+#define bit_rotate_left(a) a = ( (a &  (  1ULL << ((sizeof(a) * 8) -1)))   ? ((a << 1) | 1) : (a << 1)) 
+
 
 #endif
