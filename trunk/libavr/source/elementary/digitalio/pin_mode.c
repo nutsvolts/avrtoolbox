@@ -38,18 +38,18 @@
 
 #include "digitalio.h"
 
-void pin_mode(uint8_t pin, uint8_t mode)
+int8_t pin_mode(uint8_t pin, uint8_t mode)
 {
 #if defined (__AVR_ATmega169__) || defined (__AVR_ATmega169P__)
 	if ( pin < 8) // it is PORTB
 	{
 		if ( mode == INPUT ) // set DDRB bit to 0
 		{
-			bit8_clear(DDRB,pin);
+			bit_clear(DDRB,pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRB bit to 1
 		{
-			bit8_set(DDRB,pin);
+			bit_set(DDRB,pin);
 		}
 	}
 	else  // it is PORTD
@@ -57,12 +57,16 @@ void pin_mode(uint8_t pin, uint8_t mode)
 		pin -= 8; // converts it to numbering for PORTD
 		if ( mode == INPUT ) // set DDRD bit to 0
 		{
-			bit8_clear(DDRD,pin);
+			bit_clear(DDRD,pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRD bit to 1
 		{
-			bit8_set(DDRD,pin);
-		};
+			bit_set(DDRD,pin);
+		}
+	}
+	else // out of range 
+	{
+		return(-1); // return ERROR
 	}
 #elif defined (__AVR_ATmega328__) || defined (__AVR_ATmega328P__) 
 	// Use Arduino numbering
@@ -70,11 +74,11 @@ void pin_mode(uint8_t pin, uint8_t mode)
 	{
 		if ( mode == INPUT ) // set DDRD bit to 0
 		{
-			bit8_clear(DDRD,pin);
+			bit_clear(DDRD,pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRB bit to 1
 		{
-			bit8_set(DDRD,pin);
+			bit_set(DDRD,pin);
 		}
 	}
 	else if (pin <= 13) // matches bit# for PORTB 0 thru 5
@@ -82,11 +86,11 @@ void pin_mode(uint8_t pin, uint8_t mode)
 		pin -= 8;
 		if ( mode == INPUT ) // set DDRD bit to 0
 		{
-			bit8_clear(DDRB,pin);
+			bit_clear(DDRB,pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRB bit to 1
 		{
-			bit8_set(DDRB,pin);
+			bit_set(DDRB,pin);
 		}			
 	}
 	else if (pin <= 19) // matches bit# for PORTC 0 thru 5
@@ -94,14 +98,20 @@ void pin_mode(uint8_t pin, uint8_t mode)
 		pin -= 13;
 		if ( mode == INPUT ) // set DDRD bit to 0
 		{
-			bit8_clear(DDRC,pin);
+			bit_clear(DDRC,pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRB bit to 1
 		{
-			bit8_set(DDRC,pin);
+			bit_set(DDRC,pin);
 		}
+	}
+	else // out of range 
+	{
+		return(-1); // return ERROR
 	}	
 #else 
 #    warning "device type not defined"
 #endif
+	return(1); // return OKAY
+
 }

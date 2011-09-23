@@ -38,7 +38,7 @@
 
 #include "digitalio.h"
 
-void port_pin_clear(uint8_t portx, uint8_t pin);
+int8_t port_pin_clear(uint8_t portx, uint8_t pin)
 {
 #if defined (__AVR_ATmega169__) || defined (__AVR_ATmega169P__)
 	if (portx == PORTB) // it is PORTB
@@ -51,7 +51,7 @@ void port_pin_clear(uint8_t portx, uint8_t pin);
 	}
 	else // out of range 
 	{
-		return(-1); // returen ERROR
+		return(-1); // return ERROR
 	}
 	// TODO fix for Butterfly ports
 #elif defined (__AVR_ATmega328__) || defined (__AVR_ATmega328P__) 
@@ -69,12 +69,11 @@ void port_pin_clear(uint8_t portx, uint8_t pin);
 	}	
 	else // out of range 
 	{
-		return(-1); // returen ERROR
+		return(-1); // return ERROR
 	}
 	// TODO catch invalid pin numbers
 #else 
 #    warning "device type not defined"
 #endif
 	return(1); // return OKAY
-
 }

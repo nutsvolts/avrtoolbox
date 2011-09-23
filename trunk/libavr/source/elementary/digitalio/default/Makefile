@@ -43,7 +43,7 @@ LIBDIRS = -L"C:\avrtoolbox\libavr\librarian\atmega328"
 LIBS = -lavr_atmega328_002 
 
 ## Objects that must be built in order to link
-OBJECTS = digitalio.o pin_mode.o digital_read.o digital_write.o 
+OBJECTS = digitalio.o pin_mode.o digital_read.o digital_write.o port_pin_mode.o port_pin_read.o port_pin_set.o port_pin_clear.o port_pin_activate_pullup.o port_pin_deactivate_pullup.o port_pin_write.o 
 
 ## Objects explicitly added by the user
 LINKONLYOBJECTS = 
@@ -62,6 +62,27 @@ digital_read.o: ../digital_read.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 digital_write.o: ../digital_write.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
+
+port_pin_mode.o: ../port_pin_mode.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
+
+port_pin_read.o: ../port_pin_read.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
+
+port_pin_set.o: ../port_pin_set.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
+
+port_pin_clear.o: ../port_pin_clear.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
+
+port_pin_activate_pullup.o: ../port_pin_activate_pullup.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
+
+port_pin_deactivate_pullup.o: ../port_pin_deactivate_pullup.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
+
+port_pin_write.o: ../port_pin_write.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 ##Link

@@ -70,14 +70,14 @@
 	\param pin uint8_t number for a device specific predefined pin
 	\param mode use the define INPUT or OUTPUT
 
-	\return nothing
+	\return 1 if okay, -1 if error
 	
 	Example:
 	\code
 		pin_mode(9, OUTPUT);
 	\endcode
 */
-void pin_mode(uint8_t pin, uint8_t mode);
+int8_t pin_mode(uint8_t pin, uint8_t mode);
 
 
 /*! 
@@ -97,7 +97,7 @@ void pin_mode(uint8_t pin, uint8_t mode);
 	digital_write(9,HIGH); // open the candy door
 	\endcode
 */
-uint16_t digital_read(uint8_t pin);
+int8_t digital_read(uint8_t pin);
 
 
 /*! 
@@ -108,7 +108,7 @@ uint16_t digital_read(uint8_t pin);
 	\param pin uint8_t number for a device specific predefined pin 
 	\param value uint8_t to set pin to either HIGH or LOW (1 or 0)
 
-	\return Nothing
+	\return 1 if okay, -1 if error
 	
 	Example:
 	\code
@@ -118,7 +118,7 @@ uint16_t digital_read(uint8_t pin);
 	}		
 	\endcode
 */
-uint8_t digital_write(uint8_t pin, uint8_t value);
+int8_t digital_write(uint8_t pin, uint8_t value);
 
 /*! 
 	\ingroup digitalio  
@@ -137,7 +137,7 @@ uint8_t digital_write(uint8_t pin, uint8_t value);
 	}
 	\endcode
 */
-#define pin_read(pinx, pin) {if( bit8_is_set(pinx,pin) )return(1);else return(0);}
+#define pin_read(pinx, pin) {if( bit_is_set(pinx,pin) )return(1);else return(0);}
 
 /*! 
 	\ingroup digitalio  
@@ -156,7 +156,7 @@ uint8_t digital_write(uint8_t pin, uint8_t value);
 	}
 	\endcode
 */
-#define pin_write(portx, pinx, value) {return( value ? bit8_set(portx,pinx) : bit8_clear(portx,pinx));}
+#define pin_write(portx, pinx, value) {return( value ? bit_set(portx,pinx) : bit_clear(portx,pinx));}
 
 
 /*! 
@@ -168,7 +168,7 @@ uint8_t digital_write(uint8_t pin, uint8_t value);
 	\param uint8_t pin: The pin number 0 to 7.
 	\param uint8_t mode: either INPUT or OUTPUT
 
-	\return nothing
+	\return 1 if okay, -1 if error
 	
 	Example:
 	\code
@@ -176,7 +176,7 @@ uint8_t digital_write(uint8_t pin, uint8_t value);
 	port_pin_mode(PORTB, 7, OUTPUT);
 	\endcode
 */
-void port_pin_mode(uint8_t portx, uint8_t pin, uint8_t mode);
+int8_t port_pin_mode(uint8_t portx, uint8_t pin, uint8_t mode);
 
 
 
@@ -188,7 +188,7 @@ void port_pin_mode(uint8_t portx, uint8_t pin, uint8_t mode);
 	\param uint8_t portx: The port as identified in io.h
 	\param uint8_t pin: The pin number 0 to 7.
 	
-	\return HIGH, LOW
+	\return HIGH, LOW, or ERROR (1, 0, or -1)
 	
 	Example:
 	\code
@@ -196,7 +196,7 @@ void port_pin_mode(uint8_t portx, uint8_t pin, uint8_t mode);
 	myPinState = port_pin_read(myPort, myPin);
 	\endcode
 */
-void port_pin_read(uint8_t portx, uint8_t pin);
+int8_t port_pin_read(uint8_t portx, uint8_t pin);
 
 
 /*! 
@@ -207,7 +207,7 @@ void port_pin_read(uint8_t portx, uint8_t pin);
 	\param uint8_t portx: The port as identified in io.h
 	\param uint8_t pin: The pin number 0 to 7.
 	
-	\return Nothing
+	\return 1 if okay, -1 if error
 
 	Example:
 	\code
@@ -215,7 +215,7 @@ void port_pin_read(uint8_t portx, uint8_t pin);
 	if (port_pin_read(myPort, myPin) ) port_pin_set(myPort, myOtherPin);
 	\endcode
 */
-void port_pin_set(uint8_t portx, uint8_t pin);
+int8_t port_pin_set(uint8_t portx, uint8_t pin);
 
 /*! 
 	\ingroup digitalio  
@@ -225,7 +225,7 @@ void port_pin_set(uint8_t portx, uint8_t pin);
 	\param uint8_t portx: The port as identified in io.h
 	\param uint8_t pin: The pin number 0 to 7.
 	
-	\return Nothing
+	\return 1 if okay, -1 if error
 
 	Example:
 	\code
@@ -233,7 +233,27 @@ void port_pin_set(uint8_t portx, uint8_t pin);
 	if (port_pin_read(myPort, myPin) ) port_pin_set(myPort, myOtherPin);
 	\endcode
 */
-void port_pin_clear(uint8_t portx, uint8_t pin);
+int8_t port_pin_clear(uint8_t portx, uint8_t pin);
+
+
+/*! 
+	\ingroup digitalio  
+
+	\brief Writes O or 1 to pin in portx
+
+	\param uint8_t state: 0 or 1
+	\param uint8_t portx: The port as identified in io.h
+	\param uint8_t pin: The pin number 0 to 7.
+	
+	\return 1 if okay, -1 if error
+
+	Example:
+	\code
+	// set 'state' 0 or 1 to myPin on myPort
+	port_pin_write(myState,myPort, myPin) 
+	\endcode
+*/
+int8_t port_pin_write(uint8_t state, uint8_t portx, uint8_t pin);
 
 /*! 
 	\ingroup digitalio  
@@ -247,28 +267,28 @@ void port_pin_clear(uint8_t portx, uint8_t pin);
 	Example:
 	\code
 	// Activate the pullup on PORTB pin 5
-	port_pin_activate_pullup(DDRB, PORTB, 5)
+	port_pin_activate_pullup(PORTB, 5)
 	\endcode
 */
-void port_pin_activate_pullup(uint8_t ddrx, uint8_t pin);
+int8_t port_pin_activate_pullup(uint8_t portx, uint8_t pin);
 
 /*! 
 	\ingroup digitalio  
 
 	\brief Deactivates the pull-up resistor for a pin in a port.
 
-	\param uint8_t ddrx: The port as identified in io.h
+	\param uint8_t portx: The port as identified in io.h
 	\param uint8_t pin: The pin number 0 to 7.
 
-	\return Nothing
+	\return 1 if okay, -1 if error
 
 	Example:
 	\code
 	// Deactivate the pullup on PORTB pin 5
-	port_pin_deactivate_pullup(DDRB, PORTB, 5)
+	port_pin_deactivate_pullup(PORTB, 5)
 	\endcode
 */
-void port_pin_deactivate_pullup(uint8_t portx, uint8_t pin);
+int8_t port_pin_deactivate_pullup(uint8_t portx, uint8_t pin);
 
 
 /*! 
@@ -279,7 +299,7 @@ void port_pin_deactivate_pullup(uint8_t portx, uint8_t pin);
 	\param uint8_t ddrx: The port as identified in io.h
 	\param uint8_t pin: The pin number 0 to 7.
 	
-	\return Nothing
+	\return 1 if okay, -1 if error
 	
 	Example:
 	\code
@@ -287,7 +307,7 @@ void port_pin_deactivate_pullup(uint8_t portx, uint8_t pin);
 	port_pin_toggle(PORTB, 5)
 	\endcode
 */
-void port_pin_toggle(uint8_t portx, uint8_t pin);
+int8_t port_pin_toggle(uint8_t portx, uint8_t pin);
 
 
 

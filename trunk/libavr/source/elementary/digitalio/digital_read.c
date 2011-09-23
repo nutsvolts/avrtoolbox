@@ -41,7 +41,7 @@
 // Declared int for compatiblity with Arduino digitalRead
 // However added return of ERROR as -1 since the Arduino way
 // of returning LOW for NOT_A_PIN is doesn't inform on the error
-uint16_t digital_read(uint8_t pin)
+int8_t digital_read(uint8_t pin)
 {
 #if defined (__AVR_ATmega169__) || defined (__AVR_ATmega169P__)
 	if ( pin < 8) // it is PORTB

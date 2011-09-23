@@ -37,32 +37,47 @@
  // please contact me with details so that I may correct the situation. 
 
 #include "digitalio.h"
-void port_pin_activate_pullup(uint8_t ddrx, uint8_t pin);
+int8_t port_pin_activate_pullup(uint8_t portx, uint8_t pin)
 {
 #if defined (__AVR_ATmega169__) || defined (__AVR_ATmega169P__)
-	if (ddrx == DDRB) 
+	if (portx == PORTB) 
 	{
-		bit8_set(PORTB,pin);
+		bit_clear(DDRB,pin); // Make sure it is an input
+		bit_set(PORTB,pin);  // Activate pullup
 	}
 	else if (portx == PORTC)
 	{
-		bit8_set(PORTC,pin);
+		bit_clear(DDRC,pin); // Make sure it is an input
+		bit_set(PORTC,pin);  // Activate pullup
+	}
+	else // out of range 
+	{
+		return(-1); // return ERROR
 	}
 	// TODO: remaining accessible Butterfly ports
 #elif defined (__AVR_ATmega328__) || defined (__AVR_ATmega328P__) 
-	if( ddrx == DDRD ) 
+	if( portx == PORTD ) 
 	{
-		bit8_set(PORTd,pin);
+		bit_clear(DDRD,pin); // Make sure it is an input
+		bit_set(PORTD,pin);  // Activate pullup
 	}
-	else if (ddrx == DDRB)
+	else if (portx == PORTB)
 	{
-		bit8_set(PORTB,pin);
+		bit_clear(DDRB,pin); // Make sure it is an input
+		bit_set(PORTB,pin);  // Activate pullup
 	}
-	else if (ddrx == DDRC)
+	else if (portx == PORTC)
 	{ 		
-		bit8_set(PORTC,pin);
+		bit_clear(DDRC,pin); // Make sure it is an input
+		bit_set(PORTC,pin);  // Activate pullup
+	}
+	else // out of range 
+	{
+		return(-1); // return ERROR
 	}	
 #else 
 #    warning "device type not defined"
 #endif
+	return(1); // return OKAY
+
 }
