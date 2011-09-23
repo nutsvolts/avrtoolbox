@@ -38,7 +38,7 @@
 
 #include "digitalio.h"
 
-uint8_t digital_write(uint8_t pin, uint8_t value)
+int8_t digital_write(uint8_t pin, uint8_t value)
 {
 #if defined (__AVR_ATmega169__) || defined (__AVR_ATmega169P__)
 	if ( pin < 8) // it is PORTB
@@ -52,7 +52,7 @@ uint8_t digital_write(uint8_t pin, uint8_t value)
 	}
 	else // out of range 
 	{
-		return(-1); // returen ERROR
+		return(-1); // return ERROR
 	}
 #elif defined (__AVR_ATmega328__) || defined (__AVR_ATmega328P__) 
 	// Use Arduino numbering
@@ -72,7 +72,7 @@ uint8_t digital_write(uint8_t pin, uint8_t value)
 	}	
 	else // out of range 
 	{
-		return(-1); // returen ERROR
+		return(-1); // return ERROR
 	}
 #else 
 #    warning "device type not defined"

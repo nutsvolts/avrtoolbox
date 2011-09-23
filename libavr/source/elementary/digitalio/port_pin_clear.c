@@ -38,7 +38,7 @@
 
 #include "digitalio.h"
 
-void port_pin_clear(uint8_t portx, uint8_t pin);
+int8_t port_pin_clear(uint8_t portx, uint8_t pin)
 {
 #if defined (__AVR_ATmega169__) || defined (__AVR_ATmega169P__)
 	if (portx == PORTB) // it is PORTB

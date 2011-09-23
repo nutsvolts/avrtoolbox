@@ -42,7 +42,7 @@
 // However added return of ERROR as -1 since the Arduino way
 // of returning LOW for NOT_A_PIN is doesn't inform on the error
 //uint16_t digital_read(uint8_t pin)
-uint8_t port_pin_read(uint8_t portx, uint8_t pin)
+int8_t port_pin_read(uint8_t portx, uint8_t pin)
 
 {
 #if defined (__AVR_ATmega169__) || defined (__AVR_ATmega169P__)
@@ -56,7 +56,7 @@ uint8_t port_pin_read(uint8_t portx, uint8_t pin)
 	}
 	else // out of range 
 	{
-		return(-1); // returen ERROR
+		return(-1); // return ERROR
 	}
 	// TODO: ADD ADDRESSIBLE BUTTERFLY PORT PINS
 #elif defined (__AVR_ATmega328__) || defined (__AVR_ATmega328P__) 
@@ -74,11 +74,12 @@ uint8_t port_pin_read(uint8_t portx, uint8_t pin)
 	}	
 	else // out of range 
 	{
-		return(-1); // returen ERROR
+		return(-1); // return ERROR
 	}
 	// TODO TRAP INVALID PINS
 #else 
 #    warning "device type not defined"
 #endif
+	return(1); // return OKAY
 
 }
