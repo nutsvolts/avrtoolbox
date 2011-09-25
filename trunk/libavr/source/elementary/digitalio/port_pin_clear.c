@@ -47,7 +47,7 @@ int8_t port_pin_clear(uint8_t portx, uint8_t pin)
 	}
 	else if  // it is PORTD
 	{
-		pin_write(PORTD,pin,0;
+		pin_write(PORTD,pin,0);
 	}
 	else // out of range 
 	{

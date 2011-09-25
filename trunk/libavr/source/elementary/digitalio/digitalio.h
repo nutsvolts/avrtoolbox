@@ -156,7 +156,7 @@ int8_t digital_write(uint8_t pin, uint8_t value);
 	}
 	\endcode
 */
-#define pin_write(portx, pinx, value) {return( value ? bit_set(portx,pinx) : bit_clear(portx,pinx));}
+#define pin_write(portx, pinx, value) value ? bit_set(portx,pinx) : bit_clear(portx,pinx)
 
 
 /*! 
