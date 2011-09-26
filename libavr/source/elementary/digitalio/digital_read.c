@@ -61,17 +61,17 @@ int8_t digital_read(uint8_t pin)
 	// Use Arduino numbering
 	if( pin <= 7 ) // matches bit for PORTD 
 	{
-		pin_read(PIND,pin);
+		return(pin_read(PIND,pin));
 	}
 	else if (pin <= 13) // matches bit# for PORTB 0 thru 5
 	{
 		pin -= 8;
-		pin_read(PINB,pin);			
+		return(pin_read(PINB,pin));			
 	}
 	else if (pin <= 19) // matches bit# for PORTC 0 thru 5
 	{ // on the Arduino these are labeled analog 0 thru 5, but also work for digitalio
 		pin -= 14;
-		pin_read(PINC,pin);
+		return(pin_read(PINC,pin));
 	}	
 	else // out of range 
 	{

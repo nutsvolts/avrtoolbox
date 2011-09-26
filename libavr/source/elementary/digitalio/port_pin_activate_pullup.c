@@ -42,13 +42,17 @@ int8_t port_pin_activate_pullup(uint8_t portx, uint8_t pin)
 #if defined (__AVR_ATmega169__) || defined (__AVR_ATmega169P__)
 	if (portx == PORTB) 
 	{
-		bit_clear(DDRB,pin); // Make sure it is an input
-		bit_set(PORTB,pin);  // Activate pullup
+		//bit_clear(DDRB,pin); // Make sure it is an input
+		//bit_set(PORTB,pin);  // Activate pullup
+		DDRB &= ~(1<<pin);
+		PORTB |= (1<<pin);
 	}
 	else if (portx == PORTC)
 	{
-		bit_clear(DDRC,pin); // Make sure it is an input
-		bit_set(PORTC,pin);  // Activate pullup
+		//bit_clear(DDRC,pin); // Make sure it is an input
+		//bit_set(PORTC,pin);  // Activate pullup
+		DDRC &= ~(1<<pin);
+		PORTC |= (1<<pin);
 	}
 	else // out of range 
 	{
@@ -58,18 +62,24 @@ int8_t port_pin_activate_pullup(uint8_t portx, uint8_t pin)
 #elif defined (__AVR_ATmega328__) || defined (__AVR_ATmega328P__) 
 	if( portx == PORTD ) 
 	{
-		bit_clear(DDRD,pin); // Make sure it is an input
-		bit_set(PORTD,pin);  // Activate pullup
+		//bit_clear(DDRD,pin); // Make sure it is an input
+		//bit_set(PORTD,pin);  // Activate pullup
+		DDRD &= ~(1<<pin);
+		PORTD |= (1<<pin);
 	}
 	else if (portx == PORTB)
 	{
-		bit_clear(DDRB,pin); // Make sure it is an input
-		bit_set(PORTB,pin);  // Activate pullup
+		//bit_clear(DDRB,pin); // Make sure it is an input
+		//bit_set(PORTB,pin);  // Activate pullup
+		DDRB &= ~(1<<pin);
+		PORTB |= (1<<pin);
 	}
 	else if (portx == PORTC)
 	{ 		
-		bit_clear(DDRC,pin); // Make sure it is an input
-		bit_set(PORTC,pin);  // Activate pullup
+		//bit_clear(DDRC,pin); // Make sure it is an input
+		//bit_set(PORTC,pin);  // Activate pullup
+		DDRC &= ~(1<<pin);
+		PORTC |= (1<<pin);
 	}
 	else // out of range 
 	{

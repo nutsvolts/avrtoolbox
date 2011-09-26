@@ -43,7 +43,7 @@
 #include <avr/io.h>
 
 #include "c:\avrtoolbox\libavr\source\elementary\serial\serial.h"
-#include "c:\avrtoolbox\libavr\source\general\util\bitwise.h"
+//#include "c:\avrtoolbox\libavr\source\general\util\bitwise.h"
 
 
 #define HIGH 1
@@ -137,7 +137,13 @@ int8_t digital_write(uint8_t pin, uint8_t value);
 	}
 	\endcode
 */
-#define pin_read(pinx, pin) {if( bit_is_set(pinx,pin) )return(1);else return(0);}
+//#define pin_read(pinx, pin) {if( bit_is_set(pinx,pin) )return(1);else return(0);}
+#define pin_read(portx, pin) (portx & (1<<pin))
+//#define pin_read(portx, pin) if(portx & (1<<pin)) return(1);else return(0);
+//pin_read(pinx, pin) {if( bit_is_set(pinx,pin) )return(1);else return(0);}
+//bit_is_set(p, bit) bit_get(p, bit)
+//bit_get(p,m) ((p) & bit(m))
+
 
 /*! 
 	\ingroup digitalio  
@@ -156,7 +162,8 @@ int8_t digital_write(uint8_t pin, uint8_t value);
 	}
 	\endcode
 */
-#define pin_write(portx, pinx, value) value ? bit_set(portx,pinx) : bit_clear(portx,pinx)
+//#define pin_write(portx, pinx, value) value ? bit_set(portx,pinx) : bit_clear(portx,pinx)
+#define pin_write(portx, pinx, value) value ? (portx |= (1<<pinx)) : (portx &= ~(1<<pinx))
 
 
 /*! 
