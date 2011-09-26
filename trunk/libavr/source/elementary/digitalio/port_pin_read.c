@@ -48,11 +48,11 @@ int8_t port_pin_read(uint8_t portx, uint8_t pin)
 #if defined (__AVR_ATmega169__) || defined (__AVR_ATmega169P__)
 	if (portx == PORTB) // it is PORTB
 	{
-		pin_read(PINB,pin);
+		return(pin_read(PINB,pin));
 	}
 	else if  // it is PORTD
 	{
-		pin_read(PIND,pin);
+		return(pin_read(PIND,pin));
 	}
 	else // out of range 
 	{
@@ -62,15 +62,15 @@ int8_t port_pin_read(uint8_t portx, uint8_t pin)
 #elif defined (__AVR_ATmega328__) || defined (__AVR_ATmega328P__) 
 	if(portx == PORTD) // matches bit for PORTD 
 	{
-		pin_read(PIND,pin);
+		return(pin_read(PIND,pin));
 	}
 	else if (portx == PORTB)
 	{
-		pin_read(PINB,pin);			
+		return(pin_read(PINB,pin));			
 	}
 	else if (portx == PORTC) // matches bit# for PORTC 0 thru 5
 	{ 
-		pin_read(PINC,pin);
+		return(pin_read(PINC,pin));
 	}	
 	else // out of range 
 	{

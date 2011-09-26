@@ -20,8 +20,7 @@ digital_write.o: ../digital_write.c ../digitalio.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/stdlib.h \
   c:\avrtoolbox\libavr\source\driver\usart\/bit.h \
   c:\avrtoolbox\libavr\source\general\ring\ring.h \
-  c:\avrtoolbox\libavr\source\general\util\util.h \
-  c:\avrtoolbox\libavr\source\general\util\bitwise.h
+  c:\avrtoolbox\libavr\source\general\util\util.h
 
 ../digitalio.h:
 
@@ -68,5 +67,3 @@ c:\avrtoolbox\libavr\source\driver\usart\/bit.h:
 c:\avrtoolbox\libavr\source\general\ring\ring.h:
 
 c:\avrtoolbox\libavr\source\general\util\util.h:
-
-c:\avrtoolbox\libavr\source\general\util\bitwise.h:

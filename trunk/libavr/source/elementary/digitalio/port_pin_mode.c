@@ -73,33 +73,40 @@ int8_t port_pin_mode(uint8_t portx, uint8_t pin, uint8_t mode)
 	{
 		if ( mode == INPUT ) // set DDRD bit to 0
 		{
-			bit_clear(DDRD,pin);
+			//bit_clear(DDRD,pin);
+			DDRD &= ~(1<<pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRB bit to 1
 		{
-			bit_set(DDRD,pin);
+			//bit_set(DDRD,pin);
+			DDRD |= (1<<pin);
 		}
 	}
 	else if (portx == PORTB) // matches bit# for PORTB 0 thru 5
 	{
 		if ( mode == INPUT ) // set DDRD bit to 0
 		{
-			bit_clear(DDRB,pin);
+			//bit_clear(DDRB,pin);
+			DDRB &= ~(1<<pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRB bit to 1
 		{
-			bit_set(DDRB,pin);
-		}			
+			//bit_set(DDRB,pin);
+			DDRB |= (1<<pin);
+		}
+			
 	}
 	else if (portx == PORTC) // matches bit# for PORTC 0 thru 5
 	{ // on the Arduino these are labeled analog 0 thru 5, but also work for digitalio
 		if ( mode == INPUT ) // set DDRD bit to 0
 		{
-			bit_clear(DDRC,pin);
+			//bit_clear(DDRC,pin);
+			DDRC &= ~(1<<pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRB bit to 1
 		{
-			bit_set(DDRC,pin);
+			//bit_set(DDRC,pin);
+			DDRB |= (1<<pin);
 		}
 	}
 	else // out of range 

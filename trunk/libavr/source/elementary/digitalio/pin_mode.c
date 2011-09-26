@@ -45,11 +45,13 @@ int8_t pin_mode(uint8_t pin, uint8_t mode)
 	{
 		if ( mode == INPUT ) // set DDRB bit to 0
 		{
-			bit_clear(DDRB,pin);
+			//bit_clear(DDRB,pin);
+			DDRB &= ~(1<<pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRB bit to 1
 		{
-			bit_set(DDRB,pin);
+			//bit_set(DDRB,pin);
+			DDRB |= (1<<pin);
 		}
 	}
 	else  // it is PORTD
@@ -57,11 +59,13 @@ int8_t pin_mode(uint8_t pin, uint8_t mode)
 		pin -= 8; // converts it to numbering for PORTD
 		if ( mode == INPUT ) // set DDRD bit to 0
 		{
-			bit_clear(DDRD,pin);
+			//bit_clear(DDRD,pin);
+			DDRD &= ~(1<<pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRD bit to 1
 		{
-			bit_set(DDRD,pin);
+			//bit_set(DDRD,pin);
+			DDRD |= (1<<pin);
 		}
 	}
 	else // out of range 
@@ -74,11 +78,13 @@ int8_t pin_mode(uint8_t pin, uint8_t mode)
 	{
 		if ( mode == INPUT ) // set DDRD bit to 0
 		{
-			bit_clear(DDRD,pin);
+			//bit_clear(DDRD,pin);
+			DDRD &= ~(1<<pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRB bit to 1
 		{
-			bit_set(DDRD,pin);
+			//bit_set(DDRD,pin);
+			DDRD |= (1<<pin);
 		}
 	}
 	else if (pin <= 13) // matches bit# for PORTB 0 thru 5
@@ -86,11 +92,13 @@ int8_t pin_mode(uint8_t pin, uint8_t mode)
 		pin -= 8;
 		if ( mode == INPUT ) // set DDRD bit to 0
 		{
-			bit_clear(DDRB,pin);
+			//bit_clear(DDRB,pin);
+			DDRB &= ~(1<<pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRB bit to 1
 		{
-			bit_set(DDRB,pin);
+			//bit_set(DDRB,pin);
+			DDRB |= (1<<pin);
 		}			
 	}
 	else if (pin <= 19) // matches bit# for PORTC 0 thru 5
@@ -98,11 +106,13 @@ int8_t pin_mode(uint8_t pin, uint8_t mode)
 		pin -= 13;
 		if ( mode == INPUT ) // set DDRD bit to 0
 		{
-			bit_clear(DDRC,pin);
+			//bit_clear(DDRC,pin);
+			DDRC &= ~(1<<pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRB bit to 1
 		{
-			bit_set(DDRC,pin);
+			//bit_set(DDRC,pin);
+			DDRC |= (1<<pin);
 		}
 	}
 	else // out of range 
