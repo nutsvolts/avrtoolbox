@@ -40,17 +40,13 @@
 int8_t port_pin_activate_pullup(uint8_t portx, uint8_t pin)
 {
 #if defined (__AVR_ATmega169__) || defined (__AVR_ATmega169P__)
-	if (portx == PORTB) 
+	if (portx == portb) 
 	{
-		//bit_clear(DDRB,pin); // Make sure it is an input
-		//bit_set(PORTB,pin);  // Activate pullup
 		DDRB &= ~(1<<pin);
 		PORTB |= (1<<pin);
 	}
 	else if (portx == PORTC)
 	{
-		//bit_clear(DDRC,pin); // Make sure it is an input
-		//bit_set(PORTC,pin);  // Activate pullup
 		DDRC &= ~(1<<pin);
 		PORTC |= (1<<pin);
 	}
@@ -60,29 +56,25 @@ int8_t port_pin_activate_pullup(uint8_t portx, uint8_t pin)
 	}
 	// TODO: remaining accessible Butterfly ports
 #elif defined (__AVR_ATmega328__) || defined (__AVR_ATmega328P__) 
-	if( portx == PORTD ) 
+	if( portx == portd ) 
 	{
-		//bit_clear(DDRD,pin); // Make sure it is an input
-		//bit_set(PORTD,pin);  // Activate pullup
 		DDRD &= ~(1<<pin);
 		PORTD |= (1<<pin);
 	}
-	else if (portx == PORTB)
+	else if (portx == portb)
 	{
-		//bit_clear(DDRB,pin); // Make sure it is an input
-		//bit_set(PORTB,pin);  // Activate pullup
 		DDRB &= ~(1<<pin);
 		PORTB |= (1<<pin);
 	}
-	else if (portx == PORTC)
+	else if (portx == portc)
 	{ 		
-		//bit_clear(DDRC,pin); // Make sure it is an input
-		//bit_set(PORTC,pin);  // Activate pullup
 		DDRC &= ~(1<<pin);
 		PORTC |= (1<<pin);
 	}
 	else // out of range 
 	{
+		serial_out("Error in port_pin_acitvate_pullup()\n\n");
+
 		return(-1); // return ERROR
 	}	
 #else 
