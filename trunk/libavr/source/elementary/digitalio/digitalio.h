@@ -64,7 +64,7 @@
 // From Smiley's Workshop 39, 40, and 41 Nuts&Volts October, November, and December 2011
 
 /*!
-	\defgroup Elementary Digital I/O Functions
+	\defgroup digitalio Elementary Digital I/O Functions
 */
 
 /*! 
