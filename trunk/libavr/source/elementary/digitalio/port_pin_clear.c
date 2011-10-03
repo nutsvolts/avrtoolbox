@@ -41,7 +41,7 @@
 int8_t port_pin_clear(uint8_t portx, uint8_t pin)
 {
 #if defined (__AVR_ATmega169__) || defined (__AVR_ATmega169P__)
-	if (portx == PORTB) // it is PORTB
+	if (portx == portb) // it is PORTB
 	{
 		pin_write(PORTB,pin,0);
 	}
@@ -55,17 +55,17 @@ int8_t port_pin_clear(uint8_t portx, uint8_t pin)
 	}
 	// TODO fix for Butterfly ports
 #elif defined (__AVR_ATmega328__) || defined (__AVR_ATmega328P__) 
-	if(portx == PORTD ) // matches bit for PORTD 
+	if(portx == portd ) // matches bit for PORTD 
 	{
 		pin_write(PORTD,pin,0);
 	}
-	else if (portx == PORTB)
+	else if (portx == portb)
 	{
 		pin_write(PORTB,pin,0);
 	}
-	else if (portx == PORTC)
+	else if (portx == portc)
 	{ 
-			pin_write(PORTC,pin,0);
+		pin_write(PORTC,pin,0);
 	}	
 	else // out of range 
 	{

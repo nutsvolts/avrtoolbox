@@ -37,7 +37,7 @@
  // please contact me with details so that I may correct the situation. 
 
 #include "digitalio.h"
-
+/*
 int8_t pin_mode(uint8_t pin, uint8_t mode)
 {
 #if defined (__AVR_ATmega169__) || defined (__AVR_ATmega169P__)
@@ -125,3 +125,4 @@ int8_t pin_mode(uint8_t pin, uint8_t mode)
 	return(1); // return OKAY
 
 }
+*/

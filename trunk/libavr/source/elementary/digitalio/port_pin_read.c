@@ -41,18 +41,17 @@
 // Declared int for compatiblity with Arduino digitalRead
 // However added return of ERROR as -1 since the Arduino way
 // of returning LOW for NOT_A_PIN is doesn't inform on the error
-//uint16_t digital_read(uint8_t pin)
 int8_t port_pin_read(uint8_t portx, uint8_t pin)
 
 {
 #if defined (__AVR_ATmega169__) || defined (__AVR_ATmega169P__)
-	if (portx == PORTB) // it is PORTB
+	if (portx == portb) // it is PORTB
 	{
-		return(pin_read(PINB,pin));
+		return( (PINB & (1<<pin)) >> pin);
 	}
 	else if  // it is PORTD
 	{
-		return(pin_read(PIND,pin));
+		return( (PIND & (1<<pin)) >> pin);
 	}
 	else // out of range 
 	{
@@ -60,20 +59,21 @@ int8_t port_pin_read(uint8_t portx, uint8_t pin)
 	}
 	// TODO: ADD ADDRESSIBLE BUTTERFLY PORT PINS
 #elif defined (__AVR_ATmega328__) || defined (__AVR_ATmega328P__) 
-	if(portx == PORTD) // matches bit for PORTD 
+	if(portx == portd) // matches bit for PORTD 
 	{
-		return(pin_read(PIND,pin));
+		return( (PIND & (1<<pin)) >> pin);
 	}
-	else if (portx == PORTB)
+	else if (portx == portb)
 	{
-		return(pin_read(PINB,pin));			
+		return( (PINB & (1<<pin)) >> pin);
 	}
-	else if (portx == PORTC) // matches bit# for PORTC 0 thru 5
+	else if (portx == portc) // matches bit# for PORTC 0 thru 5
 	{ 
-		return(pin_read(PINC,pin));
+		return( (PINC & (1<<pin)) >> pin);
 	}	
 	else // out of range 
 	{
+		serial_out("Error in port_pin_read()\n");
 		return(-1); // return ERROR
 	}
 	// TODO TRAP INVALID PINS

@@ -41,7 +41,7 @@
 int8_t port_pin_mode(uint8_t portx, uint8_t pin, uint8_t mode)
 {
 #if defined (__AVR_ATmega169__) || defined (__AVR_ATmega169P__)
-	if (portx == PORTB) // it is PORTB
+	if (portx == porb) // it is PORTB
 	{
 		if ( mode == INPUT ) // set DDRB bit to 0
 		{
@@ -52,7 +52,7 @@ int8_t port_pin_mode(uint8_t portx, uint8_t pin, uint8_t mode)
 			bit_set(DDRB,pin);
 		}
 	}
-	else if (portx == PORTC // it is PORTD
+	else if (portx == portd) // it is PORTD
 	{
 		if ( mode == INPUT ) // set DDRD bit to 0
 		{
@@ -61,7 +61,7 @@ int8_t port_pin_mode(uint8_t portx, uint8_t pin, uint8_t mode)
 		else // ( mode == OUTPUT ) // set DDRD bit to 1
 		{
 			bit_set(DDRD,pin);
-		};
+		}
 	}
 	else // out of range 
 	{
@@ -69,44 +69,37 @@ int8_t port_pin_mode(uint8_t portx, uint8_t pin, uint8_t mode)
 	}
 	// TODO: remaining accessible Butterfly ports
 #elif defined (__AVR_ATmega328__) || defined (__AVR_ATmega328P__) 
-	if( portx == PORTD ) // matches bit for PORTD 
+	if( portx == portd ) // matches bit for PORTD 
 	{
 		if ( mode == INPUT ) // set DDRD bit to 0
 		{
-			//bit_clear(DDRD,pin);
 			DDRD &= ~(1<<pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRB bit to 1
 		{
-			//bit_set(DDRD,pin);
 			DDRD |= (1<<pin);
 		}
 	}
-	else if (portx == PORTB) // matches bit# for PORTB 0 thru 5
+	else if (portx == portb) // matches bit# for PORTB 0 thru 5
 	{
 		if ( mode == INPUT ) // set DDRD bit to 0
 		{
-			//bit_clear(DDRB,pin);
 			DDRB &= ~(1<<pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRB bit to 1
 		{
-			//bit_set(DDRB,pin);
 			DDRB |= (1<<pin);
 		}
-			
 	}
-	else if (portx == PORTC) // matches bit# for PORTC 0 thru 5
+	else if (portx == portc) // matches bit# for PORTC 0 thru 5
 	{ // on the Arduino these are labeled analog 0 thru 5, but also work for digitalio
 		if ( mode == INPUT ) // set DDRD bit to 0
 		{
-			//bit_clear(DDRC,pin);
 			DDRC &= ~(1<<pin);
 		}
 		else // ( mode == OUTPUT ) // set DDRB bit to 1
 		{
-			//bit_set(DDRC,pin);
-			DDRB |= (1<<pin);
+			DDRC |= (1<<pin);
 		}
 	}
 	else // out of range 

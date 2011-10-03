@@ -56,7 +56,12 @@
 #define true 1
 #define false 0 
 
-// From Smiley's Workshop 39 and 40 Nuts&Volts October and November 2011
+#define porta 0
+#define portb 1
+#define portc 2
+#define portd 3
+
+// From Smiley's Workshop 39, 40, and 41 Nuts&Volts October, November, and December 2011
 
 /*!
 	\defgroup Elementary Digital I/O Functions
@@ -137,13 +142,7 @@ int8_t digital_write(uint8_t pin, uint8_t value);
 	}
 	\endcode
 */
-//#define pin_read(pinx, pin) {if( bit_is_set(pinx,pin) )return(1);else return(0);}
 #define pin_read(portx, pin) (portx & (1<<pin))
-//#define pin_read(portx, pin) if(portx & (1<<pin)) return(1);else return(0);
-//pin_read(pinx, pin) {if( bit_is_set(pinx,pin) )return(1);else return(0);}
-//bit_is_set(p, bit) bit_get(p, bit)
-//bit_get(p,m) ((p) & bit(m))
-
 
 /*! 
 	\ingroup digitalio  
@@ -162,7 +161,6 @@ int8_t digital_write(uint8_t pin, uint8_t value);
 	}
 	\endcode
 */
-//#define pin_write(portx, pinx, value) value ? bit_set(portx,pinx) : bit_clear(portx,pinx)
 #define pin_write(portx, pinx, value) value ? (portx |= (1<<pinx)) : (portx &= ~(1<<pinx))
 
 
@@ -315,26 +313,5 @@ int8_t port_pin_deactivate_pullup(uint8_t portx, uint8_t pin);
 	\endcode
 */
 int8_t port_pin_toggle(uint8_t portx, uint8_t pin);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #endif
