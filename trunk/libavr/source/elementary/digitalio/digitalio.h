@@ -64,7 +64,7 @@
 // From Smiley's Workshop 39, 40, and 41 Nuts&Volts October, November, and December 2011
 
 /*!
-	\defgroup digitalio Elementary Digital I/O Functions
+	\defgroup Elementary Digital I/O Functions
 */
 
 /*! 
@@ -313,5 +313,192 @@ int8_t port_pin_deactivate_pullup(uint8_t portx, uint8_t pin);
 	\endcode
 */
 int8_t port_pin_toggle(uint8_t portx, uint8_t pin);
+
+
+/*! 
+	\ingroup digitalio  
+
+	\brief Rotates an 8-bit pattern one bit to the right
+	Courtesy of Cliff Lawson: http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=872900#872900
+ 
+	\param uint8_t n: the pattern to rotate
+	
+	\return rotated pattern
+	
+	Example:
+	\code
+	// Pattern 0xAA rotated right becomes 0x55
+	myPattern = 0xAA;
+	myPattern = rotate_right8(myPattern);
+	\endcode
+*/
+static inline uint8_t rotate_right8(uint8_t n)
+{
+  uint8_t carry = 0;
+
+  if (n & 1) {
+    carry = 1;
+  }
+  n >>= 1;
+  if (carry) {
+    n |= 0x80;
+  }
+  return n;
+}
+
+/*! 
+	\ingroup digitalio  
+
+	\brief Rotates an 8-bit pattern one bit to the left
+	Courtesy of Cliff Lawson: http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=872900#872900
+
+	\param uint8_t n: the pattern to rotate
+	
+	\return rotated pattern
+	
+	Example:
+	\code
+	// Pattern 0x55 rotated right becomes 0xAA
+	myPattern = 0x55;
+	myPattern = rotate_left8(myPattern);
+	\endcode
+*/
+static inline uint8_t rotate_left8(uint8_t n) 
+{
+  uint8_t carry = 0;
+
+  if (n & 0x80) {
+    carry = 1;
+  }
+  n <<= 1;
+  if (carry) {
+    n |= 0x01;
+  }
+  return n;
+}
+
+/*! 
+	\ingroup digitalio  
+
+	\brief Rotates a 16-bit pattern one bit to the right
+	Courtesy of Cliff Lawson: http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=872900#872900
+
+	\param uint16_t n: the pattern to rotate
+	
+	\return rotated pattern
+	
+	Example:
+	\code
+	// Pattern 0xAAAA rotated right becomes 0x5555
+	myPattern = 0xAAAA;
+	myPattern = rotate_right8(myPattern);
+	\endcode
+*/
+static inline uint16_t rotate_right16(uint16_t n) 
+{
+  uint8_t carry = 0;
+
+  if (n & 1) {
+    carry = 1;
+  }
+  n >>= 1;
+  if (carry) {
+    n |= (uint16_t)0x8000;
+  }
+  return n;
+}
+
+/*! 
+	\ingroup digitalio  
+
+	\brief Rotates an 16-bit pattern one bit to the left
+	Courtesy of Cliff Lawson: http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=872900#872900
+
+	\param uint16_t n: the pattern to rotate
+	
+	\return rotated pattern
+	
+	Example:
+	\code
+	// Pattern 0x5555 rotated left becomes 0xAAAA
+	myPattern = 0x5555;
+	myPattern = rotate_left16(myPattern);
+	\endcode
+*/
+static inline uint16_t rotate_left16(uint16_t n) 
+{
+  uint8_t carry = 0;
+
+  if (n & (uint16_t)0x8000) {
+    carry = 1;
+  }
+  n <<= 1;
+  if (carry) {
+    n |= 0x01;
+  }
+  return n;
+}
+
+/*! 
+	\ingroup digitalio  
+
+	\brief Rotates an 32-bit pattern one bit to the right
+	Courtesy of Cliff Lawson: http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=872900#872900
+
+	\param uint32_t n: the pattern to rotate
+	
+	\return rotated pattern
+	
+	Example:
+	\code
+	// Pattern 0xAAAAAAAA rotated right becomes 0x55555555
+	myPattern = 0xAAAAAAAA;
+	myPattern = rotate_right32(myPattern);
+	\endcode
+*/
+static inline uint32_t rotate_right32(uint32_t n) 
+{
+  uint8_t carry = 0;
+
+  if (n & 1) {
+    carry = 1;
+  }
+  n >>= 1;
+  if (carry) {
+    n |= (uint32_t)0x80000000;
+  }
+  return n;
+}
+
+/*! 
+	\ingroup digitalio  
+
+	\brief Rotates an 32-bit pattern one bit to the left
+	Courtesy of Cliff Lawson: http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=872900#872900
+
+	\param uint32_t n: the pattern to rotate
+	
+	\return rotated pattern
+	
+	Example:
+	\code
+	// Pattern 0x55555555 rotated right becomes 0xAAAAAAAA
+	myPattern = 0x55555555;
+	myPattern = rotate_left32(myPattern);
+	\endcode
+*/
+static inline uint16_t rotate_left32(uint32_t n) 
+{
+  uint8_t carry = 0;
+
+  if (n & (uint32_t)0x80000000) {
+    carry = 1;
+  }
+  n <<= 1;
+  if (carry) {
+    n |= 0x01;
+  }
+  return n;
+}
 
 #endif
