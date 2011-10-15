@@ -40,6 +40,7 @@
 #ifndef BITWISE_H
 #define BITWISE_H
 
+#include <inttypes.h>
 /*!
 	\defgroup bitwise Bitwise Elementary Macros
 */
@@ -133,8 +134,10 @@
 /*! 
 	\ingroup bitwise  
 
-	\def bit_is_set(p, bit) bit_read(p, bit)
+	\def bit_isset(p, bit) bit_rget(p, bit)
 	Returns 1 if the bit # in p is set, 0 otherwise
+	
+	NOTE: name changed from bit_is_set to bit_isset to prevent conflict with avr sfr_defs.h
 
 	Example:
 	\code
@@ -142,13 +145,15 @@
 	if(bit_is_set(PORTB,pin) bit_set(PORTC,pin);
 	\endcode
 */
-#define bit_is_set(p, bit) bit_get(p, bit)
+#define bit_isset(p, bit) bit_get(p, bit)
 
 /*! 
 	\ingroup bitwise  
 
-	\def bit_is_clear(p, bit)
+	\def bit_isclear(p, bit)
 	Returns 1 if the bit # in p is clear, 1 otherwise
+	
+	NOTE: name changed from bit_is_clear to bit_isclear to prevent conflict with avr sfr_defs.h
 
 	Example:
 	\code
@@ -157,7 +162,7 @@
 
 	\endcode
 */
-#define bit_is_clear(p, bit) (!bit_get(p, bit))
+#define bit_isclear(p, bit) (!bit_get(p, bit))
 
 
 /*! 
@@ -218,7 +223,7 @@
 	\endcode
 	
 */
-#define bit_to_shift8(mask) ( \ 
+/*#define bit_to_shift8(mask) ( \ 
     ((mask) & 0x01) ? 0 : ( \ 
     ((mask) & 0x02) ? 1 : ( \ 
     ((mask) & 0x04) ? 2 : ( \ 
@@ -226,8 +231,36 @@
     ((mask) & 0x10) ? 4 : ( \ 
     ((mask) & 0x20) ? 5 : ( \ 
     ((mask) & 0x40) ? 6 : 7 ))))))) 
-
+*/
+#define bit_to_shift8(mask) (((mask) & 0x01) ? 0 : (((mask) & 0x02) ? 1 : (((mask) & 0x04) ? 2 : (((mask) & 0x08) ? 3 : (((mask) & 0x10) ? 4 : (((mask) & 0x20) ? 5 : (((mask) & 0x40) ? 6 : 7 ))))))) 
 #define bit_get_mask_field8(byte, mask) (((byte) & (mask))>>bit_to_shift8(mask))
 
+/*! 
+	\ingroup bitwise 
+	
+	\def bit_hi_byte(x)
+	This extracts the high byte in the int x
+	
+	Example:
+	\code
+	UART_BAUD_RATE_HIGH = bit_hi_byte(setting);
+	\endcode
+	
+*/
+#define bit_hi_byte(x)	((uint8_t)(((uint16_t)(x)) >> 8))
+
+/*! 
+	\ingroup bitwise 
+	
+	\def bit_lo_byte(x)
+	This extracts the lo byte in the int x
+	
+	Example:
+	\code
+	UART_BAUD_RATE_LOW= bit_lo_byte(setting);	
+	\endcode
+	
+*/
+#define bit_lo_byte(x)	((uint8_t)((uint16_t)(x)))
 
 #endif
