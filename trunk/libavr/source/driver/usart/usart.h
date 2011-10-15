@@ -50,7 +50,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include "bit.h"
+#include "C:\avrtoolbox\libavr\source\general\util\bitwise.h"
 
 #include "c:\avrtoolbox\libavr\source\general\ring\ring.h"
 
@@ -84,7 +84,7 @@ volatile uint8_t usart_buffered_tx_flag;
 // then the ISR continues to send until the buffer is empty, otherwise
 // the ISR just sends the byte. 
 //void usart0_send_byte(void);
-//void usart0_send_buffer(void);
+void usart0_send_buffer(void);
 
 // AVRStudio crashed when I was converting from the above to the below
 // TODO FIND AND FIX

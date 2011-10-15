@@ -196,7 +196,7 @@ int main(void)
 	usart0_init_baud(57600);
 
 	// Debug test and track versions
-	uint8_t str[] = { 'H','o','w','d','y','7','4','\0'};
+	uint8_t str[] = { 'H','o','w','d','y','7','6','\0'};
 
 	int i = 0;
 

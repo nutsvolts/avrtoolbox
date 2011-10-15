@@ -68,11 +68,10 @@
 #include <inttypes.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include "ascii.h"
-#include "slice.h"
+
 #include "usart.h"
 
-#include "c:\avrtoolbox\libavr\source\general\util\util.h"
+#include "c:\avrtoolbox\libavr\source\general\util\bitwise.h"
 
 
 //
@@ -201,7 +200,7 @@
 #define usart0_mode(x) (UART_CONTROL_STATUS_REG_C = (UART_CONTROL_STATUS_REG_C & (uint8_t)~((1<<UART_MODE_SELECT_0)|(1<<UART_MODE_SELECT_1))) | (uint8_t)((x) << UART_MODE_SELECT_0))
 
 
-#define usart0_clock_polarity(x)    bit_write(x, UART_CONTROL_STATUS_REG_C, BIT(UCPOL0))
+#define usart0_clock_polarity(x)    bit_write(x, UART_CONTROL_STATUS_REG_C, bit(UCPOL0))
 
 #define usart0_transmit_enable()    (UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 << UART_ENABLE_TRANSMITTER))
 #define usart0_transmit_disable()   (UART_CONTROL_STATUS_REG_B &= (uint8_t)~(1 << UART_ENABLE_TRANSMITTER))
@@ -212,19 +211,19 @@
 #define usart0_transmit_speed_double_enable()   (UART_CONTROL_STATUS_REG_A |= (uint8_t)(1 << UART_DOUBLE_SPEED))
 #define usart0_transmit_speed_double_disable()  (UART_CONTROL_STATUS_REG_A &= (uint8_t)~(1 << UART_DOUBLE_SPEED))
 
-#define usart0_receive_complete()           bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_RECEIVE_COMPLETE))
+#define usart0_receive_complete()           bit_get(UART_CONTROL_STATUS_REG_A, bit(UART_RECEIVE_COMPLETE))
 
-#define usart0_transmit_complete()          bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_TRANSMIT_COMPLETE))
+#define usart0_transmit_complete()          bit_get(UART_CONTROL_STATUS_REG_A, bit(UART_TRANSMIT_COMPLETE))
 
-#define usart0_data_register_empty()        bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_READY_TO_TRANSMIT))
+#define usart0_data_register_empty()        bit_get(UART_CONTROL_STATUS_REG_A, bit(UART_READY_TO_TRANSMIT))
 
-#define usart0_frame_error()                bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_FRAME_ERROR))
+#define usart0_frame_error()                bit_get(UART_CONTROL_STATUS_REG_A, bit(UART_FRAME_ERROR))
 
-#define usart0_data_overrun()               bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_DATA_OVER_RUN))
+#define usart0_data_overrun()               bit_get(UART_CONTROL_STATUS_REG_A, bit(UART_DATA_OVER_RUN))
 
-#define usart0_parity_error()               bit_read(UART_CONTROL_STATUS_REG_A, BIT(UART_PARITY_ERROR))
+#define usart0_parity_error()               bit_get(UART_CONTROL_STATUS_REG_A, bit(UART_PARITY_ERROR))
 
-#define usart0_multiprocessor_mode(x)       bit_write(x, UART_CONTROL_STATUS_REG_A, BIT(UART_MULTI-PROCESSOR_COMMUNICATION_MODE))
+#define usart0_multiprocessor_mode(x)       bit_write(x, UART_CONTROL_STATUS_REG_A, bit(UART_MULTI-PROCESSOR_COMMUNICATION_MODE))
 
 #define usart0_receive_complete_interrupt_enable()      (UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 << UART_RX_COMPLETE_INTERRUPT_ENABLE))
 #define usart0_receive_complete_interrupt_disable()     (UART_CONTROL_STATUS_REG_B &= (uint8_t)~(1 << UART_RX_COMPLETE_INTERRUPT_ENABLE))
@@ -239,17 +238,17 @@
 #define usart0_data_register_empty_interrupt_enable()   (UART_CONTROL_STATUS_REG_B |= (uint8_t)(1 << UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))
 #define usart0_data_register_empty_interrupt_disable()  (UART_CONTROL_STATUS_REG_B &= (uint8_t)~(1 << UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))
 
-#define usart0_data_register_empty_interrupt_get()      bit_read(UART_CONTROL_STATUS_REG_B, BIT(UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))
+#define usart0_data_register_empty_interrupt_get()      bit_get(UART_CONTROL_STATUS_REG_B, bit(UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE))
 
-#define usart0_receive_data_bit_8(x)                    bit_write(x, UART_CONTROL_STATUS_REG_B, BIT(UART_RX_DATA_BIT_8))
+#define usart0_receive_data_bit_8(x)                    bit_write(x, UART_CONTROL_STATUS_REG_B, bit(UART_RX_DATA_BIT_8))
 
-#define usart0_transmit_data_bit_8(x)                   bit_write(x, UART_CONTROL_STATUS_REG_B, BIT(UART_tX_DATA_BIT_8))
+#define usart0_transmit_data_bit_8(x)                   bit_write(x, UART_CONTROL_STATUS_REG_B, bit(UART_tX_DATA_BIT_8))
 
 #define usart0_stop_bits_set(stop_bits) \
 do{                                     \
     if((stop_bits) >= 1 && (stop_bits) <= 2)    \
     {                                           \
-        bit_write((stop_bits) - 1, UART_CONTROL_STATUS_REG_C, BIT(UART_STOP_BIT_SELECT)); \
+        bit_write((stop_bits) - 1, UART_CONTROL_STATUS_REG_C, bit(UART_STOP_BIT_SELECT)); \
     }                                           \
 }while(0)
 
@@ -258,15 +257,15 @@ do{                                     \
 do{         \
     if((data_bits) >= 5 && (data_bits) <= 8)    \
     {       \
-        bit_write(bit_read(((data_bits) - 5), BIT(0)), UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_0)); \
-        bit_write(bit_read(((data_bits) - 5), BIT(1)), UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_1)); \
-        bit_clear(UART_CONTROL_STATUS_REG_B, BIT(UART_CHARACTER_SIZE_2));     \
+        bit_write(bit_get(((data_bits) - 5), bit(0)), UART_CONTROL_STATUS_REG_C, bit(UART_CHARACTER_SIZE_0)); \
+        bit_write(bit_get(((data_bits) - 5), bit(1)), UART_CONTROL_STATUS_REG_C, bit(UART_CHARACTER_SIZE_1)); \
+        bit_clear(UART_CONTROL_STATUS_REG_B, bit(UART_CHARACTER_SIZE_2));     \
     }       \
     if((data_bits) == 9)    \
     {       \
-        bit_set(UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_0));    \
-        bit_set(UART_CONTROL_STATUS_REG_C, BIT(UART_CHARACTER_SIZE_1));    \
-        bit_set(UART_CONTROL_STATUS_REG_B, BIT(UART_CHARACTER_SIZE_2));    \
+        bit_set(UART_CONTROL_STATUS_REG_C, bit(UART_CHARACTER_SIZE_0));    \
+        bit_set(UART_CONTROL_STATUS_REG_C, bit(UART_CHARACTER_SIZE_1));    \
+        bit_set(UART_CONTROL_STATUS_REG_B, bit(UART_CHARACTER_SIZE_2));    \
     }       \
 }while(0)
 
@@ -280,7 +279,7 @@ do{     \
     bit_set(USART0_RTS_PORT_DIRECTION, USART0_RTS); \
 }while(0)
 
-#define usart0_cts_read()       bit_read(USART0_CTS_PORT, USART0_CTS)
+#define usart0_cts_read()       bit_get(USART0_CTS_PORT, USART0_CTS)
 
 #define usart0_cts_init()   \
 do{     \
@@ -293,7 +292,7 @@ do{     \
 //
 
 void usart0_baud_set(uint32_t baudrate, uint32_t freq_cpu);
-void usart0_parity_set(usart_parity_t parity);
+//void usart0_parity_set(usart_parity_t parity);
 void usart0_flow_control_set(usart_flow_control_t flow_control);
 
 
@@ -361,7 +360,7 @@ void usart0_init(uint32_t baud, uint32_t freq_cpu, usart_mode_t mode, usart_data
  	usart0_baud_set(baud, freq_cpu);
     usart0_data_bits_set(databits);
     usart0_stop_bits_set(stopbits);
-    usart0_parity_set(parity);
+//    usart0_parity_set(parity);
  
  	usart0_baud_set(baud, freq_cpu);
 
@@ -429,22 +428,22 @@ void usart0_baud_set(uint32_t baudrate, uint32_t freq_cpu)
 	setting = usart_baudrate_to_setting(freq_cpu,baudrate);
 	
 	// Write hi byte first as writing lo byte will trigger immediate update of baud prescaler.
-	UART_BAUD_RATE_HIGH = hi_byte(setting);
-	UART_BAUD_RATE_LOW= lo_byte(setting);
+	UART_BAUD_RATE_HIGH = bit_hi_byte(setting);
+	UART_BAUD_RATE_LOW= bit_lo_byte(setting);
 	
 	return;
 }
-
+/*
 void usart0_parity_set(usart_parity_t parity)
 {
     if(parity > 0)
     {
         parity++;
     }
-    bit_write(bit_read(parity, BIT(0)), UART_CONTROL_STATUS_REG_C, BIT(UART_PARITY_MODE_0));
-    bit_write(bit_read(parity, BIT(1)), UART_CONTROL_STATUS_REG_C, BIT(UART_PARITY_MODE_1));
+    bit_write(bit_get(parity, bit(0)), UART_CONTROL_STATUS_REG_C, bit(UART_PARITY_MODE_0));
+    bit_write(bit_get(parity, bit(1)), UART_CONTROL_STATUS_REG_C, bit(UART_PARITY_MODE_1));
     return;
-}
+}*/
 
 // JWP 6/16/11 rewrote transmit interrupt to use TX complete vector
 // rather than the Data Register Empty vector
@@ -489,7 +488,12 @@ usart0_receive_interrupt_service_routine
 	register uint8_t frame_error = false;
 
 	// Get error conditions before getting the data.
-	frame_error = usart0_frame_error();
+
+	// Changed to bit operator due to warning
+	//frame_error = usart0_frame_error();
+	//frame_error	= bit_get(UART_CONTROL_STATUS_REG_A, bit(UART_FRAME_ERROR));
+	frame_error	= (UART_CONTROL_STATUS_REG_A & (1<<UART_FRAME_ERROR));
+	
 	parity_error = usart0_parity_error();
 	
 	data = UART_DATA_REG;
