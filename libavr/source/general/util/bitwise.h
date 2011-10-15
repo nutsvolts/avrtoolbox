@@ -200,4 +200,34 @@
 #define bit_rotate_left(a) a = ( (a &  (  1ULL << ((sizeof(a) * 8) -1)))   ? ((a << 1) | 1) : (a << 1)) 
 
 
+/*! 
+	\ingroup bitwise 
+	
+	\def bit_get_mask_field8(byte, mask)
+	This extracts the value of the mask field from the byte
+	
+	Example:
+	\code
+	#define PAUSEMASK	0x38	// 00111000
+	
+	myByte = read_dip(); // read a byte from my DIP switch
+	myPause= bit_get_mask_field(myByte,PAUSEMASK); // extract the pause value
+	
+	pause_seconds(myPause) // pause for myPause (0 to 7) seconds
+	
+	\endcode
+	
+*/
+#define bit_to_shift8(mask) ( \ 
+    ((mask) & 0x01) ? 0 : ( \ 
+    ((mask) & 0x02) ? 1 : ( \ 
+    ((mask) & 0x04) ? 2 : ( \ 
+    ((mask) & 0x08) ? 3 : ( \ 
+    ((mask) & 0x10) ? 4 : ( \ 
+    ((mask) & 0x20) ? 5 : ( \ 
+    ((mask) & 0x40) ? 6 : 7 ))))))) 
+
+#define bit_get_mask_field8(byte, mask) (((byte) & (mask))>>bit_to_shift8(mask))
+
+
 #endif
