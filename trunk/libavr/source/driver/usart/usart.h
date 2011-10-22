@@ -166,6 +166,8 @@ typedef struct
 
 /*!
 	\defgroup usart USART Drivers
+	
+	\brief Uses only the uart subset of the AVR usart for usart0 only.
 */
 /**
 	\ingroup usart
@@ -392,9 +394,9 @@ bool usart0_get_byte(uint8_t *b);
 
 /** \ingroup usart
 
-    \brief Puts a '\0' terminated string into the transmit buffer.
+    \brief Puts a '\\0' terminated string into the transmit buffer.
 	To prevent buffer overrun, the string is automatically truncated 
-	with '\0'if it exceeds USART0_TRANSMIT_BUFFER_LEN - 1.
+	with '\\0'if it exceeds USART0_TRANSMIT_BUFFER_LEN - 1.
 	 
 	\param *str pointer to a char buffer 
 
@@ -406,7 +408,7 @@ void usart0_put_string(char *str);
 
 	\brief Loads a string from program memory into the transmit buffer.
 	
-	\param pointer to a constant character string
+	\param *myPointer pointer to a constant character string
 
 	Example:
 	\code
@@ -425,7 +427,7 @@ void usart0_put_string(char *str);
 	\endcode
 
 */ 
-void usart0_put_pgm_string(const char *); 
+void usart0_put_pgm_string(const char *myPointer); 
 
 
 /** 
