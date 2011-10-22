@@ -73,7 +73,7 @@ int8_t port_pin_read(uint8_t portx, uint8_t pin)
 	}	
 	else // out of range 
 	{
-		serial_out("Error in port_pin_read()\n");
+		//serial_out("Error in port_pin_read()\n");
 		return(-1); // return ERROR
 	}
 	// TODO TRAP INVALID PINS

@@ -90,7 +90,7 @@ int8_t pin_mode(uint8_t pin, uint8_t mode);
 
 	\brief Reads the state of the indicated input pin.
 
-	\param uint8_t number for a device specific predefined pin
+	\param pin number for a device specific predefined pin
 
 	\return HIGH, LOW, or ERROR (1, 0, or -1)
 	
@@ -110,8 +110,8 @@ int8_t digital_read(uint8_t pin);
 
 	\brief Sets the state of the indicated output pin.
 
-	\param pin uint8_t number for a device specific predefined pin 
-	\param value uint8_t to set pin to either HIGH or LOW (1 or 0)
+	\param pin number for a device specific predefined pin 
+	\param value to set pin to either HIGH or LOW (1 or 0)
 
 	\return 1 if okay, -1 if error
 	
@@ -169,9 +169,9 @@ int8_t digital_write(uint8_t pin, uint8_t value);
 
 	\brief Set a port pin mode to input or output.
 
-	\param uint8_t portx: The port as identified in io.h
-	\param uint8_t pin: The pin number 0 to 7.
-	\param uint8_t mode: either INPUT or OUTPUT
+	\param portx The port as identified in io.h
+	\param pin The pin number 0 to 7.
+	\param mode either INPUT or OUTPUT
 
 	\return 1 if okay, -1 if error
 	
@@ -190,8 +190,8 @@ int8_t port_pin_mode(uint8_t portx, uint8_t pin, uint8_t mode);
 
 	\brief Reads the state of a pin in a port.
 
-	\param uint8_t portx: The port as identified in io.h
-	\param uint8_t pin: The pin number 0 to 7.
+	\param portx The port as identified in io.h
+	\param pin The pin number 0 to 7.
 	
 	\return HIGH, LOW, or ERROR (1, 0, or -1)
 	
@@ -209,8 +209,8 @@ int8_t port_pin_read(uint8_t portx, uint8_t pin);
 
 	\brief Sets a pin in a port to 1.
 
-	\param uint8_t portx: The port as identified in io.h
-	\param uint8_t pin: The pin number 0 to 7.
+	\param portx The port as identified in io.h
+	\param pin The pin number 0 to 7.
 	
 	\return 1 if okay, -1 if error
 
@@ -227,8 +227,8 @@ int8_t port_pin_set(uint8_t portx, uint8_t pin);
 
 	\brief Clears a pin in a port to 0.
 
-	\param uint8_t portx: The port as identified in io.h
-	\param uint8_t pin: The pin number 0 to 7.
+	\param portx The port as identified in io.h
+	\param pin The pin number 0 to 7.
 	
 	\return 1 if okay, -1 if error
 
@@ -246,9 +246,9 @@ int8_t port_pin_clear(uint8_t portx, uint8_t pin);
 
 	\brief Writes O or 1 to pin in portx
 
-	\param uint8_t state: 0 or 1
-	\param uint8_t portx: The port as identified in io.h
-	\param uint8_t pin: The pin number 0 to 7.
+	\param state 0 or 1
+	\param portx The port as identified in io.h
+	\param pin The pin number 0 to 7.
 	
 	\return 1 if okay, -1 if error
 
@@ -265,8 +265,8 @@ int8_t port_pin_write(uint8_t state, uint8_t portx, uint8_t pin);
 
 	\brief Activates the pull-up resistor for a pin in a port.
  
-	\param uint8_t portx: The port as identified in io.h
-	\param uint8_t pin: The pin number 0 to 7.
+	\param portx The port as identified in io.h
+	\param pin The pin number 0 to 7.
 
 	\return Nothing
 	Example:
@@ -282,8 +282,8 @@ int8_t port_pin_activate_pullup(uint8_t portx, uint8_t pin);
 
 	\brief Deactivates the pull-up resistor for a pin in a port.
 
-	\param uint8_t portx: The port as identified in io.h
-	\param uint8_t pin: The pin number 0 to 7.
+	\param portx The port as identified in io.h
+	\param pin The pin number 0 to 7.
 
 	\return 1 if okay, -1 if error
 
@@ -301,8 +301,8 @@ int8_t port_pin_deactivate_pullup(uint8_t portx, uint8_t pin);
 
 	\brief Toggles (if 0, sets to 1 – if 1 sets to 0)the state  of a pin in a port.
 : 
-	\param uint8_t ddrx: The port as identified in io.h
-	\param uint8_t pin: The pin number 0 to 7.
+	\param portx The port as identified in io.h
+	\param pin The pin number 0 to 7.
 	
 	\return 1 if okay, -1 if error
 	
@@ -321,7 +321,7 @@ int8_t port_pin_toggle(uint8_t portx, uint8_t pin);
 	\brief Rotates an 8-bit pattern one bit to the right
 	Courtesy of Cliff Lawson: http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=872900#872900
  
-	\param uint8_t n: the pattern to rotate
+	\param n the pattern to rotate
 	
 	\return rotated pattern
 	
@@ -352,7 +352,7 @@ static inline uint8_t rotate_right8(uint8_t n)
 	\brief Rotates an 8-bit pattern one bit to the left
 	Courtesy of Cliff Lawson: http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=872900#872900
 
-	\param uint8_t n: the pattern to rotate
+	\param n the pattern to rotate
 	
 	\return rotated pattern
 	
@@ -383,7 +383,7 @@ static inline uint8_t rotate_left8(uint8_t n)
 	\brief Rotates a 16-bit pattern one bit to the right
 	Courtesy of Cliff Lawson: http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=872900#872900
 
-	\param uint16_t n: the pattern to rotate
+	\param n the pattern to rotate
 	
 	\return rotated pattern
 	
@@ -414,7 +414,7 @@ static inline uint16_t rotate_right16(uint16_t n)
 	\brief Rotates an 16-bit pattern one bit to the left
 	Courtesy of Cliff Lawson: http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=872900#872900
 
-	\param uint16_t n: the pattern to rotate
+	\param n the pattern to rotate
 	
 	\return rotated pattern
 	
@@ -445,7 +445,7 @@ static inline uint16_t rotate_left16(uint16_t n)
 	\brief Rotates an 32-bit pattern one bit to the right
 	Courtesy of Cliff Lawson: http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=872900#872900
 
-	\param uint32_t n: the pattern to rotate
+	\param the pattern to rotate
 	
 	\return rotated pattern
 	
@@ -476,7 +476,7 @@ static inline uint32_t rotate_right32(uint32_t n)
 	\brief Rotates an 32-bit pattern one bit to the left
 	Courtesy of Cliff Lawson: http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=872900#872900
 
-	\param uint32_t n: the pattern to rotate
+	\param n the pattern to rotate
 	
 	\return rotated pattern
 	

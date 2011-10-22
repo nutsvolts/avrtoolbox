@@ -42,7 +42,7 @@
 
 #include <inttypes.h>
 /*!
-	\defgroup bitwise Bitwise Elementary Macros
+	\defgroup bitwise Bitwise Macros
 */
 
 /*! 
@@ -234,6 +234,22 @@
 */
 #define bit_to_shift8(mask) (((mask) & 0x01) ? 0 : (((mask) & 0x02) ? 1 : (((mask) & 0x04) ? 2 : (((mask) & 0x08) ? 3 : (((mask) & 0x10) ? 4 : (((mask) & 0x20) ? 5 : (((mask) & 0x40) ? 6 : 7 ))))))) 
 #define bit_get_mask_field8(byte, mask) (((byte) & (mask))>>bit_to_shift8(mask))
+
+/*#define bit_to_shift8(mask) ( \ 
+    ((mask) & 0x01) ? 0 : ( \ 
+    ((mask) & 0x02) ? 1 : ( \ 
+    ((mask) & 0x04) ? 2 : ( \ 
+    ((mask) & 0x08) ? 3 : ( \ 
+    ((mask) & 0x10) ? 4 : ( \ 
+    ((mask) & 0x20) ? 5 : ( \ 
+    ((mask) & 0x40) ? 6 : ( \ 
+    ((mask) & 0x80) ? 7 : 8 )))))))) 
+*/
+//#define bit_to_shift8(mask) (((mask) & 0x01) ? 0 : (((mask) & 0x02) ? 1 : (((mask) & 0x04) ? 2 : (((mask) & 0x08) ? 3 : (((mask) & 0x10) ? 4 : (((mask) & 0x20) ? 5 : (((mask) & 0x40) ? 6 : (((mask) & 0x80) ? 7 : 8 )))))))) 
+//#define bit_get_mask_field8(byte, mask) (((byte) & (mask))>>bit_to_shift8(mask))
+
+
+
 
 /*! 
 	\ingroup bitwise 
