@@ -74,7 +74,7 @@ int8_t port_pin_activate_pullup(uint8_t portx, uint8_t pin)
 	}
 	else // out of range 
 	{
-		serial_out("Error in port_pin_acitvate_pullup()\n\n");
+		//serial_out("Error in port_pin_acitvate_pullup()\n\n");
 
 		return(-1); // return ERROR
 	}	

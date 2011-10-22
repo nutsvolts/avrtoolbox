@@ -155,8 +155,8 @@ uint8_t serial_in(void);
 	\brief Outputs formatted data based on conversion symbols and escape character sequences contained in a string of text. 
 	Syntax: serial_out(string_with_N_data_format_symbols, data1, data2, ... dataN);
 
-	\param buff pointer to a string with format data.
-	\param size uint8_t number of characters in the buffer.
+	\param *fmt pointer to a string with format data.
+	\param ... a list of data to be formatted
 
 	\return The number of characters printed or a negative number if an error occurred.
 	
