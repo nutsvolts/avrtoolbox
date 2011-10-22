@@ -130,6 +130,9 @@
 
 /*!
 	\defgroup spi SPI Drivers
+	
+	\brief DOXYGEN has a problem with the #if defined (etc...) statement so the #defines are not properly documented
+	\todo figure out how to get the #if defined stuff to work with DOXYGEN in the spi.h file
 */
 /* ********************************************************** */
 /*!	
@@ -237,10 +240,10 @@ void spi0_init_master(void);
 	//#define SPI0_SOFT
 	#define SPI0_HARD
 
-	The user accesses the following functions:\n
-	void spi0_init_master(void);\n
-	uint8_t spi0_master_rw8(uint8_t to_slave);\n
-	uint16_t spi0_master_rw16(uint16_t to_slave);\n
+	The user accesses the following functions:
+	void spi0_init_master(void);
+	uint8_t spi0_master_rw8(uint8_t to_slave);
+	uint16_t spi0_master_rw16(uint16_t to_slave);
 
 	Which are alia's for the software or hardware version.
 
