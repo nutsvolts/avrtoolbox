@@ -70,7 +70,7 @@ int main( void )
 	lcd_puts("Hello!");
 	delay(1000);
 	lcd_clear();
-	lcd_puts("REV002");
+	lcd_puts("REV003");
 	delay(1000);
 
   lcd_set_cursor( 0, 0 );
