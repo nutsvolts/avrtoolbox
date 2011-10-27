@@ -1,3 +1,4 @@
+/*! \file digitalio.h \brief Simplifying functions and macros for digital i/o. */
 /*
  *  BSD License
  *  -----------
@@ -64,10 +65,9 @@
 // From Smiley's Workshop 39, 40, and 41 Nuts&Volts October, November, and December 2011
 
 /*!
-	\defgroup Elementary Digital I/O Functions
+	\defgroup digitalio Elementary Digital I/O Functions
 */
-
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Sets the specified pin to either input or output.
@@ -85,7 +85,7 @@
 int8_t pin_mode(uint8_t pin, uint8_t mode);
 
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Reads the state of the indicated input pin.
@@ -105,7 +105,7 @@ int8_t pin_mode(uint8_t pin, uint8_t mode);
 int8_t digital_read(uint8_t pin);
 
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Sets the state of the indicated output pin.
@@ -125,7 +125,7 @@ int8_t digital_read(uint8_t pin);
 */
 int8_t digital_write(uint8_t pin, uint8_t value);
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\todo redo doc for pin_read and pin_write
@@ -144,7 +144,7 @@ int8_t digital_write(uint8_t pin, uint8_t value);
 */
 #define pin_read(portx, pin) (portx & (1<<pin))
 
-/*! 
+/** 
 	\ingroup digitalio  
 	\todo redo doc for pin_read and pin_write
 
@@ -164,7 +164,7 @@ int8_t digital_write(uint8_t pin, uint8_t value);
 #define pin_write(portx, pinx, value) value ? (portx |= (1<<pinx)) : (portx &= ~(1<<pinx))
 
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Set a port pin mode to input or output.
@@ -185,7 +185,7 @@ int8_t port_pin_mode(uint8_t portx, uint8_t pin, uint8_t mode);
 
 
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Reads the state of a pin in a port.
@@ -204,7 +204,7 @@ int8_t port_pin_mode(uint8_t portx, uint8_t pin, uint8_t mode);
 int8_t port_pin_read(uint8_t portx, uint8_t pin);
 
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Sets a pin in a port to 1.
@@ -222,7 +222,7 @@ int8_t port_pin_read(uint8_t portx, uint8_t pin);
 */
 int8_t port_pin_set(uint8_t portx, uint8_t pin);
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Clears a pin in a port to 0.
@@ -241,7 +241,7 @@ int8_t port_pin_set(uint8_t portx, uint8_t pin);
 int8_t port_pin_clear(uint8_t portx, uint8_t pin);
 
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Writes O or 1 to pin in portx
@@ -260,7 +260,7 @@ int8_t port_pin_clear(uint8_t portx, uint8_t pin);
 */
 int8_t port_pin_write(uint8_t state, uint8_t portx, uint8_t pin);
 
-/*! 
+/**
 	\ingroup digitalio  
 
 	\brief Activates the pull-up resistor for a pin in a port.
@@ -277,7 +277,7 @@ int8_t port_pin_write(uint8_t state, uint8_t portx, uint8_t pin);
 */
 int8_t port_pin_activate_pullup(uint8_t portx, uint8_t pin);
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Deactivates the pull-up resistor for a pin in a port.
@@ -296,11 +296,11 @@ int8_t port_pin_activate_pullup(uint8_t portx, uint8_t pin);
 int8_t port_pin_deactivate_pullup(uint8_t portx, uint8_t pin);
 
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Toggles (if 0, sets to 1 – if 1 sets to 0)the state  of a pin in a port.
-: 
+ 
 	\param portx The port as identified in io.h
 	\param pin The pin number 0 to 7.
 	
@@ -315,7 +315,7 @@ int8_t port_pin_deactivate_pullup(uint8_t portx, uint8_t pin);
 int8_t port_pin_toggle(uint8_t portx, uint8_t pin);
 
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Rotates an 8-bit pattern one bit to the right
@@ -346,7 +346,7 @@ static inline uint8_t rotate_right8(uint8_t n)
   return n;
 }
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Rotates an 8-bit pattern one bit to the left
@@ -377,7 +377,7 @@ static inline uint8_t rotate_left8(uint8_t n)
   return n;
 }
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Rotates a 16-bit pattern one bit to the right
@@ -408,7 +408,7 @@ static inline uint16_t rotate_right16(uint16_t n)
   return n;
 }
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Rotates an 16-bit pattern one bit to the left
@@ -439,7 +439,7 @@ static inline uint16_t rotate_left16(uint16_t n)
   return n;
 }
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Rotates an 32-bit pattern one bit to the right
@@ -470,7 +470,7 @@ static inline uint32_t rotate_right32(uint32_t n)
   return n;
 }
 
-/*! 
+/** 
 	\ingroup digitalio  
 
 	\brief Rotates an 32-bit pattern one bit to the left
