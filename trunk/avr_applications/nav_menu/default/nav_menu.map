@@ -1,0 +1,513 @@
+Archive member included because of file (symbol)
+
+C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_005.a(delay.o)
+                              nav_menu.o (delay)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o (exit)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+                              lcd.o (__do_copy_data)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                              lcd.o (__do_clear_bss)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o)
+                              nav_menu.o (itoa)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strrev.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o) (strrev)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o) (__udivmodhi4)
+
+Allocating common symbols
+Common symbol       size              file
+
+dwn_count           0x1               nav.o
+usart0_transmit_buffer
+                    0x80              nav.o
+_displaycontrol     0x1               lcd.o
+usart0_transmit_ring
+                    0x8               nav.o
+_displaymode        0x1               lcd.o
+_displayfunction    0x1               lcd.o
+ctr_count           0x1               nav.o
+usart0_receive_ring
+                    0x8               nav.o
+usart0_receive_buffer
+                    0x40              nav.o
+nav_state           0x1               nav.o
+usart_buffered_tx_flag
+                    0x1               nav.o
+usart_tx_ready_flag
+                    0x1               nav.o
+up_count            0x1               nav.o
+rgt_count           0x1               nav.o
+lft_count           0x1               nav.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00020000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+fuse             0x00820000         0x00000400         rw !x
+lock             0x00830000         0x00000400         rw !x
+signature        0x00840000         0x00000400         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+Address of section .data set to 0x800100
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+LOAD lcd.o
+LOAD nav.o
+LOAD nav_menu.o
+LOAD C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_005.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000      0x6fc
+ *(.vectors)
+ .vectors       0x00000000       0x68 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+                0x00000000                __vectors
+                0x00000000                __vector_default
+ *(.vectors)
+ *(.progmem.gcc*)
+ *(.progmem*)
+ .progmem.data  0x00000068       0x47 nav_menu.o
+                0x0000009d                erse_txt_txt
+                0x00000094                view_num_txt
+                0x00000079                entr_txt_txt
+                0x0000008b                view_txt_txt
+                0x00000068                prog_name
+                0x00000071                prog_version
+                0x000000a6                erse_num_txt
+                0x00000082                entr_num_txt
+                0x000000b0                . = ALIGN (0x2)
+ *fill*         0x000000af        0x1 00
+                0x000000b0                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x000000b0        0x0 linker stubs
+ *(.trampolines*)
+                0x000000b0                __trampolines_end = .
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x000000b0                __ctors_start = .
+ *(.ctors)
+                0x000000b0                __ctors_end = .
+                0x000000b0                __dtors_start = .
+ *(.dtors)
+                0x000000b0                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x000000b0        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+                0x000000b0                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x000000b0        0xc c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x000000bc       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+                0x000000bc                __do_copy_data
+ .init4         0x000000d2       0x10 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x000000d2                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x000000e2        0x8 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+ *(.init9)
+ *(.text)
+ .text          0x000000ea        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+                0x000000ea                __vector_22
+                0x000000ea                __vector_1
+                0x000000ea                __vector_24
+                0x000000ea                __vector_12
+                0x000000ea                __bad_interrupt
+                0x000000ea                __vector_6
+                0x000000ea                __vector_3
+                0x000000ea                __vector_23
+                0x000000ea                __vector_25
+                0x000000ea                __vector_11
+                0x000000ea                __vector_13
+                0x000000ea                __vector_17
+                0x000000ea                __vector_19
+                0x000000ea                __vector_5
+                0x000000ea                __vector_4
+                0x000000ea                __vector_9
+                0x000000ea                __vector_2
+                0x000000ea                __vector_21
+                0x000000ea                __vector_15
+                0x000000ea                __vector_8
+                0x000000ea                __vector_14
+                0x000000ea                __vector_10
+                0x000000ea                __vector_16
+                0x000000ea                __vector_18
+                0x000000ea                __vector_20
+ .text          0x000000ee      0x1fc lcd.o
+                0x0000018e                lcd_blink_on
+                0x00000156                lcd_display_off
+                0x000001c8                lcd_putc
+                0x000001b4                lcd_cursor_on
+                0x00000256                lcd_clear
+                0x000001ec                lcd_blank
+                0x0000024e                lcd_home
+                0x00000234                lcd_puts
+                0x00000202                lcd_puts_p
+                0x0000025e                lcd_init
+                0x00000168                lcd_display_on
+                0x000001a2                lcd_cursor_off
+                0x00000130                lcd_command
+                0x0000017c                lcd_blink_off
+ .text          0x000002ea      0x202 nav.o
+                0x000003a0                nav_init
+                0x000002ea                nav_available
+                0x000002f0                nav_get_key
+                0x000003c6                __vector_7
+                0x00000374                nav_timer_init
+ .text          0x000004ec      0x166 nav_menu.o
+                0x00000540                get_top
+                0x000004ec                erse_num
+                0x00000516                view_txt
+                0x000004fa                erse_txt
+                0x00000508                view_num
+                0x00000524                entr_num
+                0x00000584                main
+                0x00000532                entr_txt
+ .text          0x00000652       0x1c C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_005.a(delay.o)
+                0x00000652                delay
+ .text          0x0000066e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text          0x0000066e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text          0x0000066e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text          0x0000066e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o)
+ .text          0x0000066e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strrev.o)
+ .text          0x0000066e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+                0x0000066e                . = ALIGN (0x2)
+ *(.text.*)
+ .text.libgcc   0x0000066e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x0000066e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x0000066e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text.avr-libc
+                0x0000066e       0x42 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o)
+                0x0000066e                itoa
+ .text.avr-libc
+                0x000006b0       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strrev.o)
+                0x000006b0                strrev
+ .text.libgcc   0x000006d0       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+                0x000006d0                __udivmodhi4
+                0x000006f8                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x000006f8        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x000006f8                exit
+                0x000006f8                _exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x000006f8        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ *(.fini0)
+                0x000006fc                _etext = .
+
+.data           0x00800100        0xc load address 0x000006fc
+                0x00800100                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800100        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+ .data          0x00800100        0x1 lcd.o
+                0x00800100                lcd_pos
+ .data          0x00800101        0x0 nav.o
+ .data          0x00800101        0xa nav_menu.o
+ .data          0x0080010b        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_005.a(delay.o)
+ .data          0x0080010b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .data          0x0080010b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .data          0x0080010b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .data          0x0080010b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o)
+ .data          0x0080010b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strrev.o)
+ .data          0x0080010b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+ *(.data*)
+ *(.rodata)
+ *(.rodata*)
+ *(.gnu.linkonce.d*)
+                0x0080010c                . = ALIGN (0x2)
+ *fill*         0x0080010b        0x1 00
+                0x0080010c                _edata = .
+                0x0080010c                PROVIDE (__data_end, .)
+
+.bss            0x0080010c       0xdb
+                0x0080010c                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x0080010c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+ .bss           0x0080010c        0x0 lcd.o
+ .bss           0x0080010c        0x0 nav.o
+ .bss           0x0080010c        0x0 nav_menu.o
+ .bss           0x0080010c        0x0 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_005.a(delay.o)
+ .bss           0x0080010c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .bss           0x0080010c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .bss           0x0080010c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .bss           0x0080010c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o)
+ .bss           0x0080010c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strrev.o)
+ .bss           0x0080010c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+ *(.bss*)
+ *(COMMON)
+ COMMON         0x0080010c        0x3 lcd.o
+                0x0080010c                _displaycontrol
+                0x0080010d                _displaymode
+                0x0080010e                _displayfunction
+ COMMON         0x0080010f       0xd8 nav.o
+                0x0080010f                dwn_count
+                0x00800110                usart0_transmit_buffer
+                0x00800190                usart0_transmit_ring
+                0x00800198                ctr_count
+                0x00800199                usart0_receive_ring
+                0x008001a1                usart0_receive_buffer
+                0x008001e1                nav_state
+                0x008001e2                usart_buffered_tx_flag
+                0x008001e3                usart_tx_ready_flag
+                0x008001e4                up_count
+                0x008001e5                rgt_count
+                0x008001e6                lft_count
+                0x008001e7                PROVIDE (__bss_end, .)
+                0x000006fc                __data_load_start = LOADADDR (.data)
+                0x00000708                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x008001e7        0x0
+                0x008001e7                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x008001e7                PROVIDE (__noinit_end, .)
+                0x008001e7                _end = .
+                0x008001e7                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000       0x80
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x20 lcd.o
+ .debug_aranges
+                0x00000020       0x20 nav.o
+ .debug_aranges
+                0x00000040       0x20 nav_menu.o
+ .debug_aranges
+                0x00000060       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_005.a(delay.o)
+
+.debug_pubnames
+                0x00000000      0x428
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x00000000      0x136 lcd.o
+ .debug_pubnames
+                0x00000136      0x14f nav.o
+ .debug_pubnames
+                0x00000285      0x187 nav_menu.o
+ .debug_pubnames
+                0x0000040c       0x1c C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_005.a(delay.o)
+
+.debug_info     0x00000000      0xc78
+ *(.debug_info)
+ .debug_info    0x00000000      0x5eb lcd.o
+ .debug_info    0x000005eb      0x274 nav.o
+ .debug_info    0x0000085f      0x2e9 nav_menu.o
+ .debug_info    0x00000b48      0x130 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_005.a(delay.o)
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev   0x00000000      0x409
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000      0x1a3 lcd.o
+ .debug_abbrev  0x000001a3       0xb9 nav.o
+ .debug_abbrev  0x0000025c       0xf2 nav_menu.o
+ .debug_abbrev  0x0000034e       0xbb C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_005.a(delay.o)
+
+.debug_line     0x00000000      0xc57
+ *(.debug_line)
+ .debug_line    0x00000000      0x49d lcd.o
+ .debug_line    0x0000049d      0x356 nav.o
+ .debug_line    0x000007f3      0x30a nav_menu.o
+ .debug_line    0x00000afd      0x15a C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_005.a(delay.o)
+
+.debug_frame    0x00000000      0x220
+ *(.debug_frame)
+ .debug_frame   0x00000000      0x110 lcd.o
+ .debug_frame   0x00000110       0x60 nav.o
+ .debug_frame   0x00000170       0x90 nav_menu.o
+ .debug_frame   0x00000200       0x20 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_005.a(delay.o)
+
+.debug_str      0x00000000      0x4e1
+ *(.debug_str)
+ .debug_str     0x00000000      0x227 lcd.o
+                                0x260 (size before relaxing)
+ .debug_str     0x00000227      0x190 nav.o
+                                0x256 (size before relaxing)
+ .debug_str     0x000003b7       0xb6 nav_menu.o
+                                0x1cf (size before relaxing)
+ .debug_str     0x0000046d       0x74 C:\avrtoolbox\libavr\librarian\atmega328\libavr_atmega328_005.a(delay.o)
+                                0x12a (size before relaxing)
+
+.debug_loc      0x00000000      0x260
+ *(.debug_loc)
+ .debug_loc     0x00000000      0x1d7 lcd.o
+ .debug_loc     0x000001d7       0x89 nav_menu.o
+
+.debug_macinfo
+ *(.debug_macinfo)
+OUTPUT(nav_menu.elf elf32-avr)
+LOAD linker stubs
