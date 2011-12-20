@@ -180,8 +180,12 @@ static uint8_t polarity;
 static uint8_t speed;
 static uint8_t pattern;
 
+#include <string.h>
+
 int main()
 {
+
+	const char *myString = "Hello, World!";
 
 	#if defined(DEBUG)
 	serial_begin(57600);

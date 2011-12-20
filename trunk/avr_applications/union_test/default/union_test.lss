@@ -221,7 +221,7 @@ void show_array(void *p, int type)
       for(i = 0; i < 32; i++)
       {
         j = (int)*(iPtr+i);
-        printf("%3d,",j);
+        printf("%d,",j);
  144:	99 e2       	ldi	r25, 0x29	; 41
  146:	e9 2e       	mov	r14, r25
  148:	91 e0       	ldi	r25, 0x01	; 1
@@ -237,7 +237,7 @@ void show_array(void *p, int type)
  150:	1f 4f       	sbci	r17, 0xFF	; 255
       {
         j = (int)*(iPtr+i);
-        printf("%3d,",j);
+        printf("%d,",j);
  152:	00 d0       	rcall	.+0      	; 0x154 <show_array+0xae>
  154:	00 d0       	rcall	.+0      	; 0x156 <show_array+0xb0>
  156:	ad b7       	in	r26, 0x3d	; 61
@@ -274,7 +274,7 @@ void show_array(void *p, int type)
       lPtr = p;
       printf("Show long array:\n ");
  182:	00 d0       	rcall	.+0      	; 0x184 <show_array+0xde>
- 184:	8e e2       	ldi	r24, 0x2E	; 46
+ 184:	8d e2       	ldi	r24, 0x2D	; 45
  186:	91 e0       	ldi	r25, 0x01	; 1
  188:	ed b7       	in	r30, 0x3d	; 61
  18a:	fe b7       	in	r31, 0x3e	; 62
@@ -290,7 +290,7 @@ void show_array(void *p, int type)
       {
         l = (long)*(lPtr+i);
         printf("%ld,",l);
- 19e:	81 e4       	ldi	r24, 0x41	; 65
+ 19e:	80 e4       	ldi	r24, 0x40	; 64
  1a0:	e8 2e       	mov	r14, r24
  1a2:	81 e0       	ldi	r24, 0x01	; 1
  1a4:	f8 2e       	mov	r15, r24
@@ -810,7 +810,7 @@ void usart0_init(uint32_t baud, uint32_t freq_cpu, usart_mode_t mode, usart_data
  424:	f8 94       	cli
 
    	stdout = &mystdout;    //set the output stream 
- 426:	86 e4       	ldi	r24, 0x46	; 70
+ 426:	85 e4       	ldi	r24, 0x45	; 69
  428:	91 e0       	ldi	r25, 0x01	; 1
  42a:	90 93 69 02 	sts	0x0269, r25
  42e:	80 93 68 02 	sts	0x0268, r24
