@@ -89,7 +89,7 @@ void show_array(void *p, int type)
       for(i = 0; i < 32; i++)
       {
         j = (int)*(iPtr+i);
-        printf("%3d,",j);
+        printf("%d,",j);
       }
       printf("\n");
       break; 
