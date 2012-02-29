@@ -263,16 +263,33 @@ lcd_create_char()
 
 void lcd_init( void )
 {
-// set LCD DDR pins to 1 for output
+
+	// set LCD DDR pins to 1 for output
+	LCD_D4_DDR |= (1<<LCD_D4_PIN);
+	LCD_D5_DDR |= (1<<LCD_D5_PIN);
+	LCD_D6_DDR |= (1<<LCD_D6_PIN);
+	LCD_D7_DDR |= (1<<LCD_D7_PIN);
+	LCD_E_DDR |= (1<<LCD_E_PIN);
+	LCD_RS_DDR |= (1<<LCD_RS_PIN);
+
+
+/*// set LCD DDR pins to 1 for output
 	bit_set(LCD_D4_DDR,LCD_D4_PIN);
 	bit_set(LCD_D5_DDR,LCD_D5_PIN);
 	bit_set(LCD_D6_DDR,LCD_D6_PIN);
 	bit_set(LCD_D7_DDR,LCD_D7_PIN);
 	bit_set(LCD_E_DDR,LCD_E_PIN);
-	bit_set(LCD_RS_DDR,LCD_RS_PIN);
+*/	bit_set(LCD_RS_DDR,LCD_RS_PIN);
+/**/
+
+// set the E and RS PORT pins to 0
+	LCD_E_PORT &= ~(1<<LCD_E_PIN);
+	LCD_RS_PORT &= ~(1<<LCD_RS_PIN);
+
+/*
 // set the E and RS PORT pins to 0
 	bit_clear(LCD_E_PORT,LCD_E_PIN);
-	bit_clear(LCD_RS_PORT,LCD_RS_PIN);
+	bit_clear(LCD_RS_PORT,LCD_RS_PIN);*//**/
 
   _delay_ms( 15 );
   lcd_nibble( 0x30 );
