@@ -847,7 +847,7 @@ void chaser_setup()
 	port_pin_mode(LED2_7_PORT,LED6_PIN,OUTPUT);
 	port_pin_mode(LED2_7_PORT,LED7_PIN,OUTPUT);
 
-	// set the pullups for the DIP switch
+	// set to input with pullups for the DIP switch
 	port_pin_activate_pullup(DIP0_4_PORT,DIP_PIN0);
 	port_pin_activate_pullup(DIP0_4_PORT,DIP_PIN1);
 	port_pin_activate_pullup(DIP0_4_PORT,DIP_PIN2);
