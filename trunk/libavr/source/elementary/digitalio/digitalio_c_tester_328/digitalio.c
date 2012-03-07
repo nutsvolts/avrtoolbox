@@ -118,14 +118,16 @@ int main()
 		port_pin_write(LED2_7_PORT,LED6_PIN,port_pin_read(DIP5_7_PORT,DIP_PIN6));
 		port_pin_write(LED2_7_PORT,LED7_PIN,port_pin_read(DIP5_7_PORT,DIP_PIN7));
 
-		newvalue = (port_pin_read(DIP0_4_PORT,DIP_PIN0)) \
-			     + (port_pin_read(DIP0_4_PORT,DIP_PIN1) << 1) \
-				 + (port_pin_read(DIP0_4_PORT,DIP_PIN2) << 2) \
-				 + (port_pin_read(DIP0_4_PORT,DIP_PIN3) << 3) \
-				 + (port_pin_read(DIP0_4_PORT,DIP_PIN4) << 4) \
-				 + (port_pin_read(DIP5_7_PORT,DIP_PIN5) << 5) \
-				 + (port_pin_read(DIP5_7_PORT,DIP_PIN6) << 6) \
-				 + (port_pin_read(DIP5_7_PORT,DIP_PIN7) << 7);
+		// NOTE the '!' are needed to correct for the Chaser Lights wiring
+		// This is backwards for a correctly wired board.
+		newvalue = (!port_pin_read(DIP0_4_PORT,DIP_PIN0)) \
+			     + (!port_pin_read(DIP0_4_PORT,DIP_PIN1) << 1) \
+				 + (!port_pin_read(DIP0_4_PORT,DIP_PIN2) << 2) \
+				 + (!port_pin_read(DIP0_4_PORT,DIP_PIN3) << 3) \
+				 + (!port_pin_read(DIP0_4_PORT,DIP_PIN4) << 4) \
+				 + (!port_pin_read(DIP5_7_PORT,DIP_PIN5) << 5) \
+				 + (!port_pin_read(DIP5_7_PORT,DIP_PIN6) << 6) \
+				 + (!port_pin_read(DIP5_7_PORT,DIP_PIN7) << 7);
 		
 		if(newvalue != oldvalue)
 		{
@@ -133,14 +135,14 @@ int main()
 			oldvalue = newvalue;	
 		}
 		
-		// Test the 8-bit rotate functions
+/*		// Test the 8-bit rotate functions
 		temp = newvalue;	
 		rotate_WS41_right(temp, 100, 64);
 		delay(2000);
 		rotate_WS41_left(temp,100, 64);
 		delay(2000);
 
-/*		// test port_pin_toggle
+		// test port_pin_toggle
 		delay(1000);
 		port_pin_toggle(LED0_1_PORT,LED0_PIN);
 		port_pin_toggle(LED0_1_PORT,LED1_PIN);
