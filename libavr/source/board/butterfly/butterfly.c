@@ -160,13 +160,27 @@ void OSCCAL_calibration(void)
         TCCR1B = (1<<CS10); /// start timer1
     }
 }
-
+/*
 void Delay(unsigned int millisec)
 {
     unsigned char i; // mt int i;
     
     while (millisec--)
         for (i=0; i<125; i++);
+}
+*/
+// From original Martin Thomas port of the Atmel code
+// to correct error in above commented out function
+// JWP 5/21/12
+void Delay(unsigned int millisec)
+{
+    // mt, int i did not work in the simulator:  int i; 
+	uint8_t i;
+    
+    while (millisec--)
+        	//mt: for (i=0; i<125; i++);
+			for (i=0; i<125; i++)  
+				asm volatile ("nop"::);
 }
 
 #endif
